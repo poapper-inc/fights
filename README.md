@@ -1,9 +1,9 @@
 # fights
 
 [![Test CI](https://github.com/poapper-inc/fights/actions/workflows/test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/test.yml)
-[![Lint CI](https://github.com/poapper-inc/fights/actions/workflows/lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/lint.yml) 
+[![Lint CI](https://github.com/poapper-inc/fights/actions/workflows/lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/lint.yml)
 
-*Work in progress*
+_Work in progress_
 
 Competitive artificial battle environments.
 
