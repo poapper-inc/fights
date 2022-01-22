@@ -2,7 +2,7 @@ import functools
 from abc import ABC, abstractmethod
 from typing import List
 
-import numpy as np
+import numpy as np  # type: ignore
 from gym import spaces  # type: ignore
 from pettingzoo import AECEnv  # type: ignore
 from pettingzoo.utils import agent_selector  # type: ignore
