@@ -3,11 +3,13 @@ from abc import ABC, abstractmethod
 from typing import List
 
 import numpy as np
-from gym import spaces
-from pettingzoo import AECEnv
-from pettingzoo.utils import agent_selector
+from gym import spaces  # type: ignore
+from pettingzoo import AECEnv  # type: ignore
+from pettingzoo.utils import agent_selector  # type: ignore
 
-from fights import BaseAction, BaseAgent, BaseState
+from .base_action import BaseAction
+from .base_agent import BaseAgent
+from .base_state import BaseState
 
 
 class BaseGame(ABC, AECEnv):

@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List
 
-from fights import BaseAction, BaseState
+from .base_state import BaseState
 
 
 class BaseAction(ABC):
@@ -16,7 +15,7 @@ class BaseAction(ABC):
 
     @abstractmethod
     @staticmethod
-    def get_possible_actions(state: BaseState) -> List[BaseAction]:
+    def get_possible_actions(state: BaseState):
         # change to overriding is better?
         pass
 

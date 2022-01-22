@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class BaseState(ABC):
     @abstractmethod
-    def __init__():
+    def __init__(self):
         pass
 
     @abstractmethod
