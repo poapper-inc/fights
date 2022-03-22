@@ -25,6 +25,13 @@ $ cd fights
 $ python3 -m pip install -e .
 ```
 
+### Running
+
+```shell
+$ cd fights # The fights folder inside the base git folder
+$ python3 -m main
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
