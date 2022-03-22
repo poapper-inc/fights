@@ -1,18 +1,18 @@
 import unittest
 
-from fights.example.gomoku.agent import Agent
-from fights.example.gomoku.basic_rule import BasicRule
-from fights.example.gomoku.computer_agent import ComputerAgent
-from fights.example.gomoku.const_variable import (
+from fights.games.gomoku.agent import Agent
+from fights.games.gomoku.basic_rule import BasicRule
+from fights.games.gomoku.computer_agent import ComputerAgent
+from fights.games.gomoku.const_variable import (
     COMPUTER_NAME,
     EnvMode,
     EnvRule,
     Stone,
     Turn,
 )
-from fights.example.gomoku.env_util import BOARD_LENGTH
-from fights.example.gomoku.gomoku_env import GomokuEnv
-from fights.example.gomoku.user_agent import UserAgent
+from fights.games.gomoku.env_util import BOARD_LENGTH
+from fights.games.gomoku.gomoku_env import GomokuEnv
+from fights.games.gomoku.user_agent import UserAgent
 
 
 class TestInitEnv(unittest.TestCase):

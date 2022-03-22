@@ -12,7 +12,7 @@ Competitive artificial battle environments.
 ### Development environment setup
 
 ```shell
-$ python -m pip install tox
+$ python3 -m pip install tox
 $ tox -e dev --devenv env
 $ source env/bin/activate
 ```
@@ -22,7 +22,7 @@ $ source env/bin/activate
 ```shell
 $ git clone https://github.com/poapper-inc/fights.git
 $ cd fights
-$ python -m pip install -e .
+$ python3 -m pip install -e .
 ```
 
 ## Contributing
