@@ -3,15 +3,6 @@ from abc import ABCMeta, abstractmethod
 
 
 class BaseEnv(metaclass=ABCMeta):
-    agents = None
-    possible_agents = None
-    observation_spaces = None
-    action_spaces = None
-    rewards = None
-    _cumulative_rewards = None
-    dones = None
-    infos = None
-
     def __init__(self):
         pass
 
@@ -21,16 +12,15 @@ class BaseEnv(metaclass=ABCMeta):
         Accepts and executes the action of the current agent_selection
         in the environment, automatically switches control to the next agent.
         """
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def reset(self):
         """
         Resets the environment and sets it up for use when called the first time.
         """
-        raise NotImplementedError
+        pass
 
-    @abstractmethod
     def seed(self, seed=None):
         """
         Reseeds the environment (making the resulting environment deterministic).
@@ -44,9 +34,8 @@ class BaseEnv(metaclass=ABCMeta):
         Returns the observation an agent currently can make.
         last() calls this function.
         """
-        raise NotImplementedError
+        pass
 
-    @abstractmethod
     def state(self):
         """
         State returns a global view of the environment appropriate for
@@ -117,14 +106,12 @@ class BaseEnv(metaclass=ABCMeta):
         for agent, reward in self.rewards.items():
             self._cumulative_rewards[agent] += reward
 
-    @abstractmethod
     def agent_iter(self, max_iter=2**63):
         """
         Yields the current agent (self.agent_selection) when used in a loop where you step() each iteration.
         """
         return BaseIterable(self, max_iter)
 
-    @abstractmethod
     def last(self, observe=True):
         """
         Returns observation, cumulative reward, done, info   for the current agent (specified by self.agent_selection)
@@ -185,7 +172,7 @@ class BaseEnv(metaclass=ABCMeta):
         return self
 
 
-class BaseIterable(metaclass=ABCMeta):
+class BaseIterable:
     def __init__(self, env, max_iter):
         self.env = env
         self.max_iter = max_iter
@@ -194,7 +181,7 @@ class BaseIterable(metaclass=ABCMeta):
         return BaseIterator(self.env, self.max_iter)
 
 
-class BaseIterator(metaclass=ABCMeta):
+class BaseIterator:
     def __init__(self, env, max_iter):
         self.env = env
         self.iters_til_term = max_iter

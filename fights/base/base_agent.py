@@ -1,13 +1,13 @@
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 
 
-class BaseAgent(ABC):
-    def __init__(self):
-        self.__name = None
+class BaseAgent(metaclass=ABCMeta):
+    def __init__(self, agent_id):
+        self.agent_id = agent_id
 
-    def get_name(self):
-        return self.__name
+    def get_agent_id(self):
+        return self.agent_id
 
     @abstractmethod
-    def determine_and_return_action(self, space):
-        ...
+    def policy(self, observation):
+        pass
