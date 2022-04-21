@@ -3,8 +3,64 @@ from abc import ABCMeta, abstractmethod
 
 
 class BaseEnv(metaclass=ABCMeta):
-    def __init__(self):
-        pass
+    def __init__(self, agents, possible_agents, observation_spaces, action_spaces):
+        self.agents = agents
+        """
+        A list of the names of all current agents, typically integers.
+        These may be changed as an environment progresses
+        (i.e. agents can be added or removed).
+        """
+
+        self.possible_agents = possible_agents
+        """
+        A list of all possible_agents the environment could generate.
+        Equivalent to the list of agents in the observation and action spaces.
+        This cannot be changed through play or resetting.
+        """
+
+        self.observation_spaces = observation_spaces
+        """
+        A dict of the observation spaces of every agent, keyed by name.
+        This cannot be changed through play or resetting.
+        """
+
+        self.action_spaces = action_spaces
+        """
+        A dict of the action spaces of every agent, keyed by name.
+        This cannot be changed through play or resetting.
+        """
+
+        self.rewards = {}
+        """
+        A dict of the rewards of every current agent at the time called, keyed by name.
+        Rewards the instantaneous reward generated after the last step.
+        Note that agents can be added or removed from this attribute.
+        last() does not directly access this attribute,
+        rather the returned reward is stored in an internal variable.
+        The rewards structure looks like:
+        `{0:[first agent's reward], 1:[second agent's reward] ... n-1:[nth agent's reward]}`
+        """
+
+        self.dones = {}
+        """
+        A dict of the done state of every current agent at the time called, keyed by name.
+        last() accesses this attribute.
+        Note that agents can be added or removed from this dict.
+        """
+
+        self.infos = {}
+        """
+        A dict of info for each current agent, keyed by name.
+        Each agent's info is also a dict.
+        Note that agents can be added or removed from this attribute.
+        last() accesses this attribute.
+        """
+
+        self._cumulative_rewards = {}
+        """
+        Temporary variable for holding results from the rewards variable.
+        last() accesses this attribute.
+        """
 
     @abstractmethod
     def step(self, action):
@@ -19,7 +75,10 @@ class BaseEnv(metaclass=ABCMeta):
         """
         Resets the environment and sets it up for use when called the first time.
         """
-        pass
+        self.rewards = {}
+        self.dones = {}
+        self.infos = {}
+        self._cumulative_rewards = {}
 
     def seed(self, seed=None):
         """
@@ -106,7 +165,7 @@ class BaseEnv(metaclass=ABCMeta):
         for agent, reward in self.rewards.items():
             self._cumulative_rewards[agent] += reward
 
-    def agent_iter(self, max_iter=2**63):
+    def agent_iter(self, max_iter=2 ** 63):
         """
         Yields the current agent (self.agent_selection) when used in a loop where you step() each iteration.
         """
@@ -114,7 +173,7 @@ class BaseEnv(metaclass=ABCMeta):
 
     def last(self, observe=True):
         """
-        Returns observation, cumulative reward, done, info   for the current agent (specified by self.agent_selection)
+        Returns observation, cumulative reward, done, info for the current agent (specified by self.agent_selection)
         """
         agent = self.agent_selection
         observation = self.observe(agent) if observe else None
@@ -191,6 +250,5 @@ class BaseIterator:
             raise StopIteration
         self.iters_til_term -= 1
         return self.env.agent_selection
-
 
 # TODO: BaseParallelEnv
