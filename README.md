@@ -1,7 +1,8 @@
 # fights
 
-[![Test CI](https://github.com/poapper-inc/fights/actions/workflows/test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/test.yml)
-[![Lint CI](https://github.com/poapper-inc/fights/actions/workflows/lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/lint.yml)
+[![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
+[![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
+[![Rust CI](https://github.com/poapper-inc/fights/actions/workflows/rust.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/rust.yml)
 
 _Work in progress_
 

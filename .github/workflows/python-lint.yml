@@ -1,4 +1,4 @@
-name: Lint CI
+name: Python Lint CI
 on:
   push:
   pull_request:
