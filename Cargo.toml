@@ -3,3 +3,4 @@ members = [
     "fights-srv",
     "fights-rust"
 ]
+default-members = ["fights-srv"]
