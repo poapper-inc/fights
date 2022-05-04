@@ -165,7 +165,7 @@ class BaseEnv(metaclass=ABCMeta):
         for agent, reward in self.rewards.items():
             self._cumulative_rewards[agent] += reward
 
-    def agent_iter(self, max_iter=2 ** 63):
+    def agent_iter(self, max_iter=2**63):
         """
         Yields the current agent (self.agent_selection) when used in a loop where you step() each iteration.
         """
@@ -177,7 +177,12 @@ class BaseEnv(metaclass=ABCMeta):
         """
         agent = self.agent_selection
         observation = self.observe(agent) if observe else None
-        return observation, self._cumulative_rewards[agent], self.dones[agent], self.infos[agent]
+        return (
+            observation,
+            self._cumulative_rewards[agent],
+            self.dones[agent],
+            self.infos[agent],
+        )
 
     def _was_done_step(self, action):
         """
@@ -198,7 +203,9 @@ class BaseEnv(metaclass=ABCMeta):
 
         # removes done agent
         agent = self.agent_selection
-        assert self.dones[agent], "an agent that was not done as attempted to be removed"
+        assert self.dones[
+            agent
+        ], "an agent that was not done as attempted to be removed"
         del self.dones[agent]
         del self.rewards[agent]
         del self._cumulative_rewards[agent]
@@ -208,11 +215,11 @@ class BaseEnv(metaclass=ABCMeta):
         # finds next done agent or loads next live agent (Stored in _skip_agent_selection)
         _dones_order = [agent for agent in self.agents if self.dones[agent]]
         if _dones_order:
-            if getattr(self, '_skip_agent_selection', None) is None:
+            if getattr(self, "_skip_agent_selection", None) is None:
                 self._skip_agent_selection = self.agent_selection
             self.agent_selection = _dones_order[0]
         else:
-            if getattr(self, '_skip_agent_selection', None) is not None:
+            if getattr(self, "_skip_agent_selection", None) is not None:
                 self.agent_selection = self._skip_agent_selection
             self._skip_agent_selection = None
         self._clear_rewards()
@@ -221,8 +228,8 @@ class BaseEnv(metaclass=ABCMeta):
         """
         Returns a name which looks like: "space_invaders_v1"
         """
-        if hasattr(self, 'metadata'):
-            return self.metadata.get('name', self.__class__.__name__)
+        if hasattr(self, "metadata"):
+            return self.metadata.get("name", self.__class__.__name__)
         else:
             return self.__class__.__name__
 
@@ -250,5 +257,6 @@ class BaseIterator:
             raise StopIteration
         self.iters_til_term -= 1
         return self.env.agent_selection
+
 
 # TODO: BaseParallelEnv
