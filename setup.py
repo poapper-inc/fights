@@ -3,6 +3,6 @@ from setuptools_rust import Binding, RustExtension
 
 setup(
     rust_extensions=[
-        RustExtension("fights_srv", "fights-srv/Cargo.toml", binding=Binding.PyO3)
+        RustExtension("fights_rust", "fights-rust/Cargo.toml", binding=Binding.PyO3)
     ],
 )

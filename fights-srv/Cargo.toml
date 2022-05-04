@@ -5,10 +5,9 @@ edition = "2021"
 
 [lib]
 name = "fights_srv"
-crate-type = ["lib", "cdylib"]
+crate-type = ["lib"]
 
 [dependencies]
 actix-web = "4"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-pyo3 = { version = "0.16.4", features = ["extension-module"] }
