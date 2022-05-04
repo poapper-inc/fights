@@ -7,9 +7,15 @@ _Work in progress_
 
 Competitive artificial battle environments.
 
-## Quick start
+Consists of:
 
-### Development environment setup
+- [fights](/fights): Python package for environments
+- [fights-srv](/fights-srv): Rust game server for state calculation
+- [fights-rust](/fights-rust): Rust extension for Python
+
+## Setup
+
+Requires Python and Rust toolchains to be installed.
 
 ```shell
 $ python3 -m pip install tox
@@ -17,19 +23,29 @@ $ tox -e dev --devenv env
 $ source env/bin/activate
 ```
 
-### Local development installation
+## Usage
+
+### fights + fights-rust
 
 ```shell
-$ git clone https://github.com/poapper-inc/fights.git
-$ cd fights
-$ python3 -m pip install -e .
+# build wheel
+$ python -m build
 ```
 
-### Running
+### fights-srv
 
 ```shell
-$ cd fights # The fights folder inside the base git folder
-$ python3 -m main
+# development build
+$ cargo build
+
+# production build
+$ cargo build --release
+
+# tests
+$ cargo test
+
+# run
+$ cargo run
 ```
 
 ## Contributing
