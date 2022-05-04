@@ -1,5 +1,3 @@
-from abc import ABC
-
 from ...base import BaseEnv
 
 
@@ -21,6 +19,7 @@ class GomokuEnv(BaseEnv):
 
     def action_space(self, agent):
         pass
+
 
 # from .basic_rule import BasicRule
 # from .computer_agent import ComputerAgent
