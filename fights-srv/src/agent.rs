@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct User {
+pub struct Agent {
     pub id: String,
 }

@@ -1,9 +1,9 @@
-use crate::User;
+use crate::agent::Agent;
 pub mod routes;
 
 pub struct Room {
     pub id: String,
-    pub users: Vec<User>,
+    pub agents: Vec<Agent>,
 }
 
 pub use routes::config_routes;

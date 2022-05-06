@@ -1,14 +1,14 @@
 use actix_web::{get, web, HttpResponse, Responder};
 
-use crate::user::User;
+use crate::agent::Agent;
 
 #[get("/rooms")]
 async fn list() -> impl Responder {
     HttpResponse::Ok().json(vec![
-        User {
+        Agent {
             id: "1".to_string(),
         },
-        User {
+        Agent {
             id: "2".to_string(),
         },
     ])
