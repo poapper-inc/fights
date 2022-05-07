@@ -8,6 +8,7 @@ name = "fights_srv"
 crate-type = ["lib"]
 
 [dependencies]
-actix-web = "4"
+tokio = { version = "1", features = ["full"] }
+axum = "0.5.4"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

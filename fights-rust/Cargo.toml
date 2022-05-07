@@ -9,7 +9,8 @@ name = "fights_rust"
 crate-type = ["cdylib"]
 
 [dependencies]
-actix-web = "4"
+tokio = { version = "1", features = ["full"] }
+axum = "0.5.4"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 pyo3 = { version = "0.16.4", features = ["extension-module"] }
