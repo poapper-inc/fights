@@ -4,8 +4,38 @@ use std::{
 };
 
 pub struct NDArray<T, const N: usize> {
-    pub data: Vec<T>,
-    pub shape: [usize; N],
+    data: Vec<T>,
+    shape: [usize; N],
+}
+
+impl<T, const N: usize> NDArray<T, N>
+where
+    T: Clone,
+{
+    pub fn shape(&self) -> &[usize; N] {
+        &self.shape
+    }
+
+    pub fn from_vec(data: Vec<T>, shape: &[usize; N]) -> Result<Self, ()> {
+        match shape.iter().product::<usize>() {
+            len if len == data.len() => Ok(NDArray {
+                data: data,
+                shape: *shape,
+            }),
+            _ => Err(()),
+        }
+    }
+
+    pub fn from_iter(data: impl IntoIterator<Item = T>, shape: &[usize; N]) -> Result<Self, ()> {
+        let v: Vec<T> = data.into_iter().collect();
+        match shape.iter().product::<usize>() {
+            len if len == v.len() => Ok(NDArray {
+                data: v,
+                shape: *shape,
+            }),
+            _ => Err(()),
+        }
+    }
 }
 
 impl<T, const N: usize> Index<&[usize; N]> for NDArray<T, N> {
@@ -48,11 +78,26 @@ mod tests {
     use crate::ndarray::NDArray;
 
     #[test]
+    fn new() {
+        let iter = 0..1024;
+        let arr_from_iter = NDArray::from_iter(iter, &[2, 8, 16, 4]).unwrap();
+        assert_eq!(arr_from_iter.shape(), &[2, 8, 16, 4]);
+
+        let arr_from_vec = NDArray::from_vec((0..1_00_00_00).collect(), &[100, 100, 100]).unwrap();
+        assert_eq!(arr_from_vec.shape(), &[100, 100, 100]);
+
+        let _arr_empty = NDArray::from_iter(&Vec::<f64>::new(), &[0]).unwrap();
+    }
+
+    #[test]
+    #[should_panic]
+    fn new_err() {
+        let _arr = NDArray::from_iter(0..12, &[3, 2, 5]).unwrap();
+    }
+
+    #[test]
     fn index() {
-        let arr = NDArray {
-            data: (0..24).collect(),
-            shape: [3, 2, 2, 2],
-        };
+        let arr = NDArray::from_iter(0..24, &[3, 2, 2, 2]).unwrap();
         assert_eq!(arr[&[0, 0, 0, 0]], 0);
         assert_eq!(arr[&[2, 1, 0, 1]], 21);
         assert_eq!(arr[&[2, 1, 1, 1]], 23);
@@ -60,10 +105,7 @@ mod tests {
 
     #[test]
     fn index_mut() {
-        let mut arr = NDArray {
-            data: (0..24).collect(),
-            shape: [3, 2, 2, 2],
-        };
+        let mut arr = NDArray::from_iter(0..24, &[3, 2, 2, 2]).unwrap();
         let x = &mut arr[&[2, 1, 0, 1]];
         *x = 0;
 
