@@ -1,19 +1,89 @@
+use num_traits::Num;
 use std::{
-    ops::{Index, IndexMut},
+    fmt::{self, Debug, Pointer},
+    ops::{AddAssign, Index, IndexMut},
     vec::Vec,
 };
 
-pub struct NDArray<T, const N: usize> {
+#[derive(Clone, Debug)]
+pub struct NDArray<T: Num, const N: usize> {
     data: Vec<T>,
     shape: [usize; N],
 }
 
+impl<T> NDArray<T, 2>
+where
+    T: Clone + Num + AddAssign,
+{
+    pub fn eye(rows: usize) -> Self {
+        let mut result = NDArray::from_vec(vec![T::zero(); rows * rows], &[rows, rows]).unwrap();
+        for i in 0..rows {
+            result[[i, i]] = T::one();
+        }
+        result
+    }
+
+    pub fn transpose(&self) -> Self {
+        let mut result = self.clone();
+        for i in 0..self.shape[0] {
+            for j in 0..self.shape[1] {
+                result[[j, i]] = self[[i, j]].clone();
+            }
+        }
+        result
+    }
+
+    pub fn fliplr(&self) -> Self {
+        let mut result = self.clone();
+        for i in 0..self.shape[0] {
+            for j in 0..self.shape[1] {
+                result[[i, self.shape[1] - j - 1]] = self[[i, j]].clone();
+            }
+        }
+        result
+    }
+
+    pub fn conv2d(&self, kernel: NDArray<T, 2>) -> Self {
+        let mut result = NDArray::zeros(&[self.shape[0], self.shape[1]]);
+        for i in 0..self.shape[0] - kernel.shape[0] + 1 {
+            for j in 0..self.shape[1] - kernel.shape[1] + 1 {
+                let mut acc = T::zero();
+                for k in 0..kernel.shape[0] {
+                    for l in 0..kernel.shape[1] {
+                        acc += kernel[[k, l]].clone() * self[[i + k, j + l]].clone();
+                    }
+                }
+                result[[i, j]] = acc;
+            }
+        }
+        result
+    }
+}
+
 impl<T, const N: usize> NDArray<T, N>
 where
-    T: Clone,
+    T: Clone + Num,
 {
     pub fn shape(&self) -> &[usize; N] {
         &self.shape
+    }
+
+    pub fn new() -> Self {
+        NDArray::from_vec(vec![], &[0; N]).unwrap()
+    }
+
+    pub fn zeros(shape: &[usize; N]) -> Self {
+        let n = shape.iter().product();
+        NDArray::from_vec(vec![T::zero(); n], shape).unwrap()
+    }
+
+    pub fn ones(shape: &[usize; N]) -> Self {
+        let n = shape.iter().product();
+        NDArray::from_vec(vec![T::one(); n], shape).unwrap()
+    }
+
+    pub fn into_flat_vec(&self) -> Vec<T> {
+        return self.data.clone();
     }
 
     pub fn from_vec(data: Vec<T>, shape: &[usize; N]) -> Result<Self, ()> {
@@ -38,9 +108,9 @@ where
     }
 }
 
-impl<T, const N: usize> Index<&[usize; N]> for NDArray<T, N> {
+impl<T: Num, const N: usize> Index<[usize; N]> for NDArray<T, N> {
     type Output = T;
-    fn index<'a>(&'a self, idx: &[usize; N]) -> &'a T {
+    fn index<'a>(&'a self, idx: [usize; N]) -> &'a T {
         let coeffs = self
             .shape
             .iter()
@@ -50,15 +120,13 @@ impl<T, const N: usize> Index<&[usize; N]> for NDArray<T, N> {
                 acc
             });
 
-        println!("{:?}", coeffs);
-
         let idx_flat: usize = idx.iter().rev().zip(&coeffs).map(|(x, y)| x * y).sum();
         &self.data[idx_flat]
     }
 }
 
-impl<T, const N: usize> IndexMut<&[usize; N]> for NDArray<T, N> {
-    fn index_mut<'a>(&'a mut self, idx: &[usize; N]) -> &'a mut T {
+impl<T: Num, const N: usize> IndexMut<[usize; N]> for NDArray<T, N> {
+    fn index_mut<'a>(&'a mut self, idx: [usize; N]) -> &'a mut T {
         let coeffs = self
             .shape
             .iter()
@@ -79,14 +147,15 @@ mod tests {
 
     #[test]
     fn new() {
-        let iter = 0..1024;
+        let iter = 0..1024i64;
         let arr_from_iter = NDArray::from_iter(iter, &[2, 8, 16, 4]).unwrap();
         assert_eq!(arr_from_iter.shape(), &[2, 8, 16, 4]);
 
-        let arr_from_vec = NDArray::from_vec((0..1_00_00_00).collect(), &[100, 100, 100]).unwrap();
+        let arr_from_vec =
+            NDArray::from_vec((0..1_00_00_00i64).collect(), &[100, 100, 100]).unwrap();
         assert_eq!(arr_from_vec.shape(), &[100, 100, 100]);
 
-        let _arr_empty = NDArray::from_iter(&Vec::<f64>::new(), &[0]).unwrap();
+        let _arr_empty = NDArray::from_iter(Vec::<f64>::new(), &[0]).unwrap();
     }
 
     #[test]
@@ -98,17 +167,17 @@ mod tests {
     #[test]
     fn index() {
         let arr = NDArray::from_iter(0..24, &[3, 2, 2, 2]).unwrap();
-        assert_eq!(arr[&[0, 0, 0, 0]], 0);
-        assert_eq!(arr[&[2, 1, 0, 1]], 21);
-        assert_eq!(arr[&[2, 1, 1, 1]], 23);
+        assert_eq!(arr[[0, 0, 0, 0]], 0);
+        assert_eq!(arr[[2, 1, 0, 1]], 21);
+        assert_eq!(arr[[2, 1, 1, 1]], 23);
     }
 
     #[test]
     fn index_mut() {
         let mut arr = NDArray::from_iter(0..24, &[3, 2, 2, 2]).unwrap();
-        let x = &mut arr[&[2, 1, 0, 1]];
+        let x = &mut arr[[2, 1, 0, 1]];
         *x = 0;
 
-        assert_eq!(arr[&[2, 1, 0, 1]], 0);
+        assert_eq!(arr[[2, 1, 0, 1]], 0);
     }
 }
