@@ -1,6 +1,6 @@
 use num_traits::Num;
 use std::{
-    fmt::{self, Debug, Pointer},
+    fmt::Debug,
     ops::{AddAssign, Index, IndexMut},
     vec::Vec,
 };
@@ -43,7 +43,7 @@ where
         result
     }
 
-    pub fn conv2d(&self, kernel: NDArray<T, 2>) -> Self {
+    pub fn conv2d(&self, kernel: &NDArray<T, 2>) -> Self {
         let mut result = NDArray::zeros(&[self.shape[0], self.shape[1]]);
         for i in 0..self.shape[0] - kernel.shape[0] + 1 {
             for j in 0..self.shape[1] - kernel.shape[1] + 1 {
