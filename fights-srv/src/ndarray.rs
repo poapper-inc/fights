@@ -89,7 +89,7 @@ where
     pub fn from_vec(data: Vec<T>, shape: &[usize; N]) -> Result<Self, ()> {
         match shape.iter().product::<usize>() {
             len if len == data.len() => Ok(NDArray {
-                data: data,
+                data,
                 shape: *shape,
             }),
             _ => Err(()),
