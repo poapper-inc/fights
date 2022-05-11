@@ -216,4 +216,26 @@ mod tests {
         let res = env.step(&a, NDArray::from_vec(vec![0, 4], &[2]).unwrap());
         assert_eq!(res.done, true);
     }
+
+    #[test]
+    #[should_panic]
+    fn place_after_win() {
+        let a = Agent {
+            id: "0".to_string(),
+        };
+        let b = Agent {
+            id: "1".to_string(),
+        };
+
+        let xs = [0, 1, 2, 3, 4];
+        let mut env = GomokuEnv::new((10, 10), 5, (&a, &b));
+        let mut res = env.reset();
+        for x in xs {
+            res = env.step(&a, NDArray::from_vec(vec![x, 0], &[2]).unwrap());
+        }
+
+        assert_eq!(res.done, true);
+        res = env.step(&b, NDArray::from_vec(vec![1, 1], &[1]).unwrap());
+        assert_eq!(res.done, true);
+    }
 }
