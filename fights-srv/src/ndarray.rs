@@ -28,7 +28,8 @@ where
     }
 
     pub fn transpose(&self) -> Self {
-        let mut result = self.clone();
+        let new_shape = [self.shape[1], self.shape[0]];
+        let mut result = NDArray::zeros(&new_shape);
         for i in 0..self.shape[0] {
             for j in 0..self.shape[1] {
                 result[[j, i]] = self[[i, j]].clone();
