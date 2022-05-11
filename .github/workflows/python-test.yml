@@ -1,4 +1,4 @@
-name: Test CI
+name: Python Test CI
 on:
   push:
   pull_request:

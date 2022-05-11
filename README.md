@@ -1,28 +1,52 @@
 # fights
 
-[![Test CI](https://github.com/poapper-inc/fights/actions/workflows/test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/test.yml)
-[![Lint CI](https://github.com/poapper-inc/fights/actions/workflows/lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/lint.yml)
+[![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
+[![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
+[![Rust CI](https://github.com/poapper-inc/fights/actions/workflows/rust.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/rust.yml)
 
 _Work in progress_
 
 Competitive artificial battle environments.
 
-## Quick start
+Consists of:
 
-### Development environment setup
+- [fights](/fights): Python package for environments
+- [fights-srv](/fights-srv): Rust game server for state calculation
+- [fights-rust](/fights-rust): Rust extension for Python
+
+## Setup
+
+Requires Python and Rust toolchains to be installed.
 
 ```shell
-$ python -m pip install tox
-$ tox -e dev --devenv env
-$ source env/bin/activate
+$ python3 -m pip install tox
+$ tox -e dev --devenv venv
+$ source venv/bin/activate
 ```
 
-### Local development installation
+## Usage
+
+### fights + fights-rust
 
 ```shell
-$ git clone https://github.com/poapper-inc/fights.git
-$ cd fights
-$ python -m pip install -e .
+# build wheel
+$ python -m build
+```
+
+### fights-srv
+
+```shell
+# development build
+$ cargo build
+
+# production build
+$ cargo build --release
+
+# tests
+$ cargo test
+
+# run
+$ cargo run
 ```
 
 ## Contributing
