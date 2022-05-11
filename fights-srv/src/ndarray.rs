@@ -112,9 +112,11 @@ where
     }
 }
 
-impl<T: Num, const N: usize> Index<[usize; N]> for NDArray<T, N> {
-    type Output = T;
-    fn index<'a>(&'a self, idx: [usize; N]) -> &'a T {
+impl<T, const N: usize> NDArray<T, N>
+where
+    T: Num,
+{
+    fn flatten_index(&self, idx: [usize; N]) -> usize {
         let coeffs = self
             .shape
             .iter()
@@ -123,24 +125,21 @@ impl<T: Num, const N: usize> Index<[usize; N]> for NDArray<T, N> {
                 acc.push(x * acc.last().unwrap().clone());
                 acc
             });
+        idx.iter().rev().zip(&coeffs).map(|(x, y)| x * y).sum()
+    }
+}
 
-        let idx_flat: usize = idx.iter().rev().zip(&coeffs).map(|(x, y)| x * y).sum();
+impl<T: Num, const N: usize> Index<[usize; N]> for NDArray<T, N> {
+    type Output = T;
+    fn index<'a>(&'a self, idx: [usize; N]) -> &'a T {
+        let idx_flat: usize = self.flatten_index(idx);
         &self.data[idx_flat]
     }
 }
 
 impl<T: Num, const N: usize> IndexMut<[usize; N]> for NDArray<T, N> {
     fn index_mut<'a>(&'a mut self, idx: [usize; N]) -> &'a mut T {
-        let coeffs = self
-            .shape
-            .iter()
-            .rev()
-            .fold(vec![1], |mut acc, &x| -> Vec<usize> {
-                acc.push(x * acc.last().unwrap().clone());
-                acc
-            });
-
-        let idx_flat: usize = idx.iter().rev().zip(&coeffs).map(|(x, y)| x * y).sum();
+        let idx_flat: usize = self.flatten_index(idx);
         self.data.index_mut(idx_flat)
     }
 }
