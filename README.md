@@ -20,8 +20,8 @@ Requires Python and Rust toolchains to be installed.
 
 ```shell
 $ python3 -m pip install tox
-$ tox -e dev --devenv env
-$ source env/bin/activate
+$ tox -e dev --devenv venv
+$ source venv/bin/activate
 ```
 
 ## Usage
