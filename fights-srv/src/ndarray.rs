@@ -169,6 +169,29 @@ mod tests {
     }
 
     #[test]
+    fn eye() {
+        let cols = 3usize;
+        let rows = 4usize;
+        let arr: NDArray<usize, 2> = NDArray::eye(cols, rows);
+        for x in 0..cols {
+            for y in 0..rows {
+                assert_eq!(arr[[x, y]], if x == y { 1 } else { 0 });
+            }
+        }
+    }
+
+    #[test]
+    fn identity() {
+        let rows = 4usize;
+        let arr: NDArray<usize, 2> = NDArray::identity(rows);
+        for x in 0..rows {
+            for y in 0..rows {
+                assert_eq!(arr[[x, y]], if x == y { 1 } else { 0 });
+            }
+        }
+    }
+
+    #[test]
     fn index() {
         let arr = NDArray::from_iter(0..24, &[3, 2, 2, 2]).unwrap();
         assert_eq!(arr[[0, 0, 0, 0]], 0);
