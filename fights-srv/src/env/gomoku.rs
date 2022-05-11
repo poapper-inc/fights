@@ -80,8 +80,8 @@ impl<'a> GomokuEnv<'a> {
         let kernels: Vec<NDArray<usize, 2>> = vec![
             NDArray::ones(&[1, self.win_condition]),
             NDArray::ones(&[self.win_condition, 1]),
-            NDArray::eye(self.win_condition),
-            NDArray::eye(self.win_condition).fliplr(),
+            NDArray::identity(self.win_condition),
+            NDArray::identity(self.win_condition).fliplr(),
         ];
 
         for (a, i) in &self.agents {
@@ -215,5 +215,26 @@ mod tests {
         env.step(&a, NDArray::from_vec(vec![1, 3], &[2]).unwrap());
         let res = env.step(&a, NDArray::from_vec(vec![0, 4], &[2]).unwrap());
         assert_eq!(res.done, true);
+    }
+
+    #[test]
+    #[should_panic]
+    fn place_after_win() {
+        let a = Agent {
+            id: "0".to_string(),
+        };
+        let b = Agent {
+            id: "1".to_string(),
+        };
+
+        let xs = [0, 1, 2, 3, 4];
+        let mut env = GomokuEnv::new((10, 10), 5, (&a, &b));
+        let mut res = env.reset();
+        for x in xs {
+            res = env.step(&a, NDArray::from_vec(vec![x, 0], &[2]).unwrap());
+        }
+
+        assert_eq!(res.done, true);
+        _ = env.step(&b, NDArray::from_vec(vec![1, 1], &[1]).unwrap());
     }
 }
