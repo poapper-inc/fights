@@ -15,8 +15,8 @@ impl<T> NDArray<T, 2>
 where
     T: Clone + Num + AddAssign,
 {
-    pub fn eye(cols: usize, rows: usize) -> Self {
-        let mut result = NDArray::from_vec(vec![T::zero(); rows * cols], &[cols, rows]).unwrap();
+    pub fn eye(rows: usize, cols: usize) -> Self {
+        let mut result = NDArray::from_vec(vec![T::zero(); rows * cols], &[rows, cols]).unwrap();
         for i in 0..rows.min(cols) {
             result[[i, i]] = T::one();
         }
@@ -172,10 +172,10 @@ mod tests {
     fn eye() {
         let cols = 3usize;
         let rows = 4usize;
-        let arr: NDArray<usize, 2> = NDArray::eye(cols, rows);
-        for x in 0..cols {
-            for y in 0..rows {
-                assert_eq!(arr[[x, y]], if x == y { 1 } else { 0 });
+        let arr: NDArray<usize, 2> = NDArray::eye(rows, cols);
+        for i in 0..rows {
+            for j in 0..cols {
+                assert_eq!(arr[[i, j]], if i == j { 1 } else { 0 });
             }
         }
     }
@@ -184,9 +184,9 @@ mod tests {
     fn identity() {
         let rows = 4usize;
         let arr: NDArray<usize, 2> = NDArray::identity(rows);
-        for x in 0..rows {
-            for y in 0..rows {
-                assert_eq!(arr[[x, y]], if x == y { 1 } else { 0 });
+        for i in 0..rows {
+            for j in 0..rows {
+                assert_eq!(arr[[i, j]], if i == j { 1 } else { 0 });
             }
         }
     }
@@ -210,10 +210,9 @@ mod tests {
 
     #[test]
     fn transpose() {
-        // 11 12 13
-        // 21 22 23
-        // 31 32 33
-        // 41 42 43
+        // 11 21 31 41
+        // 12 22 32 42
+        // 13 23 33 43
         let mat: NDArray<usize, 2> = NDArray::from_vec(
             vec![11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43],
             &[3, 4],
@@ -221,25 +220,19 @@ mod tests {
         .unwrap();
         let result = NDArray::transpose(&mat);
 
-        // 11 21 31 41
-        // 12 22 32 42
-        // 13 23 33 43
+        // 11 12 13
+        // 21 22 23
+        // 31 32 33
+        // 41 42 43
         let mat_transposed: NDArray<usize, 2> = NDArray::from_vec(
             vec![11, 12, 13, 21, 22, 23, 31, 32, 33, 41, 42, 43],
             &[4, 3],
         )
         .unwrap();
 
-        for x in 0..4 {
-            for y in 0..3 {
-                println!(
-                    "x={}, y={}, result: {} vs mat_transposed: {}",
-                    x,
-                    y,
-                    result[[x, y]],
-                    &mat_transposed[[x, y]]
-                );
-                assert_eq!(result[[x, y]], mat_transposed[[x, y]]);
+        for i in 0..4 {
+            for j in 0..3 {
+                assert_eq!(result[[i, j]], mat_transposed[[i, j]]);
             }
         }
     }
