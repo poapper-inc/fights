@@ -80,8 +80,8 @@ impl<'a> GomokuEnv<'a> {
         let kernels: Vec<NDArray<usize, 2>> = vec![
             NDArray::ones(&[1, self.win_condition]),
             NDArray::ones(&[self.win_condition, 1]),
-            NDArray::eye(self.win_condition),
-            NDArray::eye(self.win_condition).fliplr(),
+            NDArray::identity(self.win_condition),
+            NDArray::identity(self.win_condition).fliplr(),
         ];
 
         for (a, i) in &self.agents {
