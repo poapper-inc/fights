@@ -207,4 +207,40 @@ mod tests {
 
         assert_eq!(arr[[2, 1, 0, 1]], 0);
     }
+
+    #[test]
+    fn transpose() {
+        // 11 12 13
+        // 21 22 23
+        // 31 32 33
+        // 41 42 43
+        let mat: NDArray<usize, 2> = NDArray::from_vec(
+            vec![11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43],
+            &[3, 4],
+        )
+        .unwrap();
+        let result = NDArray::transpose(&mat);
+
+        // 11 21 31 41
+        // 12 22 32 42
+        // 13 23 33 43
+        let mat_transposed: NDArray<usize, 2> = NDArray::from_vec(
+            vec![11, 12, 13, 21, 22, 23, 31, 32, 33, 41, 42, 43],
+            &[4, 3],
+        )
+        .unwrap();
+
+        for x in 0..4 {
+            for y in 0..3 {
+                println!(
+                    "x={}, y={}, result: {} vs mat_transposed: {}",
+                    x,
+                    y,
+                    result[[x, y]],
+                    &mat_transposed[[x, y]]
+                );
+                assert_eq!(result[[x, y]], mat_transposed[[x, y]]);
+            }
+        }
+    }
 }
