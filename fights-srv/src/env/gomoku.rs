@@ -235,7 +235,6 @@ mod tests {
         }
 
         assert_eq!(res.done, true);
-        res = env.step(&b, NDArray::from_vec(vec![1, 1], &[1]).unwrap());
-        assert_eq!(res.done, true);
+        _ = env.step(&b, NDArray::from_vec(vec![1, 1], &[1]).unwrap());
     }
 }
