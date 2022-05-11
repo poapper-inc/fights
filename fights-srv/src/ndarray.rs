@@ -15,12 +15,16 @@ impl<T> NDArray<T, 2>
 where
     T: Clone + Num + AddAssign,
 {
-    pub fn eye(rows: usize) -> Self {
-        let mut result = NDArray::from_vec(vec![T::zero(); rows * rows], &[rows, rows]).unwrap();
-        for i in 0..rows {
+    pub fn eye(cols: usize, rows: usize) -> Self {
+        let mut result = NDArray::from_vec(vec![T::zero(); rows * cols], &[cols, rows]).unwrap();
+        for i in 0..rows.min(cols) {
             result[[i, i]] = T::one();
         }
         result
+    }
+
+    pub fn identity(rows: usize) -> Self {
+        NDArray::eye(rows, rows)
     }
 
     pub fn transpose(&self) -> Self {
