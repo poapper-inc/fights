@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "fights-srv",
-    "fights-rust"
+    "fights-rust",
+    "fightsctl"
 ]
 default-members = ["fights-srv"]
