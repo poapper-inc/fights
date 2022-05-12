@@ -3,4 +3,6 @@ recursive-include fights-srv *
 recursive-exclude fights-srv/target *
 recursive-include fights-rust *
 recursive-exclude fights-rust/target *
+recursive-include fightsctl *
+recursive-exclude fightsctl/target *
 recursive-include fights *.pyi
