@@ -2,14 +2,12 @@ from dataclasses import dataclass
 import jax.numpy as jnp
 from jax.scipy.signal import convolve2d
 
-
-State = jnp.DeviceArray
-Action = jnp.DeviceArray
+Action = jnp.ndarray
 
 
 @dataclass
 class GomokuState:
-    board: jnp.DeviceArray
+    board: jnp.ndarray
     won: bool = False
 
 
@@ -18,6 +16,12 @@ class GomokuState:
 # no internal state
 class GomokuEnv:
     win_condition: int = 3
+
+    def step(self, state: GomokuState, action: Action) -> GomokuState:
+        return GomokuState(
+            board=state.board.at[action[0], action[1]].set(1),
+            won=self._check_wins(state),
+        )
 
     def _check_wins(self, state: GomokuState) -> bool:
         kernels = [
@@ -31,11 +35,6 @@ class GomokuEnv:
             if jnp.any(convolved >= self.win_condition):
                 return True
         return False
-
-    def step(self, state: GomokuState, action: Action) -> State:
-        state.board = state.board.at[action[0], action[1]].set(1)
-        state.won = self._check_wins(state)
-        return state
 
 
 if __name__ == "__main__":
