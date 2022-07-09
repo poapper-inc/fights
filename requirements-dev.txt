@@ -7,4 +7,3 @@ isort
 mypy
 flake8-bugbear
 build
-setuptools_rust
