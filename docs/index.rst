@@ -9,7 +9,8 @@ Welcome to fights's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   fights.base
 
 
 Indices and tables
