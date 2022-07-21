@@ -9,9 +9,9 @@ Welcome to fights's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   
-   fights.base
 
+   fights.base
+   fights.envs.pouribor
 
 Indices and tables
 ==================
