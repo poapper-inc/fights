@@ -44,8 +44,24 @@ Action type. Encoded as a NumPy array of shape ``(4,)``, in the form of [ `agent
 
 @dataclass
 class PouriborState:
+    """
+    PouriborState class.
+
+    `board`
+        - Array of shape ``(C, N, N)``, where C is channel index and N is board size.
+        - C = 0: one-hot encoded position of agent 0. (starts from top)
+        - C = 1: one-hot encoded position of agent 1. (starts from bottom)
+        - C = 2: one-hot encoded positions of horizontal walls.
+        - C = 3: one-hot encoded positions of vertical walls.
+
+    `walls_remaining`
+        - Array of shape ``(2,)``, in the form of [ `agent0_remaining_walls`, `agent1_remaining_walls` ]
+
+    `done`
+        - Boolean value indicating whether the game is done.
+    """
+
     board: np.ndarray
-    pieces: np.ndarray
     walls_remaining: np.ndarray
     done: bool = False
 
