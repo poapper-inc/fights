@@ -23,6 +23,18 @@ class TestPuoriborEnv(unittest.TestCase):
         )
         self.env = PuoriborEnv()
 
+    def test_action(self):
+        self.assertRaisesRegex(
+            ValueError,
+            "invalid agent_id",
+            lambda: self.env.step(self.initial_state, np.array([2, 0, 0, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "invalid action_type",
+            lambda: self.env.step(self.initial_state, np.array([0, 4, 0, 0])),
+        )
+
     def test_move(self):
         move_agent0_down = self.env.step(self.initial_state, np.array([0, 0, 4, 1]))
         expected_pos = np.zeros_like(self.initial_state.board[0])
