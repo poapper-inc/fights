@@ -25,7 +25,7 @@ class TestPuoriborEnv(unittest.TestCase):
 
     def test_move(self):
         move_agent0_down = self.env.step(self.initial_state, np.array([0, 0, 4, 1]))
-        expected_pos = np.zeros((9, 9), dtype=np.int8)
+        expected_pos = np.zeros_like(self.initial_state.board[0])
         expected_pos[4, 1] = 1
         np.testing.assert_array_equal(move_agent0_down.board[0], expected_pos)
 
