@@ -133,9 +133,29 @@ class PuoriborEnv:
             board[agent_id][tuple(current_pos)] = 0
             board[agent_id][tuple(new_pos)] = 1
         elif action_type == 1:
-            pass
+            if walls_remaining[agent_id] == 0:
+                raise ValueError(f"no walls left for agent {agent_id}")
+            if y == self.board_size - 1:
+                raise ValueError("cannot place wall on the edge")
+            elif x == self.board_size - 1:
+                raise ValueError("right section out of board")
+            elif np.any(board[2, x : x + 2, y]):
+                raise ValueError("wall already placed")
+            board[2, x, y] = 1
+            board[2, x + 1, y] = 1
+            walls_remaining[agent_id] -= 1
         elif action_type == 2:
-            pass
+            if walls_remaining[agent_id] == 0:
+                raise ValueError(f"no walls left for agent {agent_id}")
+            if x == self.board_size - 1:
+                raise ValueError("cannot place wall on the edge")
+            elif y == self.board_size - 1:
+                raise ValueError("right section out of board")
+            elif np.any(board[3, x, y : y + 2]):
+                raise ValueError("wall already placed")
+            board[3, x, y] = 1
+            board[3, x, y + 1] = 1
+            walls_remaining[agent_id] -= 1
         elif action_type == 3:
             pass
         else:

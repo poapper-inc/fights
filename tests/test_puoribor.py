@@ -88,3 +88,68 @@ class TestPuoriborEnv(unittest.TestCase):
             "wall",
             lambda: self.env.step(adjacent_opponent_with_wall, np.array([0, 0, 4, 2])),
         )
+
+    def test_walls(self):
+        place_wall_down = self.env.step(self.initial_state, np.array([0, 1, 0, 0]))
+        expected_hwall = np.zeros_like(place_wall_down.board[2])
+        expected_hwall[0, 0] = 1
+        expected_hwall[1, 0] = 1
+        np.testing.assert_array_equal(place_wall_down.board[2], expected_hwall)
+        np.testing.assert_array_equal(
+            place_wall_down.walls_remaining, self.initial_state.walls_remaining - [1, 0]
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "already placed",
+            lambda: self.env.step(place_wall_down, np.array([1, 1, 0, 0])),
+        )
+
+        place_wall_right = self.env.step(self.initial_state, np.array([1, 2, 0, 0]))
+        expected_vwall = np.zeros_like(place_wall_right.board[3])
+        expected_vwall[0, 0] = 1
+        expected_vwall[0, 1] = 1
+        np.testing.assert_array_equal(place_wall_right.board[3], expected_vwall)
+        np.testing.assert_array_equal(
+            place_wall_right.walls_remaining,
+            self.initial_state.walls_remaining - [0, 1],
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "already placed",
+            lambda: self.env.step(place_wall_right, np.array([0, 2, 0, 0])),
+        )
+
+        self.assertRaisesRegex(
+            ValueError,
+            "edge",
+            lambda: self.env.step(self.initial_state, np.array([0, 1, 0, 8])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "edge",
+            lambda: self.env.step(self.initial_state, np.array([0, 2, 8, 0])),
+        )
+
+        self.assertRaisesRegex(
+            ValueError,
+            "section out",
+            lambda: self.env.step(self.initial_state, np.array([0, 1, 8, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "section out",
+            lambda: self.env.step(self.initial_state, np.array([0, 2, 0, 8])),
+        )
+
+        out_of_walls = deepcopy(self.initial_state)
+        out_of_walls.walls_remaining = np.zeros_like(out_of_walls.walls_remaining)
+        self.assertRaisesRegex(
+            ValueError,
+            "no walls left",
+            lambda: self.env.step(out_of_walls, np.array([0, 1, 0, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "no walls left",
+            lambda: self.env.step(out_of_walls, np.array([1, 1, 0, 0])),
+        )
