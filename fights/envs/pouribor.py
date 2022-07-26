@@ -94,13 +94,3 @@ class PouriborEnv:
             if np.any(convolved >= self.win_condition):
                 return True
         return False
-
-
-if __name__ == "__main__":
-    state = PouriborState(board=np.zeros((10, 10)))
-    state = GomokuEnv().step(state, np.array([0, 1]))
-    print(state.won)
-    state = GomokuEnv().step(state, np.array([0, 2]))
-    print(state.won)
-    state = GomokuEnv().step(state, np.array([0, 3]))
-    print(state.won)
