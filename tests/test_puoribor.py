@@ -37,6 +37,10 @@ class TestPuoriborEnv(unittest.TestCase):
             ValueError,
             lambda: self.env.step(self.initial_state, np.array([0, 0, 4, 2])),
         )
+        self.assertRaises(
+            ValueError,
+            lambda: self.env.step(self.initial_state, np.array([0, 0, 5, 1])),
+        )
 
         wall_placed_down = deepcopy(self.initial_state)
         wall_placed_down.board[2, 4, 0] = 1
@@ -57,3 +61,11 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_pos[4, 2] = 1
         jump_down = self.env.step(adjacent_opponent, np.array([0, 0, 4, 2]))
         np.testing.assert_array_equal(jump_down.board[0], expected_pos)
+
+        adjacent_opponent_with_wall = deepcopy(adjacent_opponent)
+        adjacent_opponent_with_wall.board[2, 4, 1] = 1
+        self.assertRaisesRegex(
+            ValueError,
+            "wall",
+            lambda: self.env.step(adjacent_opponent_with_wall, np.array([0, 0, 4, 2])),
+        )
