@@ -29,29 +29,36 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_pos[4, 1] = 1
         np.testing.assert_array_equal(move_agent0_down.board[0], expected_pos)
 
-        self.assertRaises(
+        self.assertRaisesRegex(
             ValueError,
+            "out of board",
             lambda: self.env.step(self.initial_state, np.array([0, 0, 9, 9])),
         )
-        self.assertRaises(
+        self.assertRaisesRegex(
             ValueError,
+            "nothing",
             lambda: self.env.step(self.initial_state, np.array([0, 0, 4, 2])),
         )
-        self.assertRaises(
+        self.assertRaisesRegex(
             ValueError,
+            "diagonally",
             lambda: self.env.step(self.initial_state, np.array([0, 0, 5, 1])),
         )
 
         wall_placed_down = deepcopy(self.initial_state)
         wall_placed_down.board[2, 4, 0] = 1
-        self.assertRaises(
-            ValueError, lambda: self.env.step(wall_placed_down, np.array([0, 0, 4, 1]))
+        self.assertRaisesRegex(
+            ValueError,
+            "wall",
+            lambda: self.env.step(wall_placed_down, np.array([0, 0, 4, 1])),
         )
 
         wall_placed_right = deepcopy(self.initial_state)
         wall_placed_right.board[3, 4, 0] = 1
-        self.assertRaises(
-            ValueError, lambda: self.env.step(wall_placed_right, np.array([0, 0, 5, 0]))
+        self.assertRaisesRegex(
+            ValueError,
+            "wall",
+            lambda: self.env.step(wall_placed_right, np.array([0, 0, 5, 0])),
         )
 
         adjacent_opponent = deepcopy(self.initial_state)
