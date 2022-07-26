@@ -49,3 +49,11 @@ class TestPuoriborEnv(unittest.TestCase):
         self.assertRaises(
             ValueError, lambda: self.env.step(wall_placed_right, np.array([0, 0, 5, 0]))
         )
+
+        adjacent_opponent = deepcopy(self.initial_state)
+        adjacent_opponent.board[1] = np.zeros_like(adjacent_opponent.board[1])
+        adjacent_opponent.board[1, 4, 1] = 1
+        expected_pos = np.zeros_like(adjacent_opponent.board[0])
+        expected_pos[4, 2] = 1
+        jump_down = self.env.step(adjacent_opponent, np.array([0, 0, 4, 2]))
+        np.testing.assert_array_equal(jump_down.board[0], expected_pos)
