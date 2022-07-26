@@ -23,8 +23,11 @@ from scipy.signal import convolve2d
 
 Action: TypeAlias = NDArray[np.int_]
 """
-Action type. Encoded as a NumPy array of shape ``(3,)``, in the form of [ `action_type`, `coordinate_x`, `coordinate_y` ]
+Action type. Encoded as a NumPy array of shape ``(4,)``, in the form of [ `agent_id`, `action_type`, `coordinate_x`, `coordinate_y` ]
 .
+
+`agent_id`
+    - agent id of action (0 or 1)
 
 `action_type`
     - 0 (move piece)
