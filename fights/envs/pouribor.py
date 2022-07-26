@@ -48,7 +48,7 @@ class PouriborState:
     PouriborState class.
 
     `board`
-        - Array of shape ``(C, N, N)``, where C is channel index and N is board size.
+        - Array of shape ``(C, W, H)``, where C is channel index and W, H is board width, height.
         - C = 0: one-hot encoded position of agent 0. (starts from top)
         - C = 1: one-hot encoded position of agent 1. (starts from bottom)
         - C = 2: one-hot encoded positions of horizontal walls.
