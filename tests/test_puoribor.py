@@ -1,12 +1,12 @@
 import unittest
 
-from fights.envs.pouribor import PouriborEnv, PouriborState
+from fights.envs.puoribor import PuoriborEnv, PuoriborState
 
 from copy import deepcopy
 import numpy as np
 
 
-class TestPouriborEnv(unittest.TestCase):
+class TestPuoriborEnv(unittest.TestCase):
     def setUp(self):
         initial_pos = np.zeros((9, 9), dtype=np.int8)
         initial_pos[4, 0] = 1
@@ -18,10 +18,10 @@ class TestPouriborEnv(unittest.TestCase):
                 np.zeros((9, 9), dtype=np.int8),
             ]
         )
-        self.initial_state = PouriborState(
+        self.initial_state = PuoriborState(
             board=board, walls_remaining=np.array([20, 20])
         )
-        self.env = PouriborEnv()
+        self.env = PuoriborEnv()
 
     def test_move(self):
         move_agent0_down = self.env.step(self.initial_state, np.array([0, 0, 4, 1]))
