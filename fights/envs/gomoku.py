@@ -1,9 +1,10 @@
 from dataclasses import dataclass
+from typing import TypeAlias
 
 import jax.numpy as jnp
 from jax.scipy.signal import convolve2d
 
-Action = jnp.ndarray
+Action: TypeAlias = jnp.ndarray
 
 
 @dataclass
