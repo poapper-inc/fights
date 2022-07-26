@@ -14,7 +14,6 @@ Directions
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
 from typing_extensions import TypeAlias
 import numpy as np
 from numpy.typing import NDArray
@@ -63,13 +62,6 @@ class PouriborState:
     board: NDArray[np.int_]
     walls_remaining: NDArray[np.int_]
     done: bool = False
-
-
-@dataclass
-class Result:
-    state: PouriborState
-    reward_fn: Callable
-    done: bool
 
 
 class PouriborEnv:
