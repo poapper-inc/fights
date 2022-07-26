@@ -1,9 +1,9 @@
 import unittest
+from copy import deepcopy
+
+import numpy as np
 
 from fights.envs.puoribor import PuoriborEnv, PuoriborState
-
-from copy import deepcopy
-import numpy as np
 
 
 class TestPuoriborEnv(unittest.TestCase):

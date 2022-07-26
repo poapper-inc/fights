@@ -14,10 +14,10 @@ Directions
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing_extensions import TypeAlias
+
 import numpy as np
 from numpy.typing import NDArray
-
+from typing_extensions import TypeAlias
 
 Action: TypeAlias = NDArray[np.int_]
 """
