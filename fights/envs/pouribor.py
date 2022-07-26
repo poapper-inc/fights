@@ -61,8 +61,8 @@ class PouriborState:
         - Boolean value indicating whether the game is done.
     """
 
-    board: np.ndarray
-    walls_remaining: np.ndarray
+    board: NDArray[np.int_]
+    walls_remaining: NDArray[np.int_]
     done: bool = False
 
 
