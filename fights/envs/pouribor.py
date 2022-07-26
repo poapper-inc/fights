@@ -18,7 +18,6 @@ from typing import Callable
 from typing_extensions import TypeAlias
 import numpy as np
 from numpy.typing import NDArray
-from scipy.signal import convolve2d
 
 
 Action: TypeAlias = NDArray[np.int_]
@@ -102,14 +101,4 @@ class PouriborEnv:
         )
 
     def _check_wins(self, state: PouriborState) -> bool:
-        kernels = [
-            np.eye(self.win_condition),
-            np.fliplr(np.eye(self.win_condition)),
-            np.ones((self.win_condition, 1)),
-            np.ones((1, self.win_condition)),
-        ]
-        for kernel in kernels:
-            convolved = convolve2d(state.board, kernel)
-            if np.any(convolved >= self.win_condition):
-                return True
-        return False
+        return state.board[0, :, -1].sum() or state.board[1, :, 0].sum()
