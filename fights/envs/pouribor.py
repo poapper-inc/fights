@@ -95,9 +95,64 @@ class PouriborEnv:
             A copy of the object with the restored state.
         """
 
+        agent_id, action_type, x, y = action
+        if not (0 <= x < self.board_size and 0 <= y < self.board_size):
+            raise ValueError(f"out of board: {(x, y)}")
+        if not 0 <= agent_id <= 1:
+            raise ValueError(f"invalid agent_id: {agent_id}")
+
+        board = np.copy(state.board)
+        walls_remaining = np.copy(state.walls_remaining)
+
+        if action_type == 0:
+            current_pos = np.argwhere(state.board[agent_id] == 1)[0]
+            new_pos = np.array([x, y])
+            opponent_pos = np.argwhere(state.board[1 - agent_id] == 1)[0]
+            if np.all(new_pos == opponent_pos):
+                raise ValueError("cannot move to opponent's position")
+
+            delta = new_pos - current_pos
+            taxicab_dist = np.abs(delta).sum()
+            if taxicab_dist == 0:
+                raise ValueError("cannot move zero blocks")
+            elif taxicab_dist > 2:
+                raise ValueError("cannot move more than two blocks")
+            elif taxicab_dist == 2:
+                if np.all(np.abs(delta) == [1, 1]):
+                    raise ValueError("cannot move diagonally")
+                if not np.all(current_pos + delta // 2 == opponent_pos):
+                    raise ValueError("cannot jump over nothing")
+
+            right_check = delta[0] > 0 and np.any(
+                state.board[3, current_pos[0] : new_pos[0], current_pos[1]]
+            )
+            left_check = delta[0] < 0 and np.any(
+                state.board[3, new_pos[0] : current_pos[0], current_pos[1]]
+            )
+            down_check = delta[1] > 0 and np.any(
+                state.board[2, current_pos[0], current_pos[1] : new_pos[1]]
+            )
+            up_check = delta[1] < 0 and np.any(
+                state.board[2, current_pos[0], new_pos[1] : current_pos[1]]
+            )
+            if right_check or left_check or down_check or up_check:
+                raise ValueError("cannot jump over walls")
+
+            board[agent_id][tuple(current_pos)] = 0
+            board[agent_id][tuple(new_pos)] = 1
+        elif action_type == 1:
+            pass
+        elif action_type == 2:
+            pass
+        elif action_type == 3:
+            pass
+        else:
+            raise ValueError(f"invalid action_type: {action_type}")
+
         return PouriborState(
-            board=state.board.at[action[0], action[1]].set(1),
-            won=self._check_wins(state),
+            board=board,
+            walls_remaining=walls_remaining,
+            done=self._check_wins(state),
         )
 
     def _check_wins(self, state: PouriborState) -> bool:
