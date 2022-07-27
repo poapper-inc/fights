@@ -43,25 +43,29 @@ Action type. Encoded as a NumPy array of shape ``(4,)``, in the form of [ `agent
 @dataclass
 class PuoriborState:
     """
-    PuoriborState class.
-
-    `board`
-        - Array of shape ``(C, W, H)``, where C is channel index and W, H is board width, height.
-        - C = 0: one-hot encoded position of agent 0. (starts from top)
-        - C = 1: one-hot encoded position of agent 1. (starts from bottom)
-        - C = 2: one-hot encoded positions of horizontal walls.
-        - C = 3: one-hot encoded positions of vertical walls.
-
-    `walls_remaining`
-        - Array of shape ``(2,)``, in the form of [ `agent0_remaining_walls`, `agent1_remaining_walls` ]
-
-    `done`
-        - Boolean value indicating whether the game is done.
+    ``PuoriborState`` represents the game state.
     """
 
     board: NDArray[np.int_]
+    """
+    Array of shape ``(C, W, H)``, where C is channel index and W, H is board width, height.
+    
+    Channels
+        - ``C = 0``: one-hot encoded position of agent 0. (starts from top)
+        - ``C = 1``: one-hot encoded position of agent 1. (starts from bottom)
+        - ``C = 2``: one-hot encoded positions of horizontal walls.
+        - ``C = 3``: one-hot encoded positions of vertical walls.
+    """
+
     walls_remaining: NDArray[np.int_]
+    """
+    Array of shape ``(2,)``, in the form of [ `agent0_remaining_walls`, `agent1_remaining_walls` ].
+    """
+
     done: bool = False
+    """
+    Boolean value indicating whether the game is done.
+    """
 
 
 class PuoriborEnv:
