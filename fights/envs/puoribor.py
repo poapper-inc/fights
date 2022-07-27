@@ -70,7 +70,7 @@ class PuoriborEnv:
     Size (width and height) of the board.
     """
 
-    max_walls: int = 20
+    max_walls: int = 10
     """
     Maximum allowed walls per agent.
     """
