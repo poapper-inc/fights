@@ -103,6 +103,11 @@ class TestPuoriborEnv(unittest.TestCase):
             "already placed",
             lambda: self.env.step(place_wall_down, np.array([1, 1, 0, 0])),
         )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(place_wall_down, np.array([1, 2, 0, 0])),
+        )
 
         place_wall_right = self.env.step(self.initial_state, np.array([1, 2, 0, 0]))
         expected_vwall = np.zeros_like(place_wall_right.board[3])

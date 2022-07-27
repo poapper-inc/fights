@@ -141,6 +141,8 @@ class PuoriborEnv:
                 raise ValueError("right section out of board")
             elif np.any(board[2, x : x + 2, y]):
                 raise ValueError("wall already placed")
+            elif np.all(board[3, x, y : y + 2]):
+                raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1
             board[2, x + 1, y] = 1
             walls_remaining[agent_id] -= 1
@@ -153,6 +155,8 @@ class PuoriborEnv:
                 raise ValueError("right section out of board")
             elif np.any(board[3, x, y : y + 2]):
                 raise ValueError("wall already placed")
+            elif np.all(board[2, x : x + 2, y]):
+                raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1
             board[3, x, y + 1] = 1
             walls_remaining[agent_id] -= 1
