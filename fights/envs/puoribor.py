@@ -49,7 +49,7 @@ class PuoriborState:
     board: NDArray[np.int_]
     """
     Array of shape ``(C, W, H)``, where C is channel index and W, H is board width, height.
-    
+
     Channels
         - ``C = 0``: one-hot encoded position of agent 0. (starts from top)
         - ``C = 1``: one-hot encoded position of agent 1. (starts from bottom)
