@@ -89,6 +89,32 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(adjacent_opponent_with_wall, np.array([0, 0, 4, 2])),
         )
 
+        blocked_by_edge = deepcopy(self.initial_state)
+        blocked_by_edge.board[1] = np.zeros_like(blocked_by_edge.board[1])
+        blocked_by_edge.board[1, 4, 1] = 1
+        expected_pos = np.zeros_like(blocked_by_edge.board[1])
+        expected_pos[3, 0] = 1
+        diagonal_jump = self.env.step(blocked_by_edge, np.array([1, 0, 3, 0]))
+        np.testing.assert_array_equal(diagonal_jump.board[1], expected_pos)
+        self.assertRaisesRegex(
+            ValueError,
+            "linear jump is possible",
+            lambda: self.env.step(blocked_by_edge, np.array([0, 0, 3, 1])),
+        )
+
+        blocked_by_wall = deepcopy(blocked_by_edge)
+        blocked_by_wall.board[2, 4, 1] = 1
+        expected_pos = np.zeros_like(blocked_by_wall.board[0])
+        expected_pos[5, 1] = 1
+        diagonal_jump = self.env.step(blocked_by_wall, np.array([0, 0, 5, 1]))
+        np.testing.assert_array_equal(diagonal_jump.board[0], expected_pos)
+        blocked_by_wall.board[2, 4, 0] = 1
+        self.assertRaisesRegex(
+            ValueError,
+            "walls",
+            lambda: self.env.step(blocked_by_wall, np.array([0, 0, 3, 1])),
+        )
+
     def test_walls(self):
         place_wall_down = self.env.step(self.initial_state, np.array([0, 1, 0, 0]))
         expected_hwall = np.zeros_like(place_wall_down.board[2])

@@ -109,25 +109,36 @@ class PuoriborEnv:
                 raise ValueError("cannot move zero blocks")
             elif taxicab_dist > 2:
                 raise ValueError("cannot move more than two blocks")
-            elif taxicab_dist == 2:
-                if np.all(np.abs(delta) == [1, 1]):
-                    raise ValueError("cannot move diagonally")
-                if not np.all(current_pos + delta // 2 == opponent_pos):
-                    raise ValueError("cannot jump over nothing")
+            elif (
+                taxicab_dist == 2
+                and np.any(delta == 0)
+                and not np.all(current_pos + delta // 2 == opponent_pos)
+            ):
+                raise ValueError("cannot jump over nothing")
 
-            right_check = delta[0] > 0 and np.any(
-                state.board[3, current_pos[0] : new_pos[0], current_pos[1]]
-            )
-            left_check = delta[0] < 0 and np.any(
-                state.board[3, new_pos[0] : current_pos[0], current_pos[1]]
-            )
-            down_check = delta[1] > 0 and np.any(
-                state.board[2, current_pos[0], current_pos[1] : new_pos[1]]
-            )
-            up_check = delta[1] < 0 and np.any(
-                state.board[2, current_pos[0], new_pos[1] : current_pos[1]]
-            )
-            if right_check or left_check or down_check or up_check:
+            if np.all(delta):
+                if np.any(current_pos + delta * [0, 1] != opponent_pos) and np.any(
+                    current_pos + delta * [1, 0] != opponent_pos
+                ):
+                    raise ValueError("cannot move diagonally")
+                elif self._check_wall_blocked(board, current_pos, opponent_pos):
+                    raise ValueError("cannot jump over walls")
+
+                original_jump_pos = current_pos + 2 * (opponent_pos - current_pos)
+                if np.all(
+                    np.logical_and(
+                        [0, 0] <= original_jump_pos,
+                        original_jump_pos < [self.board_size, self.board_size],
+                    )
+                ) and not self._check_wall_blocked(
+                    board, current_pos, original_jump_pos
+                ):
+                    raise ValueError(
+                        "cannot diagonally jump if linear jump is possible"
+                    )
+                elif self._check_wall_blocked(board, opponent_pos, new_pos):
+                    raise ValueError("cannot jump over walls")
+            elif self._check_wall_blocked(board, current_pos, new_pos):
                 raise ValueError("cannot jump over walls")
 
             board[agent_id][tuple(current_pos)] = 0
@@ -170,6 +181,27 @@ class PuoriborEnv:
             walls_remaining=walls_remaining,
             done=self._check_wins(state),
         )
+
+    def _check_wall_blocked(
+        self,
+        board: NDArray[np.int_],
+        current_pos: NDArray[np.int_],
+        new_pos: NDArray[np.int_],
+    ) -> bool:
+        delta = new_pos - current_pos
+        right_check = delta[0] > 0 and np.any(
+            board[3, current_pos[0] : new_pos[0], current_pos[1]]
+        )
+        left_check = delta[0] < 0 and np.any(
+            board[3, new_pos[0] : current_pos[0], current_pos[1]]
+        )
+        down_check = delta[1] > 0 and np.any(
+            board[2, current_pos[0], current_pos[1] : new_pos[1]]
+        )
+        up_check = delta[1] < 0 and np.any(
+            board[2, current_pos[0], new_pos[1] : current_pos[1]]
+        )
+        return right_check or left_check or down_check or up_check
 
     def _check_wins(self, state: PuoriborState) -> bool:
         return state.board[0, :, -1].sum() or state.board[1, :, 0].sum()
