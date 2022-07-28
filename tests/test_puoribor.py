@@ -19,7 +19,7 @@ class TestPuoriborEnv(unittest.TestCase):
             ]
         )
         self.initial_state = PuoriborState(
-            board=board, walls_remaining=np.array([20, 20])
+            board=board, walls_remaining=np.array([10, 10])
         )
         self.env = PuoriborEnv()
 
