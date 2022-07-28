@@ -1,20 +1,27 @@
 
-fights.envs.pouribor
+fights.envs.puoribor
 ====================
 
-.. currentmodule:: fights.envs.pouribor
+.. currentmodule:: fights.envs.puoribor
 
-.. automodule:: fights.envs.pouribor
+.. automodule:: fights.envs.puoribor
 
 -----------
 Environment
 -----------
 
-.. autoclass:: fights.envs.pouribor.PouriborEnv
+.. autoclass:: fights.envs.puoribor.PuoriborEnv
+   :members:
+
+^^^^^
+State
+^^^^^
+
+.. autoclass:: fights.envs.puoribor.PuoriborState
    :members:
 
 -----
 Types
 -----
 
-.. autodata:: fights.envs.pouribor.Action
+.. autodata:: fights.envs.puoribor.Action
