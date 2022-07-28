@@ -184,3 +184,19 @@ class TestPuoriborEnv(unittest.TestCase):
             "no walls left",
             lambda: self.env.step(out_of_walls, np.array([1, 1, 0, 0])),
         )
+
+        block_path = self.env.step(self.initial_state, np.array([0, 1, 4, 0]))
+        block_path = self.env.step(block_path, np.array([1, 2, 5, 0]))
+        self.assertRaisesRegex(
+            ValueError,
+            "blocking all paths",
+            lambda: self.env.step(block_path, np.array([0, 2, 3, 0])),
+        )
+
+        block_path = self.env.step(self.initial_state, np.array([0, 2, 5, 0]))
+        block_path = self.env.step(block_path, np.array([1, 2, 3, 0]))
+        self.assertRaisesRegex(
+            ValueError,
+            "blocking all paths",
+            lambda: self.env.step(block_path, np.array([0, 1, 4, 0])),
+        )

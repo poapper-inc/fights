@@ -14,6 +14,7 @@ Directions
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Deque
 
 import numpy as np
 from numpy.typing import NDArray
@@ -156,6 +157,10 @@ class PuoriborEnv:
                 raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1
             board[2, x + 1, y] = 1
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
+                board, 1
+            ):
+                raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
         elif action_type == 2:
             if walls_remaining[agent_id] == 0:
@@ -170,6 +175,10 @@ class PuoriborEnv:
                 raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1
             board[3, x, y + 1] = 1
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
+                board, 1
+            ):
+                raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
         elif action_type == 3:
             pass
@@ -181,6 +190,29 @@ class PuoriborEnv:
             walls_remaining=walls_remaining,
             done=self._check_wins(state),
         )
+
+    def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
+        start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
+        visited = set()
+        q = Deque([start_pos])
+        goal_y = 8 if agent_id == 0 else 0
+        while q:
+            here = q.popleft()
+            if here[1] == goal_y:
+                return True
+            for dx, dy in [(-1, 0), (0, -1), (0, 1), (1, 0)]:
+                there = (here[0] + dx, here[1] + dy)
+                if not np.all(
+                    np.logical_and(
+                        [0, 0] <= np.array(there),
+                        np.array(there) < [self.board_size, self.board_size],
+                    )
+                ) or self._check_wall_blocked(board, np.array(here), np.array(there)):
+                    continue
+                if there not in visited:
+                    visited.add(there)
+                    q.append(there)
+        return False
 
     def _check_wall_blocked(
         self,
