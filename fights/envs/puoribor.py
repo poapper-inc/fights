@@ -182,7 +182,32 @@ class PuoriborEnv:
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
         elif action_type == 3:
-            pass
+            region_top_left = np.array([x, y])
+            if not self._check_in_range(
+                region_top_left,
+                bottom_right=np.array([self.board_size - 3, self.board_size - 3]),
+            ):
+                raise ValueError("rotation region out of board")
+            elif walls_remaining[agent_id] < 2:
+                raise ValueError(f"less than two walls left for agent {agent_id}")
+
+            padded_horizontal = np.pad(board[2], 1, constant_values=0)
+            padded_vertical = np.pad(board[3], 1, constant_values=0)
+            px, py = x + 1, y + 1
+            horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
+            vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
+            horizontal_region_new = np.rot90(vertical_region)
+            vertical_region_new = np.rot90(horizontal_region)
+            padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
+            padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
+            board[2] = padded_horizontal[1:-1, 1:-1]
+            board[3] = padded_vertical[1:-1, 1:-1]
+
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
+                board, 0
+            ):
+                raise ValueError("cannot rotate to block all paths")
+            walls_remaining[agent_id] -= 2
         else:
             raise ValueError(f"invalid action_type: {action_type}")
 
