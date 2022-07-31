@@ -36,7 +36,9 @@ class TestPuoriborEnv(unittest.TestCase):
         )
 
     def test_move(self):
-        move_agent0_down = self.env.step(self.initial_state, np.array([0, 0, 4, 1]))
+        move_agent0_down = self.env.step(
+            self.initial_state, np.array([0, 0, 4, 1])
+        )
         expected_pos = np.zeros_like(self.initial_state.board[0])
         expected_pos[4, 1] = 1
         np.testing.assert_array_equal(move_agent0_down.board[0], expected_pos)
@@ -86,7 +88,9 @@ class TestPuoriborEnv(unittest.TestCase):
         self.assertRaisesRegex(
             ValueError,
             "wall",
-            lambda: self.env.step(adjacent_opponent_with_wall, np.array([0, 0, 4, 2])),
+            lambda: self.env.step(
+                adjacent_opponent_with_wall, np.array([0, 0, 4, 2])
+            ),
         )
 
         blocked_by_edge = deepcopy(self.initial_state)
@@ -116,13 +120,16 @@ class TestPuoriborEnv(unittest.TestCase):
         )
 
     def test_walls(self):
-        place_wall_down = self.env.step(self.initial_state, np.array([0, 1, 0, 0]))
+        place_wall_down = self.env.step(
+            self.initial_state, np.array([0, 1, 0, 0])
+        )
         expected_hwall = np.zeros_like(place_wall_down.board[2])
         expected_hwall[0, 0] = 1
         expected_hwall[1, 0] = 1
         np.testing.assert_array_equal(place_wall_down.board[2], expected_hwall)
         np.testing.assert_array_equal(
-            place_wall_down.walls_remaining, self.initial_state.walls_remaining - [1, 0]
+            place_wall_down.walls_remaining,
+            self.initial_state.walls_remaining - [1, 0],
         )
         self.assertRaisesRegex(
             ValueError,
@@ -135,7 +142,9 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(place_wall_down, np.array([1, 2, 0, 0])),
         )
 
-        place_wall_right = self.env.step(self.initial_state, np.array([1, 2, 0, 0]))
+        place_wall_right = self.env.step(
+            self.initial_state, np.array([1, 2, 0, 0])
+        )
         expected_vwall = np.zeros_like(place_wall_right.board[3])
         expected_vwall[0, 0] = 1
         expected_vwall[0, 1] = 1
@@ -173,7 +182,9 @@ class TestPuoriborEnv(unittest.TestCase):
         )
 
         out_of_walls = deepcopy(self.initial_state)
-        out_of_walls.walls_remaining = np.zeros_like(out_of_walls.walls_remaining)
+        out_of_walls.walls_remaining = np.zeros_like(
+            out_of_walls.walls_remaining
+        )
         self.assertRaisesRegex(
             ValueError,
             "no walls left",
@@ -202,7 +213,9 @@ class TestPuoriborEnv(unittest.TestCase):
         )
 
     def test_rotate(self):
-        top_left_corner = self.env.step(self.initial_state, np.array([0, 1, 0, 0]))
+        top_left_corner = self.env.step(
+            self.initial_state, np.array([0, 1, 0, 0])
+        )
         top_left_corner = self.env.step(top_left_corner, np.array([1, 1, 3, 2]))
         top_left_corner = self.env.step(top_left_corner, np.array([0, 2, 2, 0]))
         top_left_corner = self.env.step(top_left_corner, np.array([1, 2, 1, 2]))
