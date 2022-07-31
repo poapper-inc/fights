@@ -122,16 +122,14 @@ class PuoriborEnv:
                 raise ValueError("cannot jump over nothing")
 
             if np.all(delta):
-                if np.any(
-                    current_pos + delta * [0, 1] != opponent_pos
-                ) and np.any(current_pos + delta * [1, 0] != opponent_pos):
+                if np.any(current_pos + delta * [0, 1] != opponent_pos) and np.any(
+                    current_pos + delta * [1, 0] != opponent_pos
+                ):
                     raise ValueError("cannot move diagonally")
                 elif self._check_wall_blocked(board, current_pos, opponent_pos):
                     raise ValueError("cannot jump over walls")
 
-                original_jump_pos = current_pos + 2 * (
-                    opponent_pos - current_pos
-                )
+                original_jump_pos = current_pos + 2 * (opponent_pos - current_pos)
                 if self._check_in_range(
                     original_jump_pos
                 ) and not self._check_wall_blocked(
@@ -160,9 +158,9 @@ class PuoriborEnv:
                 raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1
             board[2, x + 1, y] = 1
-            if not self._check_path_exists(
-                board, 0
-            ) or not self._check_path_exists(board, 1):
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
+                board, 1
+            ):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
         elif action_type == 2:
@@ -178,46 +176,36 @@ class PuoriborEnv:
                 raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1
             board[3, x, y + 1] = 1
-            if not self._check_path_exists(
-                board, 0
-            ) or not self._check_path_exists(board, 1):
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
+                board, 1
+            ):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
         elif action_type == 3:
             region_top_left = np.array([x, y])
             if not self._check_in_range(
                 region_top_left,
-                bottom_right=np.array(
-                    [self.board_size - 3, self.board_size - 3]
-                ),
+                bottom_right=np.array([self.board_size - 3, self.board_size - 3]),
             ):
                 raise ValueError("rotation region out of board")
             elif walls_remaining[agent_id] < 2:
-                raise ValueError(
-                    f"less than two walls left for agent {agent_id}"
-                )
+                raise ValueError(f"less than two walls left for agent {agent_id}")
 
             padded_horizontal = np.pad(board[2], 1, constant_values=0)
             padded_vertical = np.pad(board[3], 1, constant_values=0)
             px, py = x + 1, y + 1
-            horizontal_region = np.copy(
-                padded_horizontal[px : px + 4, py - 1 : py + 4]
-            )
-            vertical_region = np.copy(
-                padded_vertical[px - 1 : px + 4, py : py + 4]
-            )
+            horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
+            vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
             horizontal_region_new = np.rot90(vertical_region)
             vertical_region_new = np.rot90(horizontal_region)
-            padded_horizontal[
-                px : px + 4, py - 1 : py + 4
-            ] = horizontal_region_new
+            padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
             padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
             board[2] = padded_horizontal[1:-1, 1:-1]
             board[3] = padded_vertical[1:-1, 1:-1]
 
-            if not self._check_path_exists(
+            if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 0
-            ) or not self._check_path_exists(board, 0):
+            ):
                 raise ValueError("cannot rotate to block all paths")
             walls_remaining[agent_id] -= 2
         else:
@@ -232,18 +220,13 @@ class PuoriborEnv:
     top_left_default = np.array([0, 0])
 
     def _check_in_range(
-        self,
-        pos: NDArray[np.int_],
-        top_left=top_left_default,
-        bottom_right=None,
+        self, pos: NDArray[np.int_], top_left=top_left_default, bottom_right=None
     ) -> np.bool_:
         if bottom_right is None:
             bottom_right = np.array([self.board_size, self.board_size])
         return np.all(np.logical_and(top_left <= pos, pos < bottom_right))
 
-    def _check_path_exists(
-        self, board: NDArray[np.int_], agent_id: int
-    ) -> bool:
+    def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
         start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
         visited = set()
         q = Deque([start_pos])
@@ -259,9 +242,7 @@ class PuoriborEnv:
                         [0, 0] <= np.array(there),
                         np.array(there) < [self.board_size, self.board_size],
                     )
-                ) or self._check_wall_blocked(
-                    board, np.array(here), np.array(there)
-                ):
+                ) or self._check_wall_blocked(board, np.array(here), np.array(there)):
                     continue
                 if there not in visited:
                     visited.add(there)

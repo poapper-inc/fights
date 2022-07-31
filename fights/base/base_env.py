@@ -3,9 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class BaseEnv(metaclass=ABCMeta):
-    def __init__(
-        self, agents, possible_agents, observation_spaces, action_spaces
-    ):
+    def __init__(self, agents, possible_agents, observation_spaces, action_spaces):
         self.agents = agents
         """
         A list of the names of all current agents, typically integers.
@@ -201,9 +199,7 @@ class BaseEnv(metaclass=ABCMeta):
             # main contents of step
         """
         if action is not None:
-            raise ValueError(
-                "when an agent is done, the only valid action is None"
-            )
+            raise ValueError("when an agent is done, the only valid action is None")
 
         # removes done agent
         agent = self.agent_selection
