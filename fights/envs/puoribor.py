@@ -93,7 +93,7 @@ class PuoriborEnv:
         """
 
         agent_id, action_type, x, y = action
-        if not (0 <= x < self.board_size and 0 <= y < self.board_size):
+        if not self._check_in_range(np.array([x, y])):
             raise ValueError(f"out of board: {(x, y)}")
         if not 0 <= agent_id <= 1:
             raise ValueError(f"invalid agent_id: {agent_id}")
@@ -130,11 +130,8 @@ class PuoriborEnv:
                     raise ValueError("cannot jump over walls")
 
                 original_jump_pos = current_pos + 2 * (opponent_pos - current_pos)
-                if np.all(
-                    np.logical_and(
-                        [0, 0] <= original_jump_pos,
-                        original_jump_pos < [self.board_size, self.board_size],
-                    )
+                if self._check_in_range(
+                    original_jump_pos
                 ) and not self._check_wall_blocked(
                     board, current_pos, original_jump_pos
                 ):
@@ -194,6 +191,13 @@ class PuoriborEnv:
             walls_remaining=walls_remaining,
             done=self._check_wins(state),
         )
+
+    def _check_in_range(
+        self, pos: NDArray[np.int_], top_left=np.array([0, 0]), bottom_right=None
+    ) -> np.bool_:
+        if bottom_right is None:
+            bottom_right = np.array([self.board_size, self.board_size])
+        return np.all(np.logical_and(top_left <= pos, pos < bottom_right))
 
     def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
         start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
