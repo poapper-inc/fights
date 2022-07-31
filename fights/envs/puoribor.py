@@ -217,8 +217,10 @@ class PuoriborEnv:
             done=self._check_wins(state),
         )
 
+    top_left_default = np.array([0, 0])
+
     def _check_in_range(
-        self, pos: NDArray[np.int_], top_left=np.array([0, 0]), bottom_right=None
+        self, pos: NDArray[np.int_], top_left=top_left_default, bottom_right=None
     ) -> np.bool_:
         if bottom_right is None:
             bottom_right = np.array([self.board_size, self.board_size])
