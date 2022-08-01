@@ -167,13 +167,15 @@ class BaseEnv(metaclass=ABCMeta):
 
     def agent_iter(self, max_iter=2**63):
         """
-        Yields the current agent (self.agent_selection) when used in a loop where you step() each iteration.
+        Yields the current agent (self.agent_selection) when used in a loop where you
+        step() each iteration.
         """
         return BaseIterable(self, max_iter)
 
     def last(self, observe=True):
         """
-        Returns observation, cumulative reward, done, info for the current agent (specified by self.agent_selection)
+        Returns observation, cumulative reward, done, info for the current agent
+        (specified by self.agent_selection)
         """
         agent = self.agent_selection
         observation = self.observe(agent) if observe else None
@@ -189,7 +191,8 @@ class BaseEnv(metaclass=ABCMeta):
         Helper function that performs step() for done agents.
         Does the following:
         1. Removes done agent from .agents, .dones, .rewards, ._cumulative_rewards, and .infos
-        2. Loads next agent into .agent_selection: if another agent is done, loads that one, otherwise load next live agent
+        2. Loads next agent into .agent_selection: if another agent is done, loads that
+        one, otherwise load next live agent
         3. Clear the rewards dict
         Highly recommended to use at the beginning of step as follows:
         def step(self, action):
