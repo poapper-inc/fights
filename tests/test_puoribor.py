@@ -271,6 +271,24 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(self.initial_state, np.array([0, 3, 6, 0])),
         )
 
+        almost_block_agent0 = self.env.step(self.initial_state, np.array([0, 2, 3, 0]))
+        almost_block_agent0 = self.env.step(almost_block_agent0, np.array([1, 2, 4, 0]))
+        almost_block_agent0 = self.env.step(almost_block_agent0, np.array([0, 2, 0, 1]))
+        self.assertRaisesRegex(
+            ValueError,
+            "rotate to block",
+            lambda: self.env.step(almost_block_agent0, np.array([1, 3, 1, 2])),
+        )
+
+        almost_block_agent1 = self.env.step(self.initial_state, np.array([0, 1, 5, 5]))
+        almost_block_agent1 = self.env.step(almost_block_agent1, np.array([1, 1, 5, 6]))
+        almost_block_agent1 = self.env.step(almost_block_agent1, np.array([0, 2, 4, 6]))
+        self.assertRaisesRegex(
+            ValueError,
+            "rotate to block",
+            lambda: self.env.step(almost_block_agent1, np.array([1, 3, 2, 5])),
+        )
+
         lacking_walls = deepcopy(self.initial_state)
         lacking_walls.walls_remaining[0] = 1
         self.assertRaisesRegex(
