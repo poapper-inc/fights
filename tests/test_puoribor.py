@@ -231,6 +231,40 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[1, 5] = 1
         np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
 
+        top_edge = self.env.step(self.initial_state, np.array([0, 1, 2, 3]))
+        top_edge = self.env.step(top_edge, np.array([1, 1, 5, 1]))
+        top_edge = self.env.step(top_edge, np.array([0, 2, 3, 3]))
+        top_edge = self.env.step(top_edge, np.array([1, 2, 5, 0]))
+        top_edge = self.env.step(top_edge, np.array([0, 2, 1, 0]))
+        top_edge = self.env.step(top_edge, np.array([1, 3, 2, 0]))
+        expected_hwall = np.zeros_like(top_edge.board[2])
+        expected_hwall[2, 1] = 1
+        expected_hwall[6, 1] = 1
+        expected_hwall[4:6, 3] = 1
+        np.testing.assert_array_equal(top_edge.board[2], expected_hwall)
+        expected_vwall = np.zeros_like(top_edge.board[3])
+        expected_vwall[1, :2] = 1
+        expected_vwall[3, 3:5] = 1
+        np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
+
+        contained = self.env.step(self.initial_state, np.array([0, 1, 2, 4]))
+        contained = self.env.step(contained, np.array([1, 1, 5, 1]))
+        contained = self.env.step(contained, np.array([0, 2, 1, 1]))
+        contained = self.env.step(contained, np.array([1, 2, 3, 3]))
+        contained = self.env.step(contained, np.array([0, 2, 4, 0]))
+        contained = self.env.step(contained, np.array([1, 3, 2, 1]))
+        expected_hwall = np.zeros_like(contained.board[2])
+        expected_hwall[4:6, 0] = 1
+        expected_hwall[2:4, 2] = 1
+        expected_hwall[5, 3] = 1
+        expected_hwall[6, 1] = 1
+        np.testing.assert_array_equal(contained.board[2], expected_hwall)
+        expected_vwall = np.zeros_like(contained.board[3])
+        expected_vwall[1, 1:3] = 1
+        expected_vwall[4, 0] = 1
+        expected_vwall[4, 4] = 1
+        np.testing.assert_array_equal(contained.board[3], expected_vwall)
+
         self.assertRaisesRegex(
             ValueError,
             "region out of board",
