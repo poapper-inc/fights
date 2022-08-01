@@ -204,7 +204,7 @@ class PuoriborEnv:
             board[3] = padded_vertical[1:-1, 1:-1]
 
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 0
+                board, 1
             ):
                 raise ValueError("cannot rotate to block all paths")
             walls_remaining[agent_id] -= 2
