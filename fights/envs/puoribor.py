@@ -278,7 +278,7 @@ class PuoriborEnv:
         up_check = delta[1] < 0 and np.any(
             board[2, current_pos[0], new_pos[1] : current_pos[1]]
         )
-        return right_check or left_check or down_check or up_check
+        return bool(right_check or left_check or down_check or up_check)
 
     def _check_wins(self, state: PuoriborState) -> bool:
         return state.board[0, :, -1].sum() or state.board[1, :, 0].sum()
