@@ -19,15 +19,11 @@ from typing import Deque, NewType
 import numpy as np
 from numpy.typing import NDArray
 
-
 PuoriborAction = NewType("PuoriborAction", np.ndarray)
 """
 Alias of ``NDArray`` to describe the action type.
-Encoded as an array of shape ``(4,)``, in the form of [ `agent_id`,
-`action_type`, `coordinate_x`, `coordinate_y` ].
-
-`agent_id`
-    - agent id of action (0 or 1)
+Encoded as an array of shape ``(3,)``, in the form of
+[ `action_type`, `coordinate_x`, `coordinate_y` ].
 
 `action_type`
     - 0 (move piece)
@@ -83,13 +79,18 @@ class PuoriborEnv:
     Maximum allowed walls per agent.
     """
 
-    def step(self, state: PuoriborState, action: NDArray) -> PuoriborState:
+    def step(
+        self, state: PuoriborState, agent_id: int, action: NDArray
+    ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
         action to take.
 
         :arg state:
             current state of the environment
+
+        :arg agent_id:
+            ID of the agent that takes the action (``0`` or ``1``)
 
         :arg action:
             agent action, encoded in the form described by :obj:`PuoriborAction`.
@@ -98,7 +99,7 @@ class PuoriborEnv:
             A copy of the object with the restored state.
         """
 
-        agent_id, action_type, x, y = action
+        action_type, x, y = action
         if not self._check_in_range(np.array([x, y])):
             raise ValueError(f"out of board: {(x, y)}")
         if not 0 <= agent_id <= 1:
