@@ -1,15 +1,15 @@
 <div align="center">
-  <img alt="fights logo" src="./assets/logo.png" width="200px">
-</picture>
 
-# fights
+  <img alt="fights logo" src="./assets/logo.png" width="200px"/>
 
-[![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
-[![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
+  # fights
 
-_Work in progress_
+  [![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
+  [![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
 
-Competitive artificial intelligence battle environments.
+  _Work in progress_
+
+  Competitive artificial intelligence battle environments.
 
 </div>
 
