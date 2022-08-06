@@ -1,15 +1,15 @@
-.. fights documentation master file, created by
-   sphinx-quickstart on Sat Jul  9 15:34:32 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Fights
+======
 
-Welcome to fights's documentation!
-==================================
+*Competitive AI environments*
+
+----
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   Quickstart <quickstart>
    fights.base
    fights.envs.pouribor
 

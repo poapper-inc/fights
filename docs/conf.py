@@ -45,6 +45,15 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "furo"
+html_title = "fights"
+html_theme_options = {
+    "source_repository": "https://github.com/poapper-inc/fights",
+    "source_branch": "main",
+    "source_directory": "docs/",
+    "light_logo": "logo-light.png",
+    "dark_logo": "logo-dark.png",
+    "sidebar_hide_name": True,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
