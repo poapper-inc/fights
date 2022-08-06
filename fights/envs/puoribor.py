@@ -294,7 +294,8 @@ class PuoriborEnv:
         """
         if self.board_size % 2 == 0:
             raise ValueError(
-                f"cannot center pieces with even board_size={self.board_size}, please initialize state manually"
+                f"cannot center pieces with even board_size={self.board_size}, please "
+                "initialize state manually"
             )
 
         starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int8)
