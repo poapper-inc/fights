@@ -8,14 +8,14 @@ from fights.envs.puoribor import PuoriborEnv, PuoriborState
 
 class TestPuoriborEnv(unittest.TestCase):
     def setUp(self):
-        initial_pos = np.zeros((9, 9), dtype=np.int8)
+        initial_pos = np.zeros((9, 9), dtype=np.int_)
         initial_pos[4, 0] = 1
         board = np.array(
             [
                 np.copy(initial_pos),
                 np.fliplr(initial_pos),
-                np.zeros((9, 9), dtype=np.int8),
-                np.zeros((9, 9), dtype=np.int8),
+                np.zeros((9, 9), dtype=np.int_),
+                np.zeros((9, 9), dtype=np.int_),
             ]
         )
         self.initial_state = PuoriborState(
