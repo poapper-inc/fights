@@ -1,3 +1,7 @@
+<div align="center">
+  <img alt="fights logo" src="./assets/logo.png" width="200px">
+</picture>
+
 # fights
 
 [![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
@@ -6,6 +10,10 @@
 _Work in progress_
 
 Competitive artificial intelligence battle environments.
+
+</div>
+
+---
 
 ## Setup
 
