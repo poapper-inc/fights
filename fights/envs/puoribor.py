@@ -14,12 +14,12 @@ Directions
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Deque, NewType
+from typing import Deque, TypeAlias
 
 import numpy as np
-from numpy.typing import NDArray
+from numpy.typing import ArrayLike, NDArray
 
-PuoriborAction = NewType("PuoriborAction", np.ndarray)
+PuoriborAction: TypeAlias = ArrayLike
 """
 Alias of ``NDArray`` to describe the action type.
 Encoded as an array of shape ``(3,)``, in the form of
@@ -80,7 +80,7 @@ class PuoriborEnv:
     """
 
     def step(
-        self, state: PuoriborState, agent_id: int, action: NDArray
+        self, state: PuoriborState, agent_id: int, action: PuoriborAction
     ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
