@@ -17,10 +17,10 @@ from dataclasses import dataclass
 from typing import Deque
 
 import numpy as np
-from numpy.typing import NDArray
+from numpy.typing import ArrayLike, NDArray
 from typing_extensions import TypeAlias
 
-Action: TypeAlias = NDArray[np.int_]
+Action: TypeAlias = ArrayLike
 """
 Action type. Encoded as a NumPy array of shape ``(4,)``, in the form of [ `agent_id`,
 `action_type`, `coordinate_x`, `coordinate_y` ]
@@ -97,6 +97,7 @@ class PuoriborEnv:
             A copy of the object with the restored state.
         """
 
+        action = np.asanyarray(action).astype(np.int_)
         agent_id, action_type, x, y = action
         if not self._check_in_range(np.array([x, y])):
             raise ValueError(f"out of board: {(x, y)}")
