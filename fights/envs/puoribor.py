@@ -284,3 +284,35 @@ class PuoriborEnv:
 
     def _check_wins(self, state: PuoriborState) -> bool:
         return state.board[0, :, -1].sum() or state.board[1, :, 0].sum()
+
+    def initialize_state(self) -> PuoriborState:
+        """
+        Initialize a :obj:`PuoriborState` object with correct environment parameters.
+
+        :returns:
+            Created initial state object.
+        """
+        if self.board_size % 2 == 0:
+            raise ValueError(
+                f"cannot center pieces with even board_size={self.board_size}, please initialize state manually"
+            )
+
+        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int8)
+        starting_pos_0[(self.board_size - 1) // 2, 0] = 1
+
+        starting_board = np.stack(
+            [
+                np.copy(starting_pos_0),
+                np.fliplr(starting_pos_0),
+                np.zeros((self.board_size, self.board_size), dtype=np.int8),
+                np.zeros((self.board_size, self.board_size), dtype=np.int8),
+            ]
+        )
+
+        initial_state = PuoriborState(
+            board=starting_board,
+            done=False,
+            walls_remaining=np.array((self.max_walls, self.max_walls)),
+        )
+
+        return initial_state

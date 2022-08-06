@@ -61,3 +61,4 @@ html_theme_options = {
 html_static_path = ["_static"]
 
 autodoc_type_aliases = {"NDArray": "NDArray", "ArrayLike": "ArrayLike"}
+autodoc_member_order = "bysource"

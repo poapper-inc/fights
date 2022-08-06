@@ -23,6 +23,31 @@ class TestPuoriborEnv(unittest.TestCase):
         )
         self.env = PuoriborEnv()
 
+    def test_initialize_state(self):
+        initial_pos = np.zeros((9, 9), dtype=np.int8)
+        initial_pos[4, 0] = 1
+        board = np.array(
+            [
+                np.copy(initial_pos),
+                np.fliplr(initial_pos),
+                np.zeros((9, 9), dtype=np.int8),
+                np.zeros((9, 9), dtype=np.int8),
+            ]
+        )
+        initial_state_correct = PuoriborState(
+            board=board, walls_remaining=np.array([10, 10])
+        )
+        initial_state_generated = PuoriborEnv().initialize_state()
+
+        np.testing.assert_equal(
+            initial_state_correct.board, initial_state_generated.board
+        )
+        self.assertEqual(initial_state_correct.done, initial_state_generated.done)
+        np.testing.assert_equal(
+            initial_state_correct.walls_remaining,
+            initial_state_generated.walls_remaining,
+        )
+
     def test_action(self):
         self.assertRaisesRegex(
             ValueError,
