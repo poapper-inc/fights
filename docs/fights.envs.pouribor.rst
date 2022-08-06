@@ -10,18 +10,18 @@ fights.envs.puoribor
 Environment
 -----------
 
-.. autoclass:: fights.envs.puoribor.PuoriborEnv
+.. autoclass:: PuoriborEnv
    :members:
+
+^^^^^^
+Action
+^^^^^^
+
+.. autodata:: fights.envs.puoribor.PuoriborAction
 
 ^^^^^
 State
 ^^^^^
 
-.. autoclass:: fights.envs.puoribor.PuoriborState
+.. autoclass:: PuoriborState
    :members:
-
------
-Types
------
-
-.. autodata:: fights.envs.puoribor.Action
