@@ -19,7 +19,7 @@ from typing import Deque, TypeAlias
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-PuoriborAction: TypeAlias = ArrayLike
+PuoriborAction = ArrayLike
 """
 Alias of ``NDArray`` to describe the action type.
 Encoded as an array of shape ``(3,)``, in the form of
