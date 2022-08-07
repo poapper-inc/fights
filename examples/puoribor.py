@@ -3,10 +3,13 @@ import sys
 sys.path.append("../")
 
 from fights.envs import puoribor
+from fights.base import BaseAgent
 import numpy as np
 
 
-class PuoriborAgent:
+class PuoriborAgent(BaseAgent):
+    env_id = ("puoribor", 0)
+
     def __init__(self, agent_id: int, seed: int = 0) -> None:
         self.agent_id = agent_id
         self._rng = np.random.default_rng(seed)
@@ -31,21 +34,15 @@ class PuoriborAgent:
 
 
 if __name__ == "__main__":
+    assert puoribor.PuoriborEnv.env_id == PuoriborAgent.env_id
+
     state = puoribor.PuoriborEnv().initialize_state()
-    agent0 = PuoriborAgent(0)
-    agent1 = PuoriborAgent(1)
+    agents = [PuoriborAgent(0), PuoriborAgent(1)]
 
     while not state.done:
-        action0 = agent0(state)
-        state = puoribor.PuoriborEnv().step(state, agent0.agent_id, action0)
-
-        if state.done:
-            print("agent 0 won")
-            break
-
-        action1 = agent1(state)
-        state = puoribor.PuoriborEnv().step(state, agent1.agent_id, action1)
-
-        if state.done:
-            print("agent 1 won")
-            break
+        for agent in agents:
+            action = agent(state)
+            state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
+            if state.done:
+                print(f"agent {agent.agent_id} won")
+                break

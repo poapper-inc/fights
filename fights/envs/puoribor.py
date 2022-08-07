@@ -20,6 +20,8 @@ import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from typing_extensions import TypeAlias
 
+from fights.base import BaseEnv
+
 PuoriborAction: TypeAlias = ArrayLike
 """
 Alias of :obj:`ArrayLike` to describe the action type.
@@ -69,7 +71,12 @@ class PuoriborState:
     """
 
 
-class PuoriborEnv:
+class PuoriborEnv(BaseEnv):
+    env_id = ("puoribor", 0)
+    """
+    Environment identifier in the form of ``(name, version)``.
+    """
+
     board_size: int = 9
     """
     Size (width and height) of the board.
