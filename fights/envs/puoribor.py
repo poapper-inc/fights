@@ -13,12 +13,17 @@ Directions
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from typing import Deque
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
-from typing_extensions import TypeAlias
+
+if sys.version_info < (3, 10):
+    from typing_extensions import TypeAlias
+else:
+    from typing import TypeAlias
 
 from fights.base import BaseEnv
 
