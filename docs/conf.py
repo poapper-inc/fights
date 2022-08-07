@@ -60,5 +60,9 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
-autodoc_type_aliases = {"NDArray": "NDArray", "ArrayLike": "ArrayLike"}
+autodoc_type_aliases = {
+    "NDArray": "NDArray",
+    "ArrayLike": "ArrayLike",
+    "PuoriborAction": "PuoriborAction",
+}
 autodoc_member_order = "bysource"

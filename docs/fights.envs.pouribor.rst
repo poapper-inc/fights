@@ -17,7 +17,7 @@ Environment
 Action
 ^^^^^^
 
-.. autodata:: fights.envs.puoribor.PuoriborAction
+.. autoclass:: fights.envs.puoribor.PuoriborAction
 
 ^^^^^
 State
