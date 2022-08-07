@@ -25,3 +25,9 @@ State
 
 .. autoclass:: PuoriborState
    :members:
+
+--------
+Examples
+--------
+
+See `examples <https://github.com/poapper-inc/fights/tree/main/examples>`_ for example usage.

@@ -2,14 +2,16 @@
 
   <img alt="fights logo" src="./assets/logo.png" width="200px"/>
 
-  # fights
+# fights
 
-  [![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
-  [![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
+[![Python Test CI](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-test.yml)
+[![Python Lint CI](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml/badge.svg)](https://github.com/poapper-inc/fights/actions/workflows/python-lint.yml)
+[![PyPI version](https://badge.fury.io/py/fights.svg)](https://badge.fury.io/py/fights)
 
-  _Work in progress_
+Competitive artificial intelligence battle environments.
 
-  Competitive artificial intelligence battle environments.
+[Documentation](https://fights.readthedocs.io/en/latest/) | 
+[Examples](./examples/)
 
 </div>
 
