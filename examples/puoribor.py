@@ -40,10 +40,12 @@ if __name__ == "__main__":
     state = puoribor.PuoriborEnv().initialize_state()
     agents = [PuoriborAgent(0), PuoriborAgent(1)]
 
+    it = 0
     while not state.done:
         for agent in agents:
             action = agent(state)
             state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
             if state.done:
-                print(f"agent {agent.agent_id} won")
+                print(f"agent {agent.agent_id} won in {it} iters")
                 break
+        it += 1
