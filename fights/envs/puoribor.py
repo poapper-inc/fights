@@ -15,10 +15,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Deque
-from typing_extensions import TypeAlias
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
+from typing_extensions import TypeAlias
 
 PuoriborAction: TypeAlias = ArrayLike
 """
