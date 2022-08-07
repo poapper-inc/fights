@@ -10,3 +10,4 @@ fights.base
 .. autoclass:: fights.base.BaseAgent
    :members:
    :special-members:
+   :exclude-members: __weakref__
