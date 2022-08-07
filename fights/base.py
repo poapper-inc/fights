@@ -1,8 +1,8 @@
+import sys
 from abc import ABC, abstractmethod
 from typing import Any, Tuple
-from numpy.typing import ArrayLike
 
-import sys
+from numpy.typing import ArrayLike
 
 if sys.version_info < (3, 10):
     from typing_extensions import TypeAlias

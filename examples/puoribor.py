@@ -2,9 +2,10 @@ import sys
 
 sys.path.append("../")
 
-from fights.envs import puoribor
-from fights.base import BaseAgent
 import numpy as np
+
+from fights.base import BaseAgent
+from fights.envs import puoribor
 
 
 class PuoriborAgent(BaseAgent):
