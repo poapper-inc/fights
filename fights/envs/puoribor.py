@@ -122,7 +122,7 @@ class PuoriborEnv(BaseEnv):
         board = np.copy(state.board)
         walls_remaining = np.copy(state.walls_remaining)
 
-        if action_type == 0:  # move piece
+        if action_type == 0:  # Move piece
             current_pos = np.argwhere(state.board[agent_id] == 1)[0]
             new_pos = np.array([x, y])
             opponent_pos = np.argwhere(state.board[1 - agent_id] == 1)[0]
@@ -142,10 +142,12 @@ class PuoriborEnv(BaseEnv):
             ):
                 raise ValueError("cannot jump over nothing")
 
-            if np.all(delta):
+            if np.all(delta):  # If moving diagonally
                 if np.any(current_pos + delta * [0, 1] != opponent_pos) and np.any(
                     current_pos + delta * [1, 0] != opponent_pos
                 ):
+                    # Only diagonal jumps are permitted.
+                    # Agents cannot simply move in diagonal direction.
                     raise ValueError("cannot move diagonally")
                 elif self._check_wall_blocked(board, current_pos, opponent_pos):
                     raise ValueError("cannot jump over walls")
@@ -167,7 +169,7 @@ class PuoriborEnv(BaseEnv):
             board[agent_id][tuple(current_pos)] = 0
             board[agent_id][tuple(new_pos)] = 1
 
-        elif action_type == 1:  # place wall horizontally
+        elif action_type == 1:  # Place wall horizontally
             if walls_remaining[agent_id] == 0:
                 raise ValueError(f"no walls left for agent {agent_id}")
             if y == self.board_size - 1:
@@ -186,7 +188,7 @@ class PuoriborEnv(BaseEnv):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
 
-        elif action_type == 2:  # place wall vertically
+        elif action_type == 2:  # Place wall vertically
             if walls_remaining[agent_id] == 0:
                 raise ValueError(f"no walls left for agent {agent_id}")
             if x == self.board_size - 1:
@@ -205,7 +207,7 @@ class PuoriborEnv(BaseEnv):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
 
-        elif action_type == 3:  # rotate section
+        elif action_type == 3:  # Rotate section
             region_top_left = np.array([x, y])
             if not self._check_in_range(
                 region_top_left,
@@ -252,7 +254,7 @@ class PuoriborEnv(BaseEnv):
         visited = set()
         q = Deque([start_pos])
         goal_y = 8 if agent_id == 0 else 0
-        while q:
+        while q:  # Run BFS to determine path
             here = q.popleft()
             if here[1] == goal_y:
                 return True
