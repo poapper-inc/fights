@@ -242,14 +242,10 @@ class PuoriborEnv(BaseEnv):
             done=self._check_wins(state),
         )
 
-    top_left_default = np.array([0, 0])
-
-    def _check_in_range(
-        self, pos: NDArray[np.int_], top_left=top_left_default, bottom_right=None
-    ) -> np.bool_:
+    def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
         if bottom_right is None:
             bottom_right = np.array([self.board_size, self.board_size])
-        return np.all(np.logical_and(top_left <= pos, pos < bottom_right))
+        return np.all(np.logical_and(np.array([0, 0]) <= pos, pos < bottom_right))
 
     def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
         start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
