@@ -108,7 +108,8 @@ if __name__ == "__main__":
             action = agent(state)
             state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
             if state.done:
-                print(f"agent {agent.agent_id} won in {it} iters")
+                winner = state.board[1, :, 0].sum()
+                print(f"agent {winner} won in {it} iters")
                 break
             os.system("cls" if os.name == "nt" else "clear")
             print(get_printable_board(state.board), end="")
