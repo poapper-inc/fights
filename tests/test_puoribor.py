@@ -327,3 +327,7 @@ class TestPuoriborEnv(unittest.TestCase):
             "less than two walls",
             lambda: self.env.step(lacking_walls, 0, np.array([3, 0, 0])),
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
