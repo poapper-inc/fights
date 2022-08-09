@@ -17,7 +17,13 @@ Competitive artificial intelligence battle environments.
 
 ---
 
-## Setup
+## Installation
+
+```shell
+$ python -m pip install fights
+```
+
+## Development setup
 
 Requires Python toolchains to be installed.
 
@@ -25,13 +31,6 @@ Requires Python toolchains to be installed.
 $ python3 -m pip install tox
 $ tox -e dev --devenv venv
 $ source venv/bin/activate
-```
-
-## Usage
-
-```shell
-# build wheel
-$ python -m build
 ```
 
 ## Contributing
