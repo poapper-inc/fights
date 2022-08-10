@@ -43,14 +43,16 @@ def fallback_to_ascii(s: str) -> str:
     try:
         s.encode(sys.stdout.encoding)
     except UnicodeEncodeError:
-        s = re.sub("[┌┬┐├┼┤└┴┘]", "+", s.replace("─", "-").replace("│", "|"))
+        s = re.sub("[┌┬┐├┼┤└┴┘]", "+", re.sub("[─━]", "-", re.sub("[│┃]", "|", s)))
     return s
 
 
 def get_printable_board(board: NDArray[np.int_]) -> str:
     table_top = fallback_to_ascii("┌───┬───┬───┬───┬───┬───┬───┬───┬───┐")
     vertical_wall = fallback_to_ascii("│")
+    vertical_wall_bold = fallback_to_ascii("┃")
     horizontal_wall = fallback_to_ascii("───")
+    horizontal_wall_bold = fallback_to_ascii("━━━")
     left_intersection = fallback_to_ascii("├")
     middle_intersection = fallback_to_ascii("┼")
     right_intersection = fallback_to_ascii("┤")
@@ -71,7 +73,7 @@ def get_printable_board(board: NDArray[np.int_]) -> str:
             else:
                 result += "   "
             if board_cell[3]:
-                result += Fore.RED + vertical_wall + Style.RESET_ALL
+                result += Fore.RED + vertical_wall_bold + Style.RESET_ALL
             else:
                 result += vertical_wall
             if x == 8:
@@ -80,7 +82,7 @@ def get_printable_board(board: NDArray[np.int_]) -> str:
         for x in range(9):
             board_cell = board_line[:, x]
             if board_cell[2]:
-                result += Fore.BLUE + horizontal_wall + Style.RESET_ALL
+                result += Fore.BLUE + horizontal_wall_bold + Style.RESET_ALL
             else:
                 result += horizontal_wall
             if x == 8:
