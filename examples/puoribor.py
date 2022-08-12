@@ -2,12 +2,8 @@ import sys
 
 sys.path.append("../")
 
-import os
-
-import numpy as np
-from numpy.typing import NDArray
-
 import colorama
+import numpy as np
 
 from fights.base import BaseAgent
 from fights.envs import puoribor
