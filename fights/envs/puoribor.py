@@ -12,6 +12,7 @@ Directions
 """
 
 from __future__ import annotations
+import re
 
 import sys
 from dataclasses import dataclass
@@ -74,6 +75,67 @@ class PuoriborState:
     """
     Boolean value indicating whether the game is done.
     """
+
+    def __str__(self) -> str:
+        """
+        Generate a human-readable string representation of the board.
+        Uses unicode box drawing characters by default, otherwise falls back to ASCII.
+        """
+
+        def fallback_to_ascii(s: str) -> str:
+            s = re.sub("[┌┬┐├┼┤└┴┘]", "+", s.replace("─", "-").replace("│", "|"))
+            return s
+
+        table_top = fallback_to_ascii("┌───┬───┬───┬───┬───┬───┬───┬───┬───┐")
+        vertical_wall = fallback_to_ascii("│")
+        horizontal_wall = fallback_to_ascii("───")
+        left_intersection = fallback_to_ascii("├")
+        middle_intersection = fallback_to_ascii("┼")
+        right_intersection = fallback_to_ascii("┤")
+        left_intersection_bottom = fallback_to_ascii("└")
+        middle_intersection_bottom = fallback_to_ascii("┴")
+        right_intersection_bottom = fallback_to_ascii("┘")
+        result = table_top + "\n"
+
+        for y in range(9):
+            board_line = self.board[:, :, y]
+            result += vertical_wall
+            for x in range(9):
+                board_cell = board_line[:, x]
+                if board_cell[0]:
+                    result += " 0 "
+                elif board_cell[1]:
+                    result += " 1 "
+                else:
+                    result += "   "
+                if board_cell[3]:
+                    result += vertical_wall
+                elif x == 8:
+                    result += vertical_wall
+                else:
+                    result += " "
+                if x == 8:
+                    result += "\n"
+            result += left_intersection_bottom if y == 8 else left_intersection
+            for x in range(9):
+                board_cell = board_line[:, x]
+                if board_cell[2]:
+                    result += horizontal_wall
+                elif y == 8:
+                    result += horizontal_wall
+                else:
+                    result += "   "
+                if x == 8:
+                    result += (
+                        right_intersection_bottom if y == 8 else right_intersection
+                    )
+                else:
+                    result += (
+                        middle_intersection_bottom if y == 8 else middle_intersection
+                    )
+            result += "\n"
+
+        return result
 
 
 class PuoriborEnv(BaseEnv):
