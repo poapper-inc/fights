@@ -1,3 +1,4 @@
+import re
 import sys
 
 sys.path.append("../")
@@ -35,6 +36,14 @@ class PuoriborAgent(BaseAgent):
         return self._rng.choice(actions)
 
 
+def fallback_to_ascii(s: str) -> str:
+    try:
+        s.encode(sys.stdout.encoding)
+    except UnicodeEncodeError:
+        s = re.sub("[┌┬┐├┼┤└┴┘]", "+", s.replace("─", "-").replace("│", "|"))
+    return s
+
+
 if __name__ == "__main__":
     assert puoribor.PuoriborEnv.env_id == PuoriborAgent.env_id
     colorama.init()
@@ -46,13 +55,13 @@ if __name__ == "__main__":
     it = 0
     while not state.done:
         print("\x1b[1;1H")
-        print(state)
+        print(fallback_to_ascii(str(state)))
         for agent in agents:
             action = agent(state)
             state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
 
             print("\x1b[1;1H")
-            print(state)
+            print(fallback_to_ascii(str(state)))
             if state.done:
                 print(f"agent {agent.agent_id} won in {it} iters")
                 break

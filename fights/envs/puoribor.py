@@ -79,22 +79,18 @@ class PuoriborState:
     def __str__(self) -> str:
         """
         Generate a human-readable string representation of the board.
-        Uses unicode box drawing characters by default, otherwise falls back to ASCII.
+        Uses unicode box drawing characters.
         """
 
-        def fallback_to_ascii(s: str) -> str:
-            s = re.sub("[┌┬┐├┼┤└┴┘]", "+", s.replace("─", "-").replace("│", "|"))
-            return s
-
-        table_top = fallback_to_ascii("┌───┬───┬───┬───┬───┬───┬───┬───┬───┐")
-        vertical_wall = fallback_to_ascii("│")
-        horizontal_wall = fallback_to_ascii("───")
-        left_intersection = fallback_to_ascii("├")
-        middle_intersection = fallback_to_ascii("┼")
-        right_intersection = fallback_to_ascii("┤")
-        left_intersection_bottom = fallback_to_ascii("└")
-        middle_intersection_bottom = fallback_to_ascii("┴")
-        right_intersection_bottom = fallback_to_ascii("┘")
+        table_top = "┌───┬───┬───┬───┬───┬───┬───┬───┬───┐"
+        vertical_wall = "│"
+        horizontal_wall = "───"
+        left_intersection = "├"
+        middle_intersection = "┼"
+        right_intersection = "┤"
+        left_intersection_bottom = "└"
+        middle_intersection_bottom = "┴"
+        right_intersection_bottom = "┘"
         result = table_top + "\n"
 
         for y in range(9):
