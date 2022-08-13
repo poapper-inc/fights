@@ -13,7 +13,6 @@ Directions
 
 from __future__ import annotations
 
-import re
 import sys
 from dataclasses import dataclass
 from typing import Deque
