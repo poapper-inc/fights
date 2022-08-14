@@ -290,6 +290,20 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[4, 4] = 1
         np.testing.assert_array_equal(contained.board[3], expected_vwall)
 
+        removed_bottom = self.env.step(self.initial_state, 0, np.array([2, 3, 6]))
+        removed_bottom = self.env.step(removed_bottom, 1, np.array([3, 0, 5]))
+        expected_hwall = np.zeros_like(removed_bottom.board[2])
+        np.testing.assert_array_equal(removed_bottom.board[2], expected_hwall)
+        expected_vwall = np.zeros_like(removed_bottom.board[3])
+        np.testing.assert_array_equal(removed_bottom.board[3], expected_vwall)
+
+        removed_right = self.env.step(self.initial_state, 0, np.array([1, 7, 0]))
+        removed_right = self.env.step(removed_right, 1, np.array([3, 5, 1]))
+        expected_hwall = np.zeros_like(removed_right.board[2])
+        np.testing.assert_array_equal(removed_right.board[2], expected_hwall)
+        expected_vwall = np.zeros_like(removed_right.board[3])
+        np.testing.assert_array_equal(removed_right.board[3], expected_vwall)
+
         self.assertRaisesRegex(
             ValueError,
             "region out of board",
