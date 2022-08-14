@@ -75,6 +75,65 @@ class PuoriborState:
     Boolean value indicating whether the game is done.
     """
 
+    def __str__(self) -> str:
+        """
+        Generate a human-readable string representation of the board.
+        Uses unicode box drawing characters.
+        """
+
+        table_top = "┌───┬───┬───┬───┬───┬───┬───┬───┬───┐"
+        vertical_wall = "│"
+        vertical_wall_bold = "┃"
+        horizontal_wall = "───"
+        horizontal_wall_bold = "━━━"
+        left_intersection = "├"
+        middle_intersection = "┼"
+        right_intersection = "┤"
+        left_intersection_bottom = "└"
+        middle_intersection_bottom = "┴"
+        right_intersection_bottom = "┘"
+        result = table_top + "\n"
+
+        for y in range(9):
+            board_line = self.board[:, :, y]
+            result += vertical_wall
+            for x in range(9):
+                board_cell = board_line[:, x]
+                if board_cell[0]:
+                    result += " 0 "
+                elif board_cell[1]:
+                    result += " 1 "
+                else:
+                    result += "   "
+                if board_cell[3]:
+                    result += vertical_wall_bold
+                elif x == 8:
+                    result += vertical_wall
+                else:
+                    result += " "
+                if x == 8:
+                    result += "\n"
+            result += left_intersection_bottom if y == 8 else left_intersection
+            for x in range(9):
+                board_cell = board_line[:, x]
+                if board_cell[2]:
+                    result += horizontal_wall_bold
+                elif y == 8:
+                    result += horizontal_wall
+                else:
+                    result += "   "
+                if x == 8:
+                    result += (
+                        right_intersection_bottom if y == 8 else right_intersection
+                    )
+                else:
+                    result += (
+                        middle_intersection_bottom if y == 8 else middle_intersection
+                    )
+            result += "\n"
+
+        return result
+
 
 class PuoriborEnv(BaseEnv):
     env_id = ("puoribor", 0)  # type: ignore
