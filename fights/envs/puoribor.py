@@ -287,6 +287,8 @@ class PuoriborEnv(BaseEnv):
             padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
             board[2] = padded_horizontal[1:-1, 1:-1]
             board[3] = padded_vertical[1:-1, 1:-1]
+            board[2, :, 8] = 0
+            board[3, 8, :] = 0
 
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1
