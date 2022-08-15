@@ -136,7 +136,7 @@ class PuoriborState:
 
 
 class PuoriborEnv(BaseEnv):
-    env_id = ("puoribor", 0)  # type: ignore
+    env_id = ("puoribor", 1)  # type: ignore
     """
     Environment identifier in the form of ``(name, version)``.
     """

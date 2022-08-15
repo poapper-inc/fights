@@ -11,7 +11,7 @@ from fights.envs import puoribor
 
 
 class PuoriborAgent(BaseAgent):
-    env_id = ("puoribor", 0)  # type: ignore
+    env_id = ("puoribor", 1)  # type: ignore
 
     def __init__(self, agent_id: int, seed: int = 0) -> None:
         self.agent_id = agent_id
