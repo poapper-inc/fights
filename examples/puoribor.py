@@ -1,10 +1,20 @@
+"""
+Puoribor game example.
+Prints board state to stdout with random agents by default.
+
+Run `python puoribor.py -h` for more information.
+"""
+
 import re
 import sys
+import argparse
 
 sys.path.append("../")
 
 import numpy as np
-from colorama import Fore, Style, init
+import colorama
+from colorama import Fore, Style
+from msgpack import packb
 
 from fights.base import BaseAgent
 from fights.envs import puoribor
@@ -50,25 +60,76 @@ def colorize_walls(s: str) -> str:
     )
 
 
-if __name__ == "__main__":
+def to_history_dict(
+    state: puoribor.PuoriborState, agent_id: int, action: puoribor.PuoriborAction
+):
+    return {
+        "state": {
+            "board": state.board.tolist(),
+            "walls_remaining": state.walls_remaining.tolist(),
+            "done": bool(state.done),
+        },
+        "action": action.tolist(),
+        "agent_id": agent_id,
+    }
+
+
+def run():
     assert puoribor.PuoriborEnv.env_id == PuoriborAgent.env_id
-    init()
+    colorama.init()
+
     state = puoribor.PuoriborEnv().initialize_state()
+    history = []
     agents = [PuoriborAgent(0), PuoriborAgent(1)]
 
-    print("\x1b[2J")
+    if not args.silent:
+        print("\x1b[2J")
 
     it = 0
     while not state.done:
-        print("\x1b[1;1H")
-        print(fallback_to_ascii(colorize_walls(str(state))))
+        if not args.silent:
+            print("\x1b[1;1H")
+            print(fallback_to_ascii(colorize_walls(str(state))))
         for agent in agents:
             action = agent(state)
             state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
-
-            print("\x1b[1;1H")
-            print(fallback_to_ascii(colorize_walls(str(state))))
+            if not args.silent:
+                print("\x1b[1;1H")
+                print(fallback_to_ascii(colorize_walls(str(state))))
             if state.done:
-                print(f"agent {agent.agent_id} won in {it} iters")
+                if not args.silent:
+                    print(f"agent {agent.agent_id} won in {it} iters")
                 break
+
+            history.append(to_history_dict(state, agent.agent_id, action))
         it += 1
+
+    return history
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Puoribor example game")
+    parser.add_argument(
+        "-o",
+        "--out",
+        dest="out",
+        help="output file path",
+        required=False,
+        type=argparse.FileType("wb"),
+    )
+    parser.add_argument(
+        "-s",
+        "--silent",
+        dest="silent",
+        action="store_true",
+        help="silence board output",
+        required=False,
+        default=False,
+    )
+    args = parser.parse_args()
+
+    history = run()
+
+    if args.out is not None:
+        with args.out as file:
+            file.write(packb(history))
