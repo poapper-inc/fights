@@ -370,15 +370,15 @@ class PuoriborEnv(BaseEnv):
                 "initialize state manually"
             )
 
-        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int8)
+        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int_)
         starting_pos_0[(self.board_size - 1) // 2, 0] = 1
 
         starting_board = np.stack(
             [
                 np.copy(starting_pos_0),
                 np.fliplr(starting_pos_0),
-                np.zeros((self.board_size, self.board_size), dtype=np.int8),
-                np.zeros((self.board_size, self.board_size), dtype=np.int8),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
             ]
         )
 
