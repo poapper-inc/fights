@@ -64,11 +64,7 @@ def to_history_dict(
     state: puoribor.PuoriborState, agent_id: int, action: puoribor.PuoriborAction
 ):
     return {
-        "state": {
-            "board": state.board.tolist(),
-            "walls_remaining": state.walls_remaining.tolist(),
-            "done": bool(state.done),
-        },
+        "state": state.to_dict(),
         "action": action.tolist(),
         "agent_id": agent_id,
     }
