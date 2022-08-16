@@ -8,20 +8,8 @@ from fights.envs.puoribor import PuoriborEnv, PuoriborState
 
 class TestPuoriborEnv(unittest.TestCase):
     def setUp(self):
-        initial_pos = np.zeros((9, 9), dtype=np.int_)
-        initial_pos[4, 0] = 1
-        board = np.array(
-            [
-                np.copy(initial_pos),
-                np.fliplr(initial_pos),
-                np.zeros((9, 9), dtype=np.int_),
-                np.zeros((9, 9), dtype=np.int_),
-            ]
-        )
-        self.initial_state = PuoriborState(
-            board=board, walls_remaining=np.array([10, 10])
-        )
         self.env = PuoriborEnv()
+        self.initial_state = self.env.initialize_state()
 
     def test_initialize_state(self):
         initial_pos = np.zeros((9, 9), dtype=np.int_)
@@ -37,15 +25,12 @@ class TestPuoriborEnv(unittest.TestCase):
         initial_state_correct = PuoriborState(
             board=board, walls_remaining=np.array([10, 10])
         )
-        initial_state_generated = PuoriborEnv().initialize_state()
 
-        np.testing.assert_equal(
-            initial_state_correct.board, initial_state_generated.board
-        )
-        self.assertEqual(initial_state_correct.done, initial_state_generated.done)
+        np.testing.assert_equal(initial_state_correct.board, self.initial_state.board)
+        self.assertEqual(initial_state_correct.done, self.initial_state.done)
         np.testing.assert_equal(
             initial_state_correct.walls_remaining,
-            initial_state_generated.walls_remaining,
+            self.initial_state.walls_remaining,
         )
 
     def test_action(self):
