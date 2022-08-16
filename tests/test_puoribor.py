@@ -342,6 +342,17 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(lacking_walls, 0, np.array([3, 0, 0])),
         )
 
+    def test_state_serialization(self):
+        initial_state_serialized = self.initial_state.to_dict()
+        np.testing.assert_array_equal(
+            initial_state_serialized["board"], self.initial_state.board
+        )
+        np.testing.assert_array_equal(
+            initial_state_serialized["walls_remaining"],
+            self.initial_state.walls_remaining,
+        )
+        self.assertEqual(initial_state_serialized["done"], self.initial_state.done)
+
 
 if __name__ == "__main__":
     unittest.main()
