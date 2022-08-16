@@ -134,6 +134,20 @@ class PuoriborState:
 
         return result
 
+    def to_dict(self) -> dict:
+        """
+        Serialize state to python dictionary.
+
+        :returns:
+            A python dict with serialized data. The dict contains keys which correspond
+            to fields of same name respectively.
+        """
+        return {
+            "board": self.board.tolist(),
+            "walls_remaining": self.walls_remaining.tolist(),
+            "done": self.done,
+        }
+
 
 class PuoriborEnv(BaseEnv):
     env_id = ("puoribor", 1)  # type: ignore
