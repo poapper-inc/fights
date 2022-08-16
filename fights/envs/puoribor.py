@@ -355,7 +355,7 @@ class PuoriborEnv(BaseEnv):
         return bool(right_check or left_check or down_check or up_check)
 
     def _check_wins(self, board: NDArray[np.int_]) -> bool:
-        return board[0, :, -1].sum() or board[1, :, 0].sum()
+        return bool(board[0, :, -1].sum() or board[1, :, 0].sum())
 
     def initialize_state(self) -> PuoriborState:
         """
@@ -370,15 +370,15 @@ class PuoriborEnv(BaseEnv):
                 "initialize state manually"
             )
 
-        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int8)
+        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int_)
         starting_pos_0[(self.board_size - 1) // 2, 0] = 1
 
         starting_board = np.stack(
             [
                 np.copy(starting_pos_0),
                 np.fliplr(starting_pos_0),
-                np.zeros((self.board_size, self.board_size), dtype=np.int8),
-                np.zeros((self.board_size, self.board_size), dtype=np.int8),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
             ]
         )
 

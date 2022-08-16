@@ -24,14 +24,14 @@ class TestPuoriborEnv(unittest.TestCase):
         self.env = PuoriborEnv()
 
     def test_initialize_state(self):
-        initial_pos = np.zeros((9, 9), dtype=np.int8)
+        initial_pos = np.zeros((9, 9), dtype=np.int_)
         initial_pos[4, 0] = 1
         board = np.array(
             [
                 np.copy(initial_pos),
                 np.fliplr(initial_pos),
-                np.zeros((9, 9), dtype=np.int8),
-                np.zeros((9, 9), dtype=np.int8),
+                np.zeros((9, 9), dtype=np.int_),
+                np.zeros((9, 9), dtype=np.int_),
             ]
         )
         initial_state_correct = PuoriborState(
