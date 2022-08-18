@@ -1,6 +1,6 @@
 import sys
 from abc import ABC, abstractmethod
-from typing import Any, Tuple
+from typing import Any, Callable, Optional, Tuple
 
 from numpy.typing import ArrayLike
 
@@ -23,7 +23,15 @@ class BaseEnv(ABC):
         ...
 
     @abstractmethod
-    def step(self, state: State, agent_id: int, action: ArrayLike) -> State:
+    def step(
+        self,
+        state: State,
+        agent_id: int,
+        action: ArrayLike,
+        *,
+        pre_step_fn: Optional[Callable[[State, int, ArrayLike], None]] = None,
+        post_step_fn: Optional[Callable[[State, int, ArrayLike], None]] = None,
+    ) -> State:
         """
         Step through the environment.
         """
