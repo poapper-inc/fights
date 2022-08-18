@@ -327,6 +327,29 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(lacking_walls, 0, np.array([3, 0, 0])),
         )
 
+    def test_step_callback(self):
+        class StepLogger:
+            log = []
+
+            def __call__(self, state, agent_id, action):
+                self.log.append((state, agent_id, action))
+
+        logger = StepLogger()
+        action = np.array([0, 3, 0])
+        next_state = self.env.step(
+            self.initial_state,
+            0,
+            action,
+            pre_callback=logger,
+            post_callback=logger,
+        )
+        np.testing.assert_array_equal(logger.log[0][0].board, self.initial_state.board)
+        self.assertEqual(logger.log[0][1], 0)
+        np.testing.assert_array_equal(logger.log[0][2], action)
+        np.testing.assert_array_equal(logger.log[1][0].board, next_state.board)
+        self.assertEqual(logger.log[1][1], 0)
+        np.testing.assert_array_equal(logger.log[1][2], action)
+
 
 if __name__ == "__main__":
     unittest.main()
