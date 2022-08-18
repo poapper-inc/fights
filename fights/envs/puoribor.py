@@ -157,8 +157,8 @@ class PuoriborEnv(BaseEnv):
         agent_id: int,
         action: ArrayLike,
         *,
-        pre_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
-        post_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
+        pre_step_fn: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
+        post_step_fn: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
     ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
@@ -173,11 +173,11 @@ class PuoriborEnv(BaseEnv):
         :arg action:
             agent action, encoded in the form described by :obj:`PuoriborAction`.
 
-        :arg pre_callback:
+        :arg pre_step_fn:
             callback to run before executing action. ``state``, ``agent_id`` and
             ``action`` will be provided as arguments.
 
-        :arg post_callback:
+        :arg post_step_fn:
             callback to run after executing action. The calculated state, ``agent_id``
             and ``action`` will be provided as arguments.
 
@@ -185,8 +185,8 @@ class PuoriborEnv(BaseEnv):
             A copy of the object with the restored state.
         """
 
-        if pre_callback is not None:
-            pre_callback(state, agent_id, action)
+        if pre_step_fn is not None:
+            pre_step_fn(state, agent_id, action)
 
         action = np.asanyarray(action).astype(np.int_)
         action_type, x, y = action
@@ -321,8 +321,8 @@ class PuoriborEnv(BaseEnv):
             walls_remaining=walls_remaining,
             done=self._check_wins(board),
         )
-        if post_callback is not None:
-            post_callback(next_state, agent_id, action)
+        if post_step_fn is not None:
+            post_step_fn(next_state, agent_id, action)
         return next_state
 
     def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:

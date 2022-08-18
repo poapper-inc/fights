@@ -340,8 +340,8 @@ class TestPuoriborEnv(unittest.TestCase):
             self.initial_state,
             0,
             action,
-            pre_callback=logger,
-            post_callback=logger,
+            pre_step_fn=logger,
+            post_step_fn=logger,
         )
         np.testing.assert_array_equal(logger.log[0][0].board, self.initial_state.board)
         self.assertEqual(logger.log[0][1], 0)
