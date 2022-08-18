@@ -165,20 +165,20 @@ class PuoriborEnv(BaseEnv):
         action to take.
 
         :arg state:
-            current state of the environment
+            Current state of the environment.
 
         :arg agent_id:
-            ID of the agent that takes the action (``0`` or ``1``)
+            ID of the agent that takes the action. (``0`` or ``1``)
 
         :arg action:
-            agent action, encoded in the form described by :obj:`PuoriborAction`.
+            Agent action, encoded in the form described by :obj:`PuoriborAction`.
 
         :arg pre_step_fn:
-            callback to run before executing action. ``state``, ``agent_id`` and
+            Callback to run before executing action. ``state``, ``agent_id`` and
             ``action`` will be provided as arguments.
 
         :arg post_step_fn:
-            callback to run after executing action. The calculated state, ``agent_id``
+            Callback to run after executing action. The calculated state, ``agent_id``
             and ``action`` will be provided as arguments.
 
         :returns:
