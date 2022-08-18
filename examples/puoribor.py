@@ -46,6 +46,28 @@ class PuoriborAgent(BaseAgent):
         return self._rng.choice(actions)
 
 
+class Logger:
+    log = []
+
+    def __call__(
+        self,
+        state: puoribor.PuoriborState,
+        agent_id: int,
+        action: puoribor.PuoriborAction,
+    ) -> None:
+        self.log.append(
+            {
+                "state": {
+                    "board": state.board.tolist(),
+                    "walls_remaining": state.walls_remaining.tolist(),
+                    "done": state.done,
+                },
+                "action": action.tolist(),  # type: ignore
+                "agent_id": agent_id,
+            }
+        )
+
+
 def fallback_to_ascii(s: str) -> str:
     try:
         s.encode(sys.stdout.encoding)
@@ -60,39 +82,27 @@ def colorize_walls(s: str) -> str:
     )
 
 
-def to_history_dict(
-    state: puoribor.PuoriborState, agent_id: int, action: puoribor.PuoriborAction
-):
-    return {
-        "state": {
-            "board": state.board.tolist(),
-            "walls_remaining": state.walls_remaining.tolist(),
-            "done": bool(state.done),
-        },
-        "action": action.tolist(),
-        "agent_id": agent_id,
-    }
-
-
 def run():
     assert puoribor.PuoriborEnv.env_id == PuoriborAgent.env_id
     colorama.init()
 
     state = puoribor.PuoriborEnv().initialize_state()
-    history = []
     agents = [PuoriborAgent(0), PuoriborAgent(1)]
 
     if not args.silent:
         print("\x1b[2J")
 
     it = 0
+    logger = Logger()
     while not state.done:
         if not args.silent:
             print("\x1b[1;1H")
             print(fallback_to_ascii(colorize_walls(str(state))))
         for agent in agents:
             action = agent(state)
-            state = puoribor.PuoriborEnv().step(state, agent.agent_id, action)
+            state = puoribor.PuoriborEnv().step(
+                state, agent.agent_id, action, post_step_fn=logger
+            )
             if not args.silent:
                 print("\x1b[1;1H")
                 print(fallback_to_ascii(colorize_walls(str(state))))
@@ -100,11 +110,9 @@ def run():
                 if not args.silent:
                     print(f"agent {agent.agent_id} won in {it} iters")
                 break
-
-            history.append(to_history_dict(state, agent.agent_id, action))
         it += 1
 
-    return history
+    return logger.log
 
 
 if __name__ == "__main__":
