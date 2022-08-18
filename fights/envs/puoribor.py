@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Deque
+from typing import Callable, Deque, Union
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -152,7 +152,16 @@ class PuoriborEnv(BaseEnv):
     """
 
     def step(
-        self, state: PuoriborState, agent_id: int, action: ArrayLike
+        self,
+        state: PuoriborState,
+        agent_id: int,
+        action: ArrayLike,
+        pre_callback: Union[
+            Callable[[PuoriborState, int, ArrayLike], None], None
+        ] = None,
+        post_callback: Union[
+            Callable[[PuoriborState, int, ArrayLike], None], None
+        ] = None,
     ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
@@ -167,9 +176,20 @@ class PuoriborEnv(BaseEnv):
         :arg action:
             agent action, encoded in the form described by :obj:`PuoriborAction`.
 
+        :arg pre_callback:
+            callback to run before executing action. ``state``, ``agent_id`` and
+            ``action`` will be provided as arguments.
+
+        :arg post_callback:
+            callback to run after executing action. The calculated state, ``agent_id``
+            and ``action`` will be provided as arguments.
+
         :returns:
             A copy of the object with the restored state.
         """
+
+        if pre_callback is not None:
+            pre_callback(state, agent_id, action)
 
         action = np.asanyarray(action).astype(np.int_)
         action_type, x, y = action
@@ -299,11 +319,14 @@ class PuoriborEnv(BaseEnv):
         else:
             raise ValueError(f"invalid action_type: {action_type}")
 
-        return PuoriborState(
+        next_state = PuoriborState(
             board=board,
             walls_remaining=walls_remaining,
             done=self._check_wins(board),
         )
+        if post_callback is not None:
+            post_callback(next_state, agent_id, action)
+        return next_state
 
     def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
         if bottom_right is None:
