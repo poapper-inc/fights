@@ -156,6 +156,7 @@ class PuoriborEnv(BaseEnv):
         state: PuoriborState,
         agent_id: int,
         action: ArrayLike,
+        *,
         pre_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
         post_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
     ) -> PuoriborState:
