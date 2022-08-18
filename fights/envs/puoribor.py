@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Callable, Deque, Union
+from typing import Callable, Deque, Optional
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -156,12 +156,8 @@ class PuoriborEnv(BaseEnv):
         state: PuoriborState,
         agent_id: int,
         action: ArrayLike,
-        pre_callback: Union[
-            Callable[[PuoriborState, int, ArrayLike], None], None
-        ] = None,
-        post_callback: Union[
-            Callable[[PuoriborState, int, ArrayLike], None], None
-        ] = None,
+        pre_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
+        post_callback: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
     ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
