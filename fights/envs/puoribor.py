@@ -141,15 +141,131 @@ class PuoriborEnv(BaseEnv):
     Environment identifier in the form of ``(name, version)``.
     """
 
-    board_size: int = 9
-    """
-    Size (width and height) of the board.
-    """
+    class Validators:
+        board_size: int = 9
+        """
+        Size (width and height) of the board.
+        """
 
-    max_walls: int = 10
-    """
-    Maximum allowed walls per agent.
-    """
+        max_walls: int = 10
+        """
+        Maximum allowed walls per agent.
+        """
+
+        @classmethod
+        def in_range(
+            cls,
+            coord: NDArray[np.int_],
+            *,
+            bottom_right: Optional[NDArray[np.int_]] = None,
+        ) -> bool:
+            """
+            Check if a coordinate is in a rectangle whose top-left coordinate is
+            ``(0, 0)``.
+
+            :arg coord:
+                Coordinate to check.
+
+            :arg bottom_right:
+                Bottom right coordinate of the rectangle. If ``None``,
+                ``(board_size, board_size)`` will be used.
+
+            :returns:
+                ``True`` if the given coordinate is in the rectangle. Otherwise
+                ``False``.
+            """
+            if bottom_right is None:
+                bottom_right = np.array([cls.board_size, cls.board_size])
+            return bool(
+                np.all(np.logical_and(np.array([0, 0]) <= coord, coord < bottom_right))
+            )
+
+        @classmethod
+        def path_exists(cls, board: NDArray[np.int_], agent_id: int) -> bool:
+            """
+            Check if agent of ID ``agent_id`` can reach its destination in the board.
+
+            :arg board:
+                Puoribor board of the agent.
+
+            :arg agent_id:
+                ID of the agent.
+
+            :returns:
+                ``True`` if the agent can reath its destination. Otherwise ``False``.
+            """
+            start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
+            visited = set()
+            q = Deque([start_pos])
+            goal_y = 8 if agent_id == 0 else 0
+            while q:  # Run BFS to determine path
+                here = q.popleft()
+                if here[1] == goal_y:
+                    return True
+                for dx, dy in [(-1, 0), (0, -1), (0, 1), (1, 0)]:
+                    there = (here[0] + dx, here[1] + dy)
+                    if not cls.in_range(np.array(there)) or cls.wall_blocked(
+                        board, np.array(here), np.array(there)
+                    ):
+                        continue
+                    if there not in visited:
+                        visited.add(there)
+                        q.append(there)
+            return False
+
+        @classmethod
+        def wall_blocked(
+            cls,
+            board: NDArray[np.int_],
+            current_pos: NDArray[np.int_],
+            new_pos: NDArray[np.int_],
+        ) -> bool:
+            """
+            Check if a path from ``current_pos`` to ``new_pos`` is blocked by wall.
+            The Manhattan distance between ``current_pos`` and ``new_pos`` should be
+            precisely 1.
+
+            :arg board:
+                Puoribor board conatining wall placements.
+
+            :arg current_pos:
+                Starting position.
+
+            :arg new_pos:
+                Destination.
+
+            :returns:
+                ``True`` if ``current_pos`` and ``new_pos`` is separated by a wall.
+                Otherwise ``False``.
+            """
+            delta = new_pos - current_pos
+            right_check = delta[0] > 0 and np.any(
+                board[3, current_pos[0] : new_pos[0], current_pos[1]]
+            )
+            left_check = delta[0] < 0 and np.any(
+                board[3, new_pos[0] : current_pos[0], current_pos[1]]
+            )
+            down_check = delta[1] > 0 and np.any(
+                board[2, current_pos[0], current_pos[1] : new_pos[1]]
+            )
+            up_check = delta[1] < 0 and np.any(
+                board[2, current_pos[0], new_pos[1] : current_pos[1]]
+            )
+            return bool(right_check or left_check or down_check or up_check)
+
+        @classmethod
+        def wins(cls, board: NDArray[np.int_]) -> bool:
+            """
+            Check if one of the two agents won.
+
+            :arg board:
+                Puoribor board containing agents' positions and wall placements.
+
+            :returns:
+                ``True`` if one of the agents reached its destination. Otherwise
+                ``False``.
+            """
+            return bool(board[0, :, -1].sum() or board[1, :, 0].sum())
 
     def step(
         self,
@@ -190,7 +306,7 @@ class PuoriborEnv(BaseEnv):
 
         action = np.asanyarray(action).astype(np.int_)
         action_type, x, y = action
-        if not self._check_in_range(np.array([x, y])):
+        if not self.Validators.in_range(np.array([x, y])):
             raise ValueError(f"out of board: {(x, y)}")
         if not 0 <= agent_id <= 1:
             raise ValueError(f"invalid agent_id: {agent_id}")
@@ -225,21 +341,21 @@ class PuoriborEnv(BaseEnv):
                     # Only diagonal jumps are permitted.
                     # Agents cannot simply move in diagonal direction.
                     raise ValueError("cannot move diagonally")
-                elif self._check_wall_blocked(board, current_pos, opponent_pos):
+                elif self.Validators.wall_blocked(board, current_pos, opponent_pos):
                     raise ValueError("cannot jump over walls")
 
                 original_jump_pos = current_pos + 2 * (opponent_pos - current_pos)
-                if self._check_in_range(
+                if self.Validators.in_range(
                     original_jump_pos
-                ) and not self._check_wall_blocked(
+                ) and not self.Validators.wall_blocked(
                     board, current_pos, original_jump_pos
                 ):
                     raise ValueError(
                         "cannot diagonally jump if linear jump is possible"
                     )
-                elif self._check_wall_blocked(board, opponent_pos, new_pos):
+                elif self.Validators.wall_blocked(board, opponent_pos, new_pos):
                     raise ValueError("cannot jump over walls")
-            elif self._check_wall_blocked(board, current_pos, new_pos):
+            elif self.Validators.wall_blocked(board, current_pos, new_pos):
                 raise ValueError("cannot jump over walls")
 
             board[agent_id][tuple(current_pos)] = 0
@@ -248,9 +364,9 @@ class PuoriborEnv(BaseEnv):
         elif action_type == 1:  # Place wall horizontally
             if walls_remaining[agent_id] == 0:
                 raise ValueError(f"no walls left for agent {agent_id}")
-            if y == self.board_size - 1:
+            if y == self.Validators.board_size - 1:
                 raise ValueError("cannot place wall on the edge")
-            elif x == self.board_size - 1:
+            elif x == self.Validators.board_size - 1:
                 raise ValueError("right section out of board")
             elif np.any(board[2, x : x + 2, y]):
                 raise ValueError("wall already placed")
@@ -258,18 +374,18 @@ class PuoriborEnv(BaseEnv):
                 raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1
             board[2, x + 1, y] = 1
-            if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 1
-            ):
+            if not self.Validators.path_exists(
+                board, 0
+            ) or not self.Validators.path_exists(board, 1):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
 
         elif action_type == 2:  # Place wall vertically
             if walls_remaining[agent_id] == 0:
                 raise ValueError(f"no walls left for agent {agent_id}")
-            if x == self.board_size - 1:
+            if x == self.Validators.board_size - 1:
                 raise ValueError("cannot place wall on the edge")
-            elif y == self.board_size - 1:
+            elif y == self.Validators.board_size - 1:
                 raise ValueError("right section out of board")
             elif np.any(board[3, x, y : y + 2]):
                 raise ValueError("wall already placed")
@@ -277,17 +393,19 @@ class PuoriborEnv(BaseEnv):
                 raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1
             board[3, x, y + 1] = 1
-            if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 1
-            ):
+            if not self.Validators.path_exists(
+                board, 0
+            ) or not self.Validators.path_exists(board, 1):
                 raise ValueError("cannot place wall blocking all paths")
             walls_remaining[agent_id] -= 1
 
         elif action_type == 3:  # Rotate section
             region_top_left = np.array([x, y])
-            if not self._check_in_range(
+            if not self.Validators.in_range(
                 region_top_left,
-                bottom_right=np.array([self.board_size - 3, self.board_size - 3]),
+                bottom_right=np.array(
+                    [self.Validators.board_size - 3, self.Validators.board_size - 3]
+                ),
             ):
                 raise ValueError("rotation region out of board")
             elif walls_remaining[agent_id] < 2:
@@ -307,9 +425,9 @@ class PuoriborEnv(BaseEnv):
             board[2, :, 8] = 0
             board[3, 8, :] = 0
 
-            if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 1
-            ):
+            if not self.Validators.path_exists(
+                board, 0
+            ) or not self.Validators.path_exists(board, 1):
                 raise ValueError("cannot rotate to block all paths")
             walls_remaining[agent_id] -= 2
 
@@ -319,63 +437,11 @@ class PuoriborEnv(BaseEnv):
         next_state = PuoriborState(
             board=board,
             walls_remaining=walls_remaining,
-            done=self._check_wins(board),
+            done=self.Validators.wins(board),
         )
         if post_step_fn is not None:
             post_step_fn(next_state, agent_id, action)
         return next_state
-
-    def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
-        if bottom_right is None:
-            bottom_right = np.array([self.board_size, self.board_size])
-        return np.all(np.logical_and(np.array([0, 0]) <= pos, pos < bottom_right))
-
-    def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
-        start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
-        visited = set()
-        q = Deque([start_pos])
-        goal_y = 8 if agent_id == 0 else 0
-        while q:  # Run BFS to determine path
-            here = q.popleft()
-            if here[1] == goal_y:
-                return True
-            for dx, dy in [(-1, 0), (0, -1), (0, 1), (1, 0)]:
-                there = (here[0] + dx, here[1] + dy)
-                if not np.all(
-                    np.logical_and(
-                        [0, 0] <= np.array(there),
-                        np.array(there) < [self.board_size, self.board_size],
-                    )
-                ) or self._check_wall_blocked(board, np.array(here), np.array(there)):
-                    continue
-                if there not in visited:
-                    visited.add(there)
-                    q.append(there)
-        return False
-
-    def _check_wall_blocked(
-        self,
-        board: NDArray[np.int_],
-        current_pos: NDArray[np.int_],
-        new_pos: NDArray[np.int_],
-    ) -> bool:
-        delta = new_pos - current_pos
-        right_check = delta[0] > 0 and np.any(
-            board[3, current_pos[0] : new_pos[0], current_pos[1]]
-        )
-        left_check = delta[0] < 0 and np.any(
-            board[3, new_pos[0] : current_pos[0], current_pos[1]]
-        )
-        down_check = delta[1] > 0 and np.any(
-            board[2, current_pos[0], current_pos[1] : new_pos[1]]
-        )
-        up_check = delta[1] < 0 and np.any(
-            board[2, current_pos[0], new_pos[1] : current_pos[1]]
-        )
-        return bool(right_check or left_check or down_check or up_check)
-
-    def _check_wins(self, board: NDArray[np.int_]) -> bool:
-        return bool(board[0, :, -1].sum() or board[1, :, 0].sum())
 
     def initialize_state(self) -> PuoriborState:
         """
@@ -384,28 +450,38 @@ class PuoriborEnv(BaseEnv):
         :returns:
             Created initial state object.
         """
-        if self.board_size % 2 == 0:
+        if self.Validators.board_size % 2 == 0:
             raise ValueError(
-                f"cannot center pieces with even board_size={self.board_size}, please "
-                "initialize state manually"
+                f"cannot center pieces with even board_size={self.Validators.board_size}, "
+                "please initialize state manually"
             )
 
-        starting_pos_0 = np.zeros((self.board_size, self.board_size), dtype=np.int_)
-        starting_pos_0[(self.board_size - 1) // 2, 0] = 1
+        starting_pos_0 = np.zeros(
+            (self.Validators.board_size, self.Validators.board_size), dtype=np.int_
+        )
+        starting_pos_0[(self.Validators.board_size - 1) // 2, 0] = 1
 
         starting_board = np.stack(
             [
                 np.copy(starting_pos_0),
                 np.fliplr(starting_pos_0),
-                np.zeros((self.board_size, self.board_size), dtype=np.int_),
-                np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros(
+                    (self.Validators.board_size, self.Validators.board_size),
+                    dtype=np.int_,
+                ),
+                np.zeros(
+                    (self.Validators.board_size, self.Validators.board_size),
+                    dtype=np.int_,
+                ),
             ]
         )
 
         initial_state = PuoriborState(
             board=starting_board,
             done=False,
-            walls_remaining=np.array((self.max_walls, self.max_walls)),
+            walls_remaining=np.array(
+                (self.Validators.max_walls, self.Validators.max_walls)
+            ),
         )
 
         return initial_state
