@@ -5,14 +5,14 @@ Prints board state to stdout with random agents by default.
 Run `python puoribor.py -h` for more information.
 """
 
+import argparse
 import re
 import sys
-import argparse
 
 sys.path.append("../")
 
-import numpy as np
 import colorama
+import numpy as np
 from colorama import Fore, Style
 from msgpack import packb
 
