@@ -8,6 +8,7 @@ Run `python puoribor.py -h` for more information.
 import argparse
 import re
 import sys
+from typing import Optional
 
 sys.path.append("../")
 
@@ -52,8 +53,8 @@ class Logger:
     def __call__(
         self,
         state: puoribor.PuoriborState,
-        agent_id: int,
-        action: puoribor.PuoriborAction,
+        agent_id: Optional[int],
+        action: Optional[puoribor.PuoriborAction],
     ) -> None:
         self.log.append(
             {
@@ -62,7 +63,7 @@ class Logger:
                     "walls_remaining": state.walls_remaining.tolist(),
                     "done": state.done,
                 },
-                "action": action.tolist(),  # type: ignore
+                "action": action if action is None else action.tolist(),  # type: ignore
                 "agent_id": agent_id,
             }
         )
@@ -94,6 +95,7 @@ def run():
 
     it = 0
     logger = Logger()
+    logger(state, None, None)
     while not state.done:
         if not args.silent:
             print("\x1b[1;1H")
