@@ -1,16 +1,9 @@
-import sys
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, Optional, Tuple
+from typing import Callable, Dict, Generic, Optional, Tuple, TypeVar
 
 from numpy.typing import ArrayLike
 
-if sys.version_info < (3, 10):
-    from typing_extensions import TypeAlias
-else:
-    from typing import TypeAlias
-
-
-State: TypeAlias = Any
+S = TypeVar("S", bound="BaseState")
 
 
 class BaseState(ABC):
@@ -30,7 +23,7 @@ class BaseState(ABC):
         ...
 
 
-class BaseEnv(ABC):
+class BaseEnv(ABC, Generic[S]):
     @property
     @abstractmethod
     def env_id(self) -> Tuple[str, int]:
@@ -42,27 +35,27 @@ class BaseEnv(ABC):
     @abstractmethod
     def step(
         self,
-        state: State,
+        state: S,
         agent_id: int,
         action: ArrayLike,
         *,
-        pre_step_fn: Optional[Callable[[State, int, ArrayLike], None]] = None,
-        post_step_fn: Optional[Callable[[State, int, ArrayLike], None]] = None,
-    ) -> State:
+        pre_step_fn: Optional[Callable[[S, int, ArrayLike], None]] = None,
+        post_step_fn: Optional[Callable[[S, int, ArrayLike], None]] = None,
+    ) -> S:
         """
         Step through the environment.
         """
         ...
 
     @abstractmethod
-    def initialize_state(self) -> BaseState:
+    def initialize_state(self) -> S:
         """
         Initialize state.
         """
         ...
 
 
-class BaseAgent(ABC):
+class BaseAgent(ABC, Generic[S]):
     @property
     @abstractmethod
     def env_id(self) -> Tuple[str, int]:
@@ -72,7 +65,7 @@ class BaseAgent(ABC):
         ...
 
     @abstractmethod
-    def __call__(self, state: State) -> ArrayLike:
+    def __call__(self, state: S) -> ArrayLike:
         """
         Return the calculated agent action based on state input.
         """
