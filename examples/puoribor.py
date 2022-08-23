@@ -25,7 +25,7 @@ class PuoriborAgent(BaseAgent):
     env_id = ("puoribor", 1)  # type: ignore
 
     def __init__(self, agent_id: int, seed: int = 0) -> None:
-        self.agent_id = agent_id
+        self.agent_id = agent_id  # type: ignore
         self._rng = np.random.default_rng(seed)
 
     def _get_all_actions(self, state: puoribor.PuoriborState):
