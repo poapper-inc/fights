@@ -1,6 +1,5 @@
 import sys
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import Any, Callable, Dict, Optional, Tuple
 
 from numpy.typing import ArrayLike
@@ -14,7 +13,6 @@ else:
 State: TypeAlias = Any
 
 
-@dataclass
 class BaseState(ABC):
     @staticmethod
     @abstractmethod
