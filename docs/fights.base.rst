@@ -4,6 +4,9 @@ fights.base
 
 .. currentmodule:: fights.base
 
+.. autoclass:: fights.base.BaseState
+   :members:
+
 .. autoclass:: fights.base.BaseEnv
    :members:
 
