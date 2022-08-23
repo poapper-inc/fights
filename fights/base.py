@@ -55,7 +55,7 @@ class BaseEnv(ABC):
         ...
 
     @abstractmethod
-    def initialize_state(self) -> Any:
+    def initialize_state(self) -> BaseState:
         """
         Initialize state.
         """
