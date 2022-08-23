@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Callable, Deque, Optional
+from typing import Callable, Deque, Dict, Optional
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -25,7 +25,7 @@ if sys.version_info < (3, 10):
 else:
     from typing import TypeAlias
 
-from fights.base import BaseEnv
+from fights.base import BaseEnv, BaseState
 
 PuoriborAction: TypeAlias = ArrayLike
 """
@@ -47,7 +47,7 @@ Encoded as an array of shape ``(3,)``, in the form of
 
 
 @dataclass
-class PuoriborState:
+class PuoriborState(BaseState):
     """
     ``PuoriborState`` represents the game state.
     """
@@ -133,6 +133,36 @@ class PuoriborState:
             result += "\n"
 
         return result
+
+    def to_dict(self) -> Dict:
+        """
+        Serialize state object to dict.
+
+        :returns:
+            A serialized dict.
+        """
+        return {
+            "board": self.board.tolist(),
+            "walls_remaining": self.walls_remaining.tolist(),
+            "done": self.done,
+        }
+
+    @staticmethod
+    def from_dict(serialized) -> PuoriborState:
+        """
+        Deserialize from serialized dict.
+
+        :arg serialized:
+            A serialized dict.
+
+        :returns:
+            Deserialized ``PuoriborState`` object.
+        """
+        return PuoriborState(
+            board=np.array(serialized["board"]),
+            walls_remaining=np.array(serialized["walls_remaining"]),
+            done=serialized["done"],
+        )
 
 
 class PuoriborEnv(BaseEnv):
