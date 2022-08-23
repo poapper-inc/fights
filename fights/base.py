@@ -1,6 +1,7 @@
 import sys
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Optional, Tuple
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, Optional, Tuple
 
 from numpy.typing import ArrayLike
 
@@ -11,6 +12,24 @@ else:
 
 
 State: TypeAlias = Any
+
+
+@dataclass
+class BaseState(ABC):
+    @staticmethod
+    @abstractmethod
+    def from_dict(serialized) -> "BaseState":
+        """
+        Deserialize from dict.
+        """
+        ...
+
+    @abstractmethod
+    def to_dict(self) -> Dict:
+        """
+        Serialize to dict.
+        """
+        ...
 
 
 class BaseEnv(ABC):
