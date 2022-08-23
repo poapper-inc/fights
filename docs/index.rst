@@ -11,6 +11,7 @@ Fights
 
    Quickstart <quickstart>
    fights.base
+   fights.envs
    fights.envs.pouribor
 
 Indices and tables
