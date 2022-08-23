@@ -58,11 +58,7 @@ class Logger:
     ) -> None:
         self.log.append(
             {
-                "state": {
-                    "board": state.board.tolist(),
-                    "walls_remaining": state.walls_remaining.tolist(),
-                    "done": state.done,
-                },
+                "state": state.to_dict(),
                 "action": action if action is None else action.tolist(),  # type: ignore
                 "agent_id": agent_id,
             }
