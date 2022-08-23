@@ -165,7 +165,7 @@ class PuoriborState(BaseState):
         )
 
 
-class PuoriborEnv(BaseEnv):
+class PuoriborEnv(BaseEnv[PuoriborState]):
     env_id = ("puoribor", 1)  # type: ignore
     """
     Environment identifier in the form of ``(name, version)``.
