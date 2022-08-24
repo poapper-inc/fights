@@ -32,6 +32,14 @@ class BaseState(ABC):
         """
         ...
 
+    @property
+    @abstractmethod
+    def done(self) -> bool:
+        """
+        Whether the game is finished.
+        """
+        ...
+
 
 class BaseEnv(ABC, Generic[S, A]):
     @property
