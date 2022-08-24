@@ -71,6 +71,14 @@ class BaseAgent(ABC):
         """
         ...
 
+    @property
+    @abstractmethod
+    def agent_id(self) -> int:
+        """
+        Agent identifier.
+        """
+        ...
+
     @abstractmethod
     def __call__(self, state: State) -> ArrayLike:
         """
