@@ -185,10 +185,14 @@ class PuoriborEnv(BaseEnv[PuoriborState]):
         self,
         state: PuoriborState,
         agent_id: int,
-        action: ArrayLike,
+        action: PuoriborAction,
         *,
-        pre_step_fn: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
-        post_step_fn: Optional[Callable[[PuoriborState, int, ArrayLike], None]] = None,
+        pre_step_fn: Optional[
+            Callable[[PuoriborState, int, PuoriborAction], None]
+        ] = None,
+        post_step_fn: Optional[
+            Callable[[PuoriborState, int, PuoriborAction], None]
+        ] = None,
     ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
