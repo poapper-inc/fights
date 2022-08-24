@@ -1,10 +1,10 @@
-from typing import Tuple, Type
+from typing import Tuple, Type, cast
 
 from ..base import BaseEnv, BaseState
 from .puoribor import PuoriborEnv, PuoriborState
 
 
-def resolve(name: str) -> Tuple[Type[BaseEnv], Type[BaseState]]:
+def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState]], Type[BaseState]]:
     """
     Resolve environment and state classes with environment name.
 
@@ -17,4 +17,4 @@ def resolve(name: str) -> Tuple[Type[BaseEnv], Type[BaseState]]:
     mappings = {"puoribor": (PuoriborEnv, PuoriborState)}
     if name not in mappings:
         raise ValueError(f"environment with name {name} not found")
-    return mappings[name]
+    return cast(Tuple[Type[BaseEnv[BaseState]], Type[BaseState]], mappings[name])
