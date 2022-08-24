@@ -1,10 +1,14 @@
+from __future__ import annotations
+
 from typing import Tuple, Type, cast
+
+from numpy.typing import ArrayLike
 
 from ..base import BaseEnv, BaseState
 from .puoribor import PuoriborEnv, PuoriborState
 
 
-def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState]], Type[BaseState]]:
+def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState, ArrayLike]], Type[BaseState]]:
     """
     Resolve environment and state classes with environment name.
 
@@ -17,4 +21,6 @@ def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState]], Type[BaseState]]:
     mappings = {"puoribor": (PuoriborEnv, PuoriborState)}
     if name not in mappings:
         raise ValueError(f"environment with name {name} not found")
-    return cast(Tuple[Type[BaseEnv[BaseState]], Type[BaseState]], mappings[name])
+    return cast(
+        Tuple[Type[BaseEnv[BaseState, ArrayLike]], Type[BaseState]], mappings[name]
+    )
