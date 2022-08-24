@@ -1,9 +1,19 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from typing import Callable, Dict, Generic, Optional, Tuple, TypeVar
 
 from numpy.typing import ArrayLike
 
 S = TypeVar("S", bound="BaseState")
+"""
+A type variable for state type with bound ``BaseState``
+"""
+
+A = TypeVar("A", bound=ArrayLike)
+"""
+A type variable for action type with bound ``ArrayLike``
+"""
 
 
 class BaseState(ABC):
@@ -23,7 +33,7 @@ class BaseState(ABC):
         ...
 
 
-class BaseEnv(ABC, Generic[S]):
+class BaseEnv(ABC, Generic[S, A]):
     @property
     @abstractmethod
     def env_id(self) -> Tuple[str, int]:
@@ -37,10 +47,10 @@ class BaseEnv(ABC, Generic[S]):
         self,
         state: S,
         agent_id: int,
-        action: ArrayLike,
+        action: A,
         *,
-        pre_step_fn: Optional[Callable[[S, int, ArrayLike], None]] = None,
-        post_step_fn: Optional[Callable[[S, int, ArrayLike], None]] = None,
+        pre_step_fn: Optional[Callable[[S, int, A], None]] = None,
+        post_step_fn: Optional[Callable[[S, int, A], None]] = None,
     ) -> S:
         """
         Step through the environment.
@@ -55,7 +65,7 @@ class BaseEnv(ABC, Generic[S]):
         ...
 
 
-class BaseAgent(ABC, Generic[S]):
+class BaseAgent(ABC, Generic[S, A]):
     @property
     @abstractmethod
     def env_id(self) -> Tuple[str, int]:
@@ -72,7 +82,7 @@ class BaseAgent(ABC, Generic[S]):
         ...
 
     @abstractmethod
-    def __call__(self, state: S) -> ArrayLike:
+    def __call__(self, state: S) -> A:
         """
         Return the calculated agent action based on state input.
         """
