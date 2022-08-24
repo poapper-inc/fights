@@ -64,11 +64,10 @@ class BaseAgent(ABC, Generic[S]):
         """
         ...
 
-    @property
     @abstractmethod
-    def agent_id(self) -> int:
+    def __init__(self, agent_id: int) -> None:
         """
-        Agent identifier.
+        Initialize an agent.
         """
         ...
 
