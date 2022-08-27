@@ -1,7 +1,7 @@
 """
 Puoribor, a variant of the classical `Quoridor <https://en.wikipedia.org/wiki/Quoridor>`_ game.
 
-Coordinates are specified in the form of ``(x, y)``, where ``(0, 0)`` is the bottom left corner.
+Coordinates are specified in the form of ``(x, y)``, where ``(0, 0)`` is the top left corner.
 All coordinates and directions are absolute and does not change between agents.
 
 Directions
