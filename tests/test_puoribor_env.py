@@ -439,7 +439,7 @@ class TestPuoriborEnv(unittest.TestCase):
 
     def test_initial_action_count(self):
         initial_actions = self._get_all_actions(self.initial_state, 0)
-        
+
         # 3 (up, left, right)
         # + 8 * 8 * 2 (walls * 2)
         # + 6 * 6 (rotation)
