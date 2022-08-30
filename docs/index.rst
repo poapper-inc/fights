@@ -12,7 +12,7 @@ Fights
    Quickstart <quickstart>
    fights.base
    fights.envs
-   fights.envs.pouribor
+   fights.envs.puoribor
 
 Indices and tables
 ==================
