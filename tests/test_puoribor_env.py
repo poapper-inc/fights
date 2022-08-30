@@ -213,6 +213,16 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(block_path, 0, np.array([1, 4, 0])),
         )
 
+        issue_24 = self.env.step(self.initial_state, 0, np.array([1, 2, 2]))
+        issue_24 = self.env.step(issue_24, 1, np.array([1, 4, 2]))
+        issue_24 = self.env.step(issue_24, 0, np.array([2, 3, 2]))
+        expected_hwall = np.zeros_like(issue_24.board[2])
+        expected_vwall = np.zeros_like(issue_24.board[3])
+        expected_hwall[2:6, 2] = 1
+        expected_vwall[3, 2:4] = 1
+        np.testing.assert_array_equal(issue_24.board[2], expected_hwall)
+        np.testing.assert_array_equal(issue_24.board[3], expected_vwall)
+
     def test_rotate(self):
         top_left_corner = self.env.step(self.initial_state, 0, np.array([1, 0, 0]))
         top_left_corner = self.env.step(top_left_corner, 1, np.array([1, 3, 2]))
@@ -227,6 +237,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[2, :2] = 1
         expected_vwall[0, 3] = 1
         np.testing.assert_array_equal(top_left_corner.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_left_corner, 1, np.array([1, 2, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_left_corner, 1, np.array([2, 2, 2])),
+        )
+        top_left_corner = self.env.step(top_left_corner, 1, np.array([2, 3, 2]))
+        expected_vwall[3, 2:4] = 1
+        np.testing.assert_array_equal(top_left_corner.board[3], expected_vwall)
+        top_left_corner = self.env.step(top_left_corner, 0, np.array([1, 0, 3]))
+        expected_hwall[:2, 3] = 1
+        np.testing.assert_array_equal(top_left_corner.board[2], expected_hwall)
 
         left_edge = self.env.step(self.initial_state, 0, np.array([1, 0, 1]))
         left_edge = self.env.step(left_edge, 1, np.array([1, 3, 3]))
@@ -241,6 +267,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[2, 1:3] = 1
         expected_vwall[0, 4] = 1
         expected_vwall[1, 5] = 1
+        np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(left_edge, 1, np.array([1, 2, 1])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(left_edge, 1, np.array([2, 2, 3])),
+        )
+        left_edge = self.env.step(left_edge, 1, np.array([1, 0, 4]))
+        expected_hwall[:2, 4] = 1
+        np.testing.assert_array_equal(left_edge.board[2], expected_hwall)
+        left_edge = self.env.step(left_edge, 0, np.array([2, 3, 3]))
+        expected_vwall[3, 3:5] = 1
         np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
 
         top_edge = self.env.step(self.initial_state, 0, np.array([1, 2, 3]))
@@ -257,6 +299,19 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall = np.zeros_like(top_edge.board[3])
         expected_vwall[1, :2] = 1
         expected_vwall[3, 3:5] = 1
+        np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_edge, 1, np.array([1, 1, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_edge, 1, np.array([2, 4, 3])),
+        )
+        top_edge = self.env.step(top_edge, 1, np.array([2, 5, 1]))
+        expected_vwall[5, 1:3] = 1
         np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
 
         contained = self.env.step(self.initial_state, 0, np.array([1, 2, 4]))
@@ -276,6 +331,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[4, 0] = 1
         expected_vwall[4, 4] = 1
         np.testing.assert_array_equal(contained.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(contained, 0, np.array([1, 1, 1])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(contained, 0, np.array([2, 2, 2])),
+        )
+        contained = self.env.step(contained, 0, np.array([2, 5, 1]))
+        expected_vwall[5, 1:3] = 1
+        np.testing.assert_array_equal(contained.board[3], expected_vwall)
+        contained = self.env.step(contained, 1, np.array([1, 4, 4]))
+        expected_hwall[4:6, 4] = 1
+        np.testing.assert_array_equal(contained.board[2], expected_hwall)
 
         removed_bottom = self.env.step(self.initial_state, 0, np.array([2, 3, 6]))
         removed_bottom = self.env.step(removed_bottom, 1, np.array([3, 0, 5]))
