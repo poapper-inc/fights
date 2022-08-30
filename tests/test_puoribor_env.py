@@ -20,6 +20,8 @@ class TestPuoriborEnv(unittest.TestCase):
                 np.fliplr(initial_pos),
                 np.zeros((9, 9), dtype=np.int_),
                 np.zeros((9, 9), dtype=np.int_),
+                np.zeros((9, 9), dtype=np.int_),
+                np.zeros((9, 9), dtype=np.int_),
             ]
         )
         initial_state_correct = PuoriborState(
@@ -211,6 +213,16 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(block_path, 0, np.array([1, 4, 0])),
         )
 
+        issue_24 = self.env.step(self.initial_state, 0, np.array([1, 2, 2]))
+        issue_24 = self.env.step(issue_24, 1, np.array([1, 4, 2]))
+        issue_24 = self.env.step(issue_24, 0, np.array([2, 3, 2]))
+        expected_hwall = np.zeros_like(issue_24.board[2])
+        expected_vwall = np.zeros_like(issue_24.board[3])
+        expected_hwall[2:6, 2] = 1
+        expected_vwall[3, 2:4] = 1
+        np.testing.assert_array_equal(issue_24.board[2], expected_hwall)
+        np.testing.assert_array_equal(issue_24.board[3], expected_vwall)
+
     def test_rotate(self):
         top_left_corner = self.env.step(self.initial_state, 0, np.array([1, 0, 0]))
         top_left_corner = self.env.step(top_left_corner, 1, np.array([1, 3, 2]))
@@ -225,6 +237,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[2, :2] = 1
         expected_vwall[0, 3] = 1
         np.testing.assert_array_equal(top_left_corner.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_left_corner, 1, np.array([1, 2, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_left_corner, 1, np.array([2, 2, 2])),
+        )
+        top_left_corner = self.env.step(top_left_corner, 1, np.array([2, 3, 2]))
+        expected_vwall[3, 2:4] = 1
+        np.testing.assert_array_equal(top_left_corner.board[3], expected_vwall)
+        top_left_corner = self.env.step(top_left_corner, 0, np.array([1, 0, 3]))
+        expected_hwall[:2, 3] = 1
+        np.testing.assert_array_equal(top_left_corner.board[2], expected_hwall)
 
         left_edge = self.env.step(self.initial_state, 0, np.array([1, 0, 1]))
         left_edge = self.env.step(left_edge, 1, np.array([1, 3, 3]))
@@ -239,6 +267,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[2, 1:3] = 1
         expected_vwall[0, 4] = 1
         expected_vwall[1, 5] = 1
+        np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(left_edge, 1, np.array([1, 2, 1])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(left_edge, 1, np.array([2, 2, 3])),
+        )
+        left_edge = self.env.step(left_edge, 1, np.array([1, 0, 4]))
+        expected_hwall[:2, 4] = 1
+        np.testing.assert_array_equal(left_edge.board[2], expected_hwall)
+        left_edge = self.env.step(left_edge, 0, np.array([2, 3, 3]))
+        expected_vwall[3, 3:5] = 1
         np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
 
         top_edge = self.env.step(self.initial_state, 0, np.array([1, 2, 3]))
@@ -255,6 +299,19 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall = np.zeros_like(top_edge.board[3])
         expected_vwall[1, :2] = 1
         expected_vwall[3, 3:5] = 1
+        np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_edge, 1, np.array([1, 1, 0])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(top_edge, 1, np.array([2, 4, 3])),
+        )
+        top_edge = self.env.step(top_edge, 1, np.array([2, 5, 1]))
+        expected_vwall[5, 1:3] = 1
         np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
 
         contained = self.env.step(self.initial_state, 0, np.array([1, 2, 4]))
@@ -274,6 +331,22 @@ class TestPuoriborEnv(unittest.TestCase):
         expected_vwall[4, 0] = 1
         expected_vwall[4, 4] = 1
         np.testing.assert_array_equal(contained.board[3], expected_vwall)
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(contained, 0, np.array([1, 1, 1])),
+        )
+        self.assertRaisesRegex(
+            ValueError,
+            "intersecting walls",
+            lambda: self.env.step(contained, 0, np.array([2, 2, 2])),
+        )
+        contained = self.env.step(contained, 0, np.array([2, 5, 1]))
+        expected_vwall[5, 1:3] = 1
+        np.testing.assert_array_equal(contained.board[3], expected_vwall)
+        contained = self.env.step(contained, 1, np.array([1, 4, 4]))
+        expected_hwall[4:6, 4] = 1
+        np.testing.assert_array_equal(contained.board[2], expected_hwall)
 
         removed_bottom = self.env.step(self.initial_state, 0, np.array([2, 3, 6]))
         removed_bottom = self.env.step(removed_bottom, 1, np.array([3, 0, 5]))
@@ -349,6 +422,72 @@ class TestPuoriborEnv(unittest.TestCase):
         np.testing.assert_array_equal(logger.log[1][0].board, next_state.board)
         self.assertEqual(logger.log[1][1], 0)
         np.testing.assert_array_equal(logger.log[1][2], action)
+
+    def _get_all_actions(self, state: PuoriborState, agent_id):
+        actions = []
+        for action_type in [0, 1, 2, 3]:
+            for coordinate_x in range(PuoriborEnv.board_size):
+                for coordinate_y in range(PuoriborEnv.board_size):
+                    action = [action_type, coordinate_x, coordinate_y]
+                    try:
+                        PuoriborEnv().step(state, agent_id, action)
+                    except ValueError:
+                        ...
+                    else:
+                        actions.append(action)
+        return actions
+
+    def test_initial_action_count(self):
+        initial_actions = self._get_all_actions(self.initial_state, 0)
+        
+        # 3 (up, left, right)
+        # + 8 * 8 * 2 (walls * 2)
+        # + 6 * 6 (rotation)
+        self.assertEqual(len(initial_actions), 3 + 8 * 8 * 2 + 6 * 6)
+
+    def test_midgame_action_count(self):
+        state = PuoriborEnv().step(self.initial_state, 0, [1, 2, 3])
+        state = PuoriborEnv().step(state, 1, [2, 1, 6])
+        state = PuoriborEnv().step(state, 0, [2, 5, 1])
+        state = PuoriborEnv().step(state, 1, [2, 1, 4])
+        state = PuoriborEnv().step(state, 0, [1, 5, 6])
+        state = PuoriborEnv().step(state, 1, [0, 4, 7])
+        state = PuoriborEnv().step(state, 0, [1, 3, 6])
+
+        #     8v  3v  7v  7v  8v  4v  8v  8v
+        # ┌───┬───┬───┬───┬───┬───┬───┬───┬───┐
+        # │                 0                 │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                       ┃           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 7h
+        # │                       ┃           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                                   │
+        # ├   ┼   ┼━━━┼━━━┼   ┼   ┼   ┼   ┼   ┤ 5h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 7h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼━━━┼━━━┼━━━┼━━━┼   ┼   ┤ 2h
+        # │       ┃         1                 │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                                   │
+        # └───┴───┴───┴───┴───┴───┴───┴───┴───┘
+
+        # 3 (down, left, right)
+        # + 8 + 7 + 8 + 5 + 7 + 8 + 2 + 8 (horizontal walls)
+        # + 8 + 3 + 7 + 7 + 8 + 4 + 8 + 8 (vertical walls)
+        # + 6 * 6 (rotation)
+
+        actions = self._get_all_actions(state, 1)
+        self.assertEqual(
+            len(actions),
+            3
+            + (8 + 7 + 8 + 5 + 7 + 8 + 2 + 8)
+            + (8 + 3 + 7 + 7 + 8 + 4 + 8 + 8)
+            + 6 * 6,
+        )
 
 
 if __name__ == "__main__":
