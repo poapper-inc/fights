@@ -62,6 +62,8 @@ class PuoriborState(BaseState):
         - ``C = 1``: one-hot encoded position of agent 1. (starts from bottom)
         - ``C = 2``: one-hot encoded positions of horizontal walls.
         - ``C = 3``: one-hot encoded positions of vertical walls.
+        - ``C = 4``: one-hot encoded positions of horizontal walls' midpoints.
+        - ``C = 5``: one-hot encoded positions of vertical walls' midpoints.
     """
 
     walls_remaining: NDArray[np.int_]
@@ -288,10 +290,11 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
                 raise ValueError("right section out of board")
             elif np.any(board[2, x : x + 2, y]):
                 raise ValueError("wall already placed")
-            elif np.all(board[3, x, y : y + 2]):
+            elif board[5, x, y]:
                 raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1
             board[2, x + 1, y] = 1
+            board[4, x, y] = 1
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1
             ):
@@ -307,10 +310,11 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
                 raise ValueError("right section out of board")
             elif np.any(board[3, x, y : y + 2]):
                 raise ValueError("wall already placed")
-            elif np.all(board[2, x : x + 2, y]):
+            elif board[4, x, y]:
                 raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1
             board[3, x, y + 1] = 1
+            board[5, x, y] = 1
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1
             ):
@@ -431,6 +435,8 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
             [
                 np.copy(starting_pos_0),
                 np.fliplr(starting_pos_0),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
                 np.zeros((self.board_size, self.board_size), dtype=np.int_),
                 np.zeros((self.board_size, self.board_size), dtype=np.int_),
             ]
