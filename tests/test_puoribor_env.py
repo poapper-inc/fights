@@ -423,6 +423,72 @@ class TestPuoriborEnv(unittest.TestCase):
         self.assertEqual(logger.log[1][1], 0)
         np.testing.assert_array_equal(logger.log[1][2], action)
 
+    def _get_all_actions(self, state: PuoriborState, agent_id):
+        actions = []
+        for action_type in [0, 1, 2, 3]:
+            for coordinate_x in range(PuoriborEnv.board_size):
+                for coordinate_y in range(PuoriborEnv.board_size):
+                    action = [action_type, coordinate_x, coordinate_y]
+                    try:
+                        PuoriborEnv().step(state, agent_id, action)
+                    except ValueError:
+                        ...
+                    else:
+                        actions.append(action)
+        return actions
+
+    def test_initial_action_count(self):
+        initial_actions = self._get_all_actions(self.initial_state, 0)
+        
+        # 3 (up, left, right)
+        # + 8 * 8 * 2 (walls * 2)
+        # + 6 * 6 (rotation)
+        self.assertEqual(len(initial_actions), 3 + 8 * 8 * 2 + 6 * 6)
+
+    def test_midgame_action_count(self):
+        state = PuoriborEnv().step(self.initial_state, 0, [1, 2, 3])
+        state = PuoriborEnv().step(state, 1, [2, 1, 6])
+        state = PuoriborEnv().step(state, 0, [2, 5, 1])
+        state = PuoriborEnv().step(state, 1, [2, 1, 4])
+        state = PuoriborEnv().step(state, 0, [1, 5, 6])
+        state = PuoriborEnv().step(state, 1, [0, 4, 7])
+        state = PuoriborEnv().step(state, 0, [1, 3, 6])
+
+        #     8v  3v  7v  7v  8v  4v  8v  8v
+        # ┌───┬───┬───┬───┬───┬───┬───┬───┬───┐
+        # │                 0                 │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                       ┃           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 7h
+        # │                       ┃           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                                   │
+        # ├   ┼   ┼━━━┼━━━┼   ┼   ┼   ┼   ┼   ┤ 5h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 7h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │       ┃                           │
+        # ├   ┼   ┼   ┼━━━┼━━━┼━━━┼━━━┼   ┼   ┤ 2h
+        # │       ┃         1                 │
+        # ├   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┼   ┤ 8h
+        # │                                   │
+        # └───┴───┴───┴───┴───┴───┴───┴───┴───┘
+
+        # 3 (down, left, right)
+        # + 8 + 7 + 8 + 5 + 7 + 8 + 2 + 8 (horizontal walls)
+        # + 8 + 3 + 7 + 7 + 8 + 4 + 8 + 8 (vertical walls)
+        # + 6 * 6 (rotation)
+
+        actions = self._get_all_actions(state, 1)
+        self.assertEqual(
+            len(actions),
+            3
+            + (8 + 7 + 8 + 5 + 7 + 8 + 2 + 8)
+            + (8 + 3 + 7 + 7 + 8 + 4 + 8 + 8)
+            + 6 * 6,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
