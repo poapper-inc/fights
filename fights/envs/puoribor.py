@@ -333,17 +333,41 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
 
             padded_horizontal = np.pad(board[2], 1, constant_values=0)
             padded_vertical = np.pad(board[3], 1, constant_values=0)
+            padded_horizontal_midpoints = np.pad(board[4], 1, constant_values=0)
+            padded_vertical_midpoints = np.pad(board[5], 1, constant_values=0)
             px, py = x + 1, y + 1
             horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
             vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
+            padded_horizontal_midpoints[px - 1, py - 1 : py + 3] = 0
+            padded_horizontal_midpoints[px + 3, py - 1 : py + 3] = 0
+            padded_vertical_midpoints[px - 1 : px + 3, py - 1] = 0
+            padded_vertical_midpoints[px - 1 : px + 3, py + 3] = 0
+            horizontal_region_midpoints = np.copy(
+                padded_horizontal_midpoints[px : px + 4, py - 1 : py + 4]
+            )
+            vertical_region_midpoints = np.copy(
+                padded_vertical_midpoints[px - 1 : px + 4, py : py + 4]
+            )
             horizontal_region_new = np.rot90(vertical_region)
             vertical_region_new = np.rot90(horizontal_region)
+            horizontal_region_midpoints_new = np.rot90(vertical_region_midpoints)
+            vertical_region_midpoints_new = np.rot90(horizontal_region_midpoints)
             padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
             padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
+            padded_horizontal_midpoints[
+                px - 1 : px + 3, py - 1 : py + 4
+            ] = horizontal_region_midpoints_new
+            padded_vertical_midpoints[
+                px - 1 : px + 4, py : py + 4
+            ] = vertical_region_midpoints_new
             board[2] = padded_horizontal[1:-1, 1:-1]
             board[3] = padded_vertical[1:-1, 1:-1]
+            board[4] = padded_horizontal_midpoints[1:-1, 1:-1]
+            board[5] = padded_vertical_midpoints[1:-1, 1:-1]
             board[2, :, 8] = 0
             board[3, 8, :] = 0
+            board[4, :, 8] = 0
+            board[5, 8, :] = 0
 
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1
