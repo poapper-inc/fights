@@ -69,7 +69,7 @@ def fallback_to_ascii(s: str) -> str:
     try:
         s.encode(sys.stdout.encoding)
     except UnicodeEncodeError:
-        s = re.sub("[┌┬┐├┼┤└┴┘]", "+", re.sub("[─━]", "-", re.sub("[│┃]", "|", s)))
+        s = re.sub("[┌┬┐├┼┤└┴┘╋]", "+", re.sub("[─━]", "-", re.sub("[│┃]", "|", s)))
     return s
 
 

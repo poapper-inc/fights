@@ -90,6 +90,7 @@ class PuoriborState(BaseState):
         horizontal_wall_bold = "━━━"
         left_intersection = "├"
         middle_intersection = "┼"
+        middle_intersection_bold = "╋"
         right_intersection = "┤"
         left_intersection_bottom = "└"
         middle_intersection_bottom = "┴"
@@ -129,9 +130,14 @@ class PuoriborState(BaseState):
                         right_intersection_bottom if y == 8 else right_intersection
                     )
                 else:
-                    result += (
-                        middle_intersection_bottom if y == 8 else middle_intersection
-                    )
+                    if np.any(self.board[4:, x, y]):
+                        result += middle_intersection_bold
+                    else:
+                        result += (
+                            middle_intersection_bottom
+                            if y == 8
+                            else middle_intersection
+                        )
             result += "\n"
 
         return result
