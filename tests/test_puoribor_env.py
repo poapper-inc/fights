@@ -400,6 +400,19 @@ class TestPuoriborEnv(unittest.TestCase):
             lambda: self.env.step(lacking_walls, 0, np.array([3, 0, 0])),
         )
 
+        issue_26 = self.env.step(self.initial_state, 0, np.array([2, 3, 1]))
+        issue_26 = self.env.step(issue_26, 1, np.array([2, 4, 2]))
+        issue_26 = self.env.step(issue_26, 0, np.array([3, 0, 2]))
+        issue_26 = self.env.step(issue_26, 1, np.array([1, 3, 1]))
+        expected_hwall = np.zeros_like(issue_26.board[2])
+        expected_hwall[3:5, 1] = 1
+        expected_hwall[3, 5] = 1
+        np.testing.assert_array_equal(issue_26.board[2], expected_hwall)
+        expected_vwall = np.zeros_like(issue_26.board[3])
+        expected_vwall[3, 1] = 1
+        expected_vwall[4, 2:4] = 1
+        np.testing.assert_array_equal(issue_26.board[3], expected_vwall)
+
     def test_step_callback(self):
         class StepLogger:
             log = []
