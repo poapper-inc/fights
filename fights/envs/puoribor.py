@@ -344,10 +344,10 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
             px, py = x + 1, y + 1
             horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
             vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
-            padded_horizontal_midpoints[px - 1, py - 1 : py + 3] = 0
-            padded_horizontal_midpoints[px + 3, py - 1 : py + 3] = 0
-            padded_vertical_midpoints[px - 1 : px + 3, py - 1] = 0
-            padded_vertical_midpoints[px - 1 : px + 3, py + 3] = 0
+            padded_horizontal_midpoints[px - 1, py - 1 : py + 4] = 0
+            padded_horizontal_midpoints[px + 3, py - 1 : py + 4] = 0
+            padded_vertical_midpoints[px - 1 : px + 4, py - 1] = 0
+            padded_vertical_midpoints[px - 1 : px + 4, py + 3] = 0
             horizontal_region_midpoints = np.copy(
                 padded_horizontal_midpoints[px : px + 4, py - 1 : py + 4]
             )
