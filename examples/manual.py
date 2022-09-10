@@ -3,16 +3,36 @@ Manually played puoribor game.
 """
 
 import argparse
+import os
 import re
 import sys
-
-from msgpack import os
+from typing import Optional
 
 sys.path.append("../")
 
 import colorama
 from colorama import Fore, Style
+from msgpack import packb
+
 from fights.envs import puoribor
+
+
+class Logger:
+    log = []
+
+    def __call__(
+        self,
+        state: puoribor.PuoriborState,
+        agent_id: Optional[int],
+        action: Optional[puoribor.PuoriborAction],
+    ) -> None:
+        self.log.append(
+            {
+                "state": state.to_dict(),
+                "action": action if action is None else action.tolist(),  # type: ignore
+                "agent_id": agent_id,
+            }
+        )
 
 
 def add_left_ticks(s: str) -> str:
@@ -50,11 +70,21 @@ if __name__ == "__main__":
         required=False,
         default=False,
     )
+    parser.add_argument(
+        "-o",
+        "--out",
+        dest="out",
+        help="output file path",
+        required=False,
+        type=argparse.FileType("wb"),
+    )
     args = parser.parse_args()
 
     env = puoribor.PuoriborEnv()
     state = env.initialize_state()
     turn = 0
+    logger = Logger()
+    logger(state, None, None)
     while not state.done:
         if args.clear:
             os.system("cls" if os.name == "nt" else "clear")
@@ -69,7 +99,7 @@ if __name__ == "__main__":
                 action = list(
                     map(int, input("action_id, x, y separated by space: ").split())
                 )
-                state = env.step(state, turn, action)
+                state = env.step(state, turn, action, post_step_fn=logger)
             except ValueError as err:
                 print(f"Invalid move: {err}")
             else:
@@ -82,3 +112,7 @@ if __name__ == "__main__":
 
         turn += 1
         turn %= 2
+
+    if args.out is not None:
+        with args.out as file:
+            file.write(packb(logger.log))
