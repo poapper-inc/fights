@@ -6,13 +6,14 @@ import argparse
 import os
 import re
 import sys
+import time
 from typing import Optional
 
 sys.path.append("../")
 
 import colorama
 from colorama import Fore, Style
-from msgpack import packb
+from msgpack import Timestamp, packb
 
 from fights.envs import puoribor
 
@@ -31,6 +32,7 @@ class Logger:
                 "state": state.to_dict(),
                 "action": action if action is None else action.tolist(),  # type: ignore
                 "agent_id": agent_id,
+                "timestamp": Timestamp.from_unix_nano(time.time_ns()),
             }
         )
 

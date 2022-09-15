@@ -8,6 +8,7 @@ Run `python puoribor.py -h` for more information.
 import argparse
 import re
 import sys
+import time
 from typing import Optional
 
 sys.path.append("../")
@@ -15,7 +16,7 @@ sys.path.append("../")
 import colorama
 import numpy as np
 from colorama import Fore, Style
-from msgpack import packb
+from msgpack import Timestamp, packb
 
 from fights.base import BaseAgent
 from fights.envs import puoribor
@@ -61,6 +62,7 @@ class Logger:
                 "state": state.to_dict(),
                 "action": action if action is None else action.tolist(),  # type: ignore
                 "agent_id": agent_id,
+                "timestamp": Timestamp(time.time_ns()),
             }
         )
 
