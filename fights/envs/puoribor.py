@@ -298,8 +298,8 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
                 raise ValueError("wall already placed")
             elif board[5, x, y]:
                 raise ValueError("cannot create intersecting walls")
-            board[2, x, y] = 1
-            board[2, x + 1, y] = 1
+            board[2, x, y] = 1 + agent_id
+            board[2, x + 1, y] = 1 + agent_id
             board[4, x, y] = 1
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1
@@ -318,8 +318,8 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
                 raise ValueError("wall already placed")
             elif board[4, x, y]:
                 raise ValueError("cannot create intersecting walls")
-            board[3, x, y] = 1
-            board[3, x, y + 1] = 1
+            board[3, x, y] = 1 + agent_id
+            board[3, x, y + 1] = 1 + agent_id
             board[5, x, y] = 1
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
                 board, 1

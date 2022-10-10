@@ -149,8 +149,8 @@ class TestPuoriborEnv(unittest.TestCase):
 
         place_wall_right = self.env.step(self.initial_state, 1, np.array([2, 0, 0]))
         expected_vwall = np.zeros_like(place_wall_right.board[3])
-        expected_vwall[0, 0] = 1
-        expected_vwall[0, 1] = 1
+        expected_vwall[0, 0] = 2
+        expected_vwall[0, 1] = 2
         np.testing.assert_array_equal(place_wall_right.board[3], expected_vwall)
         np.testing.assert_array_equal(
             place_wall_right.walls_remaining,
@@ -218,16 +218,17 @@ class TestPuoriborEnv(unittest.TestCase):
         issue_24 = self.env.step(issue_24, 0, np.array([2, 3, 2]))
         expected_hwall = np.zeros_like(issue_24.board[2])
         expected_vwall = np.zeros_like(issue_24.board[3])
-        expected_hwall[2:6, 2] = 1
+        expected_hwall[2:4, 2] = 1
+        expected_hwall[4:6, 2] = 2
         expected_vwall[3, 2:4] = 1
         np.testing.assert_array_equal(issue_24.board[2], expected_hwall)
         np.testing.assert_array_equal(issue_24.board[3], expected_vwall)
 
     def test_rotate(self):
         top_left_corner = self.env.step(self.initial_state, 0, np.array([1, 0, 0]))
-        top_left_corner = self.env.step(top_left_corner, 1, np.array([1, 3, 2]))
+        top_left_corner = self.env.step(top_left_corner, 0, np.array([1, 3, 2]))
         top_left_corner = self.env.step(top_left_corner, 0, np.array([2, 2, 0]))
-        top_left_corner = self.env.step(top_left_corner, 1, np.array([2, 1, 2]))
+        top_left_corner = self.env.step(top_left_corner, 0, np.array([2, 1, 2]))
         top_left_corner = self.env.step(top_left_corner, 0, np.array([3, 0, 0]))
         expected_hwall = np.zeros_like(top_left_corner.board[2])
         expected_hwall[:2, 1] = 1
@@ -247,7 +248,7 @@ class TestPuoriborEnv(unittest.TestCase):
             "intersecting walls",
             lambda: self.env.step(top_left_corner, 1, np.array([2, 2, 2])),
         )
-        top_left_corner = self.env.step(top_left_corner, 1, np.array([2, 3, 2]))
+        top_left_corner = self.env.step(top_left_corner, 0, np.array([2, 3, 2]))
         expected_vwall[3, 2:4] = 1
         np.testing.assert_array_equal(top_left_corner.board[3], expected_vwall)
         top_left_corner = self.env.step(top_left_corner, 0, np.array([1, 0, 3]))
@@ -255,9 +256,9 @@ class TestPuoriborEnv(unittest.TestCase):
         np.testing.assert_array_equal(top_left_corner.board[2], expected_hwall)
 
         left_edge = self.env.step(self.initial_state, 0, np.array([1, 0, 1]))
-        left_edge = self.env.step(left_edge, 1, np.array([1, 3, 3]))
+        left_edge = self.env.step(left_edge, 0, np.array([1, 3, 3]))
         left_edge = self.env.step(left_edge, 0, np.array([2, 2, 1]))
-        left_edge = self.env.step(left_edge, 1, np.array([2, 1, 4]))
+        left_edge = self.env.step(left_edge, 0, np.array([2, 1, 4]))
         left_edge = self.env.step(left_edge, 0, np.array([3, 0, 1]))
         expected_hwall = np.zeros_like(left_edge.board[2])
         expected_hwall[0, 2] = 1
@@ -278,7 +279,7 @@ class TestPuoriborEnv(unittest.TestCase):
             "intersecting walls",
             lambda: self.env.step(left_edge, 1, np.array([2, 2, 3])),
         )
-        left_edge = self.env.step(left_edge, 1, np.array([1, 0, 4]))
+        left_edge = self.env.step(left_edge, 0, np.array([1, 0, 4]))
         expected_hwall[:2, 4] = 1
         np.testing.assert_array_equal(left_edge.board[2], expected_hwall)
         left_edge = self.env.step(left_edge, 0, np.array([2, 3, 3]))
@@ -286,11 +287,11 @@ class TestPuoriborEnv(unittest.TestCase):
         np.testing.assert_array_equal(left_edge.board[3], expected_vwall)
 
         top_edge = self.env.step(self.initial_state, 0, np.array([1, 2, 3]))
-        top_edge = self.env.step(top_edge, 1, np.array([1, 5, 1]))
+        top_edge = self.env.step(top_edge, 0, np.array([1, 5, 1]))
         top_edge = self.env.step(top_edge, 0, np.array([2, 3, 3]))
-        top_edge = self.env.step(top_edge, 1, np.array([2, 5, 0]))
+        top_edge = self.env.step(top_edge, 0, np.array([2, 5, 0]))
         top_edge = self.env.step(top_edge, 0, np.array([2, 1, 0]))
-        top_edge = self.env.step(top_edge, 1, np.array([3, 2, 0]))
+        top_edge = self.env.step(top_edge, 0, np.array([3, 2, 0]))
         expected_hwall = np.zeros_like(top_edge.board[2])
         expected_hwall[2, 1] = 1
         expected_hwall[6, 1] = 1
@@ -310,16 +311,16 @@ class TestPuoriborEnv(unittest.TestCase):
             "intersecting walls",
             lambda: self.env.step(top_edge, 1, np.array([2, 4, 3])),
         )
-        top_edge = self.env.step(top_edge, 1, np.array([2, 5, 1]))
+        top_edge = self.env.step(top_edge, 0, np.array([2, 5, 1]))
         expected_vwall[5, 1:3] = 1
         np.testing.assert_array_equal(top_edge.board[3], expected_vwall)
 
         contained = self.env.step(self.initial_state, 0, np.array([1, 2, 4]))
-        contained = self.env.step(contained, 1, np.array([1, 5, 1]))
+        contained = self.env.step(contained, 0, np.array([1, 5, 1]))
         contained = self.env.step(contained, 0, np.array([2, 1, 1]))
-        contained = self.env.step(contained, 1, np.array([2, 3, 3]))
+        contained = self.env.step(contained, 0, np.array([2, 3, 3]))
         contained = self.env.step(contained, 0, np.array([2, 4, 0]))
-        contained = self.env.step(contained, 1, np.array([3, 2, 1]))
+        contained = self.env.step(contained, 0, np.array([3, 2, 1]))
         expected_hwall = np.zeros_like(contained.board[2])
         expected_hwall[4:6, 0] = 1
         expected_hwall[2:4, 2] = 1
@@ -344,19 +345,19 @@ class TestPuoriborEnv(unittest.TestCase):
         contained = self.env.step(contained, 0, np.array([2, 5, 1]))
         expected_vwall[5, 1:3] = 1
         np.testing.assert_array_equal(contained.board[3], expected_vwall)
-        contained = self.env.step(contained, 1, np.array([1, 4, 4]))
+        contained = self.env.step(contained, 0, np.array([1, 4, 4]))
         expected_hwall[4:6, 4] = 1
         np.testing.assert_array_equal(contained.board[2], expected_hwall)
 
         removed_bottom = self.env.step(self.initial_state, 0, np.array([2, 3, 6]))
-        removed_bottom = self.env.step(removed_bottom, 1, np.array([3, 0, 5]))
+        removed_bottom = self.env.step(removed_bottom, 0, np.array([3, 0, 5]))
         expected_hwall = np.zeros_like(removed_bottom.board[2])
         np.testing.assert_array_equal(removed_bottom.board[2], expected_hwall)
         expected_vwall = np.zeros_like(removed_bottom.board[3])
         np.testing.assert_array_equal(removed_bottom.board[3], expected_vwall)
 
         removed_right = self.env.step(self.initial_state, 0, np.array([1, 7, 0]))
-        removed_right = self.env.step(removed_right, 1, np.array([3, 5, 1]))
+        removed_right = self.env.step(removed_right, 0, np.array([3, 5, 1]))
         expected_hwall = np.zeros_like(removed_right.board[2])
         np.testing.assert_array_equal(removed_right.board[2], expected_hwall)
         expected_vwall = np.zeros_like(removed_right.board[3])
@@ -401,9 +402,9 @@ class TestPuoriborEnv(unittest.TestCase):
         )
 
         issue_26 = self.env.step(self.initial_state, 0, np.array([2, 3, 1]))
-        issue_26 = self.env.step(issue_26, 1, np.array([2, 4, 2]))
+        issue_26 = self.env.step(issue_26, 0, np.array([2, 4, 2]))
         issue_26 = self.env.step(issue_26, 0, np.array([3, 0, 2]))
-        issue_26 = self.env.step(issue_26, 1, np.array([1, 3, 1]))
+        issue_26 = self.env.step(issue_26, 0, np.array([1, 3, 1]))
         expected_hwall = np.zeros_like(issue_26.board[2])
         expected_hwall[3:5, 1] = 1
         expected_hwall[3, 5] = 1
