@@ -60,8 +60,10 @@ class PuoriborState(BaseState):
     Channels
         - ``C = 0``: one-hot encoded position of agent 0. (starts from top)
         - ``C = 1``: one-hot encoded position of agent 1. (starts from bottom)
-        - ``C = 2``: one-hot encoded positions of horizontal walls.
-        - ``C = 3``: one-hot encoded positions of vertical walls.
+        - ``C = 2``: label encoded positions of horizontal walls. (1 for wall placed
+          by agent 0, 2 for agent 1)
+        - ``C = 3``: label encoded positions of vertical walls. (encoding is same as
+          ``C = 2``)
         - ``C = 4``: one-hot encoded positions of horizontal walls' midpoints.
         - ``C = 5``: one-hot encoded positions of vertical walls' midpoints.
     """
