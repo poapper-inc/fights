@@ -64,5 +64,6 @@ autodoc_type_aliases = {
     "NDArray": "NDArray",
     "ArrayLike": "ArrayLike",
     "PuoriborAction": "PuoriborAction",
+    "QuoridorAction": "QuoridorAction",
 }
 autodoc_member_order = "bysource"

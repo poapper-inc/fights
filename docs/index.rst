@@ -13,6 +13,7 @@ Fights
    fights.base
    fights.envs
    fights.envs.puoribor
+   fights.envs.quoridor
 
 Indices and tables
 ==================

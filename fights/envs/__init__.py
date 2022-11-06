@@ -6,6 +6,7 @@ from numpy.typing import ArrayLike
 
 from ..base import BaseEnv, BaseState
 from .puoribor import PuoriborEnv, PuoriborState
+from .quoridor import QuoridorEnv, QuoridorState
 
 
 def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState, ArrayLike]], Type[BaseState]]:
@@ -18,7 +19,10 @@ def resolve(name: str) -> Tuple[Type[BaseEnv[BaseState, ArrayLike]], Type[BaseSt
     :returns:
         A tuple of (env class, env state).
     """
-    mappings = {"puoribor": (PuoriborEnv, PuoriborState)}
+    mappings = {
+        "puoribor": (PuoriborEnv, PuoriborState),
+        "quoridor": (QuoridorEnv, QuoridorState),
+    }
     if name not in mappings:
         raise ValueError(f"environment with name {name} not found")
     return cast(
