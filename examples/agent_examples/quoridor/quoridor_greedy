@@ -1,5 +1,5 @@
 """
-Quoridor ai example based on minimax tree search.
+Quoridor ai example based on greedy search.
 """
 
 import numpy as np
