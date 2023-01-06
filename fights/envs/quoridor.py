@@ -288,6 +288,13 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
                 raise ValueError("right section out of board")
             elif np.any(board[2, x : x + 2, y]):
                 raise ValueError("wall already placed")
+            vertical_line = board[3, x, :]
+            zero_indices = np.where(vertical_line[: y + 1] == 0)[0]
+            if len(zero_indices) == 0:
+                if y % 2 == 0:
+                    raise ValueError("cannot create intersecting walls")
+            elif y - int(zero_indices[-1]) % 2 == 1:
+                raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1 + agent_id
             board[2, x + 1, y] = 1 + agent_id
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
@@ -305,6 +312,13 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
                 raise ValueError("right section out of board")
             elif np.any(board[3, x, y : y + 2]):
                 raise ValueError("wall already placed")
+            horizontal_line = board[2, :, y]
+            zero_indices = np.where(horizontal_line[: x + 1] == 0)[0]
+            if len(zero_indices) == 0:
+                if x % 2 == 0:
+                    raise ValueError("cannot create intersecting walls")
+            elif x - int(zero_indices[-1]) % 2 == 1:
+                raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1 + agent_id
             board[3, x, y + 1] = 1 + agent_id
             if not self._check_path_exists(board, 0) or not self._check_path_exists(
