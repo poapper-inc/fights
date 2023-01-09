@@ -160,7 +160,9 @@ class PuoriborState(BaseState):
                     constant_values=0,
                 ),
                 np.pad(
-                    np.rot90(self.board[3], 2)[1:], ((0, 1), (0, 0)), constant_values=0  # type: ignore
+                    np.rot90(self.board[3], 2)[1:],
+                    ((0, 1), (0, 0)),  # type: ignore
+                    constant_values=0,
                 ),
                 np.pad(
                     np.rot90(self.board[4], 2)[1:, 1:],
