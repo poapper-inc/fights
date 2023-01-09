@@ -147,6 +147,12 @@ class PuoriborState(BaseState):
     def perspective(self, agent_id: int) -> NDArray[np.int_]:
         """
         Return board where specified agent with ``agent_id`` is on top.
+
+        :arg agent_id:
+            The ID of agent to use as base.
+
+        :returns:
+            A rotated ``board`` array.
         """
         if agent_id == 0:
             return self.board
