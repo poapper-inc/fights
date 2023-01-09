@@ -144,6 +144,38 @@ class PuoriborState(BaseState):
 
         return result
 
+    def perspective(self, agent_id: int) -> NDArray[np.int_]:
+        """
+        Return board where specified agent with ``agent_id`` is on top.
+        """
+        if agent_id == 0:
+            return self.board
+        rotated = np.stack(
+            [
+                np.rot90(self.board[0], 2),
+                np.rot90(self.board[1], 2),
+                np.pad(
+                    np.rot90(self.board[2], 2)[:, 1:],
+                    ((0, 0), (0, 1)),
+                    constant_values=0,
+                ),
+                np.pad(
+                    np.rot90(self.board[3], 2)[1:], ((0, 1), (0, 0)), constant_values=0  # type: ignore
+                ),
+                np.pad(
+                    np.rot90(self.board[4], 2)[1:, 1:],
+                    ((0, 1), (0, 1)),  # type: ignore
+                    constant_values=0,
+                ),
+                np.pad(
+                    np.rot90(self.board[5], 2)[1:, 1:],
+                    ((0, 1), (0, 1)),  # type: ignore
+                    constant_values=0,
+                ),
+            ]
+        )
+        return rotated
+
     def to_dict(self) -> Dict:
         """
         Serialize state object to dict.
