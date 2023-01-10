@@ -152,14 +152,15 @@ class PuoriborState(BaseState):
             The ID of agent to use as base.
 
         :returns:
-            A rotated ``board`` array.
+            A rotated ``board`` array. The board's index 0 will contain position of
+            agent of id ``agent_id``, and index 1 will contain the opponent's position.
         """
         if agent_id == 0:
             return self.board
         rotated = np.stack(
             [
-                np.rot90(self.board[0], 2),
                 np.rot90(self.board[1], 2),
+                np.rot90(self.board[0], 2),
                 np.pad(
                     np.rot90(self.board[2], 2)[:, 1:],
                     ((0, 0), (0, 1)),
