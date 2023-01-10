@@ -9,9 +9,9 @@ class TestPuoriborState(unittest.TestCase):
     def setUp(self):
         env = PuoriborEnv()
         self.initial_state = env.initialize_state()
-        self.state = env.step(self.initial_state, 0, np.array([0, 3, 0]))
-        self.state = env.step(self.state, 1, np.array([2, 3, 0]))
-        self.state = env.step(self.state, 0, np.array([0, 3, 1]))
+        self.state = env.step(self.initial_state, 0, [0, 3, 0])
+        self.state = env.step(self.state, 1, [2, 3, 0])
+        self.state = env.step(self.state, 0, [0, 3, 1])
 
     def test_to_dict(self):
         serialized = self.state.to_dict()
