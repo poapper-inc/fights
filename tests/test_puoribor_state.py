@@ -41,8 +41,8 @@ class TestPuoriborState(unittest.TestCase):
             before_rotation.board, before_rotation.perspective(0)
         )
         rotated_board = before_rotation.perspective(1)
-        rotated_state = self.env.step(self.initial_state, 0, [1, 5, 4])
-        rotated_state = self.env.step(rotated_state, 1, [2, 4, 2])
+        rotated_state = self.env.step(self.initial_state, 1, [1, 5, 4])
+        rotated_state = self.env.step(rotated_state, 0, [2, 4, 2])
         np.testing.assert_array_equal(rotated_board[2:], rotated_state.board[2:])
 
 
