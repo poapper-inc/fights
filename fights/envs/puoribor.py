@@ -152,8 +152,9 @@ class PuoriborState(BaseState):
             The ID of agent to use as base.
 
         :returns:
-            A rotated ``board`` array. The board's index 0 will contain position of
-            agent of id ``agent_id``, and index 1 will contain the opponent's position.
+            A rotated ``board`` array. The board's channel 0 will contain position of
+            agent of id ``agent_id``, and channel 1 will contain the opponent's
+            position.
         """
         if agent_id == 0:
             return self.board
