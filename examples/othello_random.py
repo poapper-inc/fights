@@ -39,13 +39,13 @@ def fallback_to_ascii(s: str) -> str:
     try:
         s.encode(sys.stdout.encoding)
     except UnicodeEncodeError:
-        s = re.sub("[?”Œ?”¬?”?”œ?”¼?”¤?””?”´?”˜?•‹]", "+", re.sub("[????”]", "-", re.sub("[?”‚?”ƒ]", "|", s)))
+        s = re.sub("[â”Œâ”¬â”â”œâ”¼â”¤â””â”´â”˜â•‹]", "+", re.sub("[â”€â”]", "-", re.sub("[â”‚â”ƒ]", "|", s)))
     return s
 
 
 def colorize_walls(s: str) -> str:
-    return s.replace("?”", Fore.BLUE + "?”" + Style.RESET_ALL).replace(
-        "?”ƒ", Fore.RED + "?”ƒ" + Style.RESET_ALL
+    return s.replace("?ï¿½ï¿½", Fore.BLUE + "?ï¿½ï¿½" + Style.RESET_ALL).replace(
+        "?ï¿½ï¿½", Fore.RED + "?ï¿½ï¿½" + Style.RESET_ALL
     )
 
 def run():

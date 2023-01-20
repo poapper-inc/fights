@@ -83,15 +83,15 @@ class OthelloState(BaseState):
         Uses unicode box drawing characters.
         """
 
-        table_top = "?”Œ??????????”¬??????????”¬??????????”¬??????????”¬??????????”¬??????????”¬??????????”¬??????????”"
-        vertical_wall = "?”‚"
-        horizontal_wall = "?????????"
-        left_intersection = "?”œ"
-        middle_intersection = "?”¼"
-        right_intersection = "?”¤"
-        left_intersection_bottom = "?””"
-        middle_intersection_bottom = "?”´"
-        right_intersection_bottom = "?”˜"
+        table_top = "â”Œâ”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”"
+        vertical_wall = "â”‚"
+        horizontal_wall = "â”€â”€â”€"
+        left_intersection = "â”œ"
+        middle_intersection = "â”¼"
+        right_intersection = "â”¤"
+        left_intersection_bottom = "â””"
+        middle_intersection_bottom = "â”´"
+        right_intersection_bottom = "â”˜"
 
         result = table_top + "\n"
 
