@@ -134,6 +134,42 @@ class QuoridorState(BaseState):
 
         return result
 
+    def perspective(self, agent_id: int) -> NDArray[np.int_]:
+        """
+        Return board where specified agent with ``agent_id`` is on top.
+
+        :arg agent_id:
+            The ID of agent to use as base.
+
+        :returns:
+            A rotated ``board`` array. The board's channel 0 will contain position of
+            agent of id ``agent_id``, and channel 1 will contain the opponent's
+            position. In channel 2 and 3, walles labeled with 1 are set by agent of id
+            ``agent_id``, and the others are set by the opponent.
+        """
+        if agent_id == 0:
+            return self.board
+        inverted_walls = (self.board[2:4] == 2).astype(np.int_) + (
+            self.board[2:4] == 1
+        ).astype(np.int_) * 2
+        rotated = np.stack(
+            [
+                np.rot90(self.board[1], 2),
+                np.rot90(self.board[0], 2),
+                np.pad(
+                    np.rot90(inverted_walls[0], 2)[:, 1:],
+                    ((0, 0), (0, 1)),
+                    constant_values=0,
+                ),
+                np.pad(
+                    np.rot90(inverted_walls[1], 2)[1:],
+                    ((0, 1), (0, 0)),  # type: ignore
+                    constant_values=0,
+                ),
+            ]
+        )
+        return rotated
+
     def to_dict(self) -> Dict:
         """
         Serialize state object to dict.
