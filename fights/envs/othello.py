@@ -428,6 +428,76 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
             bottom_right = np.array([self.board_size, self.board_size])
         return np.all(np.logical_and(np.array([0, 0]) <= pos, pos < bottom_right))
 
+    def build_state(self, board: NDArray[np.int_]) -> OthelloState:
+        """
+        Build a state(including legal_set, legal_dict, legal_actions, done and reward) from the current board information.
+
+        :arg state:
+            Current state of the environment.
+
+        :returns:
+            A state which board is same as the input.
+        """
+
+        legal_set = [defaultdict(set), defaultdict(set)]
+        legal_dict = [{}, {}]
+
+        directions = ((1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1))
+
+        for r in range(self.board_size):
+            for c in range(self.board_size):
+
+                if board[0][r][c] == 0 and board[1][r][c] == 0:
+
+                    for agent_id in range(2):
+
+                        for dir_id, dir in enumerate(directions):
+                            
+                            flipped = False
+                            something_to_flip = False
+                            temp_r = r
+                            temp_c = c
+                            for _ in range(1, self.board_size):
+
+                                temp_r += dir[0]
+                                temp_c += dir[1]
+                                if not self._check_in_range(np.array([temp_r, temp_c])):
+                                    break
+                                if board[1-agent_id][temp_r][temp_c] == 1:
+                                    legal_set[agent_id][(r, c)].add(dir_id)
+                                    something_to_flip = True
+                                elif board[agent_id][temp_r][temp_c] == 1:
+                                    if something_to_flip:
+                                        flipped = True
+                                    break
+                                else:
+                                    break
+                            if flipped:
+                                legal_dict[agent_id][(r, c)] = dir_id
+        
+        legal_actions = np.zeros((2, self.board_size, self.board_size), dtype=np.int_)
+        for agent_id in range(2):
+            for r in range(self.board_size):
+                for c in range(self.board_size):
+                    legal_actions[agent_id][r][c] = 1 if (r, c) in legal_dict[agent_id] else 0
+        
+        done = False
+        reward = np.zeros((2,))
+        if len(legal_dict[0]) == 0 and len(legal_dict[1]) == 0:
+            done = True
+            reward = self._check_wins(board)
+        
+        new_state = OthelloState(
+            board = board,
+            legal_actions = legal_actions,
+            done = done,
+            reward = reward,
+            legal_set = legal_set,
+            legal_dict = legal_dict
+        )
+        
+        return new_state
+
     def initialize_state(self) -> OthelloState:
         """
         Initialize a :obj:'OthelloState' object with correct environment parameters.
@@ -460,69 +530,6 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
             [0,0,0,0,0,0,0,0]],
         ])
 
-        legal_actions = np.array([
-            [[0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,1,0,0,0,0],
-            [0,0,1,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0]],
-            [[0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,1,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,1,0,1,0,0],
-            [0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0]],
-        ])
-
-        legal_set = [defaultdict(set), defaultdict(set)]
-
-        legal_set[0][(2,2)].add(0)
-        legal_set[0][(2,3)].add(1)
-        legal_set[0][(2,4)].add(2)
-        legal_set[0][(3,2)].add(7)
-        legal_set[0][(4,2)].add(6)
-
-        legal_set[1][(2,3)].add(0)
-        legal_set[1][(2,4)].add(1)
-        legal_set[1][(2,5)].add(2)
-        legal_set[1][(3,5)].add(3)
-        legal_set[1][(3,5)].add(2)
-        legal_set[1][(4,5)].add(2)
-        legal_set[1][(4,5)].add(3)
-        legal_set[1][(4,5)].add(4)
-        legal_set[1][(5,5)].add(3)
-        legal_set[1][(5,5)].add(4)
-        legal_set[1][(6,5)].add(4)
-        legal_set[1][(6,4)].add(5)
-        legal_set[1][(6,3)].add(6)
-        legal_set[1][(5,3)].add(5)
-        legal_set[1][(5,3)].add(6)
-        legal_set[1][(5,3)].add(7)
-        legal_set[1][(5,2)].add(6)
-        legal_set[1][(4,2)].add(7)
-        legal_set[1][(3,2)].add(0)
-        
-        legal_dict = [{}, {}]
-        
-        legal_dict[0][(2,3)] = 1
-        legal_dict[0][(3,2)] = 7
-
-        legal_dict[1][(3,5)] = 3
-        legal_dict[1][(5,5)] = 4
-        legal_dict[1][(5,3)] = 5
-
-        initial_state = OthelloState(
-            board = board,
-            legal_actions = legal_actions,
-            done = False,
-            reward = np.zeros((2,)),
-            legal_set = legal_set,
-            legal_dict = legal_dict
-        )
+        initial_state = self.build_state(board)
 
         return initial_state
