@@ -175,10 +175,7 @@ class OthelloState(BaseState):
         if agent_id == 0:
             return self.board
 
-        reverse_board = np.stack([np.fliplr(self.board[1]), np.fliplr(self.board[0])])
-        reverse_state = reverse_board
-
-        return reverse_state
+        return np.flip(np.rot90(self.board, 2, axes=(1, 2)), axis=0)
 
     def need_jump(self, agent_id: int) -> bool:
         """
