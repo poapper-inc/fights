@@ -494,10 +494,10 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         """
 
         legal_set = [
-            defaultdict[tuple[int, int], set[int]](set),
-            defaultdict[tuple[int, int], set[int]](set),
-        ]
-        legal_dict = [dict[tuple[int, int], int](), dict[tuple[int, int], int]()]
+            defaultdict(set),
+            defaultdict(set),
+        ]  # type: list[defaultdict[tuple[int, int], set[int]]]
+        legal_dict = [dict(), dict()]  # type: list[dict[tuple[int, int], int]]
 
         directions = (
             (1, 1),
