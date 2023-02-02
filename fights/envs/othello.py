@@ -354,7 +354,7 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
                     stones_to_flip.append((temp_r, temp_c))
                 elif state.board[agent_id][temp_r][temp_c] == 1:
                     if stones_to_flip:
-                        for (stone_r, stone_c) in stones_to_flip:
+                        for stone_r, stone_c in stones_to_flip:
                             new_board[1 - agent_id][stone_r][stone_c] = 0
                             new_board[agent_id][stone_r][stone_c] = 1
                             for temp_dir_id, temp_dir in enumerate(directions):
@@ -509,19 +509,14 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
 
         for r in range(self.board_size):
             for c in range(self.board_size):
-
                 if board[0][r][c] == 0 and board[1][r][c] == 0:
-
                     for agent_id in range(2):
-
                         for dir_id, dir in enumerate(directions):
-
                             flipped = False
                             something_to_flip = False
                             temp_r = r
                             temp_c = c
                             for _ in range(1, self.board_size):
-
                                 temp_r += dir[0]
                                 temp_c += dir[1]
                                 if not self._check_in_range(np.array([temp_r, temp_c])):
