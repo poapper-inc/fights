@@ -34,8 +34,8 @@ OthelloAction: TypeAlias = ArrayLike
 Alias of :obj:'ArrayLike' to describe the action type.
 Encoded as an array of shape ''(2,)'',
 in the form of [ 'coordinate_r', 'coordinate_c' ].
+* Note that the action [3, 3] is jumping action, not putting a stone on board (3, 3).
 """
-
 
 @dataclass
 class OthelloState(BaseState):
@@ -59,6 +59,8 @@ class OthelloState(BaseState):
     Array of shape ''(C, W, H)'',
     where C is channel index
     and W, H is board width, height.
+    * Note that if there is no possible location in legal_dict, which means the turn needs jump,
+      then (W=3, H=3) of legal_actions becomes 1, which means the agent can jump its turn.
 
     Channels
         - ''C = 0'': one-hot encoded possible positions of agent 0. (black)
@@ -79,7 +81,7 @@ class OthelloState(BaseState):
     legal_set: list[defaultdict[tuple[int, int], set[int]]]
     """
     List of length 2,
-    where each element is an defaultdict which contains 'maybe' possible locations for
+    where each element is a defaultdict which contains 'maybe' possible locations for
     each agent.
 
     defaultdict
@@ -90,7 +92,8 @@ class OthelloState(BaseState):
     legal_dict: list[dict]
     """
     List of length 2,
-    where each element is an dictionary which contains possible locations for each agent.
+    where each element is a dictionary which contains possible locations for each agent.
+    * Note that legal_dict doesn't consider (3, 3) as jumping action.
 
     dict
         - key(tuple) : possible locations.
@@ -176,12 +179,6 @@ class OthelloState(BaseState):
             return self.board
 
         return np.flip(np.rot90(self.board, 2, axes=(1, 2)), axis=0)
-
-    def need_jump(self, agent_id: int) -> bool:
-        """
-        Return whether the agent has no legal action.
-        """
-        return len(self.legal_dict[agent_id]) == 0
 
     def to_dict(self) -> dict:
         """
@@ -298,6 +295,9 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
                 raise ValueError("cannot put a stone on another stone")
             else:
                 raise ValueError("There is no stone to flip")
+        
+        if r==3 and c==3:
+            return state
 
         new_board = np.copy(state.board)
         new_legal_set = copy.deepcopy(state.legal_set)
@@ -424,6 +424,10 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         if len(new_legal_dict[0]) == 0 and len(new_legal_dict[1]) == 0:
             done = True
             reward = self._check_wins(new_board)
+        
+        for agent_id in range(2):
+            if len(new_legal_dict[agent_id]) == 0:
+                new_legal_actions[agent_id][3][3] = 1
 
         next_state = OthelloState(
             board=new_board,
@@ -546,6 +550,10 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         if len(legal_dict[0]) == 0 and len(legal_dict[1]) == 0:
             done = True
             reward = self._check_wins(board)
+
+        for agent_id in range(2):
+            if len(legal_actions[agent_id]) == 0:
+                legal_actions[agent_id][3][3] = 1
 
         new_state = OthelloState(
             board=board,
