@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from fights.envs import puoribor_cython
+
 
 
 PuoriborAction: TypeAlias = ArrayLike
