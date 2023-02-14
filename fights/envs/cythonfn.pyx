@@ -3,8 +3,6 @@
 import numpy as np
 cimport numpy as np
 
-from cython.parallel import prange, parallel
-
 def fast_step(
     pre_board,
     pre_walls_remaining,
@@ -288,118 +286,58 @@ cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):
 cdef int _check_path_exists(int [:,:,:] board_view, int agent_id, int board_size):
 
     cdef int pos_x, pos_y
-    cdef int i, j, k
+    cdef int i, j
+    cdef int cnt = 0, tail = 0
     cdef int there_x, there_y
     cdef int goal = (1-agent_id) * 8
-    cdef (int, int) frontier[81]
-    cdef (int, int) new_frontier[81][4]
-    cdef int frontier_cnt_old = 0, frontier_cnt_now = 0
-    cdef int new_frontier_cnt[81]
+    cdef int queue_x[81]
+    cdef int queue_y[81]
     cdef int visited[81][81]
+    cdef int directions[4][2]
 
     for i in range(9):
         for j in range(9):
             visited[i][j] = 0
+    
+    if agent_id:
+        directions[0][:] = [0, -1]
+        directions[1][:] = [1, 0]
+        directions[2][:] = [-1, 0]
+        directions[3][:] = [0, 1]
+    else:
+        directions[0][:] = [0, 1]
+        directions[1][:] = [1, 0]
+        directions[2][:] = [-1, 0]
+        directions[3][:] = [0, -1]
 
     (pos_x, pos_y) = _agent_pos(board_view, agent_id, board_size)
     if pos_y == goal:   return 1
     
-    frontier[frontier_cnt_old] = (pos_x, pos_y)
-    frontier_cnt_old += 1
+    queue_x[tail] = pos_x
+    queue_y[tail] = pos_y
+    tail += 1
     visited[pos_x][pos_y] = 1
 
     for i in range(board_size * board_size):
-        if frontier_cnt_old == 0:   break
-
-        if agent_id == 0:
-            with nogil, parallel():
-                for j in prange(frontier_cnt_old, schedule="dynamic"):
-                    (pos_x, pos_y) = frontier[j]
-                    new_frontier_cnt[j] = 0
-
-                    there_x = pos_x
-                    there_y = pos_y + 1
-                    if there_y < board_size:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[2, pos_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-                                if there_y == goal: break
-                    
-                    there_x = pos_x + 1
-                    there_y = pos_y
-                    if there_x < board_size:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[3, pos_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-
-                    there_x = pos_x - 1
-                    there_y = pos_y
-                    if there_x >= 0:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[3, there_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-                    
-                    there_x = pos_x
-                    there_y = pos_y - 1
-                    if there_y >= 0:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[2, pos_x, there_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-        else:
-            with nogil, parallel():
-                for j in prange(frontier_cnt_old, schedule="dynamic"):
-                    (pos_x, pos_y) = frontier[j]
-                    new_frontier_cnt[j] = 0
-
-                    there_x = pos_x
-                    there_y = pos_y - 1
-                    if there_y >= 0:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[2, pos_x, there_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-                                if there_y == goal: break
-                    
-                    there_x = pos_x + 1
-                    there_y = pos_y
-                    if there_x < board_size:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[3, pos_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-
-                    there_x = pos_x - 1
-                    there_y = pos_y
-                    if there_x >= 0:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[3, there_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-                    
-                    there_x = pos_x
-                    there_y = pos_y + 1
-                    if there_y < board_size:
-                        if visited[there_x][there_y] == 0:
-                            if board_view[2, pos_x, pos_y] == 0:
-                                new_frontier[j][new_frontier_cnt[j]] = (there_x, there_y)
-                                new_frontier_cnt[j] += 1
-        
-        frontier_cnt_now = 0
-        for j in range(frontier_cnt_old):
-            for k in range(new_frontier_cnt[j]):
-                (pos_x, pos_y) = new_frontier[j][k]
-                if pos_y == goal:
-                    return 1
-                if visited[pos_x][pos_y] == 0:
-                    visited[pos_x][pos_y] = 1
-                    frontier[frontier_cnt_now] = (pos_x, pos_y)
-                    frontier_cnt_now += 1
-        
-        frontier_cnt_old = frontier_cnt_now
+        if cnt == tail: break
+        pos_x = queue_x[cnt]
+        pos_y = queue_y[cnt]
+        cnt += 1
+        for j in range(4):
+            there_x = pos_x + directions[j][0]
+            there_y = pos_y + directions[j][1]
+            if not (0 <= there_x < board_size and 0 <= there_y < board_size):
+                continue
+            if visited[there_x][there_y]:
+                continue
+            if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):
+                continue
+            if there_y == goal:
+                return 1
+            visited[there_x][there_y] = 1
+            queue_x[tail] = there_x
+            queue_y[tail] = there_y
+            tail += 1
 
     return 0
 

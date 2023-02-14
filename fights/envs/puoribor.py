@@ -24,10 +24,8 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
+from fights.envs import cythonfn
 
-import os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from . import cythonfn
 
 PuoriborAction: TypeAlias = ArrayLike
 """
