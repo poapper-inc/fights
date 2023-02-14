@@ -1,9 +1,7 @@
 """
 Fights environment for Quoridor. (two player variant)
-
 Coordinates are specified in the form of ``(x, y)``, where ``(0, 0)`` is the top left corner.
 All coordinates and directions are absolute and does not change between agents.
-
 Directions
     - Top: `+y`
     - Right: `+x`
@@ -15,7 +13,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Callable, Deque, Dict, Optional
+from typing import Callable, Dict, Deque, Optional
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -26,18 +24,17 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
+from fights.envs import quoridor_cython
 
 QuoridorAction: TypeAlias = ArrayLike
 """
 Alias of :obj:`ArrayLike` to describe the action type.
 Encoded as an array of shape ``(3,)``, in the form of
 [ `action_type`, `coordinate_x`, `coordinate_y` ].
-
 `action_type`
     - 0 (move piece)
     - 1 (place wall horizontally)
     - 2 (place wall vertically)
-
 `coordinate_x`, `coordinate_y`
     - position to move the piece to
     - top or left position to place the wall
@@ -54,7 +51,6 @@ class QuoridorState(BaseState):
     """
     Array of shape ``(C, W, H)``, where C is channel index and W, H is board width,
     height.
-
     Channels
         - ``C = 0``: one-hot encoded position of agent 0. (starts from top)
         - ``C = 1``: one-hot encoded position of agent 1. (starts from bottom)
@@ -137,10 +133,8 @@ class QuoridorState(BaseState):
     def perspective(self, agent_id: int) -> NDArray[np.int_]:
         """
         Return board where specified agent with ``agent_id`` is on top.
-
         :arg agent_id:
             The ID of agent to use as base.
-
         :returns:
             A rotated ``board`` array. The board's channel 0 will contain position of
             agent of id ``agent_id``, and channel 1 will contain the opponent's
@@ -173,7 +167,6 @@ class QuoridorState(BaseState):
     def to_dict(self) -> Dict:
         """
         Serialize state object to dict.
-
         :returns:
             A serialized dict.
         """
@@ -187,10 +180,8 @@ class QuoridorState(BaseState):
     def from_dict(serialized) -> QuoridorState:
         """
         Deserialize from serialized dict.
-
         :arg serialized:
             A serialized dict.
-
         :returns:
             Deserialized ``QuoridorState`` object.
         """
@@ -233,24 +224,18 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         """
         Step through the game, calculating the next state given the current state and
         action to take.
-
         :arg state:
             Current state of the environment.
-
         :arg agent_id:
             ID of the agent that takes the action. (``0`` or ``1``)
-
         :arg action:
             Agent action, encoded in the form described by :obj:`QuoridorAction`.
-
         :arg pre_step_fn:
             Callback to run before executing action. ``state``, ``agent_id`` and
             ``action`` will be provided as arguments.
-
         :arg post_step_fn:
             Callback to run after executing action. The calculated state, ``agent_id``
             and ``action`` will be provided as arguments.
-
         :returns:
             A copy of the object with the restored state.
         """
@@ -258,122 +243,31 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        action = np.asanyarray(action).astype(np.int_)
-        action_type, x, y = action
-        if not self._check_in_range(np.array([x, y])):
-            raise ValueError(f"out of board: {(x, y)}")
-        if not 0 <= agent_id <= 1:
-            raise ValueError(f"invalid agent_id: {agent_id}")
-
-        board = np.copy(state.board)
-        walls_remaining = np.copy(state.walls_remaining)
-
-        if action_type == 0:  # Move piece
-            current_pos = np.argwhere(state.board[agent_id] == 1)[0]
-            new_pos = np.array([x, y])
-            opponent_pos = np.argwhere(state.board[1 - agent_id] == 1)[0]
-            if np.all(new_pos == opponent_pos):
-                raise ValueError("cannot move to opponent's position")
-
-            delta = new_pos - current_pos
-            taxicab_dist = np.abs(delta).sum()
-            if taxicab_dist == 0:
-                raise ValueError("cannot move zero blocks")
-            elif taxicab_dist > 2:
-                raise ValueError("cannot move more than two blocks")
-            elif (
-                taxicab_dist == 2
-                and np.any(delta == 0)
-                and not np.all(current_pos + delta // 2 == opponent_pos)
-            ):
-                raise ValueError("cannot jump over nothing")
-
-            if np.all(delta):  # If moving diagonally
-                if np.any(current_pos + delta * [0, 1] != opponent_pos) and np.any(
-                    current_pos + delta * [1, 0] != opponent_pos
-                ):
-                    # Only diagonal jumps are permitted.
-                    # Agents cannot simply move in diagonal direction.
-                    raise ValueError("cannot move diagonally")
-                elif self._check_wall_blocked(board, current_pos, opponent_pos):
-                    raise ValueError("cannot jump over walls")
-
-                original_jump_pos = current_pos + 2 * (opponent_pos - current_pos)
-                if self._check_in_range(
-                    original_jump_pos
-                ) and not self._check_wall_blocked(
-                    board, current_pos, original_jump_pos
-                ):
-                    raise ValueError(
-                        "cannot diagonally jump if linear jump is possible"
-                    )
-                elif self._check_wall_blocked(board, opponent_pos, new_pos):
-                    raise ValueError("cannot jump over walls")
-            elif self._check_wall_blocked(board, current_pos, new_pos):
-                raise ValueError("cannot jump over walls")
-
-            board[agent_id][tuple(current_pos)] = 0
-            board[agent_id][tuple(new_pos)] = 1
-
-        elif action_type == 1:  # Place wall horizontally
-            if walls_remaining[agent_id] == 0:
-                raise ValueError(f"no walls left for agent {agent_id}")
-            if y == self.board_size - 1:
-                raise ValueError("cannot place wall on the edge")
-            elif x == self.board_size - 1:
-                raise ValueError("right section out of board")
-            elif np.any(board[2, x : x + 2, y]):
-                raise ValueError("wall already placed")
-            vertical_line = board[3, x, :]
-            zero_indices = np.where(vertical_line[: y + 1] == 0)[0]
-            if len(zero_indices) == 0:
-                if y % 2 == 0:
-                    raise ValueError("cannot create intersecting walls")
-            elif (y - int(zero_indices[-1])) % 2 == 1:
-                raise ValueError("cannot create intersecting walls")
-            board[2, x, y] = 1 + agent_id
-            board[2, x + 1, y] = 1 + agent_id
-            if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 1
-            ):
-                raise ValueError("cannot place wall blocking all paths")
-            walls_remaining[agent_id] -= 1
-
-        elif action_type == 2:  # Place wall vertically
-            if walls_remaining[agent_id] == 0:
-                raise ValueError(f"no walls left for agent {agent_id}")
-            if x == self.board_size - 1:
-                raise ValueError("cannot place wall on the edge")
-            elif y == self.board_size - 1:
-                raise ValueError("right section out of board")
-            elif np.any(board[3, x, y : y + 2]):
-                raise ValueError("wall already placed")
-            horizontal_line = board[2, :, y]
-            zero_indices = np.where(horizontal_line[: x + 1] == 0)[0]
-            if len(zero_indices) == 0:
-                if x % 2 == 0:
-                    raise ValueError("cannot create intersecting walls")
-            elif (x - int(zero_indices[-1])) % 2 == 1:
-                raise ValueError("cannot create intersecting walls")
-            board[3, x, y] = 1 + agent_id
-            board[3, x, y + 1] = 1 + agent_id
-            if not self._check_path_exists(board, 0) or not self._check_path_exists(
-                board, 1
-            ):
-                raise ValueError("cannot place wall blocking all paths")
-            walls_remaining[agent_id] -= 1
-
-        else:
-            raise ValueError(f"invalid action_type: {action_type}")
+        next_information = quoridor_cython.fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
 
         next_state = QuoridorState(
-            board=board,
-            walls_remaining=walls_remaining,
-            done=self._check_wins(board),
+            board=next_information[0],
+            walls_remaining=next_information[1],
+            done=next_information[2],
         )
+
         if post_step_fn is not None:
             post_step_fn(next_state, agent_id, action)
         return next_state
+    
+    def legal_actions(self, state: QuoridorState, agent_id: int) -> NDArray[np.int_]:
+        """
+        Find possible actions for the agent.
+
+        :arg state:
+            Current state of the environment.
+        :arg agent_id:
+            Agent_id of the agent.
+        
+        :returns:
+            A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
+        """
+        return quoridor_cython.legal_actions(state, agent_id, self.board_size)
 
     def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
         if bottom_right is None:
@@ -430,7 +324,6 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
     def initialize_state(self) -> QuoridorState:
         """
         Initialize a :obj:`QuoridorState` object with correct environment parameters.
-
         :returns:
             Created initial state object.
         """

@@ -4,12 +4,12 @@
 {
     "distutils": {
         "depends": [],
-        "name": "fights.envs.cythonfn",
+        "name": "fights.envs.puoribor_cython",
         "sources": [
-            "cythonfn.pyx"
+            "puoribor_cython.pyx"
         ]
     },
-    "module_name": "fights.envs.cythonfn"
+    "module_name": "fights.envs.puoribor_cython"
 }
 END: Cython Metadata */
 
@@ -751,8 +751,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__fights__envs__cythonfn
-#define __PYX_HAVE_API__fights__envs__cythonfn
+#define __PYX_HAVE__fights__envs__puoribor_cython
+#define __PYX_HAVE_API__fights__envs__puoribor_cython
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -998,7 +998,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "cythonfn.pyx",
+  "puoribor_cython.pyx",
   "__init__.pxd",
   "stringsource",
   "type.pxd",
@@ -1362,23 +1362,23 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  * cdef inline object PyArray_MultiIterNew1(a):
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
-struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range;
+struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range;
 struct __pyx_ctuple_int__and_int;
 typedef struct __pyx_ctuple_int__and_int __pyx_ctuple_int__and_int;
 
-/* "fights/envs/cythonfn.pyx":283
+/* "fights/envs/puoribor_cython.pyx":283
  *     return legal_actions_np
  * 
  * cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):             # <<<<<<<<<<<<<<
  *     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)
  * 
  */
-struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range {
+struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range {
   int __pyx_n;
   int bottom_right;
 };
 
-/* "fights/envs/cythonfn.pyx":377
+/* "fights/envs/puoribor_cython.pyx":377
  *     return 0
  * 
  * cdef (int, int) _agent_pos(int [:,:,:] board_view, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -2338,7 +2338,7 @@ static PyTypeObject *__pyx_ptype_5numpy_flexible = 0;
 static PyTypeObject *__pyx_ptype_5numpy_character = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 
-/* Module declarations from 'fights.envs.cythonfn' */
+/* Module declarations from 'fights.envs.puoribor_cython' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -2350,13 +2350,13 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *, __Pyx_memviewslice, __Pyx_memviewslice, int, int, int, int); /*proto*/
-static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice, int, int, int, int); /*proto*/
-static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int, int, struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range *__pyx_optional_args); /*proto*/
-static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice, int, int); /*proto*/
-static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslice, int, int, int, int); /*proto*/
-static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice, int); /*proto*/
-static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Pyx_memviewslice, int, int); /*proto*/
+static void __pyx_f_6fights_4envs_15puoribor_cython_board_rotation(PyObject *, __Pyx_memviewslice, __Pyx_memviewslice, int, int, int, int); /*proto*/
+static int __pyx_f_6fights_4envs_15puoribor_cython__is_moving_legal(__Pyx_memviewslice, int, int, int, int); /*proto*/
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(int, int, struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range *__pyx_optional_args); /*proto*/
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_path_exists(__Pyx_memviewslice, int, int); /*proto*/
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__Pyx_memviewslice, int, int, int, int); /*proto*/
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_wins(__Pyx_memviewslice, int); /*proto*/
+static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__Pyx_memviewslice, int, int); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -2391,11 +2391,11 @@ static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_int = { "int", NULL, sizeof(int), { 0 }, 0, IS_UNSIGNED(int) ? 'U' : 'I', IS_UNSIGNED(int), 0 };
-#define __Pyx_MODULE_NAME "fights.envs.cythonfn"
-extern int __pyx_module_is_main_fights__envs__cythonfn;
-int __pyx_module_is_main_fights__envs__cythonfn = 0;
+#define __Pyx_MODULE_NAME "fights.envs.puoribor_cython"
+extern int __pyx_module_is_main_fights__envs__puoribor_cython;
+int __pyx_module_is_main_fights__envs__puoribor_cython = 0;
 
-/* Implementation of 'fights.envs.cythonfn' */
+/* Implementation of 'fights.envs.puoribor_cython' */
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_ImportError;
@@ -2490,7 +2490,6 @@ static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
 static const char __pyx_k_action_type[] = "action_type";
-static const char __pyx_k_cythonfn_pyx[] = "cythonfn.pyx";
 static const char __pyx_k_out_of_board[] = "out of board: ";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
@@ -2514,8 +2513,8 @@ static const char __pyx_k_invalid_action_type[] = "invalid action_type: ";
 static const char __pyx_k_original_jump_pos_x[] = "original_jump_pos_x";
 static const char __pyx_k_original_jump_pos_y[] = "original_jump_pos_y";
 static const char __pyx_k_pre_walls_remaining[] = "pre_walls_remaining";
+static const char __pyx_k_puoribor_cython_pyx[] = "puoribor_cython.pyx";
 static const char __pyx_k_wall_already_placed[] = "wall already placed";
-static const char __pyx_k_fights_envs_cythonfn[] = "fights.envs.cythonfn";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_walls_remaining_view[] = "walls_remaining_view";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
@@ -2531,6 +2530,7 @@ static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '
 static const char __pyx_k_cannot_jump_over_nothing[] = "cannot jump over nothing";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
 static const char __pyx_k_right_section_out_of_board[] = "right section out of board";
+static const char __pyx_k_fights_envs_puoribor_cython[] = "fights.envs.puoribor_cython";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_rotation_region_out_of_board[] = "rotation region out of board";
 static const char __pyx_k_cannot_place_wall_on_the_edge[] = "cannot place wall on the edge";
@@ -2613,7 +2613,6 @@ static PyObject *__pyx_n_s_curpos_x;
 static PyObject *__pyx_n_s_curpos_y;
 static PyObject *__pyx_n_s_cx;
 static PyObject *__pyx_n_s_cy;
-static PyObject *__pyx_kp_s_cythonfn_pyx;
 static PyObject *__pyx_n_s_delpos_x;
 static PyObject *__pyx_n_s_delpos_y;
 static PyObject *__pyx_n_s_dict;
@@ -2625,7 +2624,7 @@ static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_error;
 static PyObject *__pyx_n_s_fast_step;
-static PyObject *__pyx_n_s_fights_envs_cythonfn;
+static PyObject *__pyx_n_s_fights_envs_puoribor_cython;
 static PyObject *__pyx_n_s_flags;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fortran;
@@ -2673,6 +2672,7 @@ static PyObject *__pyx_n_s_pad;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_pre_board;
 static PyObject *__pyx_n_s_pre_walls_remaining;
+static PyObject *__pyx_kp_s_puoribor_cython_pyx;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_getbuffer;
@@ -2713,8 +2713,8 @@ static PyObject *__pyx_n_s_walls_remaining_view;
 static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_y;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pre_board, PyObject *__pyx_v_pre_walls_remaining, int __pyx_v_agent_id, PyObject *__pyx_v_action, int __pyx_v_board_size); /* proto */
-static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, int __pyx_v_agent_id, int __pyx_v_board_size); /* proto */
+static PyObject *__pyx_pf_6fights_4envs_15puoribor_cython_fast_step(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pre_board, PyObject *__pyx_v_pre_walls_remaining, int __pyx_v_agent_id, PyObject *__pyx_v_action, int __pyx_v_board_size); /* proto */
+static PyObject *__pyx_pf_6fights_4envs_15puoribor_cython_2legal_actions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, int __pyx_v_agent_id, int __pyx_v_board_size); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2822,7 +2822,7 @@ static PyObject *__pyx_codeobj__43;
 static PyObject *__pyx_codeobj__50;
 /* Late includes */
 
-/* "fights/envs/cythonfn.pyx":6
+/* "fights/envs/puoribor_cython.pyx":6
  * cimport numpy as np
  * 
  * def fast_step(             # <<<<<<<<<<<<<<
@@ -2831,9 +2831,9 @@ static PyObject *__pyx_codeobj__50;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fights_4envs_8cythonfn_1fast_step(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_6fights_4envs_8cythonfn_1fast_step = {"fast_step", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6fights_4envs_8cythonfn_1fast_step, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6fights_4envs_8cythonfn_1fast_step(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6fights_4envs_15puoribor_cython_1fast_step(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6fights_4envs_15puoribor_cython_1fast_step = {"fast_step", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6fights_4envs_15puoribor_cython_1fast_step, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6fights_4envs_15puoribor_cython_1fast_step(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_pre_board = 0;
   PyObject *__pyx_v_pre_walls_remaining = 0;
   int __pyx_v_agent_id;
@@ -2917,18 +2917,18 @@ static PyObject *__pyx_pw_6fights_4envs_8cythonfn_1fast_step(PyObject *__pyx_sel
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("fast_step", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("fights.envs.cythonfn.fast_step", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fights.envs.puoribor_cython.fast_step", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6fights_4envs_8cythonfn_fast_step(__pyx_self, __pyx_v_pre_board, __pyx_v_pre_walls_remaining, __pyx_v_agent_id, __pyx_v_action, __pyx_v_board_size);
+  __pyx_r = __pyx_pf_6fights_4envs_15puoribor_cython_fast_step(__pyx_self, __pyx_v_pre_board, __pyx_v_pre_walls_remaining, __pyx_v_agent_id, __pyx_v_action, __pyx_v_board_size);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pre_board, PyObject *__pyx_v_pre_walls_remaining, int __pyx_v_agent_id, PyObject *__pyx_v_action, int __pyx_v_board_size) {
+static PyObject *__pyx_pf_6fights_4envs_15puoribor_cython_fast_step(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pre_board, PyObject *__pyx_v_pre_walls_remaining, int __pyx_v_agent_id, PyObject *__pyx_v_action, int __pyx_v_board_size) {
   int __pyx_v_action_type;
   int __pyx_v_x;
   int __pyx_v_y;
@@ -2955,7 +2955,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   PyObject *__pyx_t_4 = NULL;
   __Pyx_memviewslice __pyx_t_5 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range __pyx_t_7;
+  struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range __pyx_t_7;
   int __pyx_t_8;
   int __pyx_t_9;
   __pyx_ctuple_int__and_int __pyx_t_10;
@@ -2969,7 +2969,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("fast_step", 0);
 
-  /* "fights/envs/cythonfn.pyx":14
+  /* "fights/envs/puoribor_cython.pyx":14
  * ):
  * 
  *     cdef int action_type = action[0]             # <<<<<<<<<<<<<<
@@ -2982,7 +2982,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_action_type = __pyx_t_2;
 
-  /* "fights/envs/cythonfn.pyx":15
+  /* "fights/envs/puoribor_cython.pyx":15
  * 
  *     cdef int action_type = action[0]
  *     cdef int x = action[1]             # <<<<<<<<<<<<<<
@@ -2995,7 +2995,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_x = __pyx_t_2;
 
-  /* "fights/envs/cythonfn.pyx":16
+  /* "fights/envs/puoribor_cython.pyx":16
  *     cdef int action_type = action[0]
  *     cdef int x = action[1]
  *     cdef int y = action[2]             # <<<<<<<<<<<<<<
@@ -3008,7 +3008,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_y = __pyx_t_2;
 
-  /* "fights/envs/cythonfn.pyx":18
+  /* "fights/envs/puoribor_cython.pyx":18
  *     cdef int y = action[2]
  * 
  *     board = np.copy(pre_board)             # <<<<<<<<<<<<<<
@@ -3038,7 +3038,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_v_board = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":19
+  /* "fights/envs/puoribor_cython.pyx":19
  * 
  *     board = np.copy(pre_board)
  *     walls_remaining = np.copy(pre_walls_remaining)             # <<<<<<<<<<<<<<
@@ -3068,7 +3068,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_v_walls_remaining = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":21
+  /* "fights/envs/puoribor_cython.pyx":21
  *     walls_remaining = np.copy(pre_walls_remaining)
  * 
  *     cdef int [:,:,:] board_view = board             # <<<<<<<<<<<<<<
@@ -3080,7 +3080,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":22
+  /* "fights/envs/puoribor_cython.pyx":22
  * 
  *     cdef int [:,:,:] board_view = board
  *     cdef int [:] walls_remaining_view = walls_remaining             # <<<<<<<<<<<<<<
@@ -3092,7 +3092,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":27
+  /* "fights/envs/puoribor_cython.pyx":27
  *     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
  * 
  *     if not _check_in_range(x, y, board_size):             # <<<<<<<<<<<<<<
@@ -3101,11 +3101,11 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
   __pyx_t_7.__pyx_n = 1;
   __pyx_t_7.bottom_right = __pyx_v_board_size;
-  __pyx_t_2 = __pyx_f_6fights_4envs_8cythonfn__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_7); 
+  __pyx_t_2 = __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_7); 
   __pyx_t_8 = ((!(__pyx_t_2 != 0)) != 0);
   if (unlikely(__pyx_t_8)) {
 
-    /* "fights/envs/cythonfn.pyx":28
+    /* "fights/envs/puoribor_cython.pyx":28
  * 
  *     if not _check_in_range(x, y, board_size):
  *         raise ValueError(f"out of board: {(x, y)}")             # <<<<<<<<<<<<<<
@@ -3137,7 +3137,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __PYX_ERR(0, 28, __pyx_L1_error)
 
-    /* "fights/envs/cythonfn.pyx":27
+    /* "fights/envs/puoribor_cython.pyx":27
  *     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
  * 
  *     if not _check_in_range(x, y, board_size):             # <<<<<<<<<<<<<<
@@ -3146,7 +3146,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":29
+  /* "fights/envs/puoribor_cython.pyx":29
  *     if not _check_in_range(x, y, board_size):
  *         raise ValueError(f"out of board: {(x, y)}")
  *     if not 0 <= agent_id <= 1:             # <<<<<<<<<<<<<<
@@ -3160,7 +3160,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_t_9 = ((!(__pyx_t_8 != 0)) != 0);
   if (unlikely(__pyx_t_9)) {
 
-    /* "fights/envs/cythonfn.pyx":30
+    /* "fights/envs/puoribor_cython.pyx":30
  *         raise ValueError(f"out of board: {(x, y)}")
  *     if not 0 <= agent_id <= 1:
  *         raise ValueError(f"invalid agent_id: {agent_id}")             # <<<<<<<<<<<<<<
@@ -3179,7 +3179,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __PYX_ERR(0, 30, __pyx_L1_error)
 
-    /* "fights/envs/cythonfn.pyx":29
+    /* "fights/envs/puoribor_cython.pyx":29
  *     if not _check_in_range(x, y, board_size):
  *         raise ValueError(f"out of board: {(x, y)}")
  *     if not 0 <= agent_id <= 1:             # <<<<<<<<<<<<<<
@@ -3188,7 +3188,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":32
+  /* "fights/envs/puoribor_cython.pyx":32
  *         raise ValueError(f"invalid agent_id: {agent_id}")
  * 
  *     if action_type == 0:  # Move piece             # <<<<<<<<<<<<<<
@@ -3198,33 +3198,33 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   switch (__pyx_v_action_type) {
     case 0:
 
-    /* "fights/envs/cythonfn.pyx":33
+    /* "fights/envs/puoribor_cython.pyx":33
  * 
  *     if action_type == 0:  # Move piece
  *         (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)             # <<<<<<<<<<<<<<
  *         (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *         newpos_x = x
  */
-    __pyx_t_10 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
+    __pyx_t_10 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
     __pyx_t_2 = __pyx_t_10.f0;
     __pyx_t_11 = __pyx_t_10.f1;
     __pyx_v_curpos_x = __pyx_t_2;
     __pyx_v_curpos_y = __pyx_t_11;
 
-    /* "fights/envs/cythonfn.pyx":34
+    /* "fights/envs/puoribor_cython.pyx":34
  *     if action_type == 0:  # Move piece
  *         (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)
  *         (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)             # <<<<<<<<<<<<<<
  *         newpos_x = x
  *         newpos_y = y
  */
-    __pyx_t_10 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, (1 - __pyx_v_agent_id), __pyx_v_board_size);
+    __pyx_t_10 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, (1 - __pyx_v_agent_id), __pyx_v_board_size);
     __pyx_t_11 = __pyx_t_10.f0;
     __pyx_t_2 = __pyx_t_10.f1;
     __pyx_v_opppos_x = __pyx_t_11;
     __pyx_v_opppos_y = __pyx_t_2;
 
-    /* "fights/envs/cythonfn.pyx":35
+    /* "fights/envs/puoribor_cython.pyx":35
  *         (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)
  *         (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *         newpos_x = x             # <<<<<<<<<<<<<<
@@ -3233,7 +3233,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     __pyx_v_newpos_x = __pyx_v_x;
 
-    /* "fights/envs/cythonfn.pyx":36
+    /* "fights/envs/puoribor_cython.pyx":36
  *         (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *         newpos_x = x
  *         newpos_y = y             # <<<<<<<<<<<<<<
@@ -3242,7 +3242,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     __pyx_v_newpos_y = __pyx_v_y;
 
-    /* "fights/envs/cythonfn.pyx":38
+    /* "fights/envs/puoribor_cython.pyx":38
  *         newpos_y = y
  * 
  *         if newpos_x == opppos_x and newpos_y == opppos_y:             # <<<<<<<<<<<<<<
@@ -3260,7 +3260,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_L6_bool_binop_done:;
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":39
+      /* "fights/envs/puoribor_cython.pyx":39
  * 
  *         if newpos_x == opppos_x and newpos_y == opppos_y:
  *             raise ValueError("cannot move to opponent's position")             # <<<<<<<<<<<<<<
@@ -3273,7 +3273,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 39, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":38
+      /* "fights/envs/puoribor_cython.pyx":38
  *         newpos_y = y
  * 
  *         if newpos_x == opppos_x and newpos_y == opppos_y:             # <<<<<<<<<<<<<<
@@ -3282,7 +3282,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":41
+    /* "fights/envs/puoribor_cython.pyx":41
  *             raise ValueError("cannot move to opponent's position")
  * 
  *         delpos_x = newpos_x - curpos_x             # <<<<<<<<<<<<<<
@@ -3291,7 +3291,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     __pyx_v_delpos_x = (__pyx_v_newpos_x - __pyx_v_curpos_x);
 
-    /* "fights/envs/cythonfn.pyx":42
+    /* "fights/envs/puoribor_cython.pyx":42
  * 
  *         delpos_x = newpos_x - curpos_x
  *         delpos_y = newpos_y - curpos_y             # <<<<<<<<<<<<<<
@@ -3300,7 +3300,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     __pyx_v_delpos_y = (__pyx_v_newpos_y - __pyx_v_curpos_y);
 
-    /* "fights/envs/cythonfn.pyx":43
+    /* "fights/envs/puoribor_cython.pyx":43
  *         delpos_x = newpos_x - curpos_x
  *         delpos_y = newpos_y - curpos_y
  *         taxicab_dist = abs(delpos_x) + abs(delpos_y)             # <<<<<<<<<<<<<<
@@ -3311,7 +3311,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_11 = abs(__pyx_v_delpos_y); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 43, __pyx_L1_error)
     __pyx_v_taxicab_dist = (__pyx_t_2 + __pyx_t_11);
 
-    /* "fights/envs/cythonfn.pyx":44
+    /* "fights/envs/puoribor_cython.pyx":44
  *         delpos_y = newpos_y - curpos_y
  *         taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *         if taxicab_dist == 0:             # <<<<<<<<<<<<<<
@@ -3321,7 +3321,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_taxicab_dist == 0) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":45
+      /* "fights/envs/puoribor_cython.pyx":45
  *         taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *         if taxicab_dist == 0:
  *             raise ValueError("cannot move zero blocks")             # <<<<<<<<<<<<<<
@@ -3334,7 +3334,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 45, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":44
+      /* "fights/envs/puoribor_cython.pyx":44
  *         delpos_y = newpos_y - curpos_y
  *         taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *         if taxicab_dist == 0:             # <<<<<<<<<<<<<<
@@ -3343,7 +3343,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":46
+    /* "fights/envs/puoribor_cython.pyx":46
  *         if taxicab_dist == 0:
  *             raise ValueError("cannot move zero blocks")
  *         elif taxicab_dist > 2:             # <<<<<<<<<<<<<<
@@ -3353,7 +3353,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_taxicab_dist > 2) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":47
+      /* "fights/envs/puoribor_cython.pyx":47
  *             raise ValueError("cannot move zero blocks")
  *         elif taxicab_dist > 2:
  *             raise ValueError("cannot move more than two blocks")             # <<<<<<<<<<<<<<
@@ -3366,7 +3366,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 47, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":46
+      /* "fights/envs/puoribor_cython.pyx":46
  *         if taxicab_dist == 0:
  *             raise ValueError("cannot move zero blocks")
  *         elif taxicab_dist > 2:             # <<<<<<<<<<<<<<
@@ -3375,7 +3375,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":49
+    /* "fights/envs/puoribor_cython.pyx":49
  *             raise ValueError("cannot move more than two blocks")
  *         elif (
  *             taxicab_dist == 2             # <<<<<<<<<<<<<<
@@ -3389,7 +3389,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       goto __pyx_L9_bool_binop_done;
     }
 
-    /* "fights/envs/cythonfn.pyx":50
+    /* "fights/envs/puoribor_cython.pyx":50
  *         elif (
  *             taxicab_dist == 2
  *             and (delpos_x == 0 or delpos_y == 0)             # <<<<<<<<<<<<<<
@@ -3409,7 +3409,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     }
     __pyx_L11_next_and:;
 
-    /* "fights/envs/cythonfn.pyx":51
+    /* "fights/envs/puoribor_cython.pyx":51
  *             taxicab_dist == 2
  *             and (delpos_x == 0 or delpos_y == 0)
  *             and not (curpos_x + delpos_x / 2 == opppos_x and curpos_y + delpos_y / 2 == opppos_y)             # <<<<<<<<<<<<<<
@@ -3429,7 +3429,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = __pyx_t_12;
     __pyx_L9_bool_binop_done:;
 
-    /* "fights/envs/cythonfn.pyx":48
+    /* "fights/envs/puoribor_cython.pyx":48
  *         elif taxicab_dist > 2:
  *             raise ValueError("cannot move more than two blocks")
  *         elif (             # <<<<<<<<<<<<<<
@@ -3438,7 +3438,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":53
+      /* "fights/envs/puoribor_cython.pyx":53
  *             and not (curpos_x + delpos_x / 2 == opppos_x and curpos_y + delpos_y / 2 == opppos_y)
  *         ):
  *             raise ValueError("cannot jump over nothing")             # <<<<<<<<<<<<<<
@@ -3451,7 +3451,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 53, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":48
+      /* "fights/envs/puoribor_cython.pyx":48
  *         elif taxicab_dist > 2:
  *             raise ValueError("cannot move more than two blocks")
  *         elif (             # <<<<<<<<<<<<<<
@@ -3460,7 +3460,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":55
+    /* "fights/envs/puoribor_cython.pyx":55
  *             raise ValueError("cannot jump over nothing")
  * 
  *         if delpos_x and delpos_y:  # If moving diagonally             # <<<<<<<<<<<<<<
@@ -3478,7 +3478,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_L16_bool_binop_done:;
     if (__pyx_t_9) {
 
-      /* "fights/envs/cythonfn.pyx":56
+      /* "fights/envs/puoribor_cython.pyx":56
  * 
  *         if delpos_x and delpos_y:  # If moving diagonally
  *             if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -3498,7 +3498,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       }
       __pyx_L20_next_and:;
 
-      /* "fights/envs/cythonfn.pyx":57
+      /* "fights/envs/puoribor_cython.pyx":57
  *         if delpos_x and delpos_y:  # If moving diagonally
  *             if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (
  *                 curpos_x != opppos_x or curpos_y + delpos_y != opppos_y             # <<<<<<<<<<<<<<
@@ -3515,7 +3515,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __pyx_t_9 = __pyx_t_12;
       __pyx_L19_bool_binop_done:;
 
-      /* "fights/envs/cythonfn.pyx":56
+      /* "fights/envs/puoribor_cython.pyx":56
  * 
  *         if delpos_x and delpos_y:  # If moving diagonally
  *             if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -3524,7 +3524,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       if (unlikely(__pyx_t_9)) {
 
-        /* "fights/envs/cythonfn.pyx":61
+        /* "fights/envs/puoribor_cython.pyx":61
  *                 # Only diagonal jumps are permitted.
  *                 # Agents cannot simply move in diagonal direction.
  *                 raise ValueError("cannot move diagonally")             # <<<<<<<<<<<<<<
@@ -3537,7 +3537,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __PYX_ERR(0, 61, __pyx_L1_error)
 
-        /* "fights/envs/cythonfn.pyx":56
+        /* "fights/envs/puoribor_cython.pyx":56
  * 
  *         if delpos_x and delpos_y:  # If moving diagonally
  *             if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -3546,17 +3546,17 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":62
+      /* "fights/envs/puoribor_cython.pyx":62
  *                 # Agents cannot simply move in diagonal direction.
  *                 raise ValueError("cannot move diagonally")
  *             elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):             # <<<<<<<<<<<<<<
  *                 raise ValueError("cannot jump over walls")
  * 
  */
-      __pyx_t_9 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_opppos_x, __pyx_v_opppos_y) != 0);
+      __pyx_t_9 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_opppos_x, __pyx_v_opppos_y) != 0);
       if (unlikely(__pyx_t_9)) {
 
-        /* "fights/envs/cythonfn.pyx":63
+        /* "fights/envs/puoribor_cython.pyx":63
  *                 raise ValueError("cannot move diagonally")
  *             elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):
  *                 raise ValueError("cannot jump over walls")             # <<<<<<<<<<<<<<
@@ -3569,7 +3569,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __PYX_ERR(0, 63, __pyx_L1_error)
 
-        /* "fights/envs/cythonfn.pyx":62
+        /* "fights/envs/puoribor_cython.pyx":62
  *                 # Agents cannot simply move in diagonal direction.
  *                 raise ValueError("cannot move diagonally")
  *             elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):             # <<<<<<<<<<<<<<
@@ -3578,7 +3578,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":65
+      /* "fights/envs/puoribor_cython.pyx":65
  *                 raise ValueError("cannot jump over walls")
  * 
  *             original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)             # <<<<<<<<<<<<<<
@@ -3587,7 +3587,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       __pyx_v_original_jump_pos_x = (__pyx_v_curpos_x + (2 * (__pyx_v_opppos_x - __pyx_v_curpos_x)));
 
-      /* "fights/envs/cythonfn.pyx":66
+      /* "fights/envs/puoribor_cython.pyx":66
  * 
  *             original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *             original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)             # <<<<<<<<<<<<<<
@@ -3596,7 +3596,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       __pyx_v_original_jump_pos_y = (__pyx_v_curpos_y + (2 * (__pyx_v_opppos_y - __pyx_v_curpos_y)));
 
-      /* "fights/envs/cythonfn.pyx":67
+      /* "fights/envs/puoribor_cython.pyx":67
  *             original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *             original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *             if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -3605,7 +3605,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       __pyx_t_7.__pyx_n = 1;
       __pyx_t_7.bottom_right = __pyx_v_board_size;
-      __pyx_t_11 = __pyx_f_6fights_4envs_8cythonfn__check_in_range(__pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y, &__pyx_t_7); 
+      __pyx_t_11 = __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(__pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y, &__pyx_t_7); 
       __pyx_t_12 = (__pyx_t_11 != 0);
       if (__pyx_t_12) {
       } else {
@@ -3613,18 +3613,18 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         goto __pyx_L24_bool_binop_done;
       }
 
-      /* "fights/envs/cythonfn.pyx":68
+      /* "fights/envs/puoribor_cython.pyx":68
  *             original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *             if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(
  *                 board_view, curpos_x, curpos_y, original_jump_pos_x, original_jump_pos_y             # <<<<<<<<<<<<<<
  *             ):
  *                 raise ValueError(
  */
-      __pyx_t_12 = ((!(__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y) != 0)) != 0);
+      __pyx_t_12 = ((!(__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y) != 0)) != 0);
       __pyx_t_9 = __pyx_t_12;
       __pyx_L24_bool_binop_done:;
 
-      /* "fights/envs/cythonfn.pyx":67
+      /* "fights/envs/puoribor_cython.pyx":67
  *             original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *             original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *             if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -3633,7 +3633,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       if (unlikely(__pyx_t_9)) {
 
-        /* "fights/envs/cythonfn.pyx":70
+        /* "fights/envs/puoribor_cython.pyx":70
  *                 board_view, curpos_x, curpos_y, original_jump_pos_x, original_jump_pos_y
  *             ):
  *                 raise ValueError(             # <<<<<<<<<<<<<<
@@ -3646,7 +3646,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __PYX_ERR(0, 70, __pyx_L1_error)
 
-        /* "fights/envs/cythonfn.pyx":67
+        /* "fights/envs/puoribor_cython.pyx":67
  *             original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *             original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *             if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -3655,17 +3655,17 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":73
+      /* "fights/envs/puoribor_cython.pyx":73
  *                     "cannot diagonally jump if linear jump is possible"
  *                 )
  *             elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
  *                 raise ValueError("cannot jump over walls")
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):
  */
-      __pyx_t_9 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_opppos_x, __pyx_v_opppos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
+      __pyx_t_9 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_opppos_x, __pyx_v_opppos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
       if (unlikely(__pyx_t_9)) {
 
-        /* "fights/envs/cythonfn.pyx":74
+        /* "fights/envs/puoribor_cython.pyx":74
  *                 )
  *             elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *                 raise ValueError("cannot jump over walls")             # <<<<<<<<<<<<<<
@@ -3678,7 +3678,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __PYX_ERR(0, 74, __pyx_L1_error)
 
-        /* "fights/envs/cythonfn.pyx":73
+        /* "fights/envs/puoribor_cython.pyx":73
  *                     "cannot diagonally jump if linear jump is possible"
  *                 )
  *             elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
@@ -3687,7 +3687,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":55
+      /* "fights/envs/puoribor_cython.pyx":55
  *             raise ValueError("cannot jump over nothing")
  * 
  *         if delpos_x and delpos_y:  # If moving diagonally             # <<<<<<<<<<<<<<
@@ -3697,17 +3697,17 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       goto __pyx_L15;
     }
 
-    /* "fights/envs/cythonfn.pyx":75
+    /* "fights/envs/puoribor_cython.pyx":75
  *             elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *                 raise ValueError("cannot jump over walls")
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
  *             raise ValueError("cannot jump over walls")
  * 
  */
-    __pyx_t_9 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
+    __pyx_t_9 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":76
+      /* "fights/envs/puoribor_cython.pyx":76
  *                 raise ValueError("cannot jump over walls")
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):
  *             raise ValueError("cannot jump over walls")             # <<<<<<<<<<<<<<
@@ -3720,7 +3720,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 76, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":75
+      /* "fights/envs/puoribor_cython.pyx":75
  *             elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *                 raise ValueError("cannot jump over walls")
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
@@ -3730,7 +3730,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     }
     __pyx_L15:;
 
-    /* "fights/envs/cythonfn.pyx":78
+    /* "fights/envs/puoribor_cython.pyx":78
  *             raise ValueError("cannot jump over walls")
  * 
  *         board_view[agent_id, curpos_x, curpos_y] = 0             # <<<<<<<<<<<<<<
@@ -3742,7 +3742,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_15 = __pyx_v_curpos_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_13 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_15 * __pyx_v_board_view.strides[2]) )) = 0;
 
-    /* "fights/envs/cythonfn.pyx":79
+    /* "fights/envs/puoribor_cython.pyx":79
  * 
  *         board_view[agent_id, curpos_x, curpos_y] = 0
  *         board_view[agent_id, newpos_x, newpos_y] = 1             # <<<<<<<<<<<<<<
@@ -3754,7 +3754,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_13 = __pyx_v_newpos_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_15 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_13 * __pyx_v_board_view.strides[2]) )) = 1;
 
-    /* "fights/envs/cythonfn.pyx":32
+    /* "fights/envs/puoribor_cython.pyx":32
  *         raise ValueError(f"invalid agent_id: {agent_id}")
  * 
  *     if action_type == 0:  # Move piece             # <<<<<<<<<<<<<<
@@ -3764,7 +3764,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     break;
     case 1:
 
-    /* "fights/envs/cythonfn.pyx":82
+    /* "fights/envs/puoribor_cython.pyx":82
  * 
  *     elif action_type == 1:  # Place wall horizontally
  *         if walls_remaining_view[agent_id] == 0:             # <<<<<<<<<<<<<<
@@ -3775,7 +3775,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = (((*((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_13 * __pyx_v_walls_remaining_view.strides[0]) ))) == 0) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":83
+      /* "fights/envs/puoribor_cython.pyx":83
  *     elif action_type == 1:  # Place wall horizontally
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")             # <<<<<<<<<<<<<<
@@ -3794,7 +3794,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 83, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":82
+      /* "fights/envs/puoribor_cython.pyx":82
  * 
  *     elif action_type == 1:  # Place wall horizontally
  *         if walls_remaining_view[agent_id] == 0:             # <<<<<<<<<<<<<<
@@ -3803,7 +3803,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":84
+    /* "fights/envs/puoribor_cython.pyx":84
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if y == board_size-1:             # <<<<<<<<<<<<<<
@@ -3813,7 +3813,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_y == (__pyx_v_board_size - 1)) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":85
+      /* "fights/envs/puoribor_cython.pyx":85
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if y == board_size-1:
  *             raise ValueError("cannot place wall on the edge")             # <<<<<<<<<<<<<<
@@ -3826,7 +3826,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 85, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":84
+      /* "fights/envs/puoribor_cython.pyx":84
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if y == board_size-1:             # <<<<<<<<<<<<<<
@@ -3835,7 +3835,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":86
+    /* "fights/envs/puoribor_cython.pyx":86
  *         if y == board_size-1:
  *             raise ValueError("cannot place wall on the edge")
  *         elif x == board_size-1:             # <<<<<<<<<<<<<<
@@ -3845,7 +3845,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_x == (__pyx_v_board_size - 1)) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":87
+      /* "fights/envs/puoribor_cython.pyx":87
  *             raise ValueError("cannot place wall on the edge")
  *         elif x == board_size-1:
  *             raise ValueError("right section out of board")             # <<<<<<<<<<<<<<
@@ -3858,7 +3858,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 87, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":86
+      /* "fights/envs/puoribor_cython.pyx":86
  *         if y == board_size-1:
  *             raise ValueError("cannot place wall on the edge")
  *         elif x == board_size-1:             # <<<<<<<<<<<<<<
@@ -3867,7 +3867,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":88
+    /* "fights/envs/puoribor_cython.pyx":88
  *         elif x == board_size-1:
  *             raise ValueError("right section out of board")
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:             # <<<<<<<<<<<<<<
@@ -3891,7 +3891,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_L28_bool_binop_done:;
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":89
+      /* "fights/envs/puoribor_cython.pyx":89
  *             raise ValueError("right section out of board")
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:
  *             raise ValueError("wall already placed")             # <<<<<<<<<<<<<<
@@ -3904,7 +3904,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 89, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":88
+      /* "fights/envs/puoribor_cython.pyx":88
  *         elif x == board_size-1:
  *             raise ValueError("right section out of board")
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:             # <<<<<<<<<<<<<<
@@ -3913,7 +3913,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":90
+    /* "fights/envs/puoribor_cython.pyx":90
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:
  *             raise ValueError("wall already placed")
  *         elif board_view[5, x, y]:             # <<<<<<<<<<<<<<
@@ -3926,7 +3926,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_13 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_15 * __pyx_v_board_view.strides[2]) ))) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":91
+      /* "fights/envs/puoribor_cython.pyx":91
  *             raise ValueError("wall already placed")
  *         elif board_view[5, x, y]:
  *             raise ValueError("cannot create intersecting walls")             # <<<<<<<<<<<<<<
@@ -3939,7 +3939,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 91, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":90
+      /* "fights/envs/puoribor_cython.pyx":90
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:
  *             raise ValueError("wall already placed")
  *         elif board_view[5, x, y]:             # <<<<<<<<<<<<<<
@@ -3948,7 +3948,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":92
+    /* "fights/envs/puoribor_cython.pyx":92
  *         elif board_view[5, x, y]:
  *             raise ValueError("cannot create intersecting walls")
  *         board_view[2, x, y] = 1 + agent_id             # <<<<<<<<<<<<<<
@@ -3960,7 +3960,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_13 = __pyx_v_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_15 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_13 * __pyx_v_board_view.strides[2]) )) = (1 + __pyx_v_agent_id);
 
-    /* "fights/envs/cythonfn.pyx":93
+    /* "fights/envs/puoribor_cython.pyx":93
  *             raise ValueError("cannot create intersecting walls")
  *         board_view[2, x, y] = 1 + agent_id
  *         board_view[2, x + 1, y] = 1 + agent_id             # <<<<<<<<<<<<<<
@@ -3972,7 +3972,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_15 = __pyx_v_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_13 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_15 * __pyx_v_board_view.strides[2]) )) = (1 + __pyx_v_agent_id);
 
-    /* "fights/envs/cythonfn.pyx":94
+    /* "fights/envs/puoribor_cython.pyx":94
  *         board_view[2, x, y] = 1 + agent_id
  *         board_view[2, x + 1, y] = 1 + agent_id
  *         walls_remaining_view[agent_id] -= 1             # <<<<<<<<<<<<<<
@@ -3982,7 +3982,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_15 = __pyx_v_agent_id;
     *((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_15 * __pyx_v_walls_remaining_view.strides[0]) )) -= 1;
 
-    /* "fights/envs/cythonfn.pyx":95
+    /* "fights/envs/puoribor_cython.pyx":95
  *         board_view[2, x + 1, y] = 1 + agent_id
  *         walls_remaining_view[agent_id] -= 1
  *         board_view[4, x, y] = 1             # <<<<<<<<<<<<<<
@@ -3994,7 +3994,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_13 = __pyx_v_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_15 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_13 * __pyx_v_board_view.strides[2]) )) = 1;
 
-    /* "fights/envs/cythonfn.pyx":81
+    /* "fights/envs/puoribor_cython.pyx":81
  *         board_view[agent_id, newpos_x, newpos_y] = 1
  * 
  *     elif action_type == 1:  # Place wall horizontally             # <<<<<<<<<<<<<<
@@ -4004,7 +4004,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     break;
     case 2:
 
-    /* "fights/envs/cythonfn.pyx":98
+    /* "fights/envs/puoribor_cython.pyx":98
  * 
  *     elif action_type == 2:  # Place wall vertically
  *         if walls_remaining_view[agent_id] == 0:             # <<<<<<<<<<<<<<
@@ -4015,7 +4015,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = (((*((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_13 * __pyx_v_walls_remaining_view.strides[0]) ))) == 0) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":99
+      /* "fights/envs/puoribor_cython.pyx":99
  *     elif action_type == 2:  # Place wall vertically
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")             # <<<<<<<<<<<<<<
@@ -4034,7 +4034,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 99, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":98
+      /* "fights/envs/puoribor_cython.pyx":98
  * 
  *     elif action_type == 2:  # Place wall vertically
  *         if walls_remaining_view[agent_id] == 0:             # <<<<<<<<<<<<<<
@@ -4043,7 +4043,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":100
+    /* "fights/envs/puoribor_cython.pyx":100
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if x == board_size-1:             # <<<<<<<<<<<<<<
@@ -4053,7 +4053,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_x == (__pyx_v_board_size - 1)) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":101
+      /* "fights/envs/puoribor_cython.pyx":101
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if x == board_size-1:
  *             raise ValueError("cannot place wall on the edge")             # <<<<<<<<<<<<<<
@@ -4066,7 +4066,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 101, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":100
+      /* "fights/envs/puoribor_cython.pyx":100
  *         if walls_remaining_view[agent_id] == 0:
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if x == board_size-1:             # <<<<<<<<<<<<<<
@@ -4075,7 +4075,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":102
+    /* "fights/envs/puoribor_cython.pyx":102
  *         if x == board_size-1:
  *             raise ValueError("cannot place wall on the edge")
  *         elif y == board_size-1:             # <<<<<<<<<<<<<<
@@ -4085,7 +4085,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((__pyx_v_y == (__pyx_v_board_size - 1)) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":103
+      /* "fights/envs/puoribor_cython.pyx":103
  *             raise ValueError("cannot place wall on the edge")
  *         elif y == board_size-1:
  *             raise ValueError("right section out of board")             # <<<<<<<<<<<<<<
@@ -4098,7 +4098,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 103, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":102
+      /* "fights/envs/puoribor_cython.pyx":102
  *         if x == board_size-1:
  *             raise ValueError("cannot place wall on the edge")
  *         elif y == board_size-1:             # <<<<<<<<<<<<<<
@@ -4107,7 +4107,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":104
+    /* "fights/envs/puoribor_cython.pyx":104
  *         elif y == board_size-1:
  *             raise ValueError("right section out of board")
  *         elif board_view[3, x, y] or board_view[3, x, y+1]:             # <<<<<<<<<<<<<<
@@ -4131,7 +4131,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_L32_bool_binop_done:;
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":105
+      /* "fights/envs/puoribor_cython.pyx":105
  *             raise ValueError("right section out of board")
  *         elif board_view[3, x, y] or board_view[3, x, y+1]:
  *             raise ValueError("wall already placed")             # <<<<<<<<<<<<<<
@@ -4144,7 +4144,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 105, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":104
+      /* "fights/envs/puoribor_cython.pyx":104
  *         elif y == board_size-1:
  *             raise ValueError("right section out of board")
  *         elif board_view[3, x, y] or board_view[3, x, y+1]:             # <<<<<<<<<<<<<<
@@ -4153,7 +4153,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":106
+    /* "fights/envs/puoribor_cython.pyx":106
  *         elif board_view[3, x, y] or board_view[3, x, y+1]:
  *             raise ValueError("wall already placed")
  *         elif board_view[4, x, y]:             # <<<<<<<<<<<<<<
@@ -4166,7 +4166,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_13 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_15 * __pyx_v_board_view.strides[2]) ))) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":107
+      /* "fights/envs/puoribor_cython.pyx":107
  *             raise ValueError("wall already placed")
  *         elif board_view[4, x, y]:
  *             raise ValueError("cannot create intersecting walls")             # <<<<<<<<<<<<<<
@@ -4179,7 +4179,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 107, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":106
+      /* "fights/envs/puoribor_cython.pyx":106
  *         elif board_view[3, x, y] or board_view[3, x, y+1]:
  *             raise ValueError("wall already placed")
  *         elif board_view[4, x, y]:             # <<<<<<<<<<<<<<
@@ -4188,7 +4188,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":108
+    /* "fights/envs/puoribor_cython.pyx":108
  *         elif board_view[4, x, y]:
  *             raise ValueError("cannot create intersecting walls")
  *         board_view[3, x, y] = 1 + agent_id             # <<<<<<<<<<<<<<
@@ -4200,7 +4200,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_13 = __pyx_v_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_15 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_13 * __pyx_v_board_view.strides[2]) )) = (1 + __pyx_v_agent_id);
 
-    /* "fights/envs/cythonfn.pyx":109
+    /* "fights/envs/puoribor_cython.pyx":109
  *             raise ValueError("cannot create intersecting walls")
  *         board_view[3, x, y] = 1 + agent_id
  *         board_view[3, x, y + 1] = 1 + agent_id             # <<<<<<<<<<<<<<
@@ -4212,7 +4212,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_15 = (__pyx_v_y + 1);
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_13 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_15 * __pyx_v_board_view.strides[2]) )) = (1 + __pyx_v_agent_id);
 
-    /* "fights/envs/cythonfn.pyx":110
+    /* "fights/envs/puoribor_cython.pyx":110
  *         board_view[3, x, y] = 1 + agent_id
  *         board_view[3, x, y + 1] = 1 + agent_id
  *         walls_remaining_view[agent_id] -= 1             # <<<<<<<<<<<<<<
@@ -4222,7 +4222,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_15 = __pyx_v_agent_id;
     *((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_15 * __pyx_v_walls_remaining_view.strides[0]) )) -= 1;
 
-    /* "fights/envs/cythonfn.pyx":111
+    /* "fights/envs/puoribor_cython.pyx":111
  *         board_view[3, x, y + 1] = 1 + agent_id
  *         walls_remaining_view[agent_id] -= 1
  *         board_view[5, x, y] = 1             # <<<<<<<<<<<<<<
@@ -4234,7 +4234,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_13 = __pyx_v_y;
     *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_15 * __pyx_v_board_view.strides[0]) ) + __pyx_t_14 * __pyx_v_board_view.strides[1]) ) + __pyx_t_13 * __pyx_v_board_view.strides[2]) )) = 1;
 
-    /* "fights/envs/cythonfn.pyx":97
+    /* "fights/envs/puoribor_cython.pyx":97
  *         board_view[4, x, y] = 1
  * 
  *     elif action_type == 2:  # Place wall vertically             # <<<<<<<<<<<<<<
@@ -4244,7 +4244,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     break;
     case 3:
 
-    /* "fights/envs/cythonfn.pyx":114
+    /* "fights/envs/puoribor_cython.pyx":114
  * 
  *     elif action_type == 3:  # Rotate section
  *         if not _check_in_range(x, y, bottom_right=board_size-3):             # <<<<<<<<<<<<<<
@@ -4253,11 +4253,11 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     __pyx_t_7.__pyx_n = 1;
     __pyx_t_7.bottom_right = (__pyx_v_board_size - 3);
-    __pyx_t_11 = __pyx_f_6fights_4envs_8cythonfn__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_7); 
+    __pyx_t_11 = __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_7); 
     __pyx_t_9 = ((!(__pyx_t_11 != 0)) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":115
+      /* "fights/envs/puoribor_cython.pyx":115
  *     elif action_type == 3:  # Rotate section
  *         if not _check_in_range(x, y, bottom_right=board_size-3):
  *             raise ValueError("rotation region out of board")             # <<<<<<<<<<<<<<
@@ -4270,7 +4270,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 115, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":114
+      /* "fights/envs/puoribor_cython.pyx":114
  * 
  *     elif action_type == 3:  # Rotate section
  *         if not _check_in_range(x, y, bottom_right=board_size-3):             # <<<<<<<<<<<<<<
@@ -4279,7 +4279,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":116
+    /* "fights/envs/puoribor_cython.pyx":116
  *         if not _check_in_range(x, y, bottom_right=board_size-3):
  *             raise ValueError("rotation region out of board")
  *         elif walls_remaining_view[agent_id] < 2:             # <<<<<<<<<<<<<<
@@ -4290,7 +4290,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     __pyx_t_9 = (((*((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_13 * __pyx_v_walls_remaining_view.strides[0]) ))) < 2) != 0);
     if (unlikely(__pyx_t_9)) {
 
-      /* "fights/envs/cythonfn.pyx":117
+      /* "fights/envs/puoribor_cython.pyx":117
  *             raise ValueError("rotation region out of board")
  *         elif walls_remaining_view[agent_id] < 2:
  *             raise ValueError(f"less than two walls left for agent {agent_id}")             # <<<<<<<<<<<<<<
@@ -4309,7 +4309,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __PYX_ERR(0, 117, __pyx_L1_error)
 
-      /* "fights/envs/cythonfn.pyx":116
+      /* "fights/envs/puoribor_cython.pyx":116
  *         if not _check_in_range(x, y, bottom_right=board_size-3):
  *             raise ValueError("rotation region out of board")
  *         elif walls_remaining_view[agent_id] < 2:             # <<<<<<<<<<<<<<
@@ -4318,16 +4318,16 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":119
+    /* "fights/envs/puoribor_cython.pyx":119
  *             raise ValueError(f"less than two walls left for agent {agent_id}")
  * 
  *         board_rotation(board, board_view, walls_remaining_view, agent_id, board_size, x, y)             # <<<<<<<<<<<<<<
  * 
  *     else:
  */
-    __pyx_f_6fights_4envs_8cythonfn_board_rotation(__pyx_v_board, __pyx_v_board_view, __pyx_v_walls_remaining_view, __pyx_v_agent_id, __pyx_v_board_size, __pyx_v_x, __pyx_v_y);
+    __pyx_f_6fights_4envs_15puoribor_cython_board_rotation(__pyx_v_board, __pyx_v_board_view, __pyx_v_walls_remaining_view, __pyx_v_agent_id, __pyx_v_board_size, __pyx_v_x, __pyx_v_y);
 
-    /* "fights/envs/cythonfn.pyx":113
+    /* "fights/envs/puoribor_cython.pyx":113
  *         board_view[5, x, y] = 1
  * 
  *     elif action_type == 3:  # Rotate section             # <<<<<<<<<<<<<<
@@ -4337,7 +4337,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     break;
     default:
 
-    /* "fights/envs/cythonfn.pyx":122
+    /* "fights/envs/puoribor_cython.pyx":122
  * 
  *     else:
  *         raise ValueError(f"invalid action_type: {action_type}")             # <<<<<<<<<<<<<<
@@ -4358,7 +4358,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
     break;
   }
 
-  /* "fights/envs/cythonfn.pyx":124
+  /* "fights/envs/puoribor_cython.pyx":124
  *         raise ValueError(f"invalid action_type: {action_type}")
  * 
  *     if action_type > 0:             # <<<<<<<<<<<<<<
@@ -4368,25 +4368,25 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_t_9 = ((__pyx_v_action_type > 0) != 0);
   if (__pyx_t_9) {
 
-    /* "fights/envs/cythonfn.pyx":126
+    /* "fights/envs/puoribor_cython.pyx":126
  *     if action_type > 0:
  * 
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):             # <<<<<<<<<<<<<<
  *             if action_type == 3:
  *                 raise ValueError("cannot rotate to block all paths")
  */
-    __pyx_t_12 = ((!(__pyx_f_6fights_4envs_8cythonfn__check_path_exists(__pyx_v_board_view, 0, __pyx_v_board_size) != 0)) != 0);
+    __pyx_t_12 = ((!(__pyx_f_6fights_4envs_15puoribor_cython__check_path_exists(__pyx_v_board_view, 0, __pyx_v_board_size) != 0)) != 0);
     if (!__pyx_t_12) {
     } else {
       __pyx_t_9 = __pyx_t_12;
       goto __pyx_L37_bool_binop_done;
     }
-    __pyx_t_12 = ((!(__pyx_f_6fights_4envs_8cythonfn__check_path_exists(__pyx_v_board_view, 1, __pyx_v_board_size) != 0)) != 0);
+    __pyx_t_12 = ((!(__pyx_f_6fights_4envs_15puoribor_cython__check_path_exists(__pyx_v_board_view, 1, __pyx_v_board_size) != 0)) != 0);
     __pyx_t_9 = __pyx_t_12;
     __pyx_L37_bool_binop_done:;
     if (__pyx_t_9) {
 
-      /* "fights/envs/cythonfn.pyx":127
+      /* "fights/envs/puoribor_cython.pyx":127
  * 
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):
  *             if action_type == 3:             # <<<<<<<<<<<<<<
@@ -4396,7 +4396,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
       __pyx_t_9 = ((__pyx_v_action_type == 3) != 0);
       if (unlikely(__pyx_t_9)) {
 
-        /* "fights/envs/cythonfn.pyx":128
+        /* "fights/envs/puoribor_cython.pyx":128
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):
  *             if action_type == 3:
  *                 raise ValueError("cannot rotate to block all paths")             # <<<<<<<<<<<<<<
@@ -4409,7 +4409,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __PYX_ERR(0, 128, __pyx_L1_error)
 
-        /* "fights/envs/cythonfn.pyx":127
+        /* "fights/envs/puoribor_cython.pyx":127
  * 
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):
  *             if action_type == 3:             # <<<<<<<<<<<<<<
@@ -4418,7 +4418,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":130
+      /* "fights/envs/puoribor_cython.pyx":130
  *                 raise ValueError("cannot rotate to block all paths")
  *             else:
  *                 raise ValueError("cannot place wall blocking all paths")             # <<<<<<<<<<<<<<
@@ -4433,7 +4433,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
         __PYX_ERR(0, 130, __pyx_L1_error)
       }
 
-      /* "fights/envs/cythonfn.pyx":126
+      /* "fights/envs/puoribor_cython.pyx":126
  *     if action_type > 0:
  * 
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):             # <<<<<<<<<<<<<<
@@ -4442,7 +4442,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":124
+    /* "fights/envs/puoribor_cython.pyx":124
  *         raise ValueError(f"invalid action_type: {action_type}")
  * 
  *     if action_type > 0:             # <<<<<<<<<<<<<<
@@ -4451,7 +4451,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":132
+  /* "fights/envs/puoribor_cython.pyx":132
  *                 raise ValueError("cannot place wall blocking all paths")
  * 
  *     return (board, walls_remaining, _check_wins(board_view, board_size))             # <<<<<<<<<<<<<<
@@ -4459,7 +4459,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  * cdef void board_rotation(
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_f_6fights_4envs_8cythonfn__check_wins(__pyx_v_board_view, __pyx_v_board_size)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_f_6fights_4envs_15puoribor_cython__check_wins(__pyx_v_board_view, __pyx_v_board_size)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -4476,7 +4476,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":6
+  /* "fights/envs/puoribor_cython.pyx":6
  * cimport numpy as np
  * 
  * def fast_step(             # <<<<<<<<<<<<<<
@@ -4491,7 +4491,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __Pyx_AddTraceback("fights.envs.cythonfn.fast_step", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fights.envs.puoribor_cython.fast_step", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_board);
@@ -4503,7 +4503,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":134
+/* "fights/envs/puoribor_cython.pyx":134
  *     return (board, walls_remaining, _check_wins(board_view, board_size))
  * 
  * cdef void board_rotation(             # <<<<<<<<<<<<<<
@@ -4511,7 +4511,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_fast_step(CYTHON_UNUSED PyObje
  *     int [:,:,:] board_view,
  */
 
-static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_board, __Pyx_memviewslice __pyx_v_board_view, __Pyx_memviewslice __pyx_v_walls_remaining_view, int __pyx_v_agent_id, int __pyx_v_board_size, int __pyx_v_x, int __pyx_v_y) {
+static void __pyx_f_6fights_4envs_15puoribor_cython_board_rotation(PyObject *__pyx_v_board, __Pyx_memviewslice __pyx_v_board_view, __Pyx_memviewslice __pyx_v_walls_remaining_view, int __pyx_v_agent_id, int __pyx_v_board_size, int __pyx_v_x, int __pyx_v_y) {
   int __pyx_v_px;
   int __pyx_v_py;
   PyObject *__pyx_v_padded_horizontal = NULL;
@@ -4542,7 +4542,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("board_rotation", 0);
 
-  /* "fights/envs/cythonfn.pyx":145
+  /* "fights/envs/puoribor_cython.pyx":145
  *     cdef int px, py
  * 
  *     padded_horizontal = np.pad(board[2], 1, constant_values=0)             # <<<<<<<<<<<<<<
@@ -4575,7 +4575,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_padded_horizontal = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":146
+  /* "fights/envs/puoribor_cython.pyx":146
  * 
  *     padded_horizontal = np.pad(board[2], 1, constant_values=0)
  *     padded_vertical = np.pad(board[3], 1, constant_values=0)             # <<<<<<<<<<<<<<
@@ -4608,7 +4608,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_padded_vertical = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "fights/envs/cythonfn.pyx":147
+  /* "fights/envs/puoribor_cython.pyx":147
  *     padded_horizontal = np.pad(board[2], 1, constant_values=0)
  *     padded_vertical = np.pad(board[3], 1, constant_values=0)
  *     padded_horizontal_midpoints = np.pad(board[4], 1, constant_values=0)             # <<<<<<<<<<<<<<
@@ -4641,7 +4641,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_padded_horizontal_midpoints = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":148
+  /* "fights/envs/puoribor_cython.pyx":148
  *     padded_vertical = np.pad(board[3], 1, constant_values=0)
  *     padded_horizontal_midpoints = np.pad(board[4], 1, constant_values=0)
  *     padded_vertical_midpoints = np.pad(board[5], 1, constant_values=0)             # <<<<<<<<<<<<<<
@@ -4674,7 +4674,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_padded_vertical_midpoints = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":149
+  /* "fights/envs/puoribor_cython.pyx":149
  *     padded_horizontal_midpoints = np.pad(board[4], 1, constant_values=0)
  *     padded_vertical_midpoints = np.pad(board[5], 1, constant_values=0)
  *     px, py = x + 1, y + 1             # <<<<<<<<<<<<<<
@@ -4686,7 +4686,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_px = __pyx_t_5;
   __pyx_v_py = __pyx_t_6;
 
-  /* "fights/envs/cythonfn.pyx":150
+  /* "fights/envs/puoribor_cython.pyx":150
  *     padded_vertical_midpoints = np.pad(board[5], 1, constant_values=0)
  *     px, py = x + 1, y + 1
  *     horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])             # <<<<<<<<<<<<<<
@@ -4744,7 +4744,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_horizontal_region = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":151
+  /* "fights/envs/puoribor_cython.pyx":151
  *     px, py = x + 1, y + 1
  *     horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
  *     vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])             # <<<<<<<<<<<<<<
@@ -4802,7 +4802,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_vertical_region = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":152
+  /* "fights/envs/puoribor_cython.pyx":152
  *     horizontal_region = np.copy(padded_horizontal[px : px + 4, py - 1 : py + 4])
  *     vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
  *     padded_horizontal_midpoints[px - 1, py - 1 : py + 4] = 0             # <<<<<<<<<<<<<<
@@ -4830,7 +4830,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_horizontal_midpoints, __pyx_t_2, __pyx_int_0) < 0)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fights/envs/cythonfn.pyx":153
+  /* "fights/envs/puoribor_cython.pyx":153
  *     vertical_region = np.copy(padded_vertical[px - 1 : px + 4, py : py + 4])
  *     padded_horizontal_midpoints[px - 1, py - 1 : py + 4] = 0
  *     padded_horizontal_midpoints[px + 3, py - 1 : py + 4] = 0             # <<<<<<<<<<<<<<
@@ -4858,7 +4858,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_horizontal_midpoints, __pyx_t_4, __pyx_int_0) < 0)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":154
+  /* "fights/envs/puoribor_cython.pyx":154
  *     padded_horizontal_midpoints[px - 1, py - 1 : py + 4] = 0
  *     padded_horizontal_midpoints[px + 3, py - 1 : py + 4] = 0
  *     padded_vertical_midpoints[px - 1 : px + 4, py - 1] = 0             # <<<<<<<<<<<<<<
@@ -4886,7 +4886,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_vertical_midpoints, __pyx_t_4, __pyx_int_0) < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":155
+  /* "fights/envs/puoribor_cython.pyx":155
  *     padded_horizontal_midpoints[px + 3, py - 1 : py + 4] = 0
  *     padded_vertical_midpoints[px - 1 : px + 4, py - 1] = 0
  *     padded_vertical_midpoints[px - 1 : px + 4, py + 3] = 0             # <<<<<<<<<<<<<<
@@ -4914,7 +4914,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_vertical_midpoints, __pyx_t_4, __pyx_int_0) < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":156
+  /* "fights/envs/puoribor_cython.pyx":156
  *     padded_vertical_midpoints[px - 1 : px + 4, py - 1] = 0
  *     padded_vertical_midpoints[px - 1 : px + 4, py + 3] = 0
  *     horizontal_region_midpoints = np.copy(             # <<<<<<<<<<<<<<
@@ -4927,7 +4927,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "fights/envs/cythonfn.pyx":157
+  /* "fights/envs/puoribor_cython.pyx":157
  *     padded_vertical_midpoints[px - 1 : px + 4, py + 3] = 0
  *     horizontal_region_midpoints = np.copy(
  *         padded_horizontal_midpoints[px : px + 4, py - 1 : py + 4]             # <<<<<<<<<<<<<<
@@ -4980,7 +4980,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_horizontal_region_midpoints = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":159
+  /* "fights/envs/puoribor_cython.pyx":159
  *         padded_horizontal_midpoints[px : px + 4, py - 1 : py + 4]
  *     )
  *     vertical_region_midpoints = np.copy(             # <<<<<<<<<<<<<<
@@ -4993,7 +4993,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fights/envs/cythonfn.pyx":160
+  /* "fights/envs/puoribor_cython.pyx":160
  *     )
  *     vertical_region_midpoints = np.copy(
  *         padded_vertical_midpoints[px - 1 : px + 4, py : py + 4]             # <<<<<<<<<<<<<<
@@ -5046,7 +5046,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_vertical_region_midpoints = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":162
+  /* "fights/envs/puoribor_cython.pyx":162
  *         padded_vertical_midpoints[px - 1 : px + 4, py : py + 4]
  *     )
  *     horizontal_region_new = np.rot90(vertical_region)             # <<<<<<<<<<<<<<
@@ -5076,7 +5076,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_horizontal_region_new = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":163
+  /* "fights/envs/puoribor_cython.pyx":163
  *     )
  *     horizontal_region_new = np.rot90(vertical_region)
  *     vertical_region_new = np.rot90(horizontal_region)             # <<<<<<<<<<<<<<
@@ -5106,7 +5106,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_vertical_region_new = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":164
+  /* "fights/envs/puoribor_cython.pyx":164
  *     horizontal_region_new = np.rot90(vertical_region)
  *     vertical_region_new = np.rot90(horizontal_region)
  *     horizontal_region_midpoints_new = np.rot90(vertical_region_midpoints)             # <<<<<<<<<<<<<<
@@ -5136,7 +5136,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_horizontal_region_midpoints_new = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":165
+  /* "fights/envs/puoribor_cython.pyx":165
  *     vertical_region_new = np.rot90(horizontal_region)
  *     horizontal_region_midpoints_new = np.rot90(vertical_region_midpoints)
  *     vertical_region_midpoints_new = np.rot90(horizontal_region_midpoints)             # <<<<<<<<<<<<<<
@@ -5166,7 +5166,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_v_vertical_region_midpoints_new = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":166
+  /* "fights/envs/puoribor_cython.pyx":166
  *     horizontal_region_midpoints_new = np.rot90(vertical_region_midpoints)
  *     vertical_region_midpoints_new = np.rot90(horizontal_region_midpoints)
  *     padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new             # <<<<<<<<<<<<<<
@@ -5200,7 +5200,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_horizontal, __pyx_t_4, __pyx_v_horizontal_region_new) < 0)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":167
+  /* "fights/envs/puoribor_cython.pyx":167
  *     vertical_region_midpoints_new = np.rot90(horizontal_region_midpoints)
  *     padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
  *     padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new             # <<<<<<<<<<<<<<
@@ -5234,7 +5234,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_vertical, __pyx_t_4, __pyx_v_vertical_region_new) < 0)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":169
+  /* "fights/envs/puoribor_cython.pyx":169
  *     padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
  *     padded_horizontal_midpoints[
  *         px - 1 : px + 3, py - 1 : py + 4             # <<<<<<<<<<<<<<
@@ -5246,7 +5246,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_px + 3)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "fights/envs/cythonfn.pyx":168
+  /* "fights/envs/puoribor_cython.pyx":168
  *     padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
  *     padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
  *     padded_horizontal_midpoints[             # <<<<<<<<<<<<<<
@@ -5258,7 +5258,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":169
+  /* "fights/envs/puoribor_cython.pyx":169
  *     padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
  *     padded_horizontal_midpoints[
  *         px - 1 : px + 3, py - 1 : py + 4             # <<<<<<<<<<<<<<
@@ -5270,7 +5270,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_py + 4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "fights/envs/cythonfn.pyx":168
+  /* "fights/envs/puoribor_cython.pyx":168
  *     padded_horizontal[px : px + 4, py - 1 : py + 4] = horizontal_region_new
  *     padded_vertical[px - 1 : px + 4, py : py + 4] = vertical_region_new
  *     padded_horizontal_midpoints[             # <<<<<<<<<<<<<<
@@ -5292,7 +5292,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_horizontal_midpoints, __pyx_t_4, __pyx_v_horizontal_region_midpoints_new) < 0)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":172
+  /* "fights/envs/puoribor_cython.pyx":172
  *     ] = horizontal_region_midpoints_new
  *     padded_vertical_midpoints[
  *         px - 1 : px + 4, py : py + 4             # <<<<<<<<<<<<<<
@@ -5304,7 +5304,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_t_2 = __Pyx_PyInt_From_long((__pyx_v_px + 4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "fights/envs/cythonfn.pyx":171
+  /* "fights/envs/puoribor_cython.pyx":171
  *         px - 1 : px + 3, py - 1 : py + 4
  *     ] = horizontal_region_midpoints_new
  *     padded_vertical_midpoints[             # <<<<<<<<<<<<<<
@@ -5316,7 +5316,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fights/envs/cythonfn.pyx":172
+  /* "fights/envs/puoribor_cython.pyx":172
  *     ] = horizontal_region_midpoints_new
  *     padded_vertical_midpoints[
  *         px - 1 : px + 4, py : py + 4             # <<<<<<<<<<<<<<
@@ -5328,7 +5328,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_py + 4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "fights/envs/cythonfn.pyx":171
+  /* "fights/envs/puoribor_cython.pyx":171
  *         px - 1 : px + 3, py - 1 : py + 4
  *     ] = horizontal_region_midpoints_new
  *     padded_vertical_midpoints[             # <<<<<<<<<<<<<<
@@ -5350,7 +5350,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(PyObject_SetItem(__pyx_v_padded_vertical_midpoints, __pyx_t_4, __pyx_v_vertical_region_midpoints_new) < 0)) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":174
+  /* "fights/envs/puoribor_cython.pyx":174
  *         px - 1 : px + 4, py : py + 4
  *     ] = vertical_region_midpoints_new
  *     board[2] = padded_horizontal[1:-1, 1:-1]             # <<<<<<<<<<<<<<
@@ -5362,7 +5362,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(__Pyx_SetItemInt(__pyx_v_board, 2, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 0) < 0)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":175
+  /* "fights/envs/puoribor_cython.pyx":175
  *     ] = vertical_region_midpoints_new
  *     board[2] = padded_horizontal[1:-1, 1:-1]
  *     board[3] = padded_vertical[1:-1, 1:-1]             # <<<<<<<<<<<<<<
@@ -5374,7 +5374,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(__Pyx_SetItemInt(__pyx_v_board, 3, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 0) < 0)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":176
+  /* "fights/envs/puoribor_cython.pyx":176
  *     board[2] = padded_horizontal[1:-1, 1:-1]
  *     board[3] = padded_vertical[1:-1, 1:-1]
  *     board[4] = padded_horizontal_midpoints[1:-1, 1:-1]             # <<<<<<<<<<<<<<
@@ -5386,7 +5386,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(__Pyx_SetItemInt(__pyx_v_board, 4, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 0) < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":177
+  /* "fights/envs/puoribor_cython.pyx":177
  *     board[3] = padded_vertical[1:-1, 1:-1]
  *     board[4] = padded_horizontal_midpoints[1:-1, 1:-1]
  *     board[5] = padded_vertical_midpoints[1:-1, 1:-1]             # <<<<<<<<<<<<<<
@@ -5398,7 +5398,7 @@ static void __pyx_f_6fights_4envs_8cythonfn_board_rotation(PyObject *__pyx_v_boa
   if (unlikely(__Pyx_SetItemInt(__pyx_v_board, 5, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 0) < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "fights/envs/cythonfn.pyx":178
+  /* "fights/envs/puoribor_cython.pyx":178
  *     board[4] = padded_horizontal_midpoints[1:-1, 1:-1]
  *     board[5] = padded_vertical_midpoints[1:-1, 1:-1]
  *     board_view[2, :, board_size-1] = 0             # <<<<<<<<<<<<<<
@@ -5442,7 +5442,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[1];
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":179
+  /* "fights/envs/puoribor_cython.pyx":179
  *     board[5] = padded_vertical_midpoints[1:-1, 1:-1]
  *     board_view[2, :, board_size-1] = 0
  *     board_view[3, board_size-1, :] = 0             # <<<<<<<<<<<<<<
@@ -5486,7 +5486,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":180
+  /* "fights/envs/puoribor_cython.pyx":180
  *     board_view[2, :, board_size-1] = 0
  *     board_view[3, board_size-1, :] = 0
  *     board_view[4, :, board_size-1] = 0             # <<<<<<<<<<<<<<
@@ -5530,7 +5530,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[1];
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":181
+  /* "fights/envs/puoribor_cython.pyx":181
  *     board_view[3, board_size-1, :] = 0
  *     board_view[4, :, board_size-1] = 0
  *     board_view[5, board_size-1, :] = 0             # <<<<<<<<<<<<<<
@@ -5574,7 +5574,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":183
+  /* "fights/envs/puoribor_cython.pyx":183
  *     board_view[5, board_size-1, :] = 0
  * 
  *     walls_remaining_view[agent_id] -= 2             # <<<<<<<<<<<<<<
@@ -5584,7 +5584,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
   __pyx_t_10 = __pyx_v_agent_id;
   *((int *) ( /* dim=0 */ (__pyx_v_walls_remaining_view.data + __pyx_t_10 * __pyx_v_walls_remaining_view.strides[0]) )) -= 2;
 
-  /* "fights/envs/cythonfn.pyx":185
+  /* "fights/envs/puoribor_cython.pyx":185
  *     walls_remaining_view[agent_id] -= 2
  * 
  *     return             # <<<<<<<<<<<<<<
@@ -5593,7 +5593,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
  */
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":134
+  /* "fights/envs/puoribor_cython.pyx":134
  *     return (board, walls_remaining, _check_wins(board_view, board_size))
  * 
  * cdef void board_rotation(             # <<<<<<<<<<<<<<
@@ -5610,7 +5610,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
-  __Pyx_WriteUnraisable("fights.envs.cythonfn.board_rotation", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("fights.envs.puoribor_cython.board_rotation", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_padded_horizontal);
   __Pyx_XDECREF(__pyx_v_padded_vertical);
@@ -5627,7 +5627,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
   __Pyx_RefNannyFinishContext();
 }
 
-/* "fights/envs/cythonfn.pyx":187
+/* "fights/envs/puoribor_cython.pyx":187
  *     return
  * 
  * cdef int _is_moving_legal(int [:,:,:] board_view, int x, int y, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -5635,7 +5635,7 @@ __pyx_t_9.strides[0] = __pyx_v_board_view.strides[2];
  *     cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
  */
 
-static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_x, int __pyx_v_y, int __pyx_v_agent_id, int __pyx_v_board_size) {
+static int __pyx_f_6fights_4envs_15puoribor_cython__is_moving_legal(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_x, int __pyx_v_y, int __pyx_v_agent_id, int __pyx_v_board_size) {
   int __pyx_v_curpos_x;
   int __pyx_v_curpos_y;
   int __pyx_v_newpos_x;
@@ -5650,7 +5650,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range __pyx_t_2;
+  struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range __pyx_t_2;
   int __pyx_t_3;
   __pyx_ctuple_int__and_int __pyx_t_4;
   int __pyx_t_5;
@@ -5661,7 +5661,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_is_moving_legal", 0);
 
-  /* "fights/envs/cythonfn.pyx":192
+  /* "fights/envs/puoribor_cython.pyx":192
  *     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
  * 
  *     if not _check_in_range(x, y, board_size):             # <<<<<<<<<<<<<<
@@ -5670,11 +5670,11 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.bottom_right = __pyx_v_board_size;
-  __pyx_t_1 = __pyx_f_6fights_4envs_8cythonfn__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_2); 
+  __pyx_t_1 = __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(__pyx_v_x, __pyx_v_y, &__pyx_t_2); 
   __pyx_t_3 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":193
+    /* "fights/envs/puoribor_cython.pyx":193
  * 
  *     if not _check_in_range(x, y, board_size):
  *         return 0             # <<<<<<<<<<<<<<
@@ -5684,7 +5684,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":192
+    /* "fights/envs/puoribor_cython.pyx":192
  *     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
  * 
  *     if not _check_in_range(x, y, board_size):             # <<<<<<<<<<<<<<
@@ -5693,33 +5693,33 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":195
+  /* "fights/envs/puoribor_cython.pyx":195
  *         return 0
  * 
  *     (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)             # <<<<<<<<<<<<<<
  *     (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *     newpos_x = x
  */
-  __pyx_t_4 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
+  __pyx_t_4 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
   __pyx_t_1 = __pyx_t_4.f0;
   __pyx_t_5 = __pyx_t_4.f1;
   __pyx_v_curpos_x = __pyx_t_1;
   __pyx_v_curpos_y = __pyx_t_5;
 
-  /* "fights/envs/cythonfn.pyx":196
+  /* "fights/envs/puoribor_cython.pyx":196
  * 
  *     (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)
  *     (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)             # <<<<<<<<<<<<<<
  *     newpos_x = x
  *     newpos_y = y
  */
-  __pyx_t_4 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, (1 - __pyx_v_agent_id), __pyx_v_board_size);
+  __pyx_t_4 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, (1 - __pyx_v_agent_id), __pyx_v_board_size);
   __pyx_t_5 = __pyx_t_4.f0;
   __pyx_t_1 = __pyx_t_4.f1;
   __pyx_v_opppos_x = __pyx_t_5;
   __pyx_v_opppos_y = __pyx_t_1;
 
-  /* "fights/envs/cythonfn.pyx":197
+  /* "fights/envs/puoribor_cython.pyx":197
  *     (curpos_x, curpos_y) = _agent_pos(board_view, agent_id, board_size)
  *     (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *     newpos_x = x             # <<<<<<<<<<<<<<
@@ -5728,7 +5728,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   __pyx_v_newpos_x = __pyx_v_x;
 
-  /* "fights/envs/cythonfn.pyx":198
+  /* "fights/envs/puoribor_cython.pyx":198
  *     (opppos_x, opppos_y) = _agent_pos(board_view, 1-agent_id, board_size)
  *     newpos_x = x
  *     newpos_y = y             # <<<<<<<<<<<<<<
@@ -5737,7 +5737,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   __pyx_v_newpos_y = __pyx_v_y;
 
-  /* "fights/envs/cythonfn.pyx":200
+  /* "fights/envs/puoribor_cython.pyx":200
  *     newpos_y = y
  * 
  *     if newpos_x == opppos_x and newpos_y == opppos_y:             # <<<<<<<<<<<<<<
@@ -5755,7 +5755,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":201
+    /* "fights/envs/puoribor_cython.pyx":201
  * 
  *     if newpos_x == opppos_x and newpos_y == opppos_y:
  *         return 0             # <<<<<<<<<<<<<<
@@ -5765,7 +5765,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":200
+    /* "fights/envs/puoribor_cython.pyx":200
  *     newpos_y = y
  * 
  *     if newpos_x == opppos_x and newpos_y == opppos_y:             # <<<<<<<<<<<<<<
@@ -5774,7 +5774,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":203
+  /* "fights/envs/puoribor_cython.pyx":203
  *         return 0
  * 
  *     delpos_x = newpos_x - curpos_x             # <<<<<<<<<<<<<<
@@ -5783,7 +5783,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   __pyx_v_delpos_x = (__pyx_v_newpos_x - __pyx_v_curpos_x);
 
-  /* "fights/envs/cythonfn.pyx":204
+  /* "fights/envs/puoribor_cython.pyx":204
  * 
  *     delpos_x = newpos_x - curpos_x
  *     delpos_y = newpos_y - curpos_y             # <<<<<<<<<<<<<<
@@ -5792,7 +5792,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   __pyx_v_delpos_y = (__pyx_v_newpos_y - __pyx_v_curpos_y);
 
-  /* "fights/envs/cythonfn.pyx":205
+  /* "fights/envs/puoribor_cython.pyx":205
  *     delpos_x = newpos_x - curpos_x
  *     delpos_y = newpos_y - curpos_y
  *     taxicab_dist = abs(delpos_x) + abs(delpos_y)             # <<<<<<<<<<<<<<
@@ -5803,7 +5803,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   __pyx_t_5 = abs(__pyx_v_delpos_y); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 205, __pyx_L1_error)
   __pyx_v_taxicab_dist = (__pyx_t_1 + __pyx_t_5);
 
-  /* "fights/envs/cythonfn.pyx":207
+  /* "fights/envs/puoribor_cython.pyx":207
  *     taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *     if (
  *         taxicab_dist == 2             # <<<<<<<<<<<<<<
@@ -5817,7 +5817,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     goto __pyx_L8_bool_binop_done;
   }
 
-  /* "fights/envs/cythonfn.pyx":208
+  /* "fights/envs/puoribor_cython.pyx":208
  *     if (
  *         taxicab_dist == 2
  *         and (delpos_x == 0 or delpos_y == 0)             # <<<<<<<<<<<<<<
@@ -5837,7 +5837,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   }
   __pyx_L10_next_and:;
 
-  /* "fights/envs/cythonfn.pyx":209
+  /* "fights/envs/puoribor_cython.pyx":209
  *         taxicab_dist == 2
  *         and (delpos_x == 0 or delpos_y == 0)
  *         and not (curpos_x + delpos_x / 2 == opppos_x and curpos_y + delpos_y / 2 == opppos_y)             # <<<<<<<<<<<<<<
@@ -5857,7 +5857,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   __pyx_t_3 = __pyx_t_7;
   __pyx_L8_bool_binop_done:;
 
-  /* "fights/envs/cythonfn.pyx":206
+  /* "fights/envs/puoribor_cython.pyx":206
  *     delpos_y = newpos_y - curpos_y
  *     taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *     if (             # <<<<<<<<<<<<<<
@@ -5866,7 +5866,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":211
+    /* "fights/envs/puoribor_cython.pyx":211
  *         and not (curpos_x + delpos_x / 2 == opppos_x and curpos_y + delpos_y / 2 == opppos_y)
  *     ):
  *         return 0             # <<<<<<<<<<<<<<
@@ -5876,7 +5876,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":206
+    /* "fights/envs/puoribor_cython.pyx":206
  *     delpos_y = newpos_y - curpos_y
  *     taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *     if (             # <<<<<<<<<<<<<<
@@ -5885,7 +5885,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":213
+  /* "fights/envs/puoribor_cython.pyx":213
  *         return 0
  * 
  *     if delpos_x and delpos_y:  # If moving diagonally             # <<<<<<<<<<<<<<
@@ -5903,7 +5903,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   __pyx_L15_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":214
+    /* "fights/envs/puoribor_cython.pyx":214
  * 
  *     if delpos_x and delpos_y:  # If moving diagonally
  *         if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -5923,7 +5923,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     }
     __pyx_L19_next_and:;
 
-    /* "fights/envs/cythonfn.pyx":215
+    /* "fights/envs/puoribor_cython.pyx":215
  *     if delpos_x and delpos_y:  # If moving diagonally
  *         if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (
  *             curpos_x != opppos_x or curpos_y + delpos_y != opppos_y             # <<<<<<<<<<<<<<
@@ -5940,7 +5940,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     __pyx_t_3 = __pyx_t_7;
     __pyx_L18_bool_binop_done:;
 
-    /* "fights/envs/cythonfn.pyx":214
+    /* "fights/envs/puoribor_cython.pyx":214
  * 
  *     if delpos_x and delpos_y:  # If moving diagonally
  *         if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -5949,7 +5949,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     if (__pyx_t_3) {
 
-      /* "fights/envs/cythonfn.pyx":219
+      /* "fights/envs/puoribor_cython.pyx":219
  *             # Only diagonal jumps are permitted.
  *             # Agents cannot simply move in diagonal direction.
  *             return 0             # <<<<<<<<<<<<<<
@@ -5959,7 +5959,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
       __pyx_r = 0;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":214
+      /* "fights/envs/puoribor_cython.pyx":214
  * 
  *     if delpos_x and delpos_y:  # If moving diagonally
  *         if (curpos_x + delpos_x != opppos_x or curpos_y != opppos_y) and (             # <<<<<<<<<<<<<<
@@ -5968,17 +5968,17 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":220
+    /* "fights/envs/puoribor_cython.pyx":220
  *             # Agents cannot simply move in diagonal direction.
  *             return 0
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):             # <<<<<<<<<<<<<<
  *             return 0
  * 
  */
-    __pyx_t_3 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_opppos_x, __pyx_v_opppos_y) != 0);
+    __pyx_t_3 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_opppos_x, __pyx_v_opppos_y) != 0);
     if (__pyx_t_3) {
 
-      /* "fights/envs/cythonfn.pyx":221
+      /* "fights/envs/puoribor_cython.pyx":221
  *             return 0
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):
  *             return 0             # <<<<<<<<<<<<<<
@@ -5988,7 +5988,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
       __pyx_r = 0;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":220
+      /* "fights/envs/puoribor_cython.pyx":220
  *             # Agents cannot simply move in diagonal direction.
  *             return 0
  *         elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):             # <<<<<<<<<<<<<<
@@ -5997,7 +5997,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":223
+    /* "fights/envs/puoribor_cython.pyx":223
  *             return 0
  * 
  *         original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)             # <<<<<<<<<<<<<<
@@ -6006,7 +6006,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     __pyx_v_original_jump_pos_x = (__pyx_v_curpos_x + (2 * (__pyx_v_opppos_x - __pyx_v_curpos_x)));
 
-    /* "fights/envs/cythonfn.pyx":224
+    /* "fights/envs/puoribor_cython.pyx":224
  * 
  *         original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *         original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)             # <<<<<<<<<<<<<<
@@ -6015,7 +6015,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     __pyx_v_original_jump_pos_y = (__pyx_v_curpos_y + (2 * (__pyx_v_opppos_y - __pyx_v_curpos_y)));
 
-    /* "fights/envs/cythonfn.pyx":225
+    /* "fights/envs/puoribor_cython.pyx":225
  *         original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *         original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *         if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -6024,7 +6024,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     __pyx_t_2.__pyx_n = 1;
     __pyx_t_2.bottom_right = __pyx_v_board_size;
-    __pyx_t_5 = __pyx_f_6fights_4envs_8cythonfn__check_in_range(__pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y, &__pyx_t_2); 
+    __pyx_t_5 = __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(__pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y, &__pyx_t_2); 
     __pyx_t_7 = (__pyx_t_5 != 0);
     if (__pyx_t_7) {
     } else {
@@ -6032,18 +6032,18 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
       goto __pyx_L23_bool_binop_done;
     }
 
-    /* "fights/envs/cythonfn.pyx":226
+    /* "fights/envs/puoribor_cython.pyx":226
  *         original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *         if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(
  *             board_view, curpos_x, curpos_y, original_jump_pos_x, original_jump_pos_y             # <<<<<<<<<<<<<<
  *         ):
  *             return 0
  */
-    __pyx_t_7 = ((!(__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y) != 0)) != 0);
+    __pyx_t_7 = ((!(__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_original_jump_pos_x, __pyx_v_original_jump_pos_y) != 0)) != 0);
     __pyx_t_3 = __pyx_t_7;
     __pyx_L23_bool_binop_done:;
 
-    /* "fights/envs/cythonfn.pyx":225
+    /* "fights/envs/puoribor_cython.pyx":225
  *         original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *         original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *         if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -6052,7 +6052,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     if (__pyx_t_3) {
 
-      /* "fights/envs/cythonfn.pyx":228
+      /* "fights/envs/puoribor_cython.pyx":228
  *             board_view, curpos_x, curpos_y, original_jump_pos_x, original_jump_pos_y
  *         ):
  *             return 0             # <<<<<<<<<<<<<<
@@ -6062,7 +6062,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
       __pyx_r = 0;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":225
+      /* "fights/envs/puoribor_cython.pyx":225
  *         original_jump_pos_x = curpos_x + 2 * (opppos_x - curpos_x)
  *         original_jump_pos_y = curpos_y + 2 * (opppos_y - curpos_y)
  *         if _check_in_range(original_jump_pos_x, original_jump_pos_y, board_size) and not _check_wall_blocked(             # <<<<<<<<<<<<<<
@@ -6071,17 +6071,17 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":229
+    /* "fights/envs/puoribor_cython.pyx":229
  *         ):
  *             return 0
  *         elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
  *             return 0
  *     elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):
  */
-    __pyx_t_3 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_opppos_x, __pyx_v_opppos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
+    __pyx_t_3 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_opppos_x, __pyx_v_opppos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
     if (__pyx_t_3) {
 
-      /* "fights/envs/cythonfn.pyx":230
+      /* "fights/envs/puoribor_cython.pyx":230
  *             return 0
  *         elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *             return 0             # <<<<<<<<<<<<<<
@@ -6091,7 +6091,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
       __pyx_r = 0;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":229
+      /* "fights/envs/puoribor_cython.pyx":229
  *         ):
  *             return 0
  *         elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
@@ -6100,7 +6100,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":213
+    /* "fights/envs/puoribor_cython.pyx":213
  *         return 0
  * 
  *     if delpos_x and delpos_y:  # If moving diagonally             # <<<<<<<<<<<<<<
@@ -6110,17 +6110,17 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     goto __pyx_L14;
   }
 
-  /* "fights/envs/cythonfn.pyx":231
+  /* "fights/envs/puoribor_cython.pyx":231
  *         elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *             return 0
  *     elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
  *         return 0
  * 
  */
-  __pyx_t_3 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
+  __pyx_t_3 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_curpos_x, __pyx_v_curpos_y, __pyx_v_newpos_x, __pyx_v_newpos_y) != 0);
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":232
+    /* "fights/envs/puoribor_cython.pyx":232
  *             return 0
  *     elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):
  *         return 0             # <<<<<<<<<<<<<<
@@ -6130,7 +6130,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":231
+    /* "fights/envs/puoribor_cython.pyx":231
  *         elif _check_wall_blocked(board_view, opppos_x, opppos_y, newpos_x, newpos_y):
  *             return 0
  *     elif _check_wall_blocked(board_view, curpos_x, curpos_y, newpos_x, newpos_y):             # <<<<<<<<<<<<<<
@@ -6140,7 +6140,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   }
   __pyx_L14:;
 
-  /* "fights/envs/cythonfn.pyx":234
+  /* "fights/envs/puoribor_cython.pyx":234
  *         return 0
  * 
  *     return 1             # <<<<<<<<<<<<<<
@@ -6150,7 +6150,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":187
+  /* "fights/envs/puoribor_cython.pyx":187
  *     return
  * 
  * cdef int _is_moving_legal(int [:,:,:] board_view, int x, int y, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -6160,14 +6160,14 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_WriteUnraisable("fights.envs.cythonfn._is_moving_legal", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("fights.envs.puoribor_cython._is_moving_legal", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":236
+/* "fights/envs/puoribor_cython.pyx":236
  *     return 1
  * 
  * def legal_actions(state, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -6176,9 +6176,9 @@ static int __pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__Pyx_memviewslice _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fights_4envs_8cythonfn_3legal_actions(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_6fights_4envs_8cythonfn_3legal_actions = {"legal_actions", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6fights_4envs_8cythonfn_3legal_actions, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6fights_4envs_8cythonfn_3legal_actions(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6fights_4envs_15puoribor_cython_3legal_actions(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6fights_4envs_15puoribor_cython_3legal_actions = {"legal_actions", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6fights_4envs_15puoribor_cython_3legal_actions, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6fights_4envs_15puoribor_cython_3legal_actions(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   int __pyx_v_agent_id;
   int __pyx_v_board_size;
@@ -6240,18 +6240,18 @@ static PyObject *__pyx_pw_6fights_4envs_8cythonfn_3legal_actions(PyObject *__pyx
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("legal_actions", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 236, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("fights.envs.cythonfn.legal_actions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fights.envs.puoribor_cython.legal_actions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6fights_4envs_8cythonfn_2legal_actions(__pyx_self, __pyx_v_state, __pyx_v_agent_id, __pyx_v_board_size);
+  __pyx_r = __pyx_pf_6fights_4envs_15puoribor_cython_2legal_actions(__pyx_self, __pyx_v_state, __pyx_v_agent_id, __pyx_v_board_size);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, int __pyx_v_agent_id, int __pyx_v_board_size) {
+static PyObject *__pyx_pf_6fights_4envs_15puoribor_cython_2legal_actions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, int __pyx_v_agent_id, int __pyx_v_board_size) {
   int __pyx_v_dir_id;
   int __pyx_v_action_type;
   int __pyx_v_next_pos_x;
@@ -6309,7 +6309,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("legal_actions", 0);
 
-  /* "fights/envs/cythonfn.pyx":240
+  /* "fights/envs/puoribor_cython.pyx":240
  *     cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
  *     cdef int directions[12][2]
  *     cdef int [:,:,:] board_view = state.board             # <<<<<<<<<<<<<<
@@ -6324,7 +6324,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_2.memview = NULL;
   __pyx_t_2.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":242
+  /* "fights/envs/puoribor_cython.pyx":242
  *     cdef int [:,:,:] board_view = state.board
  * 
  *     directions[0][:] = [0, -2]             # <<<<<<<<<<<<<<
@@ -6335,7 +6335,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_3[1] = -2;
   memcpy(&((__pyx_v_directions[0])[0]), __pyx_t_3, sizeof((__pyx_v_directions[0])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":243
+  /* "fights/envs/puoribor_cython.pyx":243
  * 
  *     directions[0][:] = [0, -2]
  *     directions[1][:] = [-1, -1]             # <<<<<<<<<<<<<<
@@ -6346,7 +6346,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_4[1] = -1;
   memcpy(&((__pyx_v_directions[1])[0]), __pyx_t_4, sizeof((__pyx_v_directions[1])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":244
+  /* "fights/envs/puoribor_cython.pyx":244
  *     directions[0][:] = [0, -2]
  *     directions[1][:] = [-1, -1]
  *     directions[2][:] = [0, -1]             # <<<<<<<<<<<<<<
@@ -6357,7 +6357,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_5[1] = -1;
   memcpy(&((__pyx_v_directions[2])[0]), __pyx_t_5, sizeof((__pyx_v_directions[2])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":245
+  /* "fights/envs/puoribor_cython.pyx":245
  *     directions[1][:] = [-1, -1]
  *     directions[2][:] = [0, -1]
  *     directions[3][:] = [1, -1]             # <<<<<<<<<<<<<<
@@ -6368,7 +6368,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_6[1] = -1;
   memcpy(&((__pyx_v_directions[3])[0]), __pyx_t_6, sizeof((__pyx_v_directions[3])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":246
+  /* "fights/envs/puoribor_cython.pyx":246
  *     directions[2][:] = [0, -1]
  *     directions[3][:] = [1, -1]
  *     directions[4][:] = [-2, 0]             # <<<<<<<<<<<<<<
@@ -6379,7 +6379,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_7[1] = 0;
   memcpy(&((__pyx_v_directions[4])[0]), __pyx_t_7, sizeof((__pyx_v_directions[4])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":247
+  /* "fights/envs/puoribor_cython.pyx":247
  *     directions[3][:] = [1, -1]
  *     directions[4][:] = [-2, 0]
  *     directions[5][:] = [-1, 0]             # <<<<<<<<<<<<<<
@@ -6390,7 +6390,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_8[1] = 0;
   memcpy(&((__pyx_v_directions[5])[0]), __pyx_t_8, sizeof((__pyx_v_directions[5])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":248
+  /* "fights/envs/puoribor_cython.pyx":248
  *     directions[4][:] = [-2, 0]
  *     directions[5][:] = [-1, 0]
  *     directions[6][:] = [1, 0]             # <<<<<<<<<<<<<<
@@ -6401,7 +6401,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_9[1] = 0;
   memcpy(&((__pyx_v_directions[6])[0]), __pyx_t_9, sizeof((__pyx_v_directions[6])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":249
+  /* "fights/envs/puoribor_cython.pyx":249
  *     directions[5][:] = [-1, 0]
  *     directions[6][:] = [1, 0]
  *     directions[7][:] = [2, 0]             # <<<<<<<<<<<<<<
@@ -6412,7 +6412,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_10[1] = 0;
   memcpy(&((__pyx_v_directions[7])[0]), __pyx_t_10, sizeof((__pyx_v_directions[7])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":250
+  /* "fights/envs/puoribor_cython.pyx":250
  *     directions[6][:] = [1, 0]
  *     directions[7][:] = [2, 0]
  *     directions[8][:] = [-1, 1]             # <<<<<<<<<<<<<<
@@ -6423,7 +6423,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_11[1] = 1;
   memcpy(&((__pyx_v_directions[8])[0]), __pyx_t_11, sizeof((__pyx_v_directions[8])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":251
+  /* "fights/envs/puoribor_cython.pyx":251
  *     directions[7][:] = [2, 0]
  *     directions[8][:] = [-1, 1]
  *     directions[9][:] = [0, 1]             # <<<<<<<<<<<<<<
@@ -6434,7 +6434,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_12[1] = 1;
   memcpy(&((__pyx_v_directions[9])[0]), __pyx_t_12, sizeof((__pyx_v_directions[9])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":252
+  /* "fights/envs/puoribor_cython.pyx":252
  *     directions[8][:] = [-1, 1]
  *     directions[9][:] = [0, 1]
  *     directions[10][:] = [1, 1]             # <<<<<<<<<<<<<<
@@ -6445,7 +6445,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_13[1] = 1;
   memcpy(&((__pyx_v_directions[10])[0]), __pyx_t_13, sizeof((__pyx_v_directions[10])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":253
+  /* "fights/envs/puoribor_cython.pyx":253
  *     directions[9][:] = [0, 1]
  *     directions[10][:] = [1, 1]
  *     directions[11][:] = [0, 2]             # <<<<<<<<<<<<<<
@@ -6456,7 +6456,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_14[1] = 2;
   memcpy(&((__pyx_v_directions[11])[0]), __pyx_t_14, sizeof((__pyx_v_directions[11])[0]) * (2));
 
-  /* "fights/envs/cythonfn.pyx":255
+  /* "fights/envs/puoribor_cython.pyx":255
  *     directions[11][:] = [0, 2]
  * 
  *     legal_actions_np = np.zeros((4, 9, 9), dtype=np.int_)             # <<<<<<<<<<<<<<
@@ -6484,7 +6484,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_v_legal_actions_np = __pyx_t_17;
   __pyx_t_17 = 0;
 
-  /* "fights/envs/cythonfn.pyx":256
+  /* "fights/envs/puoribor_cython.pyx":256
  * 
  *     legal_actions_np = np.zeros((4, 9, 9), dtype=np.int_)
  *     cdef int [:,:,:] legal_actions_np_view = legal_actions_np             # <<<<<<<<<<<<<<
@@ -6496,20 +6496,20 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_t_2.memview = NULL;
   __pyx_t_2.data = NULL;
 
-  /* "fights/envs/cythonfn.pyx":257
+  /* "fights/envs/puoribor_cython.pyx":257
  *     legal_actions_np = np.zeros((4, 9, 9), dtype=np.int_)
  *     cdef int [:,:,:] legal_actions_np_view = legal_actions_np
  *     (nowpos_x, nowpos_y) = _agent_pos(board_view, agent_id, board_size)             # <<<<<<<<<<<<<<
  * 
  *     for dir_id in range(12):
  */
-  __pyx_t_18 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
+  __pyx_t_18 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
   __pyx_t_19 = __pyx_t_18.f0;
   __pyx_t_20 = __pyx_t_18.f1;
   __pyx_v_nowpos_x = __pyx_t_19;
   __pyx_v_nowpos_y = __pyx_t_20;
 
-  /* "fights/envs/cythonfn.pyx":259
+  /* "fights/envs/puoribor_cython.pyx":259
  *     (nowpos_x, nowpos_y) = _agent_pos(board_view, agent_id, board_size)
  * 
  *     for dir_id in range(12):             # <<<<<<<<<<<<<<
@@ -6519,7 +6519,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   for (__pyx_t_20 = 0; __pyx_t_20 < 12; __pyx_t_20+=1) {
     __pyx_v_dir_id = __pyx_t_20;
 
-    /* "fights/envs/cythonfn.pyx":260
+    /* "fights/envs/puoribor_cython.pyx":260
  * 
  *     for dir_id in range(12):
  *         next_pos_x = nowpos_x + directions[dir_id][0]             # <<<<<<<<<<<<<<
@@ -6528,7 +6528,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
  */
     __pyx_v_next_pos_x = (__pyx_v_nowpos_x + ((__pyx_v_directions[__pyx_v_dir_id])[0]));
 
-    /* "fights/envs/cythonfn.pyx":261
+    /* "fights/envs/puoribor_cython.pyx":261
  *     for dir_id in range(12):
  *         next_pos_x = nowpos_x + directions[dir_id][0]
  *         next_pos_y = nowpos_y + directions[dir_id][1]             # <<<<<<<<<<<<<<
@@ -6537,17 +6537,17 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
  */
     __pyx_v_next_pos_y = (__pyx_v_nowpos_y + ((__pyx_v_directions[__pyx_v_dir_id])[1]));
 
-    /* "fights/envs/cythonfn.pyx":262
+    /* "fights/envs/puoribor_cython.pyx":262
  *         next_pos_x = nowpos_x + directions[dir_id][0]
  *         next_pos_y = nowpos_y + directions[dir_id][1]
  *         if _is_moving_legal(board_view, next_pos_x, next_pos_y, agent_id, board_size):             # <<<<<<<<<<<<<<
  *             legal_actions_np_view[0, next_pos_x, next_pos_y] = 1
  *     for action_type in range(1, 3):
  */
-    __pyx_t_21 = (__pyx_f_6fights_4envs_8cythonfn__is_moving_legal(__pyx_v_board_view, __pyx_v_next_pos_x, __pyx_v_next_pos_y, __pyx_v_agent_id, __pyx_v_board_size) != 0);
+    __pyx_t_21 = (__pyx_f_6fights_4envs_15puoribor_cython__is_moving_legal(__pyx_v_board_view, __pyx_v_next_pos_x, __pyx_v_next_pos_y, __pyx_v_agent_id, __pyx_v_board_size) != 0);
     if (__pyx_t_21) {
 
-      /* "fights/envs/cythonfn.pyx":263
+      /* "fights/envs/puoribor_cython.pyx":263
  *         next_pos_y = nowpos_y + directions[dir_id][1]
  *         if _is_moving_legal(board_view, next_pos_x, next_pos_y, agent_id, board_size):
  *             legal_actions_np_view[0, next_pos_x, next_pos_y] = 1             # <<<<<<<<<<<<<<
@@ -6559,7 +6559,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
       __pyx_t_24 = __pyx_v_next_pos_y;
       *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_legal_actions_np_view.data + __pyx_t_22 * __pyx_v_legal_actions_np_view.strides[0]) ) + __pyx_t_23 * __pyx_v_legal_actions_np_view.strides[1]) ) + __pyx_t_24 * __pyx_v_legal_actions_np_view.strides[2]) )) = 1;
 
-      /* "fights/envs/cythonfn.pyx":262
+      /* "fights/envs/puoribor_cython.pyx":262
  *         next_pos_x = nowpos_x + directions[dir_id][0]
  *         next_pos_y = nowpos_y + directions[dir_id][1]
  *         if _is_moving_legal(board_view, next_pos_x, next_pos_y, agent_id, board_size):             # <<<<<<<<<<<<<<
@@ -6569,7 +6569,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":264
+  /* "fights/envs/puoribor_cython.pyx":264
  *         if _is_moving_legal(board_view, next_pos_x, next_pos_y, agent_id, board_size):
  *             legal_actions_np_view[0, next_pos_x, next_pos_y] = 1
  *     for action_type in range(1, 3):             # <<<<<<<<<<<<<<
@@ -6579,7 +6579,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   for (__pyx_t_20 = 1; __pyx_t_20 < 3; __pyx_t_20+=1) {
     __pyx_v_action_type = __pyx_t_20;
 
-    /* "fights/envs/cythonfn.pyx":265
+    /* "fights/envs/puoribor_cython.pyx":265
  *             legal_actions_np_view[0, next_pos_x, next_pos_y] = 1
  *     for action_type in range(1, 3):
  *         for cx in range(board_size-1):             # <<<<<<<<<<<<<<
@@ -6591,7 +6591,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
     for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_26; __pyx_t_19+=1) {
       __pyx_v_cx = __pyx_t_19;
 
-      /* "fights/envs/cythonfn.pyx":266
+      /* "fights/envs/puoribor_cython.pyx":266
  *     for action_type in range(1, 3):
  *         for cx in range(board_size-1):
  *             for cy in range(board_size-1):             # <<<<<<<<<<<<<<
@@ -6603,7 +6603,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
       for (__pyx_t_29 = 0; __pyx_t_29 < __pyx_t_28; __pyx_t_29+=1) {
         __pyx_v_cy = __pyx_t_29;
 
-        /* "fights/envs/cythonfn.pyx":267
+        /* "fights/envs/puoribor_cython.pyx":267
  *         for cx in range(board_size-1):
  *             for cy in range(board_size-1):
  *                 try:             # <<<<<<<<<<<<<<
@@ -6619,7 +6619,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
           __Pyx_XGOTREF(__pyx_t_32);
           /*try:*/ {
 
-            /* "fights/envs/cythonfn.pyx":268
+            /* "fights/envs/puoribor_cython.pyx":268
  *             for cy in range(board_size-1):
  *                 try:
  *                     fast_step(state.board, state.walls_remaining, agent_id, (action_type, cx, cy), board_size)             # <<<<<<<<<<<<<<
@@ -6719,7 +6719,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-            /* "fights/envs/cythonfn.pyx":267
+            /* "fights/envs/puoribor_cython.pyx":267
  *         for cx in range(board_size-1):
  *             for cy in range(board_size-1):
  *                 try:             # <<<<<<<<<<<<<<
@@ -6728,7 +6728,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
  */
           }
 
-          /* "fights/envs/cythonfn.pyx":272
+          /* "fights/envs/puoribor_cython.pyx":272
  *                     ...
  *                 else:
  *                     legal_actions_np_view[action_type, cx, cy] = 1             # <<<<<<<<<<<<<<
@@ -6757,7 +6757,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
           __Pyx_XDECREF(__pyx_t_36); __pyx_t_36 = 0;
           __Pyx_XDECREF(__pyx_t_37); __pyx_t_37 = 0;
 
-          /* "fights/envs/cythonfn.pyx":269
+          /* "fights/envs/puoribor_cython.pyx":269
  *                 try:
  *                     fast_step(state.board, state.walls_remaining, agent_id, (action_type, cx, cy), board_size)
  *                 except:             # <<<<<<<<<<<<<<
@@ -6779,7 +6779,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":273
+  /* "fights/envs/puoribor_cython.pyx":273
  *                 else:
  *                     legal_actions_np_view[action_type, cx, cy] = 1
  *     for cx in range(board_size-3):             # <<<<<<<<<<<<<<
@@ -6791,7 +6791,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_26; __pyx_t_20+=1) {
     __pyx_v_cx = __pyx_t_20;
 
-    /* "fights/envs/cythonfn.pyx":274
+    /* "fights/envs/puoribor_cython.pyx":274
  *                     legal_actions_np_view[action_type, cx, cy] = 1
  *     for cx in range(board_size-3):
  *         for cy in range(board_size-3):             # <<<<<<<<<<<<<<
@@ -6803,7 +6803,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
     for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_28; __pyx_t_19+=1) {
       __pyx_v_cy = __pyx_t_19;
 
-      /* "fights/envs/cythonfn.pyx":275
+      /* "fights/envs/puoribor_cython.pyx":275
  *     for cx in range(board_size-3):
  *         for cy in range(board_size-3):
  *             try:             # <<<<<<<<<<<<<<
@@ -6819,7 +6819,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
         __Pyx_XGOTREF(__pyx_t_30);
         /*try:*/ {
 
-          /* "fights/envs/cythonfn.pyx":276
+          /* "fights/envs/puoribor_cython.pyx":276
  *         for cy in range(board_size-3):
  *             try:
  *                 fast_step(state.board, state.walls_remaining, agent_id, (3, cx, cy), board_size)             # <<<<<<<<<<<<<<
@@ -6917,7 +6917,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-          /* "fights/envs/cythonfn.pyx":275
+          /* "fights/envs/puoribor_cython.pyx":275
  *     for cx in range(board_size-3):
  *         for cy in range(board_size-3):
  *             try:             # <<<<<<<<<<<<<<
@@ -6926,7 +6926,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
  */
         }
 
-        /* "fights/envs/cythonfn.pyx":280
+        /* "fights/envs/puoribor_cython.pyx":280
  *                 ...
  *             else:
  *                 legal_actions_np_view[3, cx, cy] = 1             # <<<<<<<<<<<<<<
@@ -6955,7 +6955,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
         __Pyx_XDECREF(__pyx_t_36); __pyx_t_36 = 0;
         __Pyx_XDECREF(__pyx_t_37); __pyx_t_37 = 0;
 
-        /* "fights/envs/cythonfn.pyx":277
+        /* "fights/envs/puoribor_cython.pyx":277
  *             try:
  *                 fast_step(state.board, state.walls_remaining, agent_id, (3, cx, cy), board_size)
  *             except:             # <<<<<<<<<<<<<<
@@ -6976,7 +6976,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":281
+  /* "fights/envs/puoribor_cython.pyx":281
  *             else:
  *                 legal_actions_np_view[3, cx, cy] = 1
  *     return legal_actions_np             # <<<<<<<<<<<<<<
@@ -6988,7 +6988,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __pyx_r = __pyx_v_legal_actions_np;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":236
+  /* "fights/envs/puoribor_cython.pyx":236
  *     return 1
  * 
  * def legal_actions(state, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -7008,7 +7008,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_t_35);
   __Pyx_XDECREF(__pyx_t_36);
   __Pyx_XDECREF(__pyx_t_37);
-  __Pyx_AddTraceback("fights.envs.cythonfn.legal_actions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fights.envs.puoribor_cython.legal_actions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_board_view, 1);
@@ -7019,7 +7019,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":283
+/* "fights/envs/puoribor_cython.pyx":283
  *     return legal_actions_np
  * 
  * cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):             # <<<<<<<<<<<<<<
@@ -7027,7 +7027,7 @@ static PyObject *__pyx_pf_6fights_4envs_8cythonfn_2legal_actions(CYTHON_UNUSED P
  * 
  */
 
-static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int __pyx_v_pos_x, int __pyx_v_pos_y, struct __pyx_opt_args_6fights_4envs_8cythonfn__check_in_range *__pyx_optional_args) {
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_in_range(int __pyx_v_pos_x, int __pyx_v_pos_y, struct __pyx_opt_args_6fights_4envs_15puoribor_cython__check_in_range *__pyx_optional_args) {
   int __pyx_v_bottom_right = ((int)9);
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -7040,7 +7040,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int __pyx_v_pos_x, in
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":284
+  /* "fights/envs/puoribor_cython.pyx":284
  * 
  * cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):
  *     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)             # <<<<<<<<<<<<<<
@@ -7065,7 +7065,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int __pyx_v_pos_x, in
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":283
+  /* "fights/envs/puoribor_cython.pyx":283
  *     return legal_actions_np
  * 
  * cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):             # <<<<<<<<<<<<<<
@@ -7079,7 +7079,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int __pyx_v_pos_x, in
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":286
+/* "fights/envs/puoribor_cython.pyx":286
  *     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)
  * 
  * cdef int _check_path_exists(int [:,:,:] board_view, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -7087,7 +7087,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_in_range(int __pyx_v_pos_x, in
  *     cdef int pos_x, pos_y
  */
 
-static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_agent_id, int __pyx_v_board_size) {
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_path_exists(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_agent_id, int __pyx_v_board_size) {
   int __pyx_v_pos_x;
   int __pyx_v_pos_y;
   int __pyx_v_i;
@@ -7121,7 +7121,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   int __pyx_t_16;
   __Pyx_RefNannySetupContext("_check_path_exists", 0);
 
-  /* "fights/envs/cythonfn.pyx":290
+  /* "fights/envs/puoribor_cython.pyx":290
  *     cdef int pos_x, pos_y
  *     cdef int i, j
  *     cdef int cnt = 0, tail = 0             # <<<<<<<<<<<<<<
@@ -7131,7 +7131,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   __pyx_v_cnt = 0;
   __pyx_v_tail = 0;
 
-  /* "fights/envs/cythonfn.pyx":292
+  /* "fights/envs/puoribor_cython.pyx":292
  *     cdef int cnt = 0, tail = 0
  *     cdef int there_x, there_y
  *     cdef int goal = (1-agent_id) * 8             # <<<<<<<<<<<<<<
@@ -7140,7 +7140,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
   __pyx_v_goal = ((1 - __pyx_v_agent_id) * 8);
 
-  /* "fights/envs/cythonfn.pyx":298
+  /* "fights/envs/puoribor_cython.pyx":298
  *     cdef int directions[4][2]
  * 
  *     for i in range(9):             # <<<<<<<<<<<<<<
@@ -7150,7 +7150,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   for (__pyx_t_1 = 0; __pyx_t_1 < 9; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "fights/envs/cythonfn.pyx":299
+    /* "fights/envs/puoribor_cython.pyx":299
  * 
  *     for i in range(9):
  *         for j in range(9):             # <<<<<<<<<<<<<<
@@ -7160,7 +7160,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     for (__pyx_t_2 = 0; __pyx_t_2 < 9; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "fights/envs/cythonfn.pyx":300
+      /* "fights/envs/puoribor_cython.pyx":300
  *     for i in range(9):
  *         for j in range(9):
  *             visited[i][j] = 0             # <<<<<<<<<<<<<<
@@ -7171,7 +7171,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":302
+  /* "fights/envs/puoribor_cython.pyx":302
  *             visited[i][j] = 0
  * 
  *     if agent_id:             # <<<<<<<<<<<<<<
@@ -7181,7 +7181,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   __pyx_t_3 = (__pyx_v_agent_id != 0);
   if (__pyx_t_3) {
 
-    /* "fights/envs/cythonfn.pyx":303
+    /* "fights/envs/puoribor_cython.pyx":303
  * 
  *     if agent_id:
  *         directions[0][:] = [0, -1]             # <<<<<<<<<<<<<<
@@ -7192,7 +7192,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_4[1] = -1;
     memcpy(&((__pyx_v_directions[0])[0]), __pyx_t_4, sizeof((__pyx_v_directions[0])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":304
+    /* "fights/envs/puoribor_cython.pyx":304
  *     if agent_id:
  *         directions[0][:] = [0, -1]
  *         directions[1][:] = [1, 0]             # <<<<<<<<<<<<<<
@@ -7203,7 +7203,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_5[1] = 0;
     memcpy(&((__pyx_v_directions[1])[0]), __pyx_t_5, sizeof((__pyx_v_directions[1])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":305
+    /* "fights/envs/puoribor_cython.pyx":305
  *         directions[0][:] = [0, -1]
  *         directions[1][:] = [1, 0]
  *         directions[2][:] = [-1, 0]             # <<<<<<<<<<<<<<
@@ -7214,7 +7214,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_6[1] = 0;
     memcpy(&((__pyx_v_directions[2])[0]), __pyx_t_6, sizeof((__pyx_v_directions[2])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":306
+    /* "fights/envs/puoribor_cython.pyx":306
  *         directions[1][:] = [1, 0]
  *         directions[2][:] = [-1, 0]
  *         directions[3][:] = [0, 1]             # <<<<<<<<<<<<<<
@@ -7225,7 +7225,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_7[1] = 1;
     memcpy(&((__pyx_v_directions[3])[0]), __pyx_t_7, sizeof((__pyx_v_directions[3])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":302
+    /* "fights/envs/puoribor_cython.pyx":302
  *             visited[i][j] = 0
  * 
  *     if agent_id:             # <<<<<<<<<<<<<<
@@ -7235,7 +7235,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     goto __pyx_L7;
   }
 
-  /* "fights/envs/cythonfn.pyx":308
+  /* "fights/envs/puoribor_cython.pyx":308
  *         directions[3][:] = [0, 1]
  *     else:
  *         directions[0][:] = [0, 1]             # <<<<<<<<<<<<<<
@@ -7247,7 +7247,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_8[1] = 1;
     memcpy(&((__pyx_v_directions[0])[0]), __pyx_t_8, sizeof((__pyx_v_directions[0])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":309
+    /* "fights/envs/puoribor_cython.pyx":309
  *     else:
  *         directions[0][:] = [0, 1]
  *         directions[1][:] = [1, 0]             # <<<<<<<<<<<<<<
@@ -7258,7 +7258,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_9[1] = 0;
     memcpy(&((__pyx_v_directions[1])[0]), __pyx_t_9, sizeof((__pyx_v_directions[1])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":310
+    /* "fights/envs/puoribor_cython.pyx":310
  *         directions[0][:] = [0, 1]
  *         directions[1][:] = [1, 0]
  *         directions[2][:] = [-1, 0]             # <<<<<<<<<<<<<<
@@ -7269,7 +7269,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     __pyx_t_10[1] = 0;
     memcpy(&((__pyx_v_directions[2])[0]), __pyx_t_10, sizeof((__pyx_v_directions[2])[0]) * (2));
 
-    /* "fights/envs/cythonfn.pyx":311
+    /* "fights/envs/puoribor_cython.pyx":311
  *         directions[1][:] = [1, 0]
  *         directions[2][:] = [-1, 0]
  *         directions[3][:] = [0, -1]             # <<<<<<<<<<<<<<
@@ -7282,20 +7282,20 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   }
   __pyx_L7:;
 
-  /* "fights/envs/cythonfn.pyx":313
+  /* "fights/envs/puoribor_cython.pyx":313
  *         directions[3][:] = [0, -1]
  * 
  *     (pos_x, pos_y) = _agent_pos(board_view, agent_id, board_size)             # <<<<<<<<<<<<<<
  *     if pos_y == goal:   return 1
  * 
  */
-  __pyx_t_12 = __pyx_f_6fights_4envs_8cythonfn__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
+  __pyx_t_12 = __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__pyx_v_board_view, __pyx_v_agent_id, __pyx_v_board_size);
   __pyx_t_1 = __pyx_t_12.f0;
   __pyx_t_2 = __pyx_t_12.f1;
   __pyx_v_pos_x = __pyx_t_1;
   __pyx_v_pos_y = __pyx_t_2;
 
-  /* "fights/envs/cythonfn.pyx":314
+  /* "fights/envs/puoribor_cython.pyx":314
  * 
  *     (pos_x, pos_y) = _agent_pos(board_view, agent_id, board_size)
  *     if pos_y == goal:   return 1             # <<<<<<<<<<<<<<
@@ -7308,7 +7308,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     goto __pyx_L0;
   }
 
-  /* "fights/envs/cythonfn.pyx":316
+  /* "fights/envs/puoribor_cython.pyx":316
  *     if pos_y == goal:   return 1
  * 
  *     queue_x[tail] = pos_x             # <<<<<<<<<<<<<<
@@ -7317,7 +7317,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
   (__pyx_v_queue_x[__pyx_v_tail]) = __pyx_v_pos_x;
 
-  /* "fights/envs/cythonfn.pyx":317
+  /* "fights/envs/puoribor_cython.pyx":317
  * 
  *     queue_x[tail] = pos_x
  *     queue_y[tail] = pos_y             # <<<<<<<<<<<<<<
@@ -7326,7 +7326,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
   (__pyx_v_queue_y[__pyx_v_tail]) = __pyx_v_pos_y;
 
-  /* "fights/envs/cythonfn.pyx":318
+  /* "fights/envs/puoribor_cython.pyx":318
  *     queue_x[tail] = pos_x
  *     queue_y[tail] = pos_y
  *     tail += 1             # <<<<<<<<<<<<<<
@@ -7335,7 +7335,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
   __pyx_v_tail = (__pyx_v_tail + 1);
 
-  /* "fights/envs/cythonfn.pyx":319
+  /* "fights/envs/puoribor_cython.pyx":319
  *     queue_y[tail] = pos_y
  *     tail += 1
  *     visited[pos_x][pos_y] = 1             # <<<<<<<<<<<<<<
@@ -7344,7 +7344,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
   ((__pyx_v_visited[__pyx_v_pos_x])[__pyx_v_pos_y]) = 1;
 
-  /* "fights/envs/cythonfn.pyx":321
+  /* "fights/envs/puoribor_cython.pyx":321
  *     visited[pos_x][pos_y] = 1
  * 
  *     for i in range(board_size * board_size):             # <<<<<<<<<<<<<<
@@ -7356,7 +7356,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_1; __pyx_t_13+=1) {
     __pyx_v_i = __pyx_t_13;
 
-    /* "fights/envs/cythonfn.pyx":322
+    /* "fights/envs/puoribor_cython.pyx":322
  * 
  *     for i in range(board_size * board_size):
  *         if cnt == tail: break             # <<<<<<<<<<<<<<
@@ -7368,7 +7368,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
       goto __pyx_L10_break;
     }
 
-    /* "fights/envs/cythonfn.pyx":323
+    /* "fights/envs/puoribor_cython.pyx":323
  *     for i in range(board_size * board_size):
  *         if cnt == tail: break
  *         pos_x = queue_x[cnt]             # <<<<<<<<<<<<<<
@@ -7377,7 +7377,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
     __pyx_v_pos_x = (__pyx_v_queue_x[__pyx_v_cnt]);
 
-    /* "fights/envs/cythonfn.pyx":324
+    /* "fights/envs/puoribor_cython.pyx":324
  *         if cnt == tail: break
  *         pos_x = queue_x[cnt]
  *         pos_y = queue_y[cnt]             # <<<<<<<<<<<<<<
@@ -7386,7 +7386,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
     __pyx_v_pos_y = (__pyx_v_queue_y[__pyx_v_cnt]);
 
-    /* "fights/envs/cythonfn.pyx":325
+    /* "fights/envs/puoribor_cython.pyx":325
  *         pos_x = queue_x[cnt]
  *         pos_y = queue_y[cnt]
  *         cnt += 1             # <<<<<<<<<<<<<<
@@ -7395,7 +7395,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
     __pyx_v_cnt = (__pyx_v_cnt + 1);
 
-    /* "fights/envs/cythonfn.pyx":326
+    /* "fights/envs/puoribor_cython.pyx":326
  *         pos_y = queue_y[cnt]
  *         cnt += 1
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -7405,7 +7405,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
     for (__pyx_t_14 = 0; __pyx_t_14 < 4; __pyx_t_14+=1) {
       __pyx_v_j = __pyx_t_14;
 
-      /* "fights/envs/cythonfn.pyx":327
+      /* "fights/envs/puoribor_cython.pyx":327
  *         cnt += 1
  *         for j in range(4):
  *             there_x = pos_x + directions[j][0]             # <<<<<<<<<<<<<<
@@ -7414,7 +7414,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       __pyx_v_there_x = (__pyx_v_pos_x + ((__pyx_v_directions[__pyx_v_j])[0]));
 
-      /* "fights/envs/cythonfn.pyx":328
+      /* "fights/envs/puoribor_cython.pyx":328
  *         for j in range(4):
  *             there_x = pos_x + directions[j][0]
  *             there_y = pos_y + directions[j][1]             # <<<<<<<<<<<<<<
@@ -7423,7 +7423,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       __pyx_v_there_y = (__pyx_v_pos_y + ((__pyx_v_directions[__pyx_v_j])[1]));
 
-      /* "fights/envs/cythonfn.pyx":329
+      /* "fights/envs/puoribor_cython.pyx":329
  *             there_x = pos_x + directions[j][0]
  *             there_y = pos_y + directions[j][1]
  *             if not (0 <= there_x < board_size and 0 <= there_y < board_size):             # <<<<<<<<<<<<<<
@@ -7450,7 +7450,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
       __pyx_t_15 = ((!__pyx_t_3) != 0);
       if (__pyx_t_15) {
 
-        /* "fights/envs/cythonfn.pyx":330
+        /* "fights/envs/puoribor_cython.pyx":330
  *             there_y = pos_y + directions[j][1]
  *             if not (0 <= there_x < board_size and 0 <= there_y < board_size):
  *                 continue             # <<<<<<<<<<<<<<
@@ -7459,7 +7459,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
         goto __pyx_L12_continue;
 
-        /* "fights/envs/cythonfn.pyx":329
+        /* "fights/envs/puoribor_cython.pyx":329
  *             there_x = pos_x + directions[j][0]
  *             there_y = pos_y + directions[j][1]
  *             if not (0 <= there_x < board_size and 0 <= there_y < board_size):             # <<<<<<<<<<<<<<
@@ -7468,7 +7468,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":331
+      /* "fights/envs/puoribor_cython.pyx":331
  *             if not (0 <= there_x < board_size and 0 <= there_y < board_size):
  *                 continue
  *             if visited[there_x][there_y]:             # <<<<<<<<<<<<<<
@@ -7478,7 +7478,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
       __pyx_t_15 = (((__pyx_v_visited[__pyx_v_there_x])[__pyx_v_there_y]) != 0);
       if (__pyx_t_15) {
 
-        /* "fights/envs/cythonfn.pyx":332
+        /* "fights/envs/puoribor_cython.pyx":332
  *                 continue
  *             if visited[there_x][there_y]:
  *                 continue             # <<<<<<<<<<<<<<
@@ -7487,7 +7487,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
         goto __pyx_L12_continue;
 
-        /* "fights/envs/cythonfn.pyx":331
+        /* "fights/envs/puoribor_cython.pyx":331
  *             if not (0 <= there_x < board_size and 0 <= there_y < board_size):
  *                 continue
  *             if visited[there_x][there_y]:             # <<<<<<<<<<<<<<
@@ -7496,17 +7496,17 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":333
+      /* "fights/envs/puoribor_cython.pyx":333
  *             if visited[there_x][there_y]:
  *                 continue
  *             if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):             # <<<<<<<<<<<<<<
  *                 continue
  *             if there_y == goal:
  */
-      __pyx_t_15 = (__pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__pyx_v_board_view, __pyx_v_pos_x, __pyx_v_pos_y, __pyx_v_there_x, __pyx_v_there_y) != 0);
+      __pyx_t_15 = (__pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__pyx_v_board_view, __pyx_v_pos_x, __pyx_v_pos_y, __pyx_v_there_x, __pyx_v_there_y) != 0);
       if (__pyx_t_15) {
 
-        /* "fights/envs/cythonfn.pyx":334
+        /* "fights/envs/puoribor_cython.pyx":334
  *                 continue
  *             if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):
  *                 continue             # <<<<<<<<<<<<<<
@@ -7515,7 +7515,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
         goto __pyx_L12_continue;
 
-        /* "fights/envs/cythonfn.pyx":333
+        /* "fights/envs/puoribor_cython.pyx":333
  *             if visited[there_x][there_y]:
  *                 continue
  *             if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):             # <<<<<<<<<<<<<<
@@ -7524,7 +7524,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":335
+      /* "fights/envs/puoribor_cython.pyx":335
  *             if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):
  *                 continue
  *             if there_y == goal:             # <<<<<<<<<<<<<<
@@ -7534,7 +7534,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
       __pyx_t_15 = ((__pyx_v_there_y == __pyx_v_goal) != 0);
       if (__pyx_t_15) {
 
-        /* "fights/envs/cythonfn.pyx":336
+        /* "fights/envs/puoribor_cython.pyx":336
  *                 continue
  *             if there_y == goal:
  *                 return 1             # <<<<<<<<<<<<<<
@@ -7544,7 +7544,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
         __pyx_r = 1;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":335
+        /* "fights/envs/puoribor_cython.pyx":335
  *             if _check_wall_blocked(board_view, pos_x, pos_y, there_x, there_y):
  *                 continue
  *             if there_y == goal:             # <<<<<<<<<<<<<<
@@ -7553,7 +7553,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       }
 
-      /* "fights/envs/cythonfn.pyx":337
+      /* "fights/envs/puoribor_cython.pyx":337
  *             if there_y == goal:
  *                 return 1
  *             visited[there_x][there_y] = 1             # <<<<<<<<<<<<<<
@@ -7562,7 +7562,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       ((__pyx_v_visited[__pyx_v_there_x])[__pyx_v_there_y]) = 1;
 
-      /* "fights/envs/cythonfn.pyx":338
+      /* "fights/envs/puoribor_cython.pyx":338
  *                 return 1
  *             visited[there_x][there_y] = 1
  *             queue_x[tail] = there_x             # <<<<<<<<<<<<<<
@@ -7571,7 +7571,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       (__pyx_v_queue_x[__pyx_v_tail]) = __pyx_v_there_x;
 
-      /* "fights/envs/cythonfn.pyx":339
+      /* "fights/envs/puoribor_cython.pyx":339
  *             visited[there_x][there_y] = 1
  *             queue_x[tail] = there_x
  *             queue_y[tail] = there_y             # <<<<<<<<<<<<<<
@@ -7580,7 +7580,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  */
       (__pyx_v_queue_y[__pyx_v_tail]) = __pyx_v_there_y;
 
-      /* "fights/envs/cythonfn.pyx":340
+      /* "fights/envs/puoribor_cython.pyx":340
  *             queue_x[tail] = there_x
  *             queue_y[tail] = there_y
  *             tail += 1             # <<<<<<<<<<<<<<
@@ -7593,7 +7593,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   }
   __pyx_L10_break:;
 
-  /* "fights/envs/cythonfn.pyx":342
+  /* "fights/envs/puoribor_cython.pyx":342
  *             tail += 1
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -7603,7 +7603,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":286
+  /* "fights/envs/puoribor_cython.pyx":286
  *     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)
  * 
  * cdef int _check_path_exists(int [:,:,:] board_view, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -7617,7 +7617,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":344
+/* "fights/envs/puoribor_cython.pyx":344
  *     return 0
  * 
  * cdef int _check_wall_blocked(int [:,:,:] board_view, int cx, int cy, int nx, int ny):             # <<<<<<<<<<<<<<
@@ -7625,7 +7625,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_path_exists(__Pyx_memviewslice
  *     if nx > cx:
  */
 
-static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_cx, int __pyx_v_cy, int __pyx_v_nx, int __pyx_v_ny) {
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_wall_blocked(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_cx, int __pyx_v_cy, int __pyx_v_nx, int __pyx_v_ny) {
   int __pyx_v_i;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -7638,7 +7638,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   Py_ssize_t __pyx_t_7;
   __Pyx_RefNannySetupContext("_check_wall_blocked", 0);
 
-  /* "fights/envs/cythonfn.pyx":346
+  /* "fights/envs/puoribor_cython.pyx":346
  * cdef int _check_wall_blocked(int [:,:,:] board_view, int cx, int cy, int nx, int ny):
  *     cdef int i
  *     if nx > cx:             # <<<<<<<<<<<<<<
@@ -7648,7 +7648,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   __pyx_t_1 = ((__pyx_v_nx > __pyx_v_cx) != 0);
   if (__pyx_t_1) {
 
-    /* "fights/envs/cythonfn.pyx":347
+    /* "fights/envs/puoribor_cython.pyx":347
  *     cdef int i
  *     if nx > cx:
  *         for i in range(cx, nx):             # <<<<<<<<<<<<<<
@@ -7660,7 +7660,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     for (__pyx_t_4 = __pyx_v_cx; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "fights/envs/cythonfn.pyx":348
+      /* "fights/envs/puoribor_cython.pyx":348
  *     if nx > cx:
  *         for i in range(cx, nx):
  *             if board_view[3, i, cy]:             # <<<<<<<<<<<<<<
@@ -7673,7 +7673,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       __pyx_t_1 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_5 * __pyx_v_board_view.strides[0]) ) + __pyx_t_6 * __pyx_v_board_view.strides[1]) ) + __pyx_t_7 * __pyx_v_board_view.strides[2]) ))) != 0);
       if (__pyx_t_1) {
 
-        /* "fights/envs/cythonfn.pyx":349
+        /* "fights/envs/puoribor_cython.pyx":349
  *         for i in range(cx, nx):
  *             if board_view[3, i, cy]:
  *                 return 1             # <<<<<<<<<<<<<<
@@ -7683,7 +7683,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
         __pyx_r = 1;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":348
+        /* "fights/envs/puoribor_cython.pyx":348
  *     if nx > cx:
  *         for i in range(cx, nx):
  *             if board_view[3, i, cy]:             # <<<<<<<<<<<<<<
@@ -7693,7 +7693,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       }
     }
 
-    /* "fights/envs/cythonfn.pyx":350
+    /* "fights/envs/puoribor_cython.pyx":350
  *             if board_view[3, i, cy]:
  *                 return 1
  *         return 0             # <<<<<<<<<<<<<<
@@ -7703,7 +7703,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":346
+    /* "fights/envs/puoribor_cython.pyx":346
  * cdef int _check_wall_blocked(int [:,:,:] board_view, int cx, int cy, int nx, int ny):
  *     cdef int i
  *     if nx > cx:             # <<<<<<<<<<<<<<
@@ -7712,7 +7712,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":351
+  /* "fights/envs/puoribor_cython.pyx":351
  *                 return 1
  *         return 0
  *     if nx < cx:             # <<<<<<<<<<<<<<
@@ -7722,7 +7722,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   __pyx_t_1 = ((__pyx_v_nx < __pyx_v_cx) != 0);
   if (__pyx_t_1) {
 
-    /* "fights/envs/cythonfn.pyx":352
+    /* "fights/envs/puoribor_cython.pyx":352
  *         return 0
  *     if nx < cx:
  *         for i in range(nx, cx):             # <<<<<<<<<<<<<<
@@ -7734,7 +7734,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     for (__pyx_t_4 = __pyx_v_nx; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "fights/envs/cythonfn.pyx":353
+      /* "fights/envs/puoribor_cython.pyx":353
  *     if nx < cx:
  *         for i in range(nx, cx):
  *             if board_view[3, i, cy]:             # <<<<<<<<<<<<<<
@@ -7747,7 +7747,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       __pyx_t_1 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_7 * __pyx_v_board_view.strides[0]) ) + __pyx_t_6 * __pyx_v_board_view.strides[1]) ) + __pyx_t_5 * __pyx_v_board_view.strides[2]) ))) != 0);
       if (__pyx_t_1) {
 
-        /* "fights/envs/cythonfn.pyx":354
+        /* "fights/envs/puoribor_cython.pyx":354
  *         for i in range(nx, cx):
  *             if board_view[3, i, cy]:
  *                 return 1             # <<<<<<<<<<<<<<
@@ -7757,7 +7757,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
         __pyx_r = 1;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":353
+        /* "fights/envs/puoribor_cython.pyx":353
  *     if nx < cx:
  *         for i in range(nx, cx):
  *             if board_view[3, i, cy]:             # <<<<<<<<<<<<<<
@@ -7767,7 +7767,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       }
     }
 
-    /* "fights/envs/cythonfn.pyx":355
+    /* "fights/envs/puoribor_cython.pyx":355
  *             if board_view[3, i, cy]:
  *                 return 1
  *         return 0             # <<<<<<<<<<<<<<
@@ -7777,7 +7777,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":351
+    /* "fights/envs/puoribor_cython.pyx":351
  *                 return 1
  *         return 0
  *     if nx < cx:             # <<<<<<<<<<<<<<
@@ -7786,7 +7786,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":356
+  /* "fights/envs/puoribor_cython.pyx":356
  *                 return 1
  *         return 0
  *     if ny > cy:             # <<<<<<<<<<<<<<
@@ -7796,7 +7796,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   __pyx_t_1 = ((__pyx_v_ny > __pyx_v_cy) != 0);
   if (__pyx_t_1) {
 
-    /* "fights/envs/cythonfn.pyx":357
+    /* "fights/envs/puoribor_cython.pyx":357
  *         return 0
  *     if ny > cy:
  *         for i in range(cy, ny):             # <<<<<<<<<<<<<<
@@ -7808,7 +7808,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     for (__pyx_t_4 = __pyx_v_cy; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "fights/envs/cythonfn.pyx":358
+      /* "fights/envs/puoribor_cython.pyx":358
  *     if ny > cy:
  *         for i in range(cy, ny):
  *             if board_view[2, cx, i]:             # <<<<<<<<<<<<<<
@@ -7821,7 +7821,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       __pyx_t_1 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_5 * __pyx_v_board_view.strides[0]) ) + __pyx_t_6 * __pyx_v_board_view.strides[1]) ) + __pyx_t_7 * __pyx_v_board_view.strides[2]) ))) != 0);
       if (__pyx_t_1) {
 
-        /* "fights/envs/cythonfn.pyx":359
+        /* "fights/envs/puoribor_cython.pyx":359
  *         for i in range(cy, ny):
  *             if board_view[2, cx, i]:
  *                 return 1             # <<<<<<<<<<<<<<
@@ -7831,7 +7831,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
         __pyx_r = 1;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":358
+        /* "fights/envs/puoribor_cython.pyx":358
  *     if ny > cy:
  *         for i in range(cy, ny):
  *             if board_view[2, cx, i]:             # <<<<<<<<<<<<<<
@@ -7841,7 +7841,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       }
     }
 
-    /* "fights/envs/cythonfn.pyx":360
+    /* "fights/envs/puoribor_cython.pyx":360
  *             if board_view[2, cx, i]:
  *                 return 1
  *         return 0             # <<<<<<<<<<<<<<
@@ -7851,7 +7851,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":356
+    /* "fights/envs/puoribor_cython.pyx":356
  *                 return 1
  *         return 0
  *     if ny > cy:             # <<<<<<<<<<<<<<
@@ -7860,7 +7860,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":361
+  /* "fights/envs/puoribor_cython.pyx":361
  *                 return 1
  *         return 0
  *     if ny < cy:             # <<<<<<<<<<<<<<
@@ -7870,7 +7870,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   __pyx_t_1 = ((__pyx_v_ny < __pyx_v_cy) != 0);
   if (__pyx_t_1) {
 
-    /* "fights/envs/cythonfn.pyx":362
+    /* "fights/envs/puoribor_cython.pyx":362
  *         return 0
  *     if ny < cy:
  *         for i in range(ny, cy):             # <<<<<<<<<<<<<<
@@ -7882,7 +7882,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     for (__pyx_t_4 = __pyx_v_ny; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "fights/envs/cythonfn.pyx":363
+      /* "fights/envs/puoribor_cython.pyx":363
  *     if ny < cy:
  *         for i in range(ny, cy):
  *             if board_view[2, cx, i]:             # <<<<<<<<<<<<<<
@@ -7895,7 +7895,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       __pyx_t_1 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_7 * __pyx_v_board_view.strides[0]) ) + __pyx_t_6 * __pyx_v_board_view.strides[1]) ) + __pyx_t_5 * __pyx_v_board_view.strides[2]) ))) != 0);
       if (__pyx_t_1) {
 
-        /* "fights/envs/cythonfn.pyx":364
+        /* "fights/envs/puoribor_cython.pyx":364
  *         for i in range(ny, cy):
  *             if board_view[2, cx, i]:
  *                 return 1             # <<<<<<<<<<<<<<
@@ -7905,7 +7905,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
         __pyx_r = 1;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":363
+        /* "fights/envs/puoribor_cython.pyx":363
  *     if ny < cy:
  *         for i in range(ny, cy):
  *             if board_view[2, cx, i]:             # <<<<<<<<<<<<<<
@@ -7915,7 +7915,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
       }
     }
 
-    /* "fights/envs/cythonfn.pyx":365
+    /* "fights/envs/puoribor_cython.pyx":365
  *             if board_view[2, cx, i]:
  *                 return 1
  *         return 0             # <<<<<<<<<<<<<<
@@ -7925,7 +7925,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "fights/envs/cythonfn.pyx":361
+    /* "fights/envs/puoribor_cython.pyx":361
  *                 return 1
  *         return 0
  *     if ny < cy:             # <<<<<<<<<<<<<<
@@ -7934,7 +7934,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
  */
   }
 
-  /* "fights/envs/cythonfn.pyx":366
+  /* "fights/envs/puoribor_cython.pyx":366
  *                 return 1
  *         return 0
  *     return 0             # <<<<<<<<<<<<<<
@@ -7944,7 +7944,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":344
+  /* "fights/envs/puoribor_cython.pyx":344
  *     return 0
  * 
  * cdef int _check_wall_blocked(int [:,:,:] board_view, int cx, int cy, int nx, int ny):             # <<<<<<<<<<<<<<
@@ -7958,7 +7958,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":368
+/* "fights/envs/puoribor_cython.pyx":368
  *     return 0
  * 
  * cdef int _check_wins(int [:,:,:] board_view, int board_size):             # <<<<<<<<<<<<<<
@@ -7966,7 +7966,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wall_blocked(__Pyx_memviewslic
  *     for i in range(board_size):
  */
 
-static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_board_size) {
+static int __pyx_f_6fights_4envs_15puoribor_cython__check_wins(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_board_size) {
   int __pyx_v_i;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -7979,7 +7979,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("_check_wins", 0);
 
-  /* "fights/envs/cythonfn.pyx":370
+  /* "fights/envs/puoribor_cython.pyx":370
  * cdef int _check_wins(int [:,:,:] board_view, int board_size):
  *     cdef int i
  *     for i in range(board_size):             # <<<<<<<<<<<<<<
@@ -7991,7 +7991,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "fights/envs/cythonfn.pyx":371
+    /* "fights/envs/puoribor_cython.pyx":371
  *     cdef int i
  *     for i in range(board_size):
  *         if board_view[0, i, board_size-1]:             # <<<<<<<<<<<<<<
@@ -8004,7 +8004,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
     __pyx_t_7 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_4 * __pyx_v_board_view.strides[0]) ) + __pyx_t_5 * __pyx_v_board_view.strides[1]) ) + __pyx_t_6 * __pyx_v_board_view.strides[2]) ))) != 0);
     if (__pyx_t_7) {
 
-      /* "fights/envs/cythonfn.pyx":372
+      /* "fights/envs/puoribor_cython.pyx":372
  *     for i in range(board_size):
  *         if board_view[0, i, board_size-1]:
  *             return 1             # <<<<<<<<<<<<<<
@@ -8014,7 +8014,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
       __pyx_r = 1;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":371
+      /* "fights/envs/puoribor_cython.pyx":371
  *     cdef int i
  *     for i in range(board_size):
  *         if board_view[0, i, board_size-1]:             # <<<<<<<<<<<<<<
@@ -8023,7 +8023,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
  */
     }
 
-    /* "fights/envs/cythonfn.pyx":373
+    /* "fights/envs/puoribor_cython.pyx":373
  *         if board_view[0, i, board_size-1]:
  *             return 1
  *         if board_view[1, i, 0]:             # <<<<<<<<<<<<<<
@@ -8036,7 +8036,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
     __pyx_t_7 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_6 * __pyx_v_board_view.strides[0]) ) + __pyx_t_5 * __pyx_v_board_view.strides[1]) ) + __pyx_t_4 * __pyx_v_board_view.strides[2]) ))) != 0);
     if (__pyx_t_7) {
 
-      /* "fights/envs/cythonfn.pyx":374
+      /* "fights/envs/puoribor_cython.pyx":374
  *             return 1
  *         if board_view[1, i, 0]:
  *             return 1             # <<<<<<<<<<<<<<
@@ -8046,7 +8046,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
       __pyx_r = 1;
       goto __pyx_L0;
 
-      /* "fights/envs/cythonfn.pyx":373
+      /* "fights/envs/puoribor_cython.pyx":373
  *         if board_view[0, i, board_size-1]:
  *             return 1
  *         if board_view[1, i, 0]:             # <<<<<<<<<<<<<<
@@ -8056,7 +8056,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":375
+  /* "fights/envs/puoribor_cython.pyx":375
  *         if board_view[1, i, 0]:
  *             return 1
  *     return 0             # <<<<<<<<<<<<<<
@@ -8066,7 +8066,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":368
+  /* "fights/envs/puoribor_cython.pyx":368
  *     return 0
  * 
  * cdef int _check_wins(int [:,:,:] board_view, int board_size):             # <<<<<<<<<<<<<<
@@ -8080,7 +8080,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
   return __pyx_r;
 }
 
-/* "fights/envs/cythonfn.pyx":377
+/* "fights/envs/puoribor_cython.pyx":377
  *     return 0
  * 
  * cdef (int, int) _agent_pos(int [:,:,:] board_view, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -8088,7 +8088,7 @@ static int __pyx_f_6fights_4envs_8cythonfn__check_wins(__Pyx_memviewslice __pyx_
  *     for i in range(board_size):
  */
 
-static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_agent_id, int __pyx_v_board_size) {
+static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_15puoribor_cython__agent_pos(__Pyx_memviewslice __pyx_v_board_view, int __pyx_v_agent_id, int __pyx_v_board_size) {
   int __pyx_v_i;
   int __pyx_v_j;
   __pyx_ctuple_int__and_int __pyx_r;
@@ -8106,7 +8106,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
   __pyx_ctuple_int__and_int __pyx_t_11;
   __Pyx_RefNannySetupContext("_agent_pos", 0);
 
-  /* "fights/envs/cythonfn.pyx":379
+  /* "fights/envs/puoribor_cython.pyx":379
  * cdef (int, int) _agent_pos(int [:,:,:] board_view, int agent_id, int board_size):
  *     cdef int i, j
  *     for i in range(board_size):             # <<<<<<<<<<<<<<
@@ -8118,7 +8118,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "fights/envs/cythonfn.pyx":380
+    /* "fights/envs/puoribor_cython.pyx":380
  *     cdef int i, j
  *     for i in range(board_size):
  *         for j in range(board_size):             # <<<<<<<<<<<<<<
@@ -8130,7 +8130,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "fights/envs/cythonfn.pyx":381
+      /* "fights/envs/puoribor_cython.pyx":381
  *     for i in range(board_size):
  *         for j in range(board_size):
  *             if board_view[agent_id, i, j]:             # <<<<<<<<<<<<<<
@@ -8143,7 +8143,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
       __pyx_t_10 = ((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_board_view.data + __pyx_t_7 * __pyx_v_board_view.strides[0]) ) + __pyx_t_8 * __pyx_v_board_view.strides[1]) ) + __pyx_t_9 * __pyx_v_board_view.strides[2]) ))) != 0);
       if (__pyx_t_10) {
 
-        /* "fights/envs/cythonfn.pyx":382
+        /* "fights/envs/puoribor_cython.pyx":382
  *         for j in range(board_size):
  *             if board_view[agent_id, i, j]:
  *                 return (i, j)             # <<<<<<<<<<<<<<
@@ -8154,7 +8154,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
         __pyx_r = __pyx_t_11;
         goto __pyx_L0;
 
-        /* "fights/envs/cythonfn.pyx":381
+        /* "fights/envs/puoribor_cython.pyx":381
  *     for i in range(board_size):
  *         for j in range(board_size):
  *             if board_view[agent_id, i, j]:             # <<<<<<<<<<<<<<
@@ -8165,7 +8165,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
     }
   }
 
-  /* "fights/envs/cythonfn.pyx":383
+  /* "fights/envs/puoribor_cython.pyx":383
  *             if board_view[agent_id, i, j]:
  *                 return (i, j)
  *     return (-1, -1)             # <<<<<<<<<<<<<<
@@ -8175,7 +8175,7 @@ static __pyx_ctuple_int__and_int __pyx_f_6fights_4envs_8cythonfn__agent_pos(__Py
   __pyx_r = __pyx_t_11;
   goto __pyx_L0;
 
-  /* "fights/envs/cythonfn.pyx":377
+  /* "fights/envs/puoribor_cython.pyx":377
  *     return 0
  * 
  * cdef (int, int) _agent_pos(int [:,:,:] board_view, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -22369,7 +22369,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "fights.envs.cythonfn.array", /*tp_name*/
+  "fights.envs.puoribor_cython.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -22491,7 +22491,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "fights.envs.cythonfn.Enum", /*tp_name*/
+  "fights.envs.puoribor_cython.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -22755,7 +22755,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "fights.envs.cythonfn.memoryview", /*tp_name*/
+  "fights.envs.puoribor_cython.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -22896,7 +22896,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "fights.envs.cythonfn._memoryviewslice", /*tp_name*/
+  "fights.envs.puoribor_cython._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -22981,17 +22981,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_cythonfn(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_puoribor_cython(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_cythonfn},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_puoribor_cython},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "cythonfn",
+    "puoribor_cython",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -23075,7 +23075,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_curpos_y, __pyx_k_curpos_y, sizeof(__pyx_k_curpos_y), 0, 0, 1, 1},
   {&__pyx_n_s_cx, __pyx_k_cx, sizeof(__pyx_k_cx), 0, 0, 1, 1},
   {&__pyx_n_s_cy, __pyx_k_cy, sizeof(__pyx_k_cy), 0, 0, 1, 1},
-  {&__pyx_kp_s_cythonfn_pyx, __pyx_k_cythonfn_pyx, sizeof(__pyx_k_cythonfn_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_delpos_x, __pyx_k_delpos_x, sizeof(__pyx_k_delpos_x), 0, 0, 1, 1},
   {&__pyx_n_s_delpos_y, __pyx_k_delpos_y, sizeof(__pyx_k_delpos_y), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
@@ -23087,7 +23086,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
   {&__pyx_n_s_fast_step, __pyx_k_fast_step, sizeof(__pyx_k_fast_step), 0, 0, 1, 1},
-  {&__pyx_n_s_fights_envs_cythonfn, __pyx_k_fights_envs_cythonfn, sizeof(__pyx_k_fights_envs_cythonfn), 0, 0, 1, 1},
+  {&__pyx_n_s_fights_envs_puoribor_cython, __pyx_k_fights_envs_puoribor_cython, sizeof(__pyx_k_fights_envs_puoribor_cython), 0, 0, 1, 1},
   {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
@@ -23135,6 +23134,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_pre_board, __pyx_k_pre_board, sizeof(__pyx_k_pre_board), 0, 0, 1, 1},
   {&__pyx_n_s_pre_walls_remaining, __pyx_k_pre_walls_remaining, sizeof(__pyx_k_pre_walls_remaining), 0, 0, 1, 1},
+  {&__pyx_kp_s_puoribor_cython_pyx, __pyx_k_puoribor_cython_pyx, sizeof(__pyx_k_puoribor_cython_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_getbuffer, __pyx_k_pyx_getbuffer, sizeof(__pyx_k_pyx_getbuffer), 0, 0, 1, 1},
@@ -23196,7 +23196,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "fights/envs/cythonfn.pyx":39
+  /* "fights/envs/puoribor_cython.pyx":39
  * 
  *         if newpos_x == opppos_x and newpos_y == opppos_y:
  *             raise ValueError("cannot move to opponent's position")             # <<<<<<<<<<<<<<
@@ -23207,7 +23207,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "fights/envs/cythonfn.pyx":45
+  /* "fights/envs/puoribor_cython.pyx":45
  *         taxicab_dist = abs(delpos_x) + abs(delpos_y)
  *         if taxicab_dist == 0:
  *             raise ValueError("cannot move zero blocks")             # <<<<<<<<<<<<<<
@@ -23218,7 +23218,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "fights/envs/cythonfn.pyx":47
+  /* "fights/envs/puoribor_cython.pyx":47
  *             raise ValueError("cannot move zero blocks")
  *         elif taxicab_dist > 2:
  *             raise ValueError("cannot move more than two blocks")             # <<<<<<<<<<<<<<
@@ -23229,7 +23229,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "fights/envs/cythonfn.pyx":53
+  /* "fights/envs/puoribor_cython.pyx":53
  *             and not (curpos_x + delpos_x / 2 == opppos_x and curpos_y + delpos_y / 2 == opppos_y)
  *         ):
  *             raise ValueError("cannot jump over nothing")             # <<<<<<<<<<<<<<
@@ -23240,7 +23240,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "fights/envs/cythonfn.pyx":61
+  /* "fights/envs/puoribor_cython.pyx":61
  *                 # Only diagonal jumps are permitted.
  *                 # Agents cannot simply move in diagonal direction.
  *                 raise ValueError("cannot move diagonally")             # <<<<<<<<<<<<<<
@@ -23251,7 +23251,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "fights/envs/cythonfn.pyx":63
+  /* "fights/envs/puoribor_cython.pyx":63
  *                 raise ValueError("cannot move diagonally")
  *             elif _check_wall_blocked(board_view, curpos_x, curpos_y, opppos_x, opppos_y):
  *                 raise ValueError("cannot jump over walls")             # <<<<<<<<<<<<<<
@@ -23262,7 +23262,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "fights/envs/cythonfn.pyx":70
+  /* "fights/envs/puoribor_cython.pyx":70
  *                 board_view, curpos_x, curpos_y, original_jump_pos_x, original_jump_pos_y
  *             ):
  *                 raise ValueError(             # <<<<<<<<<<<<<<
@@ -23273,7 +23273,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "fights/envs/cythonfn.pyx":85
+  /* "fights/envs/puoribor_cython.pyx":85
  *             raise ValueError(f"no walls left for agent {agent_id}")
  *         if y == board_size-1:
  *             raise ValueError("cannot place wall on the edge")             # <<<<<<<<<<<<<<
@@ -23284,7 +23284,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "fights/envs/cythonfn.pyx":87
+  /* "fights/envs/puoribor_cython.pyx":87
  *             raise ValueError("cannot place wall on the edge")
  *         elif x == board_size-1:
  *             raise ValueError("right section out of board")             # <<<<<<<<<<<<<<
@@ -23295,7 +23295,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "fights/envs/cythonfn.pyx":89
+  /* "fights/envs/puoribor_cython.pyx":89
  *             raise ValueError("right section out of board")
  *         elif board_view[2, x, y] or board_view[2, x+1, y]:
  *             raise ValueError("wall already placed")             # <<<<<<<<<<<<<<
@@ -23306,7 +23306,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "fights/envs/cythonfn.pyx":91
+  /* "fights/envs/puoribor_cython.pyx":91
  *             raise ValueError("wall already placed")
  *         elif board_view[5, x, y]:
  *             raise ValueError("cannot create intersecting walls")             # <<<<<<<<<<<<<<
@@ -23317,7 +23317,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "fights/envs/cythonfn.pyx":115
+  /* "fights/envs/puoribor_cython.pyx":115
  *     elif action_type == 3:  # Rotate section
  *         if not _check_in_range(x, y, bottom_right=board_size-3):
  *             raise ValueError("rotation region out of board")             # <<<<<<<<<<<<<<
@@ -23328,7 +23328,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "fights/envs/cythonfn.pyx":128
+  /* "fights/envs/puoribor_cython.pyx":128
  *         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):
  *             if action_type == 3:
  *                 raise ValueError("cannot rotate to block all paths")             # <<<<<<<<<<<<<<
@@ -23339,7 +23339,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "fights/envs/cythonfn.pyx":130
+  /* "fights/envs/puoribor_cython.pyx":130
  *                 raise ValueError("cannot rotate to block all paths")
  *             else:
  *                 raise ValueError("cannot place wall blocking all paths")             # <<<<<<<<<<<<<<
@@ -23350,7 +23350,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "fights/envs/cythonfn.pyx":174
+  /* "fights/envs/puoribor_cython.pyx":174
  *         px - 1 : px + 4, py : py + 4
  *     ] = vertical_region_midpoints_new
  *     board[2] = padded_horizontal[1:-1, 1:-1]             # <<<<<<<<<<<<<<
@@ -23364,7 +23364,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "fights/envs/cythonfn.pyx":255
+  /* "fights/envs/puoribor_cython.pyx":255
  *     directions[11][:] = [0, 2]
  * 
  *     legal_actions_np = np.zeros((4, 9, 9), dtype=np.int_)             # <<<<<<<<<<<<<<
@@ -23595,7 +23595,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
-  /* "fights/envs/cythonfn.pyx":6
+  /* "fights/envs/puoribor_cython.pyx":6
  * cimport numpy as np
  * 
  * def fast_step(             # <<<<<<<<<<<<<<
@@ -23605,9 +23605,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__40 = PyTuple_Pack(23, __pyx_n_s_pre_board, __pyx_n_s_pre_walls_remaining, __pyx_n_s_agent_id, __pyx_n_s_action, __pyx_n_s_board_size, __pyx_n_s_action_type, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_board, __pyx_n_s_walls_remaining, __pyx_n_s_board_view, __pyx_n_s_walls_remaining_view, __pyx_n_s_curpos_x, __pyx_n_s_curpos_y, __pyx_n_s_newpos_x, __pyx_n_s_newpos_y, __pyx_n_s_opppos_x, __pyx_n_s_opppos_y, __pyx_n_s_delpos_x, __pyx_n_s_delpos_y, __pyx_n_s_taxicab_dist, __pyx_n_s_original_jump_pos_x, __pyx_n_s_original_jump_pos_y); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(5, 0, 23, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cythonfn_pyx, __pyx_n_s_fast_step, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(5, 0, 23, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_puoribor_cython_pyx, __pyx_n_s_fast_step, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 6, __pyx_L1_error)
 
-  /* "fights/envs/cythonfn.pyx":236
+  /* "fights/envs/puoribor_cython.pyx":236
  *     return 1
  * 
  * def legal_actions(state, int agent_id, int board_size):             # <<<<<<<<<<<<<<
@@ -23617,7 +23617,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__42 = PyTuple_Pack(15, __pyx_n_s_state, __pyx_n_s_agent_id, __pyx_n_s_board_size, __pyx_n_s_dir_id, __pyx_n_s_action_type, __pyx_n_s_next_pos_x, __pyx_n_s_next_pos_y, __pyx_n_s_cx, __pyx_n_s_cy, __pyx_n_s_nowpos_x, __pyx_n_s_nowpos_y, __pyx_n_s_directions, __pyx_n_s_board_view, __pyx_n_s_legal_actions_np, __pyx_n_s_legal_actions_np_view); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(3, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cythonfn_pyx, __pyx_n_s_legal_actions, 236, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(3, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_puoribor_cython_pyx, __pyx_n_s_legal_actions, 236, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 236, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -23903,11 +23903,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initcythonfn(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initcythonfn(void)
+__Pyx_PyMODINIT_FUNC initpuoribor_cython(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initpuoribor_cython(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_cythonfn(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_cythonfn(void)
+__Pyx_PyMODINIT_FUNC PyInit_puoribor_cython(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_puoribor_cython(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -23974,7 +23974,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_cythonfn(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_puoribor_cython(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -23987,7 +23987,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_cythonfn(PyObject *__pyx_pyinit_mo
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'cythonfn' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'puoribor_cython' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -24002,7 +24002,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_cythonfn(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_puoribor_cython(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -24039,7 +24039,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("cythonfn", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("puoribor_cython", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -24057,14 +24057,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_fights__envs__cythonfn) {
+  if (__pyx_module_is_main_fights__envs__puoribor_cython) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "fights.envs.cythonfn")) {
-      if (unlikely(PyDict_SetItemString(modules, "fights.envs.cythonfn", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "fights.envs.puoribor_cython")) {
+      if (unlikely(PyDict_SetItemString(modules, "fights.envs.puoribor_cython", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -24085,7 +24085,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "fights/envs/cythonfn.pyx":3
+  /* "fights/envs/puoribor_cython.pyx":3
  * #cython: language_level=3, boundscheck=False, wraparound=False, initializedcheck=False, cdivision=True
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -24097,31 +24097,31 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":6
+  /* "fights/envs/puoribor_cython.pyx":6
  * cimport numpy as np
  * 
  * def fast_step(             # <<<<<<<<<<<<<<
  *     pre_board,
  *     pre_walls_remaining,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6fights_4envs_8cythonfn_1fast_step, NULL, __pyx_n_s_fights_envs_cythonfn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6fights_4envs_15puoribor_cython_1fast_step, NULL, __pyx_n_s_fights_envs_puoribor_cython); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_fast_step, __pyx_t_1) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":236
+  /* "fights/envs/puoribor_cython.pyx":236
  *     return 1
  * 
  * def legal_actions(state, int agent_id, int board_size):             # <<<<<<<<<<<<<<
  * 
  *     cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6fights_4envs_8cythonfn_3legal_actions, NULL, __pyx_n_s_fights_envs_cythonfn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6fights_4envs_15puoribor_cython_3legal_actions, NULL, __pyx_n_s_fights_envs_puoribor_cython); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_legal_actions, __pyx_t_1) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "fights/envs/cythonfn.pyx":1
+  /* "fights/envs/puoribor_cython.pyx":1
  * #cython: language_level=3, boundscheck=False, wraparound=False, initializedcheck=False, cdivision=True             # <<<<<<<<<<<<<<
  * 
  * import numpy as np
@@ -24291,11 +24291,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init fights.envs.cythonfn", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init fights.envs.puoribor_cython", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init fights.envs.cythonfn");
+    PyErr_SetString(PyExc_ImportError, "init fights.envs.puoribor_cython");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

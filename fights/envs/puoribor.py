@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from fights.envs import cythonfn
+from fights.envs import puoribor_cython
 
 
 PuoriborAction: TypeAlias = ArrayLike
@@ -264,7 +264,7 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        next_information = cythonfn.fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
+        next_information = puoribor_cython.fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
 
         next_state = PuoriborState(
             board=next_information[0],
@@ -288,7 +288,7 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
         :returns:
             A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
         """
-        return cythonfn.legal_actions(state, agent_id, self.board_size)
+        return puoribor_cython.legal_actions(state, agent_id, self.board_size)
 
     def _check_in_range(self, pos: tuple, bottom_right: int = None) -> np.bool_:
         if bottom_right is None:
