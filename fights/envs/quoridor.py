@@ -329,7 +329,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             if len(zero_indices) == 0:
                 if y % 2 == 0:
                     raise ValueError("cannot create intersecting walls")
-            elif y - int(zero_indices[-1]) % 2 == 1:
+            elif (y - int(zero_indices[-1])) % 2 == 1:
                 raise ValueError("cannot create intersecting walls")
             board[2, x, y] = 1 + agent_id
             board[2, x + 1, y] = 1 + agent_id
@@ -353,7 +353,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             if len(zero_indices) == 0:
                 if x % 2 == 0:
                     raise ValueError("cannot create intersecting walls")
-            elif x - int(zero_indices[-1]) % 2 == 1:
+            elif (x - int(zero_indices[-1])) % 2 == 1:
                 raise ValueError("cannot create intersecting walls")
             board[3, x, y] = 1 + agent_id
             board[3, x, y + 1] = 1 + agent_id
