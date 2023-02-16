@@ -23,7 +23,7 @@ if sys.version_info < (3, 10):
 else:
     from typing import TypeAlias
 
-from fights.envs import quoridor_cython
+from fights.envs.quoridor_cython import fast_step, fast_legal_actions
 from fights.base import BaseEnv, BaseState
 
 QuoridorAction: TypeAlias = ArrayLike
@@ -243,7 +243,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        next_information = quoridor_cython.fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
+        next_information = fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
 
         next_state = QuoridorState(
             board=next_information[0],
@@ -267,7 +267,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         :returns:
             A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
         """
-        return quoridor_cython.legal_actions(state, agent_id, self.board_size)
+        return fast_legal_actions(state, agent_id, self.board_size)
 
     def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
         if bottom_right is None:
