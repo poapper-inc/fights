@@ -23,7 +23,7 @@ if sys.version_info < (3, 10):
 else:
     from typing import TypeAlias
 
-
+from fights.envs import quoridor_cython
 from fights.base import BaseEnv, BaseState
 
 QuoridorAction: TypeAlias = ArrayLike
