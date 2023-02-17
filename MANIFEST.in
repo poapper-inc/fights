@@ -1,1 +1,1 @@
-recursive-include fights *.pyi
+recursive-include fights *.pyi *.pyx
