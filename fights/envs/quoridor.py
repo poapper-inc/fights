@@ -243,7 +243,9 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        next_information = fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
+        next_information = fast_step(
+            state.board, state.walls_remaining, agent_id, action, self.board_size
+        )
 
         next_state = QuoridorState(
             board=next_information[0],
@@ -254,7 +256,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         if post_step_fn is not None:
             post_step_fn(next_state, agent_id, action)
         return next_state
-    
+
     def legal_actions(self, state: QuoridorState, agent_id: int) -> NDArray[np.int_]:
         """
         Find possible actions for the agent.
@@ -263,7 +265,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             Current state of the environment.
         :arg agent_id:
             Agent_id of the agent.
-        
+
         :returns:
             A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
         """

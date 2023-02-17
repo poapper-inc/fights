@@ -1,16 +1,13 @@
 """
 Quoridor Environment Benchmark
 """
-
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
-import numpy as np
-import time
-
 from fights.base import BaseAgent
 from fights.envs import quoridor
+
+import time
+
+import numpy as np
+
 
 class RandomAgent(BaseAgent):
     env_id = ("quoridor", 0)  # type: ignore
@@ -22,6 +19,7 @@ class RandomAgent(BaseAgent):
     def __call__(self, state: quoridor.QuoridorState) -> quoridor.QuoridorAction:
         legal_actions_np = quoridor.QuoridorEnv().legal_actions(state, self.agent_id)
         return self._rng.choice(np.argwhere(legal_actions_np == 1))
+
 
 def run():
     assert quoridor.QuoridorEnv.env_id == RandomAgent.env_id
@@ -47,7 +45,6 @@ def run():
     end = time.time()
     print(f"{end - start} sec")
 
+
 if __name__ == "__main__":
     run()
-    
-    

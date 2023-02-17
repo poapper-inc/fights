@@ -26,7 +26,6 @@ else:
 from fights.base import BaseEnv, BaseState
 
 
-
 PuoriborAction: TypeAlias = ArrayLike
 """
 Alias of :obj:`ArrayLike` to describe the action type.
@@ -264,7 +263,9 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        next_information = puoribor_cython.fast_step(state.board, state.walls_remaining, agent_id, action, self.board_size)
+        next_information = puoribor_cython.fast_step(
+            state.board, state.walls_remaining, agent_id, action, self.board_size
+        )
 
         next_state = PuoriborState(
             board=next_information[0],
@@ -275,7 +276,7 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
         if post_step_fn is not None:
             post_step_fn(next_state, agent_id, action)
         return next_state
-    
+
     def legal_actions(self, state: PuoriborState, agent_id: int) -> NDArray[np.int_]:
         """
         Find possible actions for the agent.
@@ -284,23 +285,25 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
             Current state of the environment.
         :arg agent_id:
             Agent_id of the agent.
-        
+
         :returns:
             A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
         """
         return puoribor_cython.legal_actions(state, agent_id, self.board_size)
 
-    def _check_in_range(self, pos: tuple, bottom_right: int = None) -> np.bool_:
+    def _check_in_range(
+        self, pos: tuple, bottom_right: Optional[int] = None
+    ) -> np.bool_:
         if bottom_right is None:
             bottom_right = self.board_size
-        return ((0 <= pos[0] < bottom_right) and (0 <= pos[1] < bottom_right))
+        return (0 <= pos[0] < bottom_right) and (0 <= pos[1] < bottom_right)
 
     def _check_wall_blocked(
         self,
         board: NDArray[np.int_],
         current_pos: tuple,
         new_pos: tuple,
-    ) -> bool:
+    ) -> np.bool_:
         if new_pos[0] > current_pos[0]:
             return np.any(board[3, current_pos[0] : new_pos[0], current_pos[1]])
         if new_pos[0] < current_pos[0]:
@@ -309,9 +312,9 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
             return np.any(board[2, current_pos[0], current_pos[1] : new_pos[1]])
         if new_pos[1] < current_pos[1]:
             return np.any(board[2, current_pos[0], new_pos[1] : current_pos[1]])
-        return False
+        return np.False_
 
-    def _check_wins(self, board: NDArray[np.int_]) -> bool:
+    def _check_wins(self, board: NDArray[np.int_]) -> np.bool_:
         return board[0, :, -1].any() or board[1, :, 0].any()
 
     def initialize_state(self) -> PuoriborState:

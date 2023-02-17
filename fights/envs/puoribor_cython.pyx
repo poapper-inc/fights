@@ -23,7 +23,7 @@ def fast_step(
 
     cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
-    
+
     if not _check_in_range(x, y, board_size):
         raise ValueError(f"out of board: {(x, y)}")
     if not 0 <= agent_id <= 1:
@@ -122,7 +122,7 @@ def fast_step(
         raise ValueError(f"invalid action_type: {action_type}")
 
     if action_type > 0:
-        
+
         if not _check_path_exists(board_view, 0, board_size) or not _check_path_exists(board_view, 1, board_size):
             if action_type == 3:
                 raise ValueError("cannot rotate to block all paths")
@@ -188,7 +188,7 @@ cdef int _is_moving_legal(int [:,:,:] board_view, int x, int y, int agent_id, in
 
     cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
-    
+
     if not _check_in_range(x, y, board_size):
         return 0
 
@@ -234,7 +234,7 @@ cdef int _is_moving_legal(int [:,:,:] board_view, int x, int y, int agent_id, in
     return 1
 
 def legal_actions(state, int agent_id, int board_size):
-    
+
     cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
     cdef int directions[12][2]
     cdef int [:,:,:] board_view = state.board
@@ -255,7 +255,7 @@ def legal_actions(state, int agent_id, int board_size):
     legal_actions_np = np.zeros((4, 9, 9), dtype=np.int_)
     cdef int [:,:,:] legal_actions_np_view = legal_actions_np
     (nowpos_x, nowpos_y) = _agent_pos(board_view, agent_id, board_size)
-    
+
     for dir_id in range(12):
         next_pos_x = nowpos_x + directions[dir_id][0]
         next_pos_y = nowpos_y + directions[dir_id][1]
@@ -298,7 +298,7 @@ cdef int _check_path_exists(int [:,:,:] board_view, int agent_id, int board_size
     for i in range(9):
         for j in range(9):
             visited[i][j] = 0
-    
+
     if agent_id:
         directions[0][:] = [0, -1]
         directions[1][:] = [1, 0]
@@ -312,7 +312,7 @@ cdef int _check_path_exists(int [:,:,:] board_view, int agent_id, int board_size
 
     (pos_x, pos_y) = _agent_pos(board_view, agent_id, board_size)
     if pos_y == goal:   return 1
-    
+
     queue_x[tail] = pos_x
     queue_y[tail] = pos_y
     tail += 1
