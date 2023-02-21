@@ -1,5 +1,42 @@
+[project]
+name = "fights"
+description = "Competitive artificial intelligence battle environments"
+readme = {file = "README.md", content-type = "text/markdown"}
+authors = [
+  {name = "PoApper, Inc.", email = "support@poapper.com"}
+]
+maintainers = [
+  {name = "Lucas Yunkyu Lee", email = "me@luc.li"},
+  {name = "Ryang Sohn", email = "loop.infinitely@gmail.com"},
+  {name = "Taemin Lee"},
+]
+requires-python = ">=3.7"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+license = {file = "LICENSE"}
+dependencies = [
+    "numpy >= 1.21",
+    "Cython"
+]
+dynamic = ["version"]
+
+[project.urls]
+documentation = "https://fights.readthedocs.io"
+repository = "https://github.com/poapper-inc/fights"
+
+[tool.setuptools.dynamic]
+version = {attr = "fights.__version__"}
+
 [build-system]
-requires = ["setuptools>=42", "wheel", "Cython", "numpy"]
+requires = ["setuptools", "wheel", "Cython", "numpy>=1.21"]
 build-backend = "setuptools.build_meta"
 
 [tool.black]
