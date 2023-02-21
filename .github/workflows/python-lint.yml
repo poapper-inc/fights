@@ -17,11 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install linting dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Run flake8
-        run: flake8 fights tests
-      - name: Run isort
-        run: isort --check --diff fights tests
-      - name: Run black
-        run: black --check --diff fights tests
+      - name: Run flake8, isort, black
+        run: tox -r -e lint
       - name: Run mypy
         run: tox -r -e typecheck
