@@ -24,7 +24,7 @@ classifiers = [
 license = {file = "LICENSE"}
 dependencies = [
     "numpy >= 1.21",
-    "Cython"
+    "typing_extensions"
 ]
 dynamic = ["version"]
 
