@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Callable, Dict, Deque, Optional
+from typing import Callable, Deque, Dict, Optional
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from fights.envs.quoridor_cython import fast_step, fast_legal_actions  # type: ignore
+from fights.envs.quoridor_cython import fast_legal_actions, fast_step  # type: ignore
 
 QuoridorAction: TypeAlias = ArrayLike
 """

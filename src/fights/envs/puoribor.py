@@ -26,7 +26,6 @@ else:
 from fights.base import BaseEnv, BaseState
 from fights.envs.puoribor_cython import fast_step, legal_actions  # type: ignore
 
-
 PuoriborAction: TypeAlias = ArrayLike
 """
 Alias of :obj:`ArrayLike` to describe the action type.

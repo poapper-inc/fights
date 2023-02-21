@@ -1,12 +1,12 @@
 """
 Quoridor Environment Benchmark
 """
-from fights.base import BaseAgent
-from fights.envs import quoridor
-
 import time
 
 import numpy as np
+
+from fights.base import BaseAgent
+from fights.envs import quoridor
 
 
 class RandomAgent(BaseAgent):
@@ -26,16 +26,13 @@ def run():
     start = time.time()
 
     for game in range(10):
-
         print(game)
 
         state = quoridor.QuoridorEnv().initialize_state()
         agents = [RandomAgent(0, game), RandomAgent(1, game)]
 
         while not state.done:
-
             for agent in agents:
-
                 action = agent(state)
                 state = quoridor.QuoridorEnv().step(state, agent.agent_id, action)
 
