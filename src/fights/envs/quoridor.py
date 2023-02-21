@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from .quoridor_cython import fast_step, fast_legal_actions
+from fights.envs.quoridor_cython import fast_step, fast_legal_actions  # type: ignore
 
 QuoridorAction: TypeAlias = ArrayLike
 """
