@@ -244,7 +244,11 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             pre_step_fn(state, agent_id, action)
 
         next_information = fast_step(
-            state.board, state.walls_remaining, agent_id, action, self.board_size
+            state.board,
+            state.walls_remaining,
+            agent_id,
+            np.array(action),
+            self.board_size,
         )
 
         next_state = QuoridorState(

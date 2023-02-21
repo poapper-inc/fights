@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from .puoribor_cython import fast_step, legal_actions
+from .puoribor_cython import fast_step, legal_actions  # type: ignore
 
 
 PuoriborAction: TypeAlias = ArrayLike
@@ -265,7 +265,11 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
             pre_step_fn(state, agent_id, action)
 
         next_information = fast_step(
-            state.board, state.walls_remaining, agent_id, action, self.board_size
+            state.board,
+            state.walls_remaining,
+            agent_id,
+            np.array(action, dtype=np.int_),
+            self.board_size,
         )
 
         next_state = PuoriborState(
