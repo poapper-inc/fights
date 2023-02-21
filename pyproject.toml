@@ -32,6 +32,9 @@ dynamic = ["version"]
 documentation = "https://fights.readthedocs.io"
 repository = "https://github.com/poapper-inc/fights"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.setuptools.dynamic]
 version = {attr = "fights.__version__"}
 

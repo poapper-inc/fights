@@ -1,5 +1,5 @@
 """
-Fights environment for Quoridor. (two player variant)
+Puoribor, a variant of the classical `Quoridor <https://en.wikipedia.org/wiki/Quoridor>`_ game.
 Coordinates are specified in the form of ``(x, y)``, where ``(0, 0)`` is the top left corner.
 All coordinates and directions are absolute and does not change between agents.
 Directions
@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass
-from typing import Callable, Dict, Deque, Optional
+from typing import Callable, Dict, Optional
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -23,10 +23,11 @@ if sys.version_info < (3, 10):
 else:
     from typing import TypeAlias
 
-from fights.envs.quoridor_cython import fast_step, fast_legal_actions
 from fights.base import BaseEnv, BaseState
+from .puoribor_cython import fast_step, legal_actions
 
-QuoridorAction: TypeAlias = ArrayLike
+
+PuoriborAction: TypeAlias = ArrayLike
 """
 Alias of :obj:`ArrayLike` to describe the action type.
 Encoded as an array of shape ``(3,)``, in the form of
@@ -35,16 +36,18 @@ Encoded as an array of shape ``(3,)``, in the form of
     - 0 (move piece)
     - 1 (place wall horizontally)
     - 2 (place wall vertically)
+    - 3 (rotate section)
 `coordinate_x`, `coordinate_y`
     - position to move the piece to
     - top or left position to place the wall
+    - top left position of the section to rotate
 """
 
 
 @dataclass
-class QuoridorState(BaseState):
+class PuoriborState(BaseState):
     """
-    ``QuoridorState`` represents the game state.
+    ``PuoriborState`` represents the game state.
     """
 
     board: NDArray[np.int_]
@@ -58,6 +61,8 @@ class QuoridorState(BaseState):
           by agent 0, 2 for agent 1)
         - ``C = 3``: label encoded positions of vertical walls. (encoding is same as
           ``C = 2``)
+        - ``C = 4``: one-hot encoded positions of horizontal walls' midpoints.
+        - ``C = 5``: one-hot encoded positions of vertical walls' midpoints.
     """
 
     walls_remaining: NDArray[np.int_]
@@ -84,6 +89,7 @@ class QuoridorState(BaseState):
         horizontal_wall_bold = "━━━"
         left_intersection = "├"
         middle_intersection = "┼"
+        middle_intersection_bold = "╋"
         right_intersection = "┤"
         left_intersection_bottom = "└"
         middle_intersection_bottom = "┴"
@@ -123,9 +129,14 @@ class QuoridorState(BaseState):
                         right_intersection_bottom if y == 8 else right_intersection
                     )
                 else:
-                    result += (
-                        middle_intersection_bottom if y == 8 else middle_intersection
-                    )
+                    if np.any(self.board[4:, x, y]):
+                        result += middle_intersection_bold
+                    else:
+                        result += (
+                            middle_intersection_bottom
+                            if y == 8
+                            else middle_intersection
+                        )
             result += "\n"
 
         return result
@@ -160,6 +171,16 @@ class QuoridorState(BaseState):
                     ((0, 1), (0, 0)),  # type: ignore
                     constant_values=0,
                 ),
+                np.pad(
+                    np.rot90(self.board[4], 2)[1:, 1:],
+                    ((0, 1), (0, 1)),  # type: ignore
+                    constant_values=0,
+                ),
+                np.pad(
+                    np.rot90(self.board[5], 2)[1:, 1:],
+                    ((0, 1), (0, 1)),  # type: ignore
+                    constant_values=0,
+                ),
             ]
         )
         return rotated
@@ -177,23 +198,23 @@ class QuoridorState(BaseState):
         }
 
     @staticmethod
-    def from_dict(serialized) -> QuoridorState:
+    def from_dict(serialized) -> PuoriborState:
         """
         Deserialize from serialized dict.
         :arg serialized:
             A serialized dict.
         :returns:
-            Deserialized ``QuoridorState`` object.
+            Deserialized ``PuoriborState`` object.
         """
-        return QuoridorState(
+        return PuoriborState(
             board=np.array(serialized["board"]),
             walls_remaining=np.array(serialized["walls_remaining"]),
             done=serialized["done"],
         )
 
 
-class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
-    env_id = ("quoridor", 0)  # type: ignore
+class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
+    env_id = ("puoribor", 3)  # type: ignore
     """
     Environment identifier in the form of ``(name, version)``.
     """
@@ -210,17 +231,17 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
 
     def step(
         self,
-        state: QuoridorState,
+        state: PuoriborState,
         agent_id: int,
-        action: QuoridorAction,
+        action: PuoriborAction,
         *,
         pre_step_fn: Optional[
-            Callable[[QuoridorState, int, QuoridorAction], None]
+            Callable[[PuoriborState, int, PuoriborAction], None]
         ] = None,
         post_step_fn: Optional[
-            Callable[[QuoridorState, int, QuoridorAction], None]
+            Callable[[PuoriborState, int, PuoriborAction], None]
         ] = None,
-    ) -> QuoridorState:
+    ) -> PuoriborState:
         """
         Step through the game, calculating the next state given the current state and
         action to take.
@@ -229,7 +250,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         :arg agent_id:
             ID of the agent that takes the action. (``0`` or ``1``)
         :arg action:
-            Agent action, encoded in the form described by :obj:`QuoridorAction`.
+            Agent action, encoded in the form described by :obj:`PuoriborAction`.
         :arg pre_step_fn:
             Callback to run before executing action. ``state``, ``agent_id`` and
             ``action`` will be provided as arguments.
@@ -247,7 +268,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             state.board, state.walls_remaining, agent_id, action, self.board_size
         )
 
-        next_state = QuoridorState(
+        next_state = PuoriborState(
             board=next_information[0],
             walls_remaining=next_information[1],
             done=next_information[2],
@@ -257,7 +278,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             post_step_fn(next_state, agent_id, action)
         return next_state
 
-    def legal_actions(self, state: QuoridorState, agent_id: int) -> NDArray[np.int_]:
+    def legal_actions(self, state: PuoriborState, agent_id: int) -> NDArray[np.int_]:
         """
         Find possible actions for the agent.
 
@@ -269,63 +290,37 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
         :returns:
             A numpy array of shape (4, 9, 9) which is one-hot encoding of possible actions.
         """
-        return fast_legal_actions(state, agent_id, self.board_size)
+        return legal_actions(state, agent_id, self.board_size)
 
-    def _check_in_range(self, pos: NDArray[np.int_], bottom_right=None) -> np.bool_:
+    def _check_in_range(
+        self, pos: tuple, bottom_right: Optional[int] = None
+    ) -> np.bool_:
         if bottom_right is None:
-            bottom_right = np.array([self.board_size, self.board_size])
-        return np.all(np.logical_and(np.array([0, 0]) <= pos, pos < bottom_right))
-
-    def _check_path_exists(self, board: NDArray[np.int_], agent_id: int) -> bool:
-        start_pos = tuple(np.argwhere(board[agent_id] == 1)[0])
-        visited = set()
-        q = Deque([start_pos])
-        goal_y = 8 if agent_id == 0 else 0
-        while q:  # Run BFS to determine path
-            here = q.popleft()
-            if here[1] == goal_y:
-                return True
-            for dx, dy in [(-1, 0), (0, -1), (0, 1), (1, 0)]:
-                there = (here[0] + dx, here[1] + dy)
-                if not np.all(
-                    np.logical_and(
-                        [0, 0] <= np.array(there),
-                        np.array(there) < [self.board_size, self.board_size],
-                    )
-                ) or self._check_wall_blocked(board, np.array(here), np.array(there)):
-                    continue
-                if there not in visited:
-                    visited.add(there)
-                    q.append(there)
-        return False
+            bottom_right = self.board_size
+        return (0 <= pos[0] < bottom_right) and (0 <= pos[1] < bottom_right)
 
     def _check_wall_blocked(
         self,
         board: NDArray[np.int_],
-        current_pos: NDArray[np.int_],
-        new_pos: NDArray[np.int_],
-    ) -> bool:
-        delta = new_pos - current_pos
-        right_check = delta[0] > 0 and np.any(
-            board[3, current_pos[0] : new_pos[0], current_pos[1]]
-        )
-        left_check = delta[0] < 0 and np.any(
-            board[3, new_pos[0] : current_pos[0], current_pos[1]]
-        )
-        down_check = delta[1] > 0 and np.any(
-            board[2, current_pos[0], current_pos[1] : new_pos[1]]
-        )
-        up_check = delta[1] < 0 and np.any(
-            board[2, current_pos[0], new_pos[1] : current_pos[1]]
-        )
-        return bool(right_check or left_check or down_check or up_check)
+        current_pos: tuple,
+        new_pos: tuple,
+    ) -> np.bool_:
+        if new_pos[0] > current_pos[0]:
+            return np.any(board[3, current_pos[0] : new_pos[0], current_pos[1]])
+        if new_pos[0] < current_pos[0]:
+            return np.any(board[3, new_pos[0] : current_pos[0], current_pos[1]])
+        if new_pos[1] > current_pos[1]:
+            return np.any(board[2, current_pos[0], current_pos[1] : new_pos[1]])
+        if new_pos[1] < current_pos[1]:
+            return np.any(board[2, current_pos[0], new_pos[1] : current_pos[1]])
+        return np.False_
 
-    def _check_wins(self, board: NDArray[np.int_]) -> bool:
-        return bool(board[0, :, -1].sum() or board[1, :, 0].sum())
+    def _check_wins(self, board: NDArray[np.int_]) -> np.bool_:
+        return board[0, :, -1].any() or board[1, :, 0].any()
 
-    def initialize_state(self) -> QuoridorState:
+    def initialize_state(self) -> PuoriborState:
         """
-        Initialize a :obj:`QuoridorState` object with correct environment parameters.
+        Initialize a :obj:`PuoriborState` object with correct environment parameters.
         :returns:
             Created initial state object.
         """
@@ -344,13 +339,15 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
                 np.fliplr(starting_pos_0),
                 np.zeros((self.board_size, self.board_size), dtype=np.int_),
                 np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
+                np.zeros((self.board_size, self.board_size), dtype=np.int_),
             ]
         )
 
-        initial_state = QuoridorState(
+        new_state = PuoriborState(
             board=starting_board,
-            done=False,
             walls_remaining=np.array((self.max_walls, self.max_walls)),
+            done=False,
         )
 
-        return initial_state
+        return new_state
