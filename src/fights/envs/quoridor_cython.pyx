@@ -8,9 +8,9 @@ from cython.parallel import prange, parallel
 def fast_step(
     long[:, :, :] pre_board,
     long[:] pre_walls_remaining,
-    long agent_id,
+    int agent_id,
     long[:] action,
-    long board_size
+    int board_size
 ):
 
     cdef long action_type = action[0]
@@ -23,9 +23,9 @@ def fast_step(
     cdef long [:,:,:] board_view = board
     cdef long [:] walls_remaining_view = walls_remaining
 
-    cdef long curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
-    cdef long taxicab_dist, original_jump_pos_x, original_jump_pos_y
-    cdef long cx, cy, zero_index
+    cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
+    cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
+    cdef int cx, cy, zero_index
 
     if not _check_in_range(x, y, board_size):
         raise ValueError(f"out of board: {(x, y)}")
@@ -136,10 +136,10 @@ def fast_step(
 
     return (board, walls_remaining, _check_wins(board_view, board_size))
 
-cdef int _is_moving_legal(long[:,:,:] board_view, long x, long y, long agent_id, long board_size):
+cdef int _is_moving_legal(long[:,:,:] board_view, int x, int y, int agent_id, int board_size):
 
-    cdef long curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
-    cdef long taxicab_dist, original_jump_pos_x, original_jump_pos_y
+    cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
+    cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
     
     if not _check_in_range(x, y, board_size):
         return 0
@@ -185,10 +185,10 @@ cdef int _is_moving_legal(long[:,:,:] board_view, long x, long y, long agent_id,
 
     return 1
 
-def fast_legal_actions(state, long agent_id, long board_size):
+def fast_legal_actions(state, int agent_id, int board_size):
     
-    cdef long dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
-    cdef long directions[12][2]
+    cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
+    cdef int directions[12][2]
     cdef long [:,:,:] board_view = state.board
 
     directions[0][:] = [0, -2]
@@ -224,20 +224,20 @@ def fast_legal_actions(state, long agent_id, long board_size):
                     legal_actions_np_view[action_type, cx, cy] = 1
     return legal_actions_np
 
-cdef long _check_in_range(long pos_x, long pos_y, long bottom_right = 9):
+cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):
     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)
 
-cdef long _check_path_exists(long [:,:,:] board_view, long agent_id, long board_size):
+cdef int _check_path_exists(long [:,:,:] board_view, int agent_id, int board_size):
 
-    cdef long pos_x, pos_y
-    cdef long i, j
-    cdef long cnt = 0, tail = 0
-    cdef long there_x, there_y
-    cdef long goal = (1-agent_id) * 8
-    cdef long queue_x[81]
-    cdef long queue_y[81]
-    cdef long visited[81][81]
-    cdef long directions[4][2]
+    cdef int pos_x, pos_y
+    cdef int i, j
+    cdef int cnt = 0, tail = 0
+    cdef int there_x, there_y
+    cdef int goal = (1-agent_id) * 8
+    cdef int queue_x[81]
+    cdef int queue_y[81]
+    cdef int visited[81][81]
+    cdef int directions[4][2]
 
     for i in range(9):
         for j in range(9):
@@ -285,8 +285,8 @@ cdef long _check_path_exists(long [:,:,:] board_view, long agent_id, long board_
 
     return 0
 
-cdef int _check_wall_blocked(long[:,:,:] board_view, long cx, long cy, long nx, long ny):
-    cdef long i
+cdef int _check_wall_blocked(long[:,:,:] board_view, int cx, int cy, int nx, int ny):
+    cdef int i
     if nx > cx:
         for i in range(cx, nx):
             if board_view[3, i, cy]:
@@ -309,7 +309,7 @@ cdef int _check_wall_blocked(long[:,:,:] board_view, long cx, long cy, long nx, 
         return 0
     return 0
 
-cdef int _check_wins(long[:,:,:] board_view, long board_size):
+cdef int _check_wins(long[:,:,:] board_view, int board_size):
     cdef int i
     for i in range(board_size):
         if board_view[0, i, board_size-1]:
@@ -318,7 +318,7 @@ cdef int _check_wins(long[:,:,:] board_view, long board_size):
             return 1
     return 0
 
-cdef (int, int) _agent_pos(long[:,:,:] board_view, long agent_id, long board_size):
+cdef (int, int) _agent_pos(long[:,:,:] board_view, int agent_id, int board_size):
     cdef int i, j
     for i in range(board_size):
         for j in range(board_size):
