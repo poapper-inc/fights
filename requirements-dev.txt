@@ -8,3 +8,4 @@ mypy
 flake8-bugbear
 build
 msgpack
+Cython
