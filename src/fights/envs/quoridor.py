@@ -247,7 +247,7 @@ class QuoridorEnv(BaseEnv[QuoridorState, QuoridorAction]):
             state.board,
             state.walls_remaining,
             agent_id,
-            np.array(action),
+            np.array(action, np.int_),
             self.board_size,
         )
 
