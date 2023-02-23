@@ -216,7 +216,8 @@ def fast_legal_actions(state, int agent_id, int board_size):
         for cx in range(board_size-1):
             for cy in range(board_size-1):
                 try:
-                    fast_step(state.board, state.walls_remaining, agent_id, (action_type, cx, cy), board_size)
+                    fast_step(state.board, state.walls_remaining, agent_id,
+                              np.array([action_type, cx, cy], dtype=np.int_), board_size)
                 except:
                     ...
                 else:
