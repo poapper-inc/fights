@@ -9,3 +9,4 @@ flake8-bugbear
 build
 msgpack
 Cython
+cibuildwheel
