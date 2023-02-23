@@ -274,7 +274,7 @@ class PuoriborEnv(BaseEnv[PuoriborState, PuoriborAction]):
         next_state = PuoriborState(
             board=next_information[0],
             walls_remaining=next_information[1],
-            done=next_information[2],
+            done=bool(next_information[2]),
         )
 
         if post_step_fn is not None:
