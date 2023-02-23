@@ -24,7 +24,7 @@ else:
     from typing import TypeAlias
 
 from fights.base import BaseEnv, BaseState
-from fights.envs.puoribor_cython import fast_step, legal_actions  # type: ignore
+from fights.envs.puoribor_cython import fast_step, legal_actions
 
 PuoriborAction: TypeAlias = ArrayLike
 """
