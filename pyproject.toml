@@ -36,7 +36,7 @@ repository = "https://github.com/poapper-inc/fights"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"fights.envs" = ["*.pyx"]
+"fights.envs" = ["*.pyx", "*.pyi"]
 
 [tool.setuptools.dynamic]
 version = {attr = "fights.__version__"}
