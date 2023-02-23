@@ -14,7 +14,6 @@ def fast_step(
     long[:] action,
     int board_size
 ):
-
     cdef long action_type = action[0]
     cdef long x = action[1]
     cdef long y = action[2]
@@ -139,10 +138,9 @@ def fast_step(
     return (board, walls_remaining, _check_wins(board_view, board_size))
 
 cdef int _is_moving_legal(long[:,:,:] board_view, int x, int y, int agent_id, int board_size):
-
     cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
-    
+
     if not _check_in_range(x, y, board_size):
         return 0
 
@@ -188,7 +186,6 @@ cdef int _is_moving_legal(long[:,:,:] board_view, int x, int y, int agent_id, in
     return 1
 
 def fast_legal_actions(state, int agent_id, int board_size):
-    
     cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
     cdef int directions[12][2]
     cdef long [:,:,:] board_view = state.board
@@ -209,7 +206,7 @@ def fast_legal_actions(state, int agent_id, int board_size):
     legal_actions_np = np.zeros((3, 9, 9), dtype=np.int_)
     cdef long [:,:,:] legal_actions_np_view = legal_actions_np
     (nowpos_x, nowpos_y) = _agent_pos(board_view, agent_id, board_size)
-    
+
     for dir_id in range(12):
         next_pos_x = nowpos_x + directions[dir_id][0]
         next_pos_y = nowpos_y + directions[dir_id][1]
@@ -244,7 +241,7 @@ cdef int _check_path_exists(long [:,:,:] board_view, int agent_id, int board_siz
     for i in range(9):
         for j in range(9):
             visited[i][j] = 0
-    
+
     if agent_id:
         directions[0][:] = [0, -1]
         directions[1][:] = [1, 0]
@@ -258,7 +255,7 @@ cdef int _check_path_exists(long [:,:,:] board_view, int agent_id, int board_siz
 
     (pos_x, pos_y) = _agent_pos(board_view, agent_id, board_size)
     if pos_y == goal:   return 1
-    
+
     queue_x[tail] = pos_x
     queue_y[tail] = pos_y
     tail += 1

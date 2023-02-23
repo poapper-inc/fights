@@ -12,7 +12,6 @@ def fast_step(
     long[:] action,
     int board_size
 ):
-
     cdef long action_type = action[0]
     cdef long x = action[1]
     cdef long y = action[2]
@@ -187,7 +186,6 @@ cdef void board_rotation(
     return
 
 cdef int _is_moving_legal(long [:,:,:] board_view, int x, int y, int agent_id, int board_size):
-
     cdef int curpos_x, curpos_y, newpos_x, newpos_y, opppos_x, opppos_y, delpos_x, delpos_y
     cdef int taxicab_dist, original_jump_pos_x, original_jump_pos_y
 
@@ -236,7 +234,6 @@ cdef int _is_moving_legal(long [:,:,:] board_view, int x, int y, int agent_id, i
     return 1
 
 def legal_actions(state, int agent_id, int board_size):
-
     cdef int dir_id, action_type, next_pos_x, next_pos_y, cx, cy, nowpos_x, nowpos_y
     cdef int directions[12][2]
     cdef long [:,:,:] board_view = state.board
@@ -286,7 +283,6 @@ cdef int _check_in_range(int pos_x, int pos_y, int bottom_right = 9):
     return (0 <= pos_x < bottom_right and 0 <= pos_y < bottom_right)
 
 cdef int _check_path_exists(long [:,:,:] board_view, int agent_id, int board_size):
-
     cdef int pos_x, pos_y
     cdef int i, j
     cdef int cnt = 0, tail = 0
