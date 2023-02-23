@@ -227,3 +227,6 @@ poetry.toml
 
 # ignore auto-generated c files
 *.c
+
+# cibuildwheel
+wheelhouse/
