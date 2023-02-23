@@ -57,6 +57,7 @@ ignore_missing_imports = true
 [tool.cibuildwheel]
 build-frontend = "build"
 skip = "pp* *-musllinux*"
-archs = ["x86_64", "AMD64"]
+archs = ["x86_64"]
+windows = ["AMD64"]
 test-requires = "pytest"
 test-command = "pytest {project}/tests"
