@@ -29,6 +29,10 @@ else:
 
 from fights.base import BaseEnv, BaseState
 
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from . import othello_cythonfn
+
 OthelloAction: TypeAlias = ArrayLike
 """
 Alias of :obj:'ArrayLike' to describe the action type.
@@ -59,8 +63,7 @@ class OthelloState(BaseState):
     Array of shape ''(C, W, H)'',
     where C is channel index
     and W, H is board width, height.
-    * Note that if there is no possible location in legal_dict, which means the turn needs jump,
-      then (W=3, H=3) of legal_actions becomes 1, which means the agent can jump its turn.
+    * Note that (W=3, H=3) is 1 when the agent can only jump
 
     Channels
         - ''C = 0'': one-hot encoded possible positions of agent 0. (black)
@@ -76,28 +79,6 @@ class OthelloState(BaseState):
         - Win : 1
         - Lose : -1
         - Draw or not done yet : 0
-    """
-
-    legal_set: list[defaultdict[tuple[int, int], set[int]]]
-    """
-    List of length 2,
-    where each element is a defaultdict which contains 'maybe' possible locations for
-    each agent.
-
-    defaultdict
-        - key(tuple) : empty locations next to opponent's stone.
-        - value(set) : directions where opponent's stone is next to the location.
-    """
-
-    legal_dict: list[dict]
-    """
-    List of length 2,
-    where each element is a dictionary which contains possible locations for each agent.
-    * Note that legal_dict doesn't consider (3, 3) as jumping action.
-
-    dict
-        - key(tuple) : possible locations.
-        - value(0~7) : a direction where opponent's stones which can be flipped are.
     """
 
     done: bool = False
@@ -189,11 +170,6 @@ class OthelloState(BaseState):
         return {
             "board": self.board.tolist(),
             "legal_actions": self.legal_actions.tolist(),
-            "legal_set": [
-                {" ".join([str(x) for x in k]): list(v) for k, v in d.items()}
-                for d in self.legal_set
-            ],
-            "legal_dict": self.legal_dict,
             "done": self.done,
             "reward": self.reward.tolist(),
         }
@@ -210,19 +186,6 @@ class OthelloState(BaseState):
         return OthelloState(
             board=np.array(serialized["board"]),
             legal_actions=np.array(serialized["legal_actions"]),
-            legal_set=[
-                defaultdict(
-                    set,
-                    {
-                        tuple(
-                            [int(x) for x in k.split()],  # type: ignore
-                        ): set(v)
-                        for k, v in d.items()
-                    },
-                )
-                for d in serialized["legal_set"]  # type: ignore
-            ],
-            legal_dict=serialized["legal_dict"],
             done=serialized["done"],
             reward=np.array(serialized["reward"]),
         )
@@ -280,191 +243,19 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        action = np.asanyarray(action).astype(np.int_)
-        r, c = action
-
-        if not self._check_in_range(np.array([r, c])):
-            raise ValueError(f"out of board: {(r, c)}")
-        if not 0 <= agent_id <= 1:
-            raise ValueError(f"invalid agent_id: {agent_id}")
-
-        if state.legal_actions[agent_id][r][c] == 0:
-            if state.board[1 - agent_id][r][c]:
-                raise ValueError("cannot put a stone on opponent's stone")
-            elif state.board[agent_id][r][c]:
-                raise ValueError("cannot put a stone on another stone")
-            else:
-                raise ValueError("There is no stone to flip")
-        
-        if r==3 and c==3:
-            return state
-
-        new_board = np.copy(state.board)
-        new_legal_set = copy.deepcopy(state.legal_set)
-        new_legal_dict = copy.deepcopy(state.legal_dict)
-
-        directions = (
-            (1, 1),
-            (1, 0),
-            (1, -1),
-            (0, -1),
-            (-1, -1),
-            (-1, 0),
-            (-1, 1),
-            (0, 1),
-        )
-
-        # Put a stone and update its position of board, legal_dict, and legal_set.
-        new_board[agent_id][r][c] = 1
-        del new_legal_dict[agent_id][(r, c)]
-        del new_legal_set[agent_id][(r, c)]
-        if (r, c) in new_legal_set[1 - agent_id]:
-            del new_legal_set[1 - agent_id][(r, c)]
-        if (r, c) in new_legal_dict[1 - agent_id]:
-            del new_legal_dict[1 - agent_id][(r, c)]
-
-        # Update 8 surroundings(legal_set) of the location where the stone has just been put.
-        for dir_id, dir in enumerate(directions):
-            opp_dir_id = (dir_id + 4) % 8
-            sur_r = r + dir[0]
-            sur_c = c + dir[1]
-            if not self._check_in_range(np.array([sur_r, sur_c])):
-                continue
-            if (
-                new_board[agent_id][sur_r][sur_c] == 1
-                or new_board[1 - agent_id][sur_r][sur_c] == 1
-            ):
-                continue
-            new_legal_set[1 - agent_id][(sur_r, sur_c)].add(opp_dir_id)
-
-        # Flip the stones and Update 8 surroundings(legal_set) of the locations where
-        # stones flipped.
-        # If one legal_set element is deleted, then verify same location of legal_dict
-        # and delete it too if needed.
-        for dir_id in state.legal_set[agent_id][(r, c)]:
-            stones_to_flip = []
-            temp_r = r
-            temp_c = c
-            for _ in range(1, self.board_size):
-                temp_r += directions[dir_id][0]
-                temp_c += directions[dir_id][1]
-                if not self._check_in_range(np.array([temp_r, temp_c])):
-                    break
-                if state.board[1 - agent_id][temp_r][temp_c] == 1:
-                    stones_to_flip.append((temp_r, temp_c))
-                elif state.board[agent_id][temp_r][temp_c] == 1:
-                    if stones_to_flip:
-                        for stone_r, stone_c in stones_to_flip:
-                            new_board[1 - agent_id][stone_r][stone_c] = 0
-                            new_board[agent_id][stone_r][stone_c] = 1
-                            for temp_dir_id, temp_dir in enumerate(directions):
-                                opp_dir_id = (temp_dir_id + 4) % 8
-                                if temp_dir_id == dir_id or opp_dir_id == dir_id:
-                                    continue
-                                sur_r = stone_r + temp_dir[0]
-                                sur_c = stone_c + temp_dir[1]
-                                if not self._check_in_range(np.array([sur_r, sur_c])):
-                                    continue
-                                if (
-                                    new_board[agent_id][sur_r][sur_c] == 1
-                                    or new_board[1 - agent_id][sur_r][sur_c] == 1
-                                ):
-                                    continue
-                                new_legal_set[1 - agent_id][(sur_r, sur_c)].add(
-                                    opp_dir_id
-                                )
-                                new_legal_set[agent_id][(sur_r, sur_c)].remove(
-                                    opp_dir_id
-                                )
-                                if (sur_r, sur_c) in new_legal_dict[
-                                    agent_id
-                                ] and new_legal_dict[agent_id][
-                                    (sur_r, sur_c)
-                                ] == opp_dir_id:
-                                    del new_legal_dict[agent_id][(sur_r, sur_c)]
-                                if len(new_legal_set[agent_id][(sur_r, sur_c)]) == 0:
-                                    del new_legal_set[agent_id][(sur_r, sur_c)]
-                    break
-                else:
-                    break
-
-        # Update legal_dict according to new board and legal_set.
-        for agent_id in range(2):
-            for r, c in new_legal_set[agent_id]:
-                if (r, c) in new_legal_dict[agent_id]:
-                    dir = directions[new_legal_dict[agent_id][(r, c)]]
-                    if not self._can_flip(new_board, r, c, agent_id, dir[0], dir[1]):
-                        del new_legal_dict[agent_id][(r, c)]
-                if (r, c) not in new_legal_dict[agent_id]:
-                    for dir_id in new_legal_set[agent_id][(r, c)]:
-                        if self._can_flip(
-                            new_board,
-                            r,
-                            c,
-                            agent_id,
-                            directions[dir_id][0],
-                            directions[dir_id][1],
-                        ):
-                            new_legal_dict[agent_id][(r, c)] = dir_id
-                            break
-
-        # Build new legal_actions with legal_dict
-        new_legal_actions = np.zeros(
-            (2, self.board_size, self.board_size), dtype=np.int_
-        )
-        for agent_id in range(2):
-            for r in range(self.board_size):
-                for c in range(self.board_size):
-                    new_legal_actions[agent_id][r][c] = (
-                        1 if (r, c) in new_legal_dict[agent_id] else 0
-                    )
-
-        done = False
-        reward = np.zeros((2,), dtype=np.int_)
-        if len(new_legal_dict[0]) == 0 and len(new_legal_dict[1]) == 0:
-            done = True
-            reward = self._check_wins(new_board)
-        
-        for agent_id in range(2):
-            if len(new_legal_dict[agent_id]) == 0:
-                new_legal_actions[agent_id][3][3] = 1
+        next_information = othello_cythonfn.fast_step(state.board, state.legal_actions, agent_id, action[0], action[1], self.board_size)
 
         next_state = OthelloState(
-            board=new_board,
-            legal_actions=new_legal_actions,
-            done=done,
-            reward=reward,
-            legal_set=new_legal_set,
-            legal_dict=new_legal_dict,
+            board=next_information[0],
+            legal_actions=next_information[1],
+            reward=np.array([next_information[2], next_information[3]]),
+            done=next_information[4]
         )
 
         if post_step_fn is not None:
             post_step_fn(next_state, agent_id, action)
 
         return next_state
-
-    def _can_flip(
-        self,
-        board: NDArray[np.int_],
-        r: int,
-        c: int,
-        agent_id: int,
-        dir_r: int,
-        dir_c: int,
-    ) -> bool:
-        something_to_flip = False
-        for _ in range(1, self.board_size):
-            r += dir_r
-            c += dir_c
-            if not self._check_in_range(np.array([r, c])):
-                return False
-            if board[1 - agent_id][r][c] == 1:
-                something_to_flip = True
-            elif board[agent_id][r][c] == 1:
-                if something_to_flip:
-                    return True
-                return False
-        return False
 
     def _check_wins(self, board: NDArray[np.int_]) -> NDArray[np.int_]:
         agent0_cnt = np.count_nonzero(board[0])
@@ -481,90 +272,6 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         if bottom_right is None:
             bottom_right = np.array([self.board_size, self.board_size])
         return np.all(np.logical_and(np.array([0, 0]) <= pos, pos < bottom_right))
-
-    def build_state(self, board: NDArray[np.int_]) -> OthelloState:
-        """
-        Build a state(including legal_set, legal_dict, legal_actions, done and reward)
-        from the current board information.
-
-        :arg state:
-            Current state of the environment.
-
-        :returns:
-            A state which board is same as the input.
-        """
-
-        legal_set = [
-            defaultdict(set),
-            defaultdict(set),
-        ]  # type: list[defaultdict[tuple[int, int], set[int]]]
-        legal_dict = [dict(), dict()]  # type: list[dict[tuple[int, int], int]]
-
-        directions = (
-            (1, 1),
-            (1, 0),
-            (1, -1),
-            (0, -1),
-            (-1, -1),
-            (-1, 0),
-            (-1, 1),
-            (0, 1),
-        )
-
-        for r in range(self.board_size):
-            for c in range(self.board_size):
-                if board[0][r][c] == 0 and board[1][r][c] == 0:
-                    for agent_id in range(2):
-                        for dir_id, dir in enumerate(directions):
-                            flipped = False
-                            something_to_flip = False
-                            temp_r = r
-                            temp_c = c
-                            for _ in range(1, self.board_size):
-                                temp_r += dir[0]
-                                temp_c += dir[1]
-                                if not self._check_in_range(np.array([temp_r, temp_c])):
-                                    break
-                                if board[1 - agent_id][temp_r][temp_c] == 1:
-                                    legal_set[agent_id][(r, c)].add(dir_id)
-                                    something_to_flip = True
-                                elif board[agent_id][temp_r][temp_c] == 1:
-                                    if something_to_flip:
-                                        flipped = True
-                                    break
-                                else:
-                                    break
-                            if flipped:
-                                legal_dict[agent_id][(r, c)] = dir_id
-
-        legal_actions = np.zeros((2, self.board_size, self.board_size), dtype=np.int_)
-        for agent_id in range(2):
-            for r in range(self.board_size):
-                for c in range(self.board_size):
-                    legal_actions[agent_id][r][c] = (
-                        1 if (r, c) in legal_dict[agent_id] else 0
-                    )
-
-        done = False
-        reward = np.zeros((2,), dtype=np.int_)
-        if len(legal_dict[0]) == 0 and len(legal_dict[1]) == 0:
-            done = True
-            reward = self._check_wins(board)
-
-        for agent_id in range(2):
-            if len(legal_actions[agent_id]) == 0:
-                legal_actions[agent_id][3][3] = 1
-
-        new_state = OthelloState(
-            board=board,
-            legal_actions=legal_actions,
-            done=done,
-            reward=reward,
-            legal_set=legal_set,
-            legal_dict=legal_dict,
-        )
-
-        return new_state
 
     def initialize_state(self) -> OthelloState:
         """
@@ -604,6 +311,36 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
             ]
         )
 
-        initial_state = self.build_state(board)
+        legal_actions = np.array(
+            [
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 0],
+                    [0, 0, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 1, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                ],
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 1, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                ],
+            ]
+        )
+
+        initial_state = OthelloState(
+            board=board,
+            legal_actions=legal_actions,
+            done=False,
+            reward = np.zeros((2,), dtype=np.int_)
+        )
 
         return initial_state
