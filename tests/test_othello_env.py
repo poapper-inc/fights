@@ -73,7 +73,7 @@ class TestOthelloEnv(unittest.TestCase):
         )
 
     def test_flip(self):
-        expected_boards = self.test_flip_expected_boards()
+        expected_boards = self.flip_expected_boards()
         next_state = self.env.step(self.initial_state, 0, [3, 2])
         np.testing.assert_array_equal(next_state.board, expected_boards[0])
         next_state = self.env.step(next_state, 1, [2, 2])
@@ -114,7 +114,7 @@ class TestOthelloEnv(unittest.TestCase):
         np.testing.assert_array_equal(next_state.board, expected_boards[18])
 
     def test_legal_actions(self):
-        expected_legal_actions = self.test_expected_legal_actions()
+        expected_legal_actions = self.expected_legal_actions()
         next_state = self.env.step(self.initial_state, 0, [3, 2])
         np.testing.assert_array_equal(
             next_state.legal_actions, expected_legal_actions[0]
@@ -172,7 +172,7 @@ class TestOthelloEnv(unittest.TestCase):
             next_state.legal_actions, expected_legal_actions[13]
         )
 
-    def test_expected_legal_actions(self):
+    def expected_legal_actions(self):
         legal_actions = np.array(
             [
                 [
@@ -487,7 +487,7 @@ class TestOthelloEnv(unittest.TestCase):
         )
         return legal_actions
 
-    def test_flip_expected_boards(self):
+    def flip_expected_boards(self):
         expected_boards = np.array(
             [
                 [
