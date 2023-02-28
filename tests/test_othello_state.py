@@ -31,5 +31,6 @@ class TestOthelloState(unittest.TestCase):
             rotated_board,
         )
 
+
 if __name__ == "__main__":
     unittest.main()
