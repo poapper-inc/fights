@@ -12,9 +12,7 @@ Directions
 
 from __future__ import annotations
 
-import copy
 import sys
-from collections import defaultdict
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Optional
