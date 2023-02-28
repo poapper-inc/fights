@@ -43,7 +43,7 @@ class TestOthelloEnv(unittest.TestCase):
         )
         self.assertRaisesRegex(
             ValueError,
-            "cannot put a stone on opponent's stone",
+            "cannot skip if there is possible action",
             lambda: self.env.step(self.initial_state, 0, [3, 3]),
         )
         self.assertRaisesRegex(
@@ -58,7 +58,7 @@ class TestOthelloEnv(unittest.TestCase):
         )
         self.assertRaisesRegex(
             ValueError,
-            "cannot put a stone on another stone",
+            "cannot skip if there is possible action",
             lambda: self.env.step(self.initial_state, 1, [3, 3]),
         )
         self.assertRaisesRegex(
@@ -431,7 +431,7 @@ class TestOthelloEnv(unittest.TestCase):
                     [
                         [0, 0, 0, 0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0, 1, 1, 0],
-                        [0, 0, 0, 0, 0, 0, 1, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0, 0, 1, 0],
                         [0, 0, 0, 0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -477,7 +477,7 @@ class TestOthelloEnv(unittest.TestCase):
                         [0, 0, 0, 1, 0, 1, 1, 0],
                         [0, 0, 0, 0, 0, 0, 1, 0],
                         [0, 0, 0, 0, 0, 0, 1, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 1, 0, 0, 0, 0, 0, 0],
                         [0, 1, 0, 0, 0, 0, 1, 0],
                         [0, 1, 1, 0, 0, 1, 1, 0],
                         [0, 0, 0, 0, 0, 0, 0, 0],

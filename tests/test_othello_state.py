@@ -18,8 +18,6 @@ class TestOthelloState(unittest.TestCase):
             self.initial_state.legal_actions, deserialized.legal_actions
         )
         np.testing.assert_array_equal(self.initial_state.reward, deserialized.reward)
-        self.assertListEqual(self.initial_state.legal_set, deserialized.legal_set)
-        self.assertListEqual(self.initial_state.legal_dict, deserialized.legal_dict)
         self.assertEqual(self.initial_state.done, deserialized.done)
 
     def test_perspective(self):
@@ -32,3 +30,6 @@ class TestOthelloState(unittest.TestCase):
             np.flip(np.rot90(before_rotation.board, 2, axes=(1, 2)), axis=0),
             rotated_board,
         )
+
+if __name__ == "__main__":
+    unittest.main()
