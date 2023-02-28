@@ -29,8 +29,6 @@ else:
 
 from fights.base import BaseEnv, BaseState
 
-import os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from . import othello_cythonfn
 
 OthelloAction: TypeAlias = ArrayLike
@@ -40,6 +38,7 @@ Encoded as an array of shape ''(2,)'',
 in the form of [ 'coordinate_r', 'coordinate_c' ].
 * Note that the action [3, 3] is jumping action, not putting a stone on board (3, 3).
 """
+
 
 @dataclass
 class OthelloState(BaseState):
@@ -243,13 +242,21 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
         if pre_step_fn is not None:
             pre_step_fn(state, agent_id, action)
 
-        next_information = othello_cythonfn.fast_step(state.board, state.legal_actions, agent_id, action[0], action[1], self.board_size)
+        action = np.array(action, dtype=np.int_)
+        next_information = othello_cythonfn.fast_step(
+            state.board,
+            state.legal_actions,
+            agent_id,
+            action[0],
+            action[1],
+            self.board_size,
+        )
 
         next_state = OthelloState(
             board=next_information[0],
             legal_actions=next_information[1],
             reward=np.array([next_information[2], next_information[3]]),
-            done=next_information[4]
+            done=bool(next_information[4]),
         )
 
         if post_step_fn is not None:
@@ -340,7 +347,7 @@ class OthelloEnv(BaseEnv[OthelloState, OthelloAction]):
             board=board,
             legal_actions=legal_actions,
             done=False,
-            reward = np.zeros((2,), dtype=np.int_)
+            reward=np.zeros((2,), dtype=np.int_),
         )
 
         return initial_state

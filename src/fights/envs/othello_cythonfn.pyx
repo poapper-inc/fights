@@ -13,10 +13,10 @@ def fast_step(
 ):
 
     board = np.copy(pre_board)
-    cdef int [:,:,:] board_view = board
+    cdef long [:,:,:] board_view = board
     legal_actions = np.copy(pre_legal_actions)
-    cdef int [:,:,:] pre_legal_actions_view = pre_legal_actions
-    cdef int [:,:,:] legal_actions_view = legal_actions
+    cdef long [:,:,:] pre_legal_actions_view = pre_legal_actions
+    cdef long [:,:,:] legal_actions_view = legal_actions
 
     cdef int reward[2]
     cdef int done
@@ -118,7 +118,7 @@ def fast_step(
 
     return (board, legal_actions, reward[0], reward[1], done)
 
-cdef int is_flippable(int [:,:,:] board_view, int agent_id, int r, int c, int board_size, int [8][2] directions):
+cdef int is_flippable(long [:,:,:] board_view, int agent_id, int r, int c, int board_size, int [8][2] directions):
     
     cdef int i, j
     cdef int flag
@@ -147,7 +147,7 @@ cdef int is_flippable(int [:,:,:] board_view, int agent_id, int r, int c, int bo
 cdef int _check_in_range(int pos_r, int pos_c, int bottom_right = 8):
     return (0 <= pos_r < bottom_right and 0 <= pos_c < bottom_right)
 
-cdef int _check_wins(int [:,:,:] board_view, int board_size):
+cdef int _check_wins(long [:,:,:] board_view, int board_size):
     cdef int i, j
     cdef int agent0_cnt = 0, agent1_cnt = 0
     for i in range(board_size):
