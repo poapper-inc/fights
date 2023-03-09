@@ -18,5 +18,11 @@ quoridor = Extension(
     include_dirs=[np.get_include()],
     define_macros=defs,
 )
+othello = Extension(
+    "fights.envs.othello_cythonfn",
+    sources=[join(fights_envs_path, "othello_cythonfn.pyx")],
+    include_dirs=[np.get_include()],
+    define_macros=defs,
+)
 
-setup(ext_modules=cythonize([puoribor, quoridor]))
+setup(ext_modules=cythonize([puoribor, quoridor, othello]))
