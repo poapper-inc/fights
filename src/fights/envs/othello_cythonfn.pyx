@@ -37,7 +37,7 @@ def fast_step(
         raise ValueError(f"out of board: {(action_r, action_c)}")
     if not 0 <= agent_id <= 1:
         raise ValueError(f"invalid agent_id: {agent_id}")
-    
+
     if action_r == 3 and action_c == 3:
         if legal_actions_view[agent_id, 3, 3]:
             return (board, legal_actions, reward[0], reward[1], done)
@@ -89,7 +89,7 @@ def fast_step(
                 break
     if not flipped_something:
         raise ValueError("There is no stone to flip")
-    
+
     for i in range(board_size):
         for j in range(board_size):
             if board_view[0, i, j] or board_view[1, i, j]:
@@ -121,7 +121,6 @@ def fast_step(
     return (board, legal_actions, reward[0], reward[1], done)
 
 cdef int is_flippable(long [:,:,:] board_view, int agent_id, int r, int c, int board_size, int [8][2] directions):
-    
     cdef int i, j
     cdef int flag
     cdef int now_r, now_c
